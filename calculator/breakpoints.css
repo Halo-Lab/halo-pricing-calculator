@@ -1,0 +1,13 @@
+/*
+ * These custom breakpoint definitions are used while compiling CSS.
+ * Since every CSS file is compiled in isolation, that file should
+ * be imported everywhere.
+ */
+@custom-media --small-mobile (width >= 376px);
+@custom-media --medium-mobile (width >= 481px);
+@custom-media --small-tablet (width >= 641px);
+@custom-media --tablet (width >= 767px);
+@custom-media --big-tablet (width >= 992px);
+@custom-media --small-laptop (width >= 1281px);
+@custom-media --medium-laptop (width >= 1441px);
+@custom-media --big-laptop (width >= 1801px);

@@ -1,0 +1,20 @@
+{
+  "name": "halo-pricing-calculator",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "ui:dev": "npm start -w calculator",
+    "sanity:dev": "npm run dev -w sanity",
+    "ui:lint": "tsc --project ./calculator --noEmit",
+    "format": "npx prettier --write ."
+  },
+  "workspaces": [
+    "sanity",
+    "calculator"
+  ],
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5"
+  }
+}
