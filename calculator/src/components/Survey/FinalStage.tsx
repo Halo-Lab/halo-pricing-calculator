@@ -73,7 +73,7 @@ export const FinalStage: Component<{}> = () => {
             );
             const submit = document.querySelector<
               HTMLButtonElement | HTMLInputElement
-            >("#proposal-submit");
+            >("#submit-survey-data");
 
             if (input && submit) {
               input.value = createEmailContent({
