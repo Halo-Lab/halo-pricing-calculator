@@ -39,13 +39,10 @@
       @container banner (width >= 340px) {
         margin-top: 2rem;
         margin-bottom: 2rem;
-      }
-
-      @container banner (width >= 370px) {
         font-size: 3rem;
       }
 
-      @container banner (width >= 420px) {
+      @container banner (width >= 400px) {
         font-size: 3.5rem;
       }
 
@@ -190,9 +187,13 @@
     container-name: platform;
 
     h2 {
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       margin-top: 1rem;
       margin-bottom: 1.25rem;
+
+      @container platform (width >= 280px) {
+        font-size: 1.7rem;
+      }
 
       @container platform (width >= 320px) {
         margin-top: 1.5rem;
@@ -244,7 +245,7 @@
       label {
         text-transform: uppercase;
         font-weight: 500;
-        padding: 0.5rem;
+        padding: 0.5rem 0.5rem 0.5rem 0.7rem;
         border-radius: 6.25rem;
         background-color: rgb(var(--grey-colour));
         margin-bottom: 0.5rem;

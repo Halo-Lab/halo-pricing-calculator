@@ -5,6 +5,7 @@ import {
   Question,
   QuestionData,
   ConditionalPreviousQuestion,
+  QuestionVisibilityCondition,
 } from "./entities/question.js";
 import {
   Estimate,
@@ -82,6 +83,55 @@ createQuestion({
     }),
   ],
   multiple: true,
+});
+createQuestion({
+  text: "What type of website do you need?",
+  title: "Type",
+  options: [
+    {
+      text: "Landing page",
+      estimates: [
+        {
+          text: "Landing page",
+          assessment: new EstimateRangeAssessment(80, 100),
+        },
+      ],
+    },
+    {
+      text: "Corporate website",
+      estimates: [
+        {
+          text: "Corporate website",
+          assessment: new EstimateRangeAssessment(160, 200),
+        },
+      ],
+    },
+    {
+      text: "E-commerce",
+      estimates: [
+        {
+          text: "E-commerce",
+          assessment: new EstimateRangeAssessment(180, 240),
+        },
+      ],
+    },
+    {
+      text: "I don't know",
+      estimates: [
+        {
+          text: "I don't know",
+          assessment: new EstimateRangeAssessment(80, 100),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new ConditionalPreviousQuestion({
+      step: 2,
+      previous: questions[1].id,
+      conditions: [new QuestionVisibilityCondition(questions[1].options[0])],
+    }),
+  ],
 });
 
 interface MinimalEstimate {

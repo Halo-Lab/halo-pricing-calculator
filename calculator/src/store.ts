@@ -91,6 +91,17 @@ export class AddCommentEvent extends Event {
   }
 }
 
+export class RemoveCommentEvent extends Event {
+  override reduce(
+    store: Store,
+    dispatch: Dispatch<Event>,
+  ): void | Partial<Store> | undefined | null {
+    store.comments = store.comments.filter(
+      (comment) => comment.step !== store.currentStep,
+    );
+  }
+}
+
 export class MoveToNextStepEvent extends Event {
   override reduce(
     store: Store,

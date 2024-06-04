@@ -16,8 +16,7 @@
 
     --base-transition-time: 0.15s;
     --common-transitions: color var(--base-transition-time),
-      fill var(--base-transition-time),
-      stroke var(--base-transition-time),
+      fill var(--base-transition-time), stroke var(--base-transition-time),
       background-color var(--base-transition-time),
       outline-color var(--base-transition-time),
       border-color var(--base-transition-time),
@@ -25,6 +24,7 @@
 
     padding-left: 1rem;
     padding-right: 1rem;
+    color: rgb(var(--dark-colour));
 
     @media (--medium-mobile) {
       padding-left: 2rem;
@@ -61,10 +61,10 @@
       position: absolute;
     }
 
-    input:where([type="email"],[type="password"],[type="text"]) {
-&:focus {
-  outline:none;
-    }
+    input:where([type="email"], [type="password"], [type="text"]) {
+      &:focus {
+        outline: none;
+      }
     }
 
     a[href] {
@@ -92,7 +92,9 @@
       font-weight: 500;
     }
 
-    [hidden]{display:none;}
+    [hidden] {
+      display: none;
+    }
   }
 
   @layer components {
@@ -222,12 +224,12 @@
       cursor: pointer;
     }
 
-    input:where([type="email"],[type="password"],[type="text"]) {
-      border-top:none;
-      border-left:none;
-      border-right:none;
-      padding-bottom:1rem;
-      border-bottom: 1px solid rgba(var(--dark-colour)/.5);
+    input:where([type="email"], [type="password"], [type="text"]) {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(var(--dark-colour) / 0.5);
       transition: var(--common-transitions);
     }
   }

@@ -1,6 +1,7 @@
 import { For, Component, memo, Getter } from "moru";
 
 import { Option } from "../../entities/option.js";
+import { Button } from "../Button";
 import { createId } from "../../id.js";
 import { Question } from "../../entities/question.js";
 import { WebsiteIcon } from "./WebsiteIcon.js";
@@ -16,8 +17,6 @@ import {
 } from "../../store.js";
 
 import "./index.css";
-import girl from "./closeup-happy-pretty-young-woman-longsleeve-standing-with-hands-folded.png";
-import calculator from "./orange-calculator.png";
 
 interface EntryProperties extends RightCardProperties {}
 
@@ -37,19 +36,28 @@ const LeftCard: Component<{}> = () => {
 
       <h1>
         estimate <br /> your <br /> project
-        <img src={calculator} alt="Yellow sparkle calculator" />
+        <img
+          src="https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6655c98a2ac5ea540a95dc40_calculator-illustration.webp"
+          alt="Yellow sparkle calculator"
+        />
       </h1>
 
       <footer>
-        <img src={girl} alt="Smiling woman on yellow background" />
+        <img
+          src="https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6655c989d8c17acc9e11cce7_calculator-manager.webp"
+          alt="Smiling woman on yellow background"
+        />
         <p>
           let's talk about <br /> project more
         </p>
-        <a href="/contact-us" data-sliding-text-container>
-          <span data-sliding-text="get a rough estimate">
-            get a rough estimate
-          </span>
-        </a>
+        <Button
+          variant="secondary-on-dark"
+          on:click={() => {
+            window.location.pathname = "/contact-us";
+          }}
+        >
+          get a rough estimate
+        </Button>
       </footer>
     </section>
   );
@@ -124,15 +132,9 @@ const RightCard: Component<RightCardProperties> = ({ question }) => {
           }}
         </For>
 
-        <button
-          data-btn-primary
-          type="submit"
-          value="next"
-          disabled={shouldWaitForAnswers}
-          data-sliding-text-container
-        >
-          <span data-sliding-text="next">next</span>
-        </button>
+        <Button type="submit" disabled={shouldWaitForAnswers} variant="primary">
+          next
+        </Button>
       </form>
     </section>
   );

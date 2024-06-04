@@ -14,7 +14,7 @@ export class EstimateApplicationCondition {
 }
 
 abstract class EstimateAssessmentBase {
-  constructor(public applicable?: EstimateApplicationCondition[]) {}
+  constructor(public applicable?: EstimateApplicationCondition) {}
 
   abstract toString(): string;
 }
@@ -22,7 +22,7 @@ abstract class EstimateAssessmentBase {
 export class EstimateExactAssessment extends EstimateAssessmentBase {
   constructor(
     public hours: number,
-    applicable?: EstimateApplicationCondition[],
+    applicable?: EstimateApplicationCondition,
   ) {
     super(applicable);
   }
@@ -38,7 +38,7 @@ export class EstimateRangeAssessment extends EstimateAssessmentBase {
   constructor(
     public minHours: number,
     public maxHours: number,
-    applicable?: EstimateApplicationCondition[],
+    applicable?: EstimateApplicationCondition,
   ) {
     super(applicable);
   }
