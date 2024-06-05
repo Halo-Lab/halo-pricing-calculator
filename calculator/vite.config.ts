@@ -1,4 +1,5 @@
 import browserslist from "browserslist";
+import { name } from "../package.json";
 import { defineConfig } from "vite";
 import { browserslistToTargets } from "lightningcss";
 
@@ -16,9 +17,9 @@ export default defineConfig({
     cssMinify: "lightningcss",
     rollupOptions: {
       output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        entryFileNames: `${name}/assets/[name].js`,
+        chunkFileNames: `${name}/assets/[name].js`,
+        assetFileNames: `${name}/assets/[name].[ext]`,
       },
     },
   },
