@@ -7,13 +7,8 @@ import { Reference } from "../../entities/entity.js";
 import { Dictionary } from "../../dictionary.js";
 import { TabbedSection } from "./TabbedSection.js";
 import { SingleLineInput } from "../SingleLineInput.js";
+import { Estimate, EstimateRange } from "../../entities/estimate.js";
 import { useStore, Comment, ResetEvent } from "../../store.js";
-import {
-  Estimate,
-  EstimateExactAssessment,
-  EstimateRangeAssessment,
-  EstimateApplicationConditionKind,
-} from "../../entities/estimate.js";
 
 /**
  * A speculative email regex.
@@ -27,8 +22,8 @@ import {
  * Possible regressions:
  *	1. Does not allow comments in qouted local part.
  */
-export const EMAIL_REGEX =
-  /^(?:"(?:[^"\\]|\\["\\]){1,62}"|(?:\([^)]*\))?(?:\w|[-!#$%&'*+/=?^`{|}~])(?:\w|[-!#$%&'*+/=?^`{|}~]|\.(?=\w|[-!#$%&'*+/=?^`{|}~])){0,63}(?:\([^)]*\))?)@(?:\([^)]*\))?(?:(?:[a-zA-Z0-9-]){1,63}(?:\.[a-zA-Z0-9-]{1,62}){0,3}|\[(?:\d{3}(?:\.\d{3}){3}|IPv6(?::(?:\d|[A-Fa-f]){4}){8})\])(?:\([^)]*\))?$/;
+const EMAIL_REGEX =
+  /^(?:"(?:[^"\\]|\\["\\]){1,62}"|(?:\([^)]*\))?(?:\w|[-!#$%&'*+\/=?^`{|}~])(?:\w|[-!#$%&'*+\/=?^`{|}~]|\.(?=\w|[-!#$%&'*+\/=?^`{|}~])){0,63}(?:\([^)]*\))?)@(?:\([^)]*\))?(?:[a-zA-Z0-9-]{1,63}(?:\.[a-zA-Z0-9-]{1,62}){0,3}|\[(?:\d{3}(?:\.\d{3}){3}|IPv6(?::(?:\d|[A-Fa-f]){4}){8})])(?:\([^)]*\))?$/;
 
 export const FinalStage: Component<{}> = () => {
   const [select, dispatch] = useStore();
@@ -149,82 +144,58 @@ function createEmailContent({
   estimates,
   questionsByStep,
 }: EmailContentSource): string {
-  let totalMinDays = 0;
-  let totalMaxDays = 0;
+  let totalMinHours = 0;
+  let totalMaxHours = 0;
 
-  const stepsWithAnswers = questionsByStep.map((questions, index) => {
-    const answeredQuestions = questions.map((question, index) => {
-      const questionAnswers = question.options
-        .filter((optionReference) => answers.has(optionReference))
-        .map((optionReference) => options.get(optionReference))
-        .filter((option): option is Option => Boolean(option))
-        .map((option) => {
-          const [minDays, maxDays] = option.estimates
-            .filter((estimateReference) => {
-              const estimate = estimates.get(estimateReference);
+  const stepsWithAnswers = questionsByStep
+    .map((questions, index) => {
+      const answeredQuestions = questions
+        .map((question, index) => {
+          const questionAnswers = question.options
+            .filter((optionReference) => answers.has(optionReference))
+            .map((optionReference) => options.get(optionReference))
+            .filter((option): option is Option => Boolean(option))
+            .map((option) => {
+              const [minHours, maxHours] = option.estimates
+                .filter((estimateReference) => {
+                  return estimates
+                    .get(estimateReference)
+                    ?.assessment.matches(answers);
+                })
+                .reduce(
+                  (accumulator: EstimateRange, estimateReference) => {
+                    const estimate = estimates.get(estimateReference)!;
 
-              if (!estimate) return false;
+                    [totalMinHours, totalMaxHours] =
+                      estimate.assessment.applyTo([
+                        totalMinHours,
+                        totalMaxHours,
+                      ]);
 
-              if (estimate.assessment.applicable) {
-                switch (estimate.assessment.applicable.kind) {
-                  case EstimateApplicationConditionKind.Or:
-                    return estimate.assessment.applicable.chosenOptions.some(
-                      (optionReference) => answers.has(optionReference),
-                    );
-                  case EstimateApplicationConditionKind.And:
-                    return estimate.assessment.applicable.chosenOptions.every(
-                      (optionReference) => answers.has(optionReference),
-                    );
-                }
-              } else {
-                return true;
-              }
+                    return estimate.assessment.applyTo(accumulator);
+                  },
+                  [0, 0],
+                );
+
+              const workTime = hoursRangeToString(minHours, maxHours);
+
+              return `    - ${option.text} (${workTime})`;
             })
-            .reduce(
-              (accumulator: [number, number], estimateReference) => {
-                const estimate = estimates.get(estimateReference)!;
+            .join("\n");
 
-                if (estimate.assessment instanceof EstimateExactAssessment) {
-                  const days = Math.ceil(estimate.assessment.hours / 8);
-                  accumulator[0] += days;
-                  totalMinDays += days;
-
-                  accumulator[1] += days;
-                  totalMaxDays += days;
-                } else if (
-                  estimate.assessment instanceof EstimateRangeAssessment
-                ) {
-                  const minDays = Math.ceil(estimate.assessment.minHours / 8);
-                  accumulator[0] += minDays;
-                  totalMinDays += minDays;
-
-                  const maxDays = Math.ceil(estimate.assessment.maxHours / 8);
-                  accumulator[1] += maxDays;
-                  totalMaxDays += maxDays;
-                }
-
-                return accumulator;
-              },
-              [0, 0],
-            );
-
-          const workTime = rangeToString(minDays, maxDays);
-
-          return `    - ${option.text} (${workTime})`;
+          return `  ${index + 1}: ${question.text}\n${questionAnswers}`;
         })
-        .join("\n");
+        .join("");
 
-      return `  ${index + 1}: ${question.text}\n${questionAnswers}`;
-    });
+      const comment = comments.find((comment) => comment.step === index);
 
-    const comment = comments.find((comment) => comment.step === index);
+      const commentSection = comment ? `  Comment: ${comment.text}\n\n` : "\n";
 
-    const commentSection = comment ? `  Comment: ${comment.text}\n\n` : "\n";
+      return `Step ${index + 1}.\n${answeredQuestions}\n${commentSection}`;
+    })
+    .join("");
 
-    return `Step ${index + 1}.\n${answeredQuestions}\n${commentSection}`;
-  });
-
-  const totalEstimate = rangeToString(totalMinDays, totalMaxDays);
+  const totalEstimate = hoursRangeToString(totalMinHours, totalMaxHours);
 
   return `
 Name: ${name}
@@ -236,7 +207,10 @@ Total estimate: ${totalEstimate}
 `;
 }
 
-function rangeToString(minDays: number, maxDays: number): string {
+function hoursRangeToString(minHours: number, maxHours: number): string {
+  const minDays = Estimate.toDays(minHours);
+  const maxDays = Estimate.toDays(maxHours);
+
   return minDays === maxDays
     ? minDays === 1
       ? "1 day"

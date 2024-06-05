@@ -11,6 +11,15 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: "../dist",
+    emptyOutDir: true,
     cssMinify: "lightningcss",
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`,
+      },
+    },
   },
 });

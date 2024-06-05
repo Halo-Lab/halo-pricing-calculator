@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "ui:dev": "npm start -w calculator",
+    "ui:build": "npm run build -w calculator",
     "sanity:dev": "npm run dev -w sanity",
     "ui:lint": "tsc --project ./calculator --noEmit",
     "format": "npx prettier --write ."

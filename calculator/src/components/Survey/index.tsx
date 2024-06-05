@@ -1,17 +1,13 @@
-import { For, ref, Show, memo, state, Getter, Component, effect } from "moru";
+import { For, ref, Show, memo, state, Getter, Component } from "moru";
 
 import { Option } from "../../entities/option.js";
+import { Button } from "../Button.js";
 import { Question } from "../../entities/question.js";
 import { createId } from "../../id.js";
 import { PlusIcon } from "./PlusIcon.js";
 import { FinalStage } from "./FinalStage.js";
 import { TabbedSection } from "./TabbedSection.js";
-import {
-  Estimate,
-  EstimateExactAssessment,
-  EstimateRangeAssessment,
-  EstimateApplicationConditionKind,
-} from "../../entities/estimate.js";
+import { Estimate, EstimateRange } from "../../entities/estimate.js";
 import {
   useStore,
   AddAnswerEvent,
@@ -21,7 +17,6 @@ import {
 } from "../../store.js";
 
 import "./index.css";
-import { Button } from "../Button.js";
 
 interface SurveyProperties {
   questions: Getter<Question[] | undefined>;
@@ -58,9 +53,12 @@ const QuestionsBlock: Component<QuestionsBlockProperties> = ({ questions }) => {
 
   const isMovingForwardForbidden = memo(() => {
     return !questions((questions) =>
-      questions?.every((question) => {
-        return question.options.some((optionReference) =>
-          answers().has(optionReference),
+      questions.every((question) => {
+        return (
+          question.optional ||
+          question.options.some((optionReference) =>
+            answers().has(optionReference),
+          )
         );
       }),
     );
@@ -102,6 +100,8 @@ interface QuestionBlockProperties {
 }
 
 const QuestionBlock: Component<QuestionBlockProperties> = ({ question }) => {
+  const blockId = createId(5);
+
   const [select, dispatch] = useStore();
 
   const options = select((store) => store.options);
@@ -132,6 +132,7 @@ const QuestionBlock: Component<QuestionBlockProperties> = ({ question }) => {
       <For each={questionOptions}>
         {(option) => (
           <SelectOption
+            name={blockId}
             option={option}
             multiple={multiple}
             deselectAllOptions={deselectAllOptions}
@@ -143,12 +144,14 @@ const QuestionBlock: Component<QuestionBlockProperties> = ({ question }) => {
 };
 
 interface SelectOptionProperties {
+  name: string;
   option: Getter<Option>;
   multiple: Getter<boolean>;
   deselectAllOptions(): void;
 }
 
 const SelectOption: Component<SelectOptionProperties> = ({
+  name: blockName,
   option,
   multiple,
   deselectAllOptions,
@@ -169,7 +172,7 @@ const SelectOption: Component<SelectOptionProperties> = ({
     return option().text;
   }, [option]);
   const name = memo(() => {
-    return inputType() === "radio" ? "answer" : "";
+    return inputType() === "radio" ? blockName : "";
   }, [inputType]);
   const isSelected = memo(() => {
     return answers().has(option().id);
@@ -212,6 +215,7 @@ const ResultsBlock: Component<{}> = () => {
     () => false,
   );
   const estimates = select((store) => store.estimates);
+
   const estimatesOfSelectedOptions = memo(() => {
     return Array.from(answers())
       .map((optionReference) => options().get(optionReference))
@@ -222,47 +226,24 @@ const ResultsBlock: Component<{}> = () => {
       })
       .filter((estimate): estimate is Estimate => !!estimate?.text)
       .filter((estimate) => {
-        if (estimate.assessment.applicable) {
-          switch (estimate.assessment.applicable.kind) {
-            case EstimateApplicationConditionKind.Or:
-              return estimate.assessment.applicable.chosenOptions.some(
-                (optionReference) =>
-                  answers((values) => values.has(optionReference)),
-              );
-            case EstimateApplicationConditionKind.And:
-              return estimate.assessment.applicable.chosenOptions.every(
-                (optionReference) =>
-                  answers((values) => values.has(optionReference)),
-              );
-          }
-        } else {
-          return true;
-        }
+        return estimate.assessment.matches(answers());
       });
   }, [answers, options]);
   const overallEstimateRange = memo(() => {
     return estimatesOfSelectedOptions((estimates) => {
       return estimates.reduce(
-        (accumulator: [number, number], estimate) => {
-          if (estimate.assessment instanceof EstimateExactAssessment) {
-            accumulator[0] += estimate.assessment.hours;
-            accumulator[1] += estimate.assessment.hours;
-          } else if (estimate.assessment instanceof EstimateRangeAssessment) {
-            accumulator[0] += estimate.assessment.minHours;
-            accumulator[1] += estimate.assessment.maxHours;
-          }
-
-          return accumulator;
+        (accumulator: EstimateRange, estimate) => {
+          return estimate.assessment.applyTo(accumulator);
         },
         [0, 0],
       );
     });
   }, [estimatesOfSelectedOptions]);
   const overallMinimalDays = memo(() => {
-    return Math.ceil(overallEstimateRange()[0] / 8);
+    return Estimate.toDays(overallEstimateRange()[0]);
   }, [overallEstimateRange]);
   const overallMaximumDays = memo(() => {
-    return Math.ceil(overallEstimateRange()[1] / 8);
+    return Estimate.toDays(overallEstimateRange()[1]);
   }, [overallEstimateRange]);
 
   return (
@@ -280,11 +261,7 @@ const ResultsBlock: Component<{}> = () => {
         </button>
       </header>
 
-      <ol
-        ref={listRef}
-        data-expanded={isListExpanded}
-        class="scroll-style-light"
-      >
+      <ol ref={listRef} data-expanded={isListExpanded} scroll-style-light>
         <For each={estimatesOfSelectedOptions}>
           {(estimate) => <EstimateRow estimate={estimate} />}
         </For>

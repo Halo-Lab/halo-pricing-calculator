@@ -4,13 +4,8 @@ import { Option } from "./entities/option.js";
 import { Estimate } from "./entities/estimate.js";
 import { Reference } from "./entities/entity.js";
 import { Dictionary } from "./dictionary.js";
+import { Question, QuestionStep } from "./entities/question.js";
 import { options, questions, estimates } from "./data.js";
-import {
-  Question,
-  QuestionVisibilityCondition,
-  QuestionVisibilityDependencyState,
-  QuestionVisibilityConditionsMatchRule,
-} from "./entities/question.js";
 
 export interface Comment {
   step: number;
@@ -138,7 +133,7 @@ function createQuestionsSequence(store: Store): Question[][] {
   if (firstQuestion) {
     const questionsByStep: (Question[] | undefined)[] = [[firstQuestion]];
 
-    groupQuestionsByStep(store, questionsByStep, firstQuestion);
+    groupQuestionsByStep(store, questionsByStep, firstQuestion, 0);
 
     return questionsByStep.filter((questions): questions is Question[] =>
       Boolean(questions?.length),
@@ -152,72 +147,41 @@ function groupQuestionsByStep(
   store: Store,
   questionsByStep: (Question[] | undefined)[],
   currentQuestion: Question,
+  currentQuestionPosition: number,
 ): void {
   currentQuestion.next.forEach((nextQuestionReference) => {
     const nextQuestion = store.questions.get(nextQuestionReference);
 
-    const conditionalPreviousQuestion = nextQuestion?.previous.find(
-      (rule) => rule.previous === currentQuestion.id,
+    const previousQuestionConditionalLink = nextQuestion?.previous.find(
+      (rule) => rule.question === currentQuestion.id,
     );
 
-    if (conditionalPreviousQuestion) {
-      const isPreviousQuestionAnswered = currentQuestion.options.some(
-        (optionReference) => store.answers.has(optionReference),
-      );
-      let shouldNextQuestionBeIncluded = false;
-
-      switch (conditionalPreviousQuestion.matchRule) {
-        case QuestionVisibilityConditionsMatchRule.Or: {
-          shouldNextQuestionBeIncluded =
-            conditionalPreviousQuestion.conditions.some((condition) =>
-              isConditionSatisfied(
-                store,
-                condition,
-                isPreviousQuestionAnswered,
-              ),
-            );
-          break;
-        }
-        case QuestionVisibilityConditionsMatchRule.And: {
-          shouldNextQuestionBeIncluded =
-            conditionalPreviousQuestion.conditions.every((condition) =>
-              isConditionSatisfied(
-                store,
-                condition,
-                isPreviousQuestionAnswered,
-              ),
-            );
-          break;
-        }
-      }
+    if (previousQuestionConditionalLink) {
+      const shouldNextQuestionBeIncluded =
+        previousQuestionConditionalLink.matches(store.answers);
 
       if (shouldNextQuestionBeIncluded) {
-        questionsByStep[conditionalPreviousQuestion.step] ??= [];
-        questionsByStep[conditionalPreviousQuestion.step]!.push(nextQuestion!);
+        let nextQuestionPosition = currentQuestionPosition;
 
-        groupQuestionsByStep(store, questionsByStep, nextQuestion!);
+        switch (previousQuestionConditionalLink.step) {
+          case QuestionStep.New: {
+            nextQuestionPosition += 1;
+            (questionsByStep[nextQuestionPosition] ??= []).push(nextQuestion!);
+            break;
+          }
+          case QuestionStep.Same: {
+            questionsByStep[nextQuestionPosition]!.push(nextQuestion!);
+            break;
+          }
+        }
+
+        groupQuestionsByStep(
+          store,
+          questionsByStep,
+          nextQuestion!,
+          nextQuestionPosition,
+        );
       }
     }
   });
-}
-
-function isConditionSatisfied(
-  store: Store,
-  condition: QuestionVisibilityCondition,
-  isPreviousQuestionAnswered: boolean,
-): boolean {
-  if (isPreviousQuestionAnswered) {
-    const isIncludedDependentOptionSelected = store.answers.has(
-      condition.option,
-    );
-
-    switch (condition.state) {
-      case QuestionVisibilityDependencyState.Selected:
-        return isIncludedDependentOptionSelected;
-      case QuestionVisibilityDependencyState.NotSelected:
-        return !isIncludedDependentOptionSelected;
-    }
-  } else {
-    return true;
-  }
 }
