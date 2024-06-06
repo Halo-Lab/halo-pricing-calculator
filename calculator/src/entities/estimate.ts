@@ -210,6 +210,8 @@ export class Estimate extends Entity<Estimate> {
   /**
    * Estimate's display text.
    * It can be used as a short description of the estimate.
+   *
+   * The empty string means this estimate won't be shown to the user.
    */
   text: string;
   /**

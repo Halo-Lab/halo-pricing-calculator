@@ -27,18 +27,17 @@ export const estimates: Estimate[] = [];
   options: [
     {
       text: "Website",
-      estimates: [{ text: "", assessment: new EstimateExactAssessment(0) }],
+      estimates: [{ text: "", assessment: new EstimateUnknownAssessment() }],
     },
     {
       text: "Web application",
-      estimates: [{ text: "", assessment: new EstimateExactAssessment(0) }],
+      estimates: [{ text: "", assessment: new EstimateUnknownAssessment() }],
     },
     {
       text: "Branding",
-      estimates: [{ text: "", assessment: new EstimateExactAssessment(0) }],
+      estimates: [{ text: "", assessment: new EstimateUnknownAssessment() }],
     },
   ],
-  multiple: true,
   previous: [],
 });
 /* 1 */ createQuestion({
@@ -1260,6 +1259,1132 @@ export const estimates: Estimate[] = [];
   ],
   multiple: true,
   optional: true,
+});
+// Branding
+/* 25 */ createQuestion({
+  text: "Do you have branding or style guidelines we should follow?",
+  title: "Guidelines",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Guidelines",
+          assessment: new EstimateExactAssessment(0),
+        },
+      ],
+    },
+    {
+      text: "Yes, but It may be enhanced",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "No, I’m open to suggestions",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "No, I don’t need it at the moment",
+      estimates: [
+        {
+          text: "Guidelines",
+          assessment: new EstimateExactAssessment(0),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[1].id,
+      condition: new And(
+        new Selected(questions[1].options[2]),
+        new Not(
+          new Or(
+            new Selected(questions[1].options[0]),
+            new Selected(questions[1].options[1]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[9].id,
+      condition: new And(
+        new Selected(questions[1].options[2]),
+        new Not(new Selected(questions[1].options[1])),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[17].id,
+      condition: new And(
+        new Selected(questions[1].options[2]),
+        new Not(new Selected(questions[13].options[2])),
+        new Not(
+          new Or(
+            new Selected(questions[2].options[2]),
+            new Selected(questions[10].options[2]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[18].id,
+      condition: new And(
+        new Selected(questions[1].options[2]),
+        new Not(
+          new Or(
+            new Selected(questions[2].options[2]),
+            new Selected(questions[10].options[2]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[24].id,
+      condition: new Selected(questions[1].options[2]),
+    }),
+  ],
+});
+/* 26 */ createQuestion({
+  text: "Please select the branding services you need",
+  title: "Branding",
+  options: [
+    {
+      text: "Logo",
+      estimates: [
+        {
+          text: "Branding services",
+          assessment: new EstimateRangeAssessment(40, 56),
+        },
+      ],
+    },
+    {
+      text: "Basic Brand Guidelines",
+      estimates: [
+        {
+          text: "Branding services",
+          assessment: new EstimateExactAssessment(80),
+        },
+      ],
+    },
+    {
+      text: "Advanced Brand Guidelines",
+      estimates: [
+        {
+          text: "Branding services",
+          assessment: new EstimateRangeAssessment(120, 160),
+        },
+      ],
+    },
+    {
+      text: "Advanced Brand Guidelines And Brand Strategy",
+      estimates: [
+        {
+          text: "Branding services",
+          assessment: new EstimateRangeAssessment(200, 232),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[25].id,
+    }),
+  ],
+});
+/* 27 */ createQuestion({
+  text: "Do you need Naming?",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        { text: "Naming", assessment: new EstimateExactAssessment(40) },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        { text: "Naming", assessment: new EstimateUnknownAssessment() },
+      ],
+    },
+    {
+      text: "I'm not sure",
+      estimates: [
+        { text: "Naming", assessment: new EstimateUnknownAssessment() },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[26].id,
+    }),
+  ],
+});
+/* 28 */ createQuestion({
+  text: "Would you like to have some custom elements in your identity?",
+  options: [
+    {
+      text: "Mascottes",
+      estimates: [
+        { text: "Identity", assessment: new EstimateExactAssessment(40) },
+      ],
+    },
+    {
+      text: "3D Graphics",
+      estimates: [
+        { text: "Identity", assessment: new EstimateExactAssessment(40) },
+      ],
+    },
+    {
+      text: "Illustrations",
+      estimates: [
+        { text: "Identity", assessment: new EstimateExactAssessment(40) },
+      ],
+    },
+    {
+      text: "I'm not sure",
+      estimates: [
+        { text: "Identity", assessment: new EstimateUnknownAssessment() },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[27].id,
+    }),
+  ],
+});
+/* 29 */ createQuestion({
+  text: "Do you need any additional marketing materials?",
+  options: [
+    {
+      text: "Pitch Deck designs",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Merch & stationery for printing",
+      estimates: [
+        {
+          text: "Marketing materials",
+          assessment: new EstimateRangeAssessment(12, 32),
+        },
+      ],
+    },
+    {
+      text: "Digital Ads, Media Posts",
+      estimates: [
+        {
+          text: "Marketing materials",
+          assessment: new EstimateRangeAssessment(8, 16),
+        },
+      ],
+    },
+    {
+      text: "Promo video",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Posters and Billboard Mockup",
+      estimates: [
+        {
+          text: "Marketing materials",
+          assessment: new EstimateRangeAssessment(4, 12),
+        },
+      ],
+    },
+    {
+      text: "No, I don’t need it",
+      estimates: [
+        {
+          text: "Marketing materials",
+          assessment: new EstimateExactAssessment(40),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[28].id,
+    }),
+  ],
+});
+questions[8].previous.push(
+  new PreviousQuestionConditionalLink({
+    step: QuestionStep.Same,
+    question: questions[29].id,
+    condition: new Not(new Selected(questions[1].options[0])),
+  }),
+);
+questions[29].next.push(questions[8].id);
+/* 30 */ createQuestion({
+  text: "What should be the duration of the video?",
+  options: [
+    {
+      text: "<5 - seconds",
+      estimates: [
+        {
+          text: "Video duration",
+          assessment: new EstimateExactAssessment(4),
+        },
+      ],
+    },
+    {
+      text: "Up to 15 seconds",
+      estimates: [
+        {
+          text: "Video duration",
+          assessment: new EstimateExactAssessment(8),
+        },
+      ],
+    },
+    {
+      text: "Up to 1 minute",
+      estimates: [
+        {
+          text: "Video duration",
+          assessment: new EstimateExactAssessment(20),
+        },
+      ],
+    },
+  ],
+  previous: [],
+});
+/* 31 */ createQuestion({
+  text: "What type of promo video is it?",
+  title: "Promo Video",
+  options: [
+    {
+      text: "Video showcasing product interface",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment({
+            condition: new Not(
+              new Or(
+                questions[30].options.map((option) => new Selected(option)),
+              ),
+            ),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(8, {
+            condition: new Selected(questions[30].options[0]),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(16, {
+            condition: new Selected(questions[30].options[1]),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(56, {
+            condition: new Selected(questions[30].options[2]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "Video with a simple interface and graphics",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment({
+            condition: new Not(
+              new Or(
+                questions[30].options.map((option) => new Selected(option)),
+              ),
+            ),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(12, {
+            condition: new Selected(questions[30].options[0]),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(32, {
+            condition: new Selected(questions[30].options[1]),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(92, {
+            condition: new Selected(questions[30].options[2]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "Illustrated video",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment({
+            condition: new Not(
+              new Or(
+                questions[30].options.map((option) => new Selected(option)),
+              ),
+            ),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(20, {
+            condition: new Selected(questions[30].options[0]),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(64, {
+            condition: new Selected(questions[30].options[1]),
+          }),
+        },
+        {
+          text: "Video type",
+          assessment: new EstimateExactAssessment(160, {
+            condition: new Selected(questions[30].options[2]),
+          }),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[29].id,
+      condition: new And(
+        new Selected(questions[1].options[0]),
+        new Selected(questions[29].options[3]),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[9].id,
+      condition: new And(
+        new Not(new Selected(questions[1].options[0])),
+        new Selected(questions[29].options[3]),
+      ),
+    }),
+  ],
+});
+questions[30].previous.push(
+  new PreviousQuestionConditionalLink({
+    step: QuestionStep.Same,
+    question: questions[31].id,
+  }),
+);
+questions[31].next.push(questions[30].id);
+/* 32 */ createQuestion({
+  text: "Do you need a voiceover?",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Voiceover",
+          assessment: new EstimateRangeAssessment(8, 20),
+        },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Voiceover",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[30].id,
+    }),
+  ],
+});
+/* 33 */ createQuestion({
+  text: "Do you have a script?",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Script",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "No, please provide one",
+      estimates: [
+        {
+          text: "Script",
+          assessment: new EstimateRangeAssessment(8, 16),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[32].id,
+    }),
+  ],
+});
+/* 34 */ createQuestion({
+  text: "How big is your pitch deck?",
+  title: "Pitch deck",
+  options: [
+    {
+      text: "Up to 15 slides",
+      estimates: [
+        {
+          text: "Pitch deck size",
+          assessment: new EstimateRangeAssessment(40, 56),
+        },
+      ],
+    },
+    {
+      text: "16 - 30 slides",
+      estimates: [
+        {
+          text: "Pitch deck size",
+          assessment: new EstimateRangeAssessment(64, 80),
+        },
+      ],
+    },
+    {
+      text: "31 - 50 slides",
+      estimates: [
+        {
+          text: "Pitch deck size",
+          assessment: new EstimateRangeAssessment(80, 120),
+        },
+      ],
+    },
+    {
+      text: "More than 51 slides",
+      estimates: [
+        {
+          text: "Pitch deck size",
+          assessment: new EstimateExactAssessment(240),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[33].id,
+      condition: new Selected(questions[29].options[0]),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[29].id,
+      condition: new And(
+        new Selected(questions[29].options[0]),
+        new Not(new Selected(questions[29].options[3])),
+        new Selected(questions[1].options[0]),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[9].id,
+      condition: new And(
+        new Selected(questions[29].options[0]),
+        new Not(new Selected(questions[29].options[3])),
+        new Not(new Selected(questions[1].options[0])),
+      ),
+    }),
+  ],
+});
+/* 35 */ createQuestion({
+  text: "By default, you get access to Figma source files. Need any other formats?",
+  options: [
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateExactAssessment(0),
+        },
+      ],
+    },
+    {
+      text: "Keynote",
+      estimates: [
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(8, {
+            condition: new Selected(questions[34].options[0]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(16, {
+            condition: new Selected(questions[34].options[1]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(32, {
+            condition: new Selected(questions[34].options[2]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(52, {
+            condition: new Selected(questions[34].options[3]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "PowerPoint",
+      estimates: [
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(8, {
+            condition: new Selected(questions[34].options[0]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(16, {
+            condition: new Selected(questions[34].options[1]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(32, {
+            condition: new Selected(questions[34].options[2]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(52, {
+            condition: new Selected(questions[34].options[3]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "Google slides",
+      estimates: [
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(12, {
+            condition: new Selected(questions[34].options[0]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(16, {
+            condition: new Selected(questions[34].options[1]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(48, {
+            condition: new Selected(questions[34].options[2]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(52, {
+            condition: new Selected(questions[34].options[3]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "Canva",
+      estimates: [
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(16, {
+            condition: new Selected(questions[34].options[0]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(32, {
+            condition: new Selected(questions[34].options[1]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(60, {
+            condition: new Selected(questions[34].options[2]),
+          }),
+        },
+        {
+          text: "File format",
+          assessment: new EstimateExactAssessment(68, {
+            condition: new Selected(questions[34].options[3]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "Other",
+      estimates: [
+        {
+          text: "",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[34].id,
+    }),
+  ],
+});
+/* 36 */ createQuestion({
+  text: "Do you have content?",
+  options: [
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Content",
+          assessment: new EstimateExactAssessment(40, {
+            condition: new Selected(questions[34].options[0]),
+          }),
+        },
+        {
+          text: "Content",
+          assessment: new EstimateExactAssessment(80, {
+            condition: new Selected(questions[34].options[1]),
+          }),
+        },
+        {
+          text: "Content",
+          assessment: new EstimateExactAssessment(160, {
+            condition: new Selected(questions[34].options[2]),
+          }),
+        },
+        {
+          text: "Content",
+          assessment: new EstimateExactAssessment(200, {
+            condition: new Selected(questions[34].options[3]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "Yes",
+      estimates: [
+        { text: "Content", assessment: new EstimateExactAssessment(0) },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[35].id,
+    }),
+  ],
+});
+// Digital marketing
+/* 37 */ createQuestion({
+  text: "How big is your website?",
+  title: "Digital Marketing",
+  options: [
+    {
+      text: "Up to 100 pages",
+      estimates: [
+        {
+          text: "Website site",
+          assessment: new EstimateExactAssessment(30),
+        },
+      ],
+    },
+    {
+      text: "Up to 1000 pages",
+      estimates: [
+        {
+          text: "Website site",
+          assessment: new EstimateExactAssessment(40),
+        },
+      ],
+    },
+    {
+      text: "Up to 10,000 pages",
+      estimates: [
+        {
+          text: "Website site",
+          assessment: new EstimateExactAssessment(60),
+        },
+      ],
+    },
+    {
+      text: "More",
+      estimates: [
+        {
+          text: "Website site",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "I'm not sure",
+      estimates: [
+        {
+          text: "Website site",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[1].id,
+      condition: new And(
+        new Selected(questions[1].options[3]),
+        new Not(
+          new Or(
+            questions[1].options
+              .slice(0, -1)
+              .map((option) => new Selected(option)),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[9].id,
+      condition: new And(
+        new Selected(questions[1].options[0]),
+        new Selected(questions[1].options[3]),
+        new Not(
+          new Or(
+            questions[1].options
+              .slice(1, -1)
+              .map((option) => new Selected(option)),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[17].id,
+      condition: new And(
+        new Selected(questions[1].options[1]),
+        new Selected(questions[1].options[3]),
+        new Not(new Selected(questions[1].options[2])),
+        new Not(
+          new Or(
+            new Selected(questions[13].options[2]),
+            new Selected(questions[2].options[2]),
+            new Selected(questions[10].options[2]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[18].id,
+      condition: new And(
+        new Selected(questions[1].options[1]),
+        new Selected(questions[1].options[3]),
+        new Not(new Selected(questions[1].options[2])),
+        new Not(
+          new Or(
+            new Selected(questions[2].options[2]),
+            new Selected(questions[10].options[2]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[24].id,
+      condition: new And(
+        new Selected(questions[1].options[1]),
+        new Selected(questions[1].options[3]),
+        new Not(new Selected(questions[1].options[2])),
+        new Or(
+          new Selected(questions[2].options[2]),
+          new Selected(questions[10].options[2]),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[29].id,
+      condition: new And(
+        new Selected(questions[1].options[0]),
+        new Selected(questions[1].options[2]),
+        new Selected(questions[1].options[3]),
+        new Not(
+          new Or(
+            new Selected(questions[29].options[0]),
+            new Selected(questions[29].options[3]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[9].id,
+      condition: new And(
+        new Not(new Selected(questions[1].options[0])),
+        new Selected(questions[1].options[2]),
+        new Selected(questions[1].options[3]),
+        new Not(
+          new Or(
+            new Selected(questions[29].options[0]),
+            new Selected(questions[29].options[3]),
+          ),
+        ),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[33].id,
+      condition: new And(
+        new Selected(questions[1].options[2]),
+        new Selected(questions[1].options[3]),
+        new Selected(questions[29].options[3]),
+        new Not(new Selected(questions[29].options[0])),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[36].id,
+      condition: new And(
+        new Selected(questions[1].options[2]),
+        new Selected(questions[1].options[3]),
+        new Selected(questions[29].options[0]),
+      ),
+    }),
+  ],
+});
+/* 38 */ createQuestion({
+  text: "Will the content need to be updated?",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Content update",
+          assessment: new EstimateExactAssessment(30),
+        },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Content update",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "I'm not sure",
+      estimates: [
+        {
+          text: "Content update",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[37].id,
+    }),
+  ],
+});
+/* 39 */ createQuestion({
+  text: "Will we need to improve your backlink profile ?",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Profile improvement",
+          assessment: new EstimateExactAssessment(15),
+        },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Profile improvement",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "I'm not sure",
+      estimates: [
+        {
+          text: "Profile improvement",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[38].id,
+    }),
+  ],
+});
+/* 40 */ createQuestion({
+  text: "What type of audit do you need ?",
+  options: [
+    {
+      text: "Full SEO audit (with all the following options)",
+      estimates: [
+        {
+          text: "Audit type",
+          assessment: new EstimateExactAssessment(60),
+        },
+      ],
+    },
+    {
+      text: "Technical audit",
+      estimates: [
+        {
+          text: "Audit type",
+          assessment: new EstimateExactAssessment(30),
+        },
+      ],
+    },
+    {
+      text: "Backlink profile audit",
+      estimates: [
+        {
+          text: "Audit type",
+          assessment: new EstimateExactAssessment(20),
+        },
+      ],
+    },
+    {
+      text: "Audit after Google update",
+      estimates: [
+        {
+          text: "Audit type",
+          assessment: new EstimateExactAssessment(40),
+        },
+      ],
+    },
+    {
+      text: "I’m not sure",
+      estimates: [
+        {
+          text: "Audit type",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[39].id,
+    }),
+  ],
+});
+/* 41 */ createQuestion({
+  text: "How many content do you need ?",
+  options: [
+    {
+      text: "3 articles",
+      estimates: [
+        {
+          text: "Content amount",
+          assessment: new EstimateExactAssessment(10),
+        },
+      ],
+    },
+    {
+      text: "5 articles",
+      estimates: [
+        {
+          text: "Content amount",
+          assessment: new EstimateExactAssessment(15),
+        },
+      ],
+    },
+    {
+      text: "10 articles",
+      estimates: [
+        {
+          text: "Content amount",
+          assessment: new EstimateExactAssessment(30),
+        },
+      ],
+    },
+    {
+      text: "More",
+      estimates: [
+        {
+          text: "Content amount",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "I'm not sure",
+      estimates: [
+        {
+          text: "Content amount",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[40].id,
+    }),
+  ],
 });
 
 interface MinimalEstimate {

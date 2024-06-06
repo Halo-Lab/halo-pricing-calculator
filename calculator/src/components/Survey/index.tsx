@@ -261,7 +261,12 @@ const ResultsBlock: Component<{}> = () => {
         </button>
       </header>
 
-      <ol ref={listRef} data-expanded={isListExpanded} scroll-style-light>
+      <ol
+        ref={listRef}
+        data-expanded={isListExpanded}
+        scroll-style-light
+        data-lenis-prevent
+      >
         <For each={estimatesOfSelectedOptions}>
           {(estimate) => <EstimateRow estimate={estimate} />}
         </For>
