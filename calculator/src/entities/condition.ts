@@ -12,7 +12,7 @@ export abstract class Condition {
 /**
  * Tries to match at least one {@link Condition}.
  */
-export class Or extends Condition {
+export class SomeOf extends Condition {
   conditions: Condition[];
 
   constructor(...conditions: [Condition[]] | Condition[]) {
@@ -29,7 +29,7 @@ export class Or extends Condition {
 /**
  * Matches only if all {@link Condition}s are satisfied.
  */
-export class And extends Condition {
+export class All extends Condition {
   conditions: Condition[];
 
   constructor(...conditions: [Condition[]] | Condition[]) {

@@ -93,7 +93,7 @@ export class Question extends Entity<Question> {
    */
   title?: string;
   /**
-   * Indicates whether the current question needs be answered.
+   * Indicates whether the current question needs to be answered.
    */
   optional?: boolean;
 

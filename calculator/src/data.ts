@@ -1,7 +1,7 @@
 import { Option } from "./entities/option.js";
 import { createId } from "./id.js";
 import { Reference } from "./entities/entity.js";
-import { Or, And, Not, Selected } from "./entities/condition.js";
+import { SomeOf, All, Not, Selected } from "./entities/condition.js";
 import {
   Question,
   QuestionData,
@@ -200,7 +200,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[2].id,
-      condition: new Or(
+      condition: new SomeOf(
         new Selected(questions[2].options[1]),
         new Selected(questions[2].options[2]),
       ),
@@ -216,7 +216,7 @@ export const estimates: Estimate[] = [];
         {
           text: "Customization",
           assessment: new EstimateExactAssessment(0, {
-            condition: new Or(
+            condition: new SomeOf(
               questions[3].options
                 .slice(0, -1)
                 .map((option) => new Selected(option)),
@@ -237,7 +237,7 @@ export const estimates: Estimate[] = [];
         {
           text: "Customization",
           assessment: new EstimateExactAssessment(24, {
-            condition: new Or(
+            condition: new SomeOf(
               questions[3].options
                 .slice(0, -1)
                 .map((option) => new Selected(option)),
@@ -264,7 +264,7 @@ export const estimates: Estimate[] = [];
         {
           text: "Customization",
           assessment: new EstimateExactAssessment(1.25, {
-            condition: new Or(
+            condition: new SomeOf(
               questions[3].options
                 .slice(1, -1)
                 .map((option) => new Selected(option)),
@@ -314,7 +314,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.Same,
       question: questions[4].id,
-      condition: new Or(
+      condition: new SomeOf(
         new Selected(questions[2].options[0]),
         new Selected(questions[2].options[3]),
       ),
@@ -323,7 +323,7 @@ export const estimates: Estimate[] = [];
       step: QuestionStep.New,
       question: questions[2].id,
       condition: new Not(
-        new Or(
+        new SomeOf(
           new Selected(questions[2].options[0]),
           new Selected(questions[2].options[3]),
         ),
@@ -502,7 +502,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[1].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[1]),
         new Not(new Selected(questions[1].options[0])),
       ),
@@ -620,7 +620,7 @@ export const estimates: Estimate[] = [];
         {
           text: "Technical stack",
           assessment: new EstimateExactAssessment(24, {
-            condition: new Or(
+            condition: new SomeOf(
               new Selected(questions[2].options[0]),
               new Selected(questions[10].options[0]),
             ),
@@ -634,7 +634,7 @@ export const estimates: Estimate[] = [];
         {
           text: "Technical stack",
           assessment: new EstimateRangeAssessment(24, 48, {
-            condition: new Or(
+            condition: new SomeOf(
               new Selected(questions[2].options[0]),
               new Selected(questions[10].options[0]),
             ),
@@ -643,12 +643,12 @@ export const estimates: Estimate[] = [];
         {
           text: "Technical stack",
           assessment: new EstimateRangeAssessment(40, 64, {
-            condition: new And(
-              new Or(
+            condition: new All(
+              new SomeOf(
                 new Selected(questions[2].options[2]),
                 new Selected(questions[10].options[2]),
               ),
-              new Or(
+              new SomeOf(
                 new Selected(questions[3].options[0]),
                 new Selected(questions[11].options[0]),
               ),
@@ -658,12 +658,12 @@ export const estimates: Estimate[] = [];
         {
           text: "Technical stack",
           assessment: new EstimateRangeAssessment(80, 120, {
-            condition: new And(
-              new Or(
+            condition: new All(
+              new SomeOf(
                 new Selected(questions[2].options[2]),
                 new Selected(questions[10].options[2]),
               ),
-              new Or(
+              new SomeOf(
                 new Selected(questions[3].options[1]),
                 new Selected(questions[11].options[1]),
               ),
@@ -673,12 +673,12 @@ export const estimates: Estimate[] = [];
         {
           text: "Technical stack",
           assessment: new EstimateRangeAssessment(80, 160, {
-            condition: new And(
-              new Or(
+            condition: new All(
+              new SomeOf(
                 new Selected(questions[2].options[2]),
                 new Selected(questions[10].options[2]),
               ),
-              new Or(
+              new SomeOf(
                 new Selected(questions[3].options[2]),
                 new Selected(questions[11].options[2]),
               ),
@@ -688,12 +688,12 @@ export const estimates: Estimate[] = [];
         {
           text: "Technical stack",
           assessment: new EstimateRangeAssessment(160, 240, {
-            condition: new And(
-              new Or(
+            condition: new All(
+              new SomeOf(
                 new Selected(questions[2].options[2]),
                 new Selected(questions[10].options[2]),
               ),
-              new Or(
+              new SomeOf(
                 new Selected(questions[3].options[3]),
                 new Selected(questions[11].options[3]),
               ),
@@ -939,7 +939,7 @@ export const estimates: Estimate[] = [];
       estimates: [
         {
           text: "Monthly visits",
-          assessment: new EstimateRangeAssessment(3, 6),
+          assessment: new EstimateRangeAssessment(24, 48),
         },
       ],
     },
@@ -948,7 +948,7 @@ export const estimates: Estimate[] = [];
       estimates: [
         {
           text: "Monthly visits",
-          assessment: new EstimateRangeAssessment(4, 6),
+          assessment: new EstimateRangeAssessment(32, 48),
         },
       ],
     },
@@ -1026,7 +1026,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[18].id,
-      condition: new Or(
+      condition: new SomeOf(
         new Selected(questions[2].options[2]),
         new Selected(questions[10].options[2]),
       ),
@@ -1034,8 +1034,8 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[17].id,
-      condition: new And(
-        new Or(
+      condition: new All(
+        new SomeOf(
           new Selected(questions[2].options[2]),
           new Selected(questions[10].options[2]),
         ),
@@ -1306,10 +1306,10 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[1].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[2]),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[1].options[0]),
             new Selected(questions[1].options[1]),
           ),
@@ -1319,7 +1319,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[2]),
         new Not(new Selected(questions[1].options[1])),
       ),
@@ -1327,11 +1327,11 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[17].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[2]),
         new Not(new Selected(questions[13].options[2])),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[2].options[2]),
             new Selected(questions[10].options[2]),
           ),
@@ -1341,10 +1341,10 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[18].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[2]),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[2].options[2]),
             new Selected(questions[10].options[2]),
           ),
@@ -1587,7 +1587,7 @@ questions[29].next.push(questions[8].id);
           text: "",
           assessment: new EstimateUnknownAssessment({
             condition: new Not(
-              new Or(
+              new SomeOf(
                 questions[30].options.map((option) => new Selected(option)),
               ),
             ),
@@ -1620,7 +1620,7 @@ questions[29].next.push(questions[8].id);
           text: "",
           assessment: new EstimateUnknownAssessment({
             condition: new Not(
-              new Or(
+              new SomeOf(
                 questions[30].options.map((option) => new Selected(option)),
               ),
             ),
@@ -1653,7 +1653,7 @@ questions[29].next.push(questions[8].id);
           text: "",
           assessment: new EstimateUnknownAssessment({
             condition: new Not(
-              new Or(
+              new SomeOf(
                 questions[30].options.map((option) => new Selected(option)),
               ),
             ),
@@ -1684,7 +1684,7 @@ questions[29].next.push(questions[8].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[29].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[0]),
         new Selected(questions[29].options[3]),
       ),
@@ -1692,7 +1692,7 @@ questions[29].next.push(questions[8].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
-      condition: new And(
+      condition: new All(
         new Not(new Selected(questions[1].options[0])),
         new Selected(questions[29].options[3]),
       ),
@@ -1814,7 +1814,7 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[29].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[29].options[0]),
         new Not(new Selected(questions[29].options[3])),
         new Selected(questions[1].options[0]),
@@ -1823,7 +1823,7 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[29].options[0]),
         new Not(new Selected(questions[29].options[3])),
         new Not(new Selected(questions[1].options[0])),
@@ -2077,10 +2077,10 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[1].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[3]),
         new Not(
-          new Or(
+          new SomeOf(
             questions[1].options
               .slice(0, -1)
               .map((option) => new Selected(option)),
@@ -2091,11 +2091,11 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[0]),
         new Selected(questions[1].options[3]),
         new Not(
-          new Or(
+          new SomeOf(
             questions[1].options
               .slice(1, -1)
               .map((option) => new Selected(option)),
@@ -2106,12 +2106,12 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[17].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[1]),
         new Selected(questions[1].options[3]),
         new Not(new Selected(questions[1].options[2])),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[13].options[2]),
             new Selected(questions[2].options[2]),
             new Selected(questions[10].options[2]),
@@ -2122,12 +2122,12 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[18].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[1]),
         new Selected(questions[1].options[3]),
         new Not(new Selected(questions[1].options[2])),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[2].options[2]),
             new Selected(questions[10].options[2]),
           ),
@@ -2137,11 +2137,11 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[24].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[1]),
         new Selected(questions[1].options[3]),
         new Not(new Selected(questions[1].options[2])),
-        new Or(
+        new SomeOf(
           new Selected(questions[2].options[2]),
           new Selected(questions[10].options[2]),
         ),
@@ -2150,12 +2150,12 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[29].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[0]),
         new Selected(questions[1].options[2]),
         new Selected(questions[1].options[3]),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[29].options[0]),
             new Selected(questions[29].options[3]),
           ),
@@ -2165,12 +2165,12 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
-      condition: new And(
+      condition: new All(
         new Not(new Selected(questions[1].options[0])),
         new Selected(questions[1].options[2]),
         new Selected(questions[1].options[3]),
         new Not(
-          new Or(
+          new SomeOf(
             new Selected(questions[29].options[0]),
             new Selected(questions[29].options[3]),
           ),
@@ -2180,7 +2180,7 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[33].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[2]),
         new Selected(questions[1].options[3]),
         new Selected(questions[29].options[3]),
@@ -2190,7 +2190,7 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[36].id,
-      condition: new And(
+      condition: new All(
         new Selected(questions[1].options[2]),
         new Selected(questions[1].options[3]),
         new Selected(questions[29].options[0]),
@@ -2383,6 +2383,722 @@ questions[31].next.push(questions[30].id);
     new PreviousQuestionConditionalLink({
       step: QuestionStep.Same,
       question: questions[40].id,
+    }),
+  ],
+});
+// Web application
+/* 42 */ createQuestion({
+  text: "Which administration features do you need?",
+  title: "Choose Service",
+  options: [
+    {
+      text: "UX/UI design",
+      estimates: [{ text: "", assessment: new EstimateUnknownAssessment() }],
+    },
+    {
+      text: "Web development",
+      estimates: [{ text: "", assessment: new EstimateUnknownAssessment() }],
+    },
+    // {
+    //   text: "Branding and marketing",
+    //   estimates: [{ text: "", assessment: new EstimateUnknownAssessment() }],
+    // },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[0].id,
+      condition: new Selected(questions[0].options[1]),
+    }),
+  ],
+  multiple: true,
+});
+/* 43 */ createQuestion({
+  text: "What level of customisation would you like?",
+  title: "Customization",
+  options: [
+    {
+      text: "Custom UI Design",
+      estimates: [
+        {
+          text: "Customization",
+          assessment: new EstimateRangeAssessment(180, 200),
+        },
+      ],
+    },
+    {
+      text: "Material UI / Other libraries",
+      estimates: [
+        {
+          text: "Customization",
+          assessment: new EstimateRangeAssessment(160, 200),
+        },
+      ],
+    },
+    {
+      text: "Wireframes / Prototypes",
+      estimates: [
+        {
+          text: "Customization",
+          assessment: new EstimateRangeAssessment(120, 160),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[42].id,
+      condition: new Selected(questions[42].options[0]),
+    }),
+  ],
+});
+/* 44 */ createQuestion({
+  text: "Do you have branding or style guidelines we should follow?",
+  options: [
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Style guidelines",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "I'm open to suggestions",
+      estimates: [
+        {
+          text: "Style guidelines",
+          assessment: new EstimateRangeAssessment(8, 12),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[43].id,
+      condition: new Selected(questions[43].options[2]),
+    }),
+  ],
+});
+/* 45 */ createQuestion({
+  text: "Approximately how many pages will your application have?",
+  title: "Development",
+  options: [
+    {
+      text: "5-7 pages",
+      estimates: [
+        {
+          text: "Page count",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "8-15 pages",
+      estimates: [
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(16, 120, {
+            condition: new Selected(questions[43].options[0]),
+          }),
+        },
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(16, 92, {
+            condition: new Selected(questions[43].options[1]),
+          }),
+        },
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(12, 80, {
+            condition: new Selected(questions[43].options[2]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "16-20 pages",
+      estimates: [
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(120, 216, {
+            condition: new Selected(questions[43].options[0]),
+          }),
+        },
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(102, 184, {
+            condition: new Selected(questions[43].options[1]),
+          }),
+        },
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(72, 130, {
+            condition: new Selected(questions[43].options[2]),
+          }),
+        },
+      ],
+    },
+    {
+      text: ">20 pages",
+      estimates: [
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(216, 300, {
+            condition: new Selected(questions[43].options[0]),
+          }),
+        },
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(184, 255, {
+            condition: new Selected(questions[43].options[1]),
+          }),
+        },
+        {
+          text: "Page count",
+          assessment: new EstimateRangeAssessment(130, 180, {
+            condition: new Selected(questions[43].options[2]),
+          }),
+        },
+      ],
+    },
+    {
+      text: "I don't know",
+      estimates: [
+        {
+          text: "Page count",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[43].id,
+      condition: new Not(new Selected(questions[43].options[2])),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[44].id,
+    }),
+  ],
+});
+/* 46 */ createQuestion({
+  text: "Do you need additional screen sizes?",
+  options: [
+    {
+      text: "Desktop only",
+      estimates: [
+        {
+          text: "Other screen sizes",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Mobile only",
+      estimates: [
+        {
+          text: "Other screen sizes",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Desktop and mobile",
+      estimates: [
+        {
+          text: "Other screen sizes",
+          assessment: new EstimateExactAssessment(0.3, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[45].id,
+    }),
+  ],
+});
+/* 47 */ createQuestion({
+  text: "What screen orientation do you need?",
+  options: [
+    {
+      text: "Tablet portrait",
+      estimates: [
+        {
+          text: "Screen orientation",
+          assessment: new EstimateExactAssessment(0.15, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+    {
+      text: "Tablet landscape",
+      estimates: [
+        {
+          text: "Screen orientation",
+          assessment: new EstimateExactAssessment(0.2, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Screen orientation",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Other",
+      estimates: [
+        {
+          text: "Screen orientation",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[46].id,
+      condition: new Selected(questions[46].options[2]),
+    }),
+  ],
+});
+/* 48 */ createQuestion({
+  text: "How many types of users will use the application?",
+  options: [
+    {
+      text: "Single user type",
+      estimates: [
+        {
+          text: "User types",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Multiple user types",
+      estimates: [
+        {
+          text: "User types",
+          assessment: new EstimateRangeAssessment(0.2, 1, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[46].id,
+      condition: new Not(new Selected(questions[46].options[2])),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[47].id,
+    }),
+  ],
+});
+/* 49 */ createQuestion({
+  text: "Will users have personal profiles?",
+  options: [
+    {
+      text: "Yes, Advanced ones",
+      estimates: [
+        {
+          text: "Personal profiles",
+          assessment: new EstimateExactAssessment(0.15, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+    {
+      text: "Yes, Simple ones",
+      estimates: [
+        {
+          text: "Personal profiles",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Personal profiles",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[48].id,
+    }),
+  ],
+});
+/* 50 */ createQuestion({
+  text: "Do you need messaging to manage customer conversations?",
+  options: [
+    {
+      text: "Chat Support / HumanChat support",
+      estimates: [
+        {
+          text: "Customer conversations",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Video/Audio Calls Integration (3rd Party )",
+      estimates: [
+        {
+          text: "Customer conversations",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "User-to-user text messaging",
+      estimates: [
+        {
+          text: "Customer conversations",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Chatbots",
+      estimates: [
+        {
+          text: "Customer conversations",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Customer conversations",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[49].id,
+    }),
+  ],
+});
+/* 51 */ createQuestion({
+  text: "Where do you want to save your application data ?",
+  title: "Development",
+  options: [
+    {
+      text: "A new database",
+      estimates: [
+        {
+          text: "Data storage",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "An Existing Database",
+      estimates: [
+        {
+          text: "Data storage",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Cloud Database",
+      estimates: [
+        {
+          text: "Data storage",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[42].id,
+      condition: new Not(new Selected(questions[42].options[0])),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[50].id,
+    }),
+  ],
+});
+/* 52 */ createQuestion({
+  text: "Which administration features do you need?",
+  options: [
+    {
+      text: "User Management",
+      estimates: [
+        {
+          text: "Administration features",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Content Management",
+      estimates: [
+        {
+          text: "Administration features",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Reporting and Analytics",
+      estimates: [
+        {
+          text: "Administration features",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Notification Control",
+      estimates: [
+        {
+          text: "Administration features",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[51].id,
+    }),
+  ],
+});
+/* 53 */ createQuestion({
+  text: "Have you got a website and customer/product database ready to migrate?",
+  options: [
+    {
+      text: "No",
+      estimates: [
+        {
+          text: "Data migration",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Data migration",
+          assessment: new EstimateRangeAssessment(16, 40),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[52].id,
+    }),
+  ],
+});
+/* 54 */ createQuestion({
+  text: "Do you want users to authorise on your website?",
+  options: [
+    {
+      text: "User authorization",
+      estimates: [
+        {
+          text: "User authorization",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "User authorization",
+      estimates: [
+        {
+          text: "User authorization",
+          assessment: new EstimateRangeAssessment(32, 48),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[53].id,
+    }),
+  ],
+});
+/* 55 */ createQuestion({
+  text: "How do you want users to authorise?",
+  options: [
+    {
+      text: "Email/password login",
+      estimates: [
+        {
+          text: "Authorization types",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Social media login",
+      estimates: [
+        {
+          text: "Authorization types",
+          assessment: new EstimateRangeAssessment(8, 12),
+        },
+      ],
+    },
+    {
+      text: "Two factor authentication",
+      estimates: [
+        {
+          text: "Authorization types",
+          assessment: new EstimateRangeAssessment(8, 16),
+        },
+      ],
+    },
+    {
+      text: "Role based access",
+      estimates: [
+        {
+          text: "Authorization types",
+          assessment: new EstimateRangeAssessment(8, 20),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[54].id,
+      condition: new Selected(questions[54].options[1]),
+    }),
+  ],
+});
+/* 56 */ createQuestion({
+  text: "Do you want users to add details through the sign up and onboarding?",
+  options: [
+    {
+      text: "No, just email/name/password",
+      estimates: [
+        {
+          text: "Profile details",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Yes, for example, billing info, location, etc",
+      estimates: [
+        {
+          text: "Profile details",
+          assessment: new EstimateRangeAssessment(8, 16),
+        },
+      ],
+    },
+    {
+      text: "Yes, I want a big questionnaire",
+      estimates: [
+        {
+          text: "Profile details",
+          assessment: new EstimateRangeAssessment(12, 20),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[54].id,
+      condition: new Not(new Selected(questions[54].options[1])),
+    }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[55].id,
+    }),
+  ],
+});
+questions[16].previous.push(
+  new PreviousQuestionConditionalLink({
+    step: QuestionStep.Same,
+    question: questions[56].id,
+    condition: new Selected(questions[0].options[1]),
+  }),
+);
+questions[56].next.push(questions[16].id);
+/* 57 */ createQuestion({
+  text: "Do you need the back-end development?",
+  options: [
+    {
+      text: "No, it's on my team",
+      estimates: [
+        {
+          text: "Back-end development",
+          assessment: new EstimateUnknownAssessment(),
+        },
+      ],
+    },
+    {
+      text: "Use CMS/low-code solutions",
+      estimates: [
+        {
+          text: "Back-end development",
+          assessment: new EstimateRangeAssessment(0.15, 0.3, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+    {
+      text: "Yes",
+      estimates: [
+        {
+          text: "Back-end development",
+          assessment: new EstimateRangeAssessment(1, 1.5, {
+            operationKind: EstimationOperationKind.Multiplication,
+          }),
+        },
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.Same,
+      question: questions[17].id,
+      condition: new Selected(questions[0].options[1]),
     }),
   ],
 });
