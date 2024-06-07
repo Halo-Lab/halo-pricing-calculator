@@ -96,6 +96,10 @@ const RightCard: Component<RightCardProperties> = ({ question }) => {
     return !platformOptions().some((option) => answers().has(option.id));
   }, [answers]);
 
+  const deselectAllOptions = () => {
+    question().options.forEach(optionReference => dispatch(new RemoveAnswerEvent(optionReference)))
+  }
+
   return (
     <section data-platform>
       <svg
@@ -127,6 +131,7 @@ const RightCard: Component<RightCardProperties> = ({ question }) => {
                 index={index}
                 option={option}
                 multiple={multipleOptionsAllowed}
+                deselectAllOptions={deselectAllOptions}
               />
             );
           }}
@@ -144,12 +149,13 @@ interface SelectOptionProperties {
   index: Getter<number>;
   option: Getter<Option>;
   multiple: Getter<boolean>;
+  deselectAllOptions():void;
 }
 
 const SelectOption: Component<SelectOptionProperties> = ({
   index,
   option,
-  multiple,
+  multiple,deselectAllOptions
 }) => {
   const inputId = createId();
 
@@ -180,6 +186,10 @@ const SelectOption: Component<SelectOptionProperties> = ({
         checked={isSelected}
         on:change={(event) => {
           if (event.currentTarget.checked) {
+            if (!multiple()) {
+              deselectAllOptions()
+            }
+
             dispatch(new AddAnswerEvent(option().id));
           } else {
             dispatch(new RemoveAnswerEvent(option().id));

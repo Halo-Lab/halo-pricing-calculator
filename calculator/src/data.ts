@@ -599,6 +599,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
+      condition: new Selected(questions[0].options[1])
     }),
   ],
 });
@@ -1404,6 +1405,11 @@ export const estimates: Estimate[] = [];
       step: QuestionStep.New,
       question: questions[25].id,
     }),
+    new PreviousQuestionConditionalLink({
+      step: QuestionStep.New,
+      question: questions[0].id,
+      condition: new Selected(questions[0].options[2])
+    })
   ],
 });
 /* 27 */ createQuestion({
