@@ -1,14 +1,14 @@
-import { Component, state, memo, Show } from "moru";
+import { JSX, useState, useMemo } from "react";
 
-import { Button } from "../Button.js";
-import { Option } from "../../entities/option.js";
-import { Question } from "../../entities/question.js";
-import { Reference } from "../../entities/entity.js";
-import { Dictionary } from "../../dictionary.js";
-import { TabbedSection } from "./TabbedSection.js";
-import { SingleLineInput } from "../SingleLineInput.js";
-import { Estimate, EstimateRange } from "../../entities/estimate.js";
-import { useStore, Comment, ResetEvent } from "../../store.js";
+import { Button } from "../components/Button";
+import { Option } from "../entities/option";
+import { Question } from "../entities/question";
+import { Reference } from "../entities/entity";
+import { Dictionary } from "../dictionary";
+import { TabbedSection } from "./TabbedSection";
+import { SingleLineInput } from "../components/SingleLineInput";
+import { Comment, useSelector, useDispatch, ResetStore } from "../Store";
+import { Estimate, EstimateRange } from "../entities/estimate";
 
 /**
  * A speculative email regex.
@@ -25,33 +25,31 @@ import { useStore, Comment, ResetEvent } from "../../store.js";
 const EMAIL_REGEX =
   /^(?:"(?:[^"\\]|\\["\\]){1,62}"|(?:\([^)]*\))?(?:\w|[-!#$%&'*+\/=?^`{|}~])(?:\w|[-!#$%&'*+\/=?^`{|}~]|\.(?=\w|[-!#$%&'*+\/=?^`{|}~])){0,63}(?:\([^)]*\))?)@(?:\([^)]*\))?(?:[a-zA-Z0-9-]{1,63}(?:\.[a-zA-Z0-9-]{1,62}){0,3}|\[(?:\d{3}(?:\.\d{3}){3}|IPv6(?::(?:\d|[A-Fa-f]){4}){8})])(?:\([^)]*\))?$/;
 
-export const FinalStage: Component<{}> = () => {
-  const [select, dispatch] = useStore();
+export function FinalStage(): JSX.Element {
+  const dispatch = useDispatch();
+  const store = useSelector((store) => store);
 
-  const answers = select((store) => store.answers);
-  const options = select((store) => store.options);
-  const comments = select((store) => store.comments);
-  const estimates = select((store) => store.estimates);
-  const questionsByStep = select((store) => store.questionsByStep);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
 
-  const [email, setEmail] = state("");
-  const [name, setName] = state("");
-
-  const isEmailInvalid = memo(() => {
-    return !EMAIL_REGEX.test(email());
+  const isEmailInvalid = useMemo(() => {
+    return !EMAIL_REGEX.test(email);
   }, [email]);
-  const isNameInvalid = memo(() => {
-    return name().length === 0;
+
+  const isNameInvalid = useMemo(() => {
+    return name.length === 0;
   }, [name]);
-  const isGettingProposalForbidden = memo(() => {
-    return isNameInvalid() || isEmailInvalid();
+
+  const isGettingProposalForbidden = useMemo(() => {
+    return isNameInvalid || isEmailInvalid;
   }, [isNameInvalid, isEmailInvalid]);
 
-  const shouldShowEmailError = memo(() => {
-    return email().length > 0 && isEmailInvalid();
+  const shouldShowEmailError = useMemo(() => {
+    return email.length > 0 && isEmailInvalid;
   }, [email]);
-  const shouldShowNameError = memo(() => {
-    return name().length > 0 && isNameInvalid();
+
+  const shouldShowNameError = useMemo(() => {
+    return name.length > 0 && isNameInvalid;
   }, [name]);
 
   return (
@@ -62,7 +60,7 @@ export const FinalStage: Component<{}> = () => {
         <Button
           variant="primary"
           disabled={isGettingProposalForbidden}
-          on:click={() => {
+          onClick={() => {
             const input = document.querySelector<HTMLInputElement>(
               "#input-for-survey-data",
             );
@@ -72,18 +70,18 @@ export const FinalStage: Component<{}> = () => {
 
             if (input && submit) {
               input.value = createEmailContent({
-                name: name(),
-                email: email(),
-                answers: answers(),
-                options: options(),
-                comments: comments(),
-                estimates: estimates(),
-                questionsByStep: questionsByStep(),
+                name: name,
+                email: email,
+                answers: store.answers,
+                options: store.options,
+                comments: store.comments,
+                estimates: store.estimates,
+                questionsByStep: store.questionsByStep,
               });
 
               submit.click();
 
-              dispatch(new ResetEvent());
+              dispatch(new ResetStore());
             }
           }}
         >
@@ -101,29 +99,25 @@ export const FinalStage: Component<{}> = () => {
             type="email"
             label="Email"
             required
-            prop:value={email}
-            on:input={(event) => setEmail(event.currentTarget.value)}
+            value={email}
+            onInput={(value) => setEmail(value)}
           />
-          <Show when={shouldShowEmailError}>
-            <p>Seems like this email is invalid</p>
-          </Show>
+          {shouldShowEmailError && <p>Seems like this email is invalid</p>}
         </div>
         <div data-input-container>
           <SingleLineInput
             type="text"
             label="Name"
             required
-            prop:value={name}
-            on:input={(event) => setName(event.currentTarget.value)}
+            value={name}
+            onInput={(value) => setName(value)}
           />
-          <Show when={shouldShowNameError}>
-            <p>Fill in name please</p>
-          </Show>
+          {shouldShowNameError && <p>Fill in name please</p>}
         </div>
       </form>
     </TabbedSection>
   );
-};
+}
 
 interface EmailContentSource {
   name: string;
@@ -193,7 +187,7 @@ function createEmailContent({
 
       return `Step ${index + 1}.\n${answeredQuestions}\n${commentSection}`;
     })
-    .join("");
+    .join("\n");
 
   const totalEstimate = hoursRangeToString(totalMinHours, totalMaxHours);
 

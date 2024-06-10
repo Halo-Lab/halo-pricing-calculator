@@ -1,8 +1,7 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    "types": ["vite/client"],
-    "jsxImportSource": "moru"
+    "types": ["vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

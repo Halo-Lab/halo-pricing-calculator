@@ -1,7 +1,8 @@
 import browserslist from "browserslist";
-import { name } from "../package.json";
 import { defineConfig } from "vite";
 import { browserslistToTargets } from "lightningcss";
+
+import { name } from "../package.json";
 
 export default defineConfig({
   base: `/${name}`,

@@ -290,6 +290,7 @@ export const estimates: Estimate[] = [];
 });
 /* 5 */ createQuestion({
   text: "Is it a new site or a redesign?",
+  title: "Web Design",
   options: [
     {
       text: "Redesign of a current one",
@@ -315,18 +316,16 @@ export const estimates: Estimate[] = [];
       step: QuestionStep.Same,
       question: questions[4].id,
       condition: new SomeOf(
-        new Selected(questions[2].options[0]),
-        new Selected(questions[2].options[3]),
+        new Selected(questions[2].options[1]),
+        new Selected(questions[2].options[2]),
       ),
     }),
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[2].id,
-      condition: new Not(
-        new SomeOf(
-          new Selected(questions[2].options[0]),
-          new Selected(questions[2].options[3]),
-        ),
+      condition: new SomeOf(
+        new Selected(questions[2].options[0]),
+        new Selected(questions[2].options[3]),
       ),
     }),
   ],
@@ -599,7 +598,7 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
-      condition: new Selected(questions[0].options[1])
+      condition: new Selected(questions[0].options[1]),
     }),
   ],
 });
@@ -1408,8 +1407,8 @@ export const estimates: Estimate[] = [];
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[0].id,
-      condition: new Selected(questions[0].options[2])
-    })
+      condition: new Selected(questions[0].options[2]),
+    }),
   ],
 });
 /* 27 */ createQuestion({

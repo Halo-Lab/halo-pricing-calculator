@@ -6,11 +6,6 @@
     "start": "vite",
     "build": "vite build"
   },
-  "dependencies": {
-    "@moru/store": "0.0.1",
-    "@moru/web": "0.0.1",
-    "moru": "0.0.5-1"
-  },
   "devDependencies": {
     "browserslist": "^4.23.0",
     "lightningcss": "^1.24.1",

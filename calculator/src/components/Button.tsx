@@ -1,12 +1,16 @@
-import { JSX, Component, memo, isGetter } from "moru";
+import { JSX, PropsWithChildren } from "react";
 
 export type ButtonVariant =
   | "primary"
   | "secondary-on-light"
   | "secondary-on-dark";
 
-interface ButtonProperties extends JSX.HTMLButtonAttributes {
+interface ButtonProperties extends PropsWithChildren {
+  type?: "button" | "submit" | "reset";
+  class?: string;
   variant: ButtonVariant;
+  disabled?: boolean;
+  onClick?(): void;
 }
 
 const BUTTON_STATIC_CLASSES = "button is-small-simple";
@@ -16,30 +20,28 @@ const BUTTON_VARIANT_CLASSES: Record<ButtonVariant, string> = {
   "secondary-on-dark": "is-border-white",
 };
 
-export const Button: Component<ButtonProperties> = ({
+export function Button({
   type = "button",
   class: className,
   variant,
+  disabled,
+  onClick,
   children,
-  ...properties
-}) => {
-  const classes = isGetter(className)
-    ? memo(() => {
-        return className(
-          (value) =>
-            `${BUTTON_STATIC_CLASSES} ${BUTTON_VARIANT_CLASSES[variant]} ${value}`,
-        );
-      }, [className])
-    : `${BUTTON_STATIC_CLASSES} ${BUTTON_VARIANT_CLASSES[variant]} ${className ?? ""}`;
-
+}: ButtonProperties): JSX.Element {
   return (
-    <button type={type} class={classes} data-hover {...properties}>
-      <div class="button__overflow">
-        <div data-hover-elem class="button__texts">
-          <div class="button__text">{children}</div>
-          <div class="button__text is-absolute">{children}</div>
+    <button
+      type={type}
+      className={`${BUTTON_STATIC_CLASSES} ${BUTTON_VARIANT_CLASSES[variant]} ${className ?? ""}`}
+      data-hover
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <div className="button__overflow">
+        <div data-hover-elem className="button__texts">
+          <div className="button__text">{children}</div>
+          <div className="button__text is-absolute">{children}</div>
         </div>
       </div>
     </button>
   );
-};
+}

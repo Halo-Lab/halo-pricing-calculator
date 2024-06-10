@@ -1,6 +1,6 @@
-import { Component } from "moru";
+import { JSX } from "react";
 
-export const BrandingIcon: Component<{}> = () => {
+export function BrandingIcon(): JSX.Element {
   return (
     <svg
       width="35"
@@ -36,16 +36,8 @@ export const BrandingIcon: Component<{}> = () => {
           y2="16.5456"
           gradientUnits="userSpaceOnUse"
         >
-          <stop
-            offset="0.390982"
-            stop-color="currentColor"
-            stop-opacity="0.35"
-          />
-          <stop
-            offset="0.829412"
-            stop-color="currentColor"
-            stop-opacity="0.15"
-          />
+          <stop offset="0.390982" stopColor="currentColor" stopOpacity="0.35" />
+          <stop offset="0.829412" stopColor="currentColor" stopOpacity="0.15" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_46241_30537"
@@ -55,12 +47,8 @@ export const BrandingIcon: Component<{}> = () => {
           y2="12.2488"
           gradientUnits="userSpaceOnUse"
         >
-          <stop
-            offset="0.443473"
-            stop-color="currentColor"
-            stop-opacity="0.7"
-          />
-          <stop offset="1" stop-color="currentColor" stop-opacity="0.3" />
+          <stop offset="0.443473" stopColor="currentColor" stopOpacity="0.7" />
+          <stop offset="1" stopColor="currentColor" stopOpacity="0.3" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_46241_30537"
@@ -70,10 +58,10 @@ export const BrandingIcon: Component<{}> = () => {
           y2="22.4348"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.683926" stop-color="currentColor" />
-          <stop offset="1" stop-color="currentColor" stop-opacity="0.6" />
+          <stop offset="0.683926" stopColor="currentColor" />
+          <stop offset="1" stopColor="currentColor" stopOpacity="0.6" />
         </linearGradient>
       </defs>
     </svg>
   );
-};
+}

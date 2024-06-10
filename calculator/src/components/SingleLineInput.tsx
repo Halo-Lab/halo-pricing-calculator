@@ -1,37 +1,44 @@
-import { JSX, Component, Getter } from "moru";
+import { JSX, useId } from "react";
 
-import { createId } from "../id.js";
-
-interface SingleLineInputProperties
-  extends Pick<
-    JSX.HTMLInputAttributes,
-    "type" | "name" | "required" | "on:input" | "prop:value"
-  > {
-  label: string | Getter<string>;
+interface SingleLineInputProperties {
+  type: string;
+  name?: string;
+  value: string;
+  label: string;
+  required?: boolean;
+  onInput(value: string): void;
 }
 
-export const SingleLineInput: Component<SingleLineInputProperties> = ({
+export function SingleLineInput({
+  type,
   name,
+  value,
   label,
-  ...properties
-}) => {
-  const id = createId();
+  onInput,
+  required,
+}: SingleLineInputProperties): JSX.Element {
+  const id = useId();
 
   return (
-    <div class="input-wrap">
-      <label for={id} class="form__label">
+    <div className="input-wrap">
+      <label htmlFor={id} className="form__label">
         {label}
       </label>
       <input
         id={id}
-        class="input w-input"
-        maxlength="256"
+        type={type}
+        className="input w-input"
+        maxLength={256}
         name={name}
         data-name={name}
         placeholder={label}
         data-input-anim
-        {...properties}
+        value={value}
+        required={required}
+        onInput={(event) => {
+          onInput(event.currentTarget.value);
+        }}
       />
     </div>
   );
-};
+}

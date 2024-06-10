@@ -1,27 +1,17 @@
-import { mount } from "@moru/web/client";
-import { context } from "moru";
+import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
 
-import { Calculator } from "./src/Calculator.js";
-import { StoreProvider } from "./src/store.js";
+import { Application } from "./src/Application";
+import { StoreProvider } from "./src/Store";
 
 import "./index.css";
 
-const calculatorRootNode = document.querySelector("#calculator-root")!;
-const calculatorContext = context();
+const root = createRoot(document.querySelector("#calculator-root")!);
 
-const unmount = mount(
-  calculatorContext,
-  <StoreProvider>
-    <Calculator />
-  </StoreProvider>,
-  calculatorRootNode,
+root.render(
+  <StrictMode>
+    <StoreProvider>
+      <Application />
+    </StoreProvider>
+  </StrictMode>,
 );
-
-/**
- * Removes currently mounted calculator DOM nodes
- * and disposes the associative context.
- */
-function disposeApplication(): void {
-  unmount();
-  calculatorContext.dispose();
-}

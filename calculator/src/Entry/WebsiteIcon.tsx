@@ -1,6 +1,6 @@
-import { Component } from "moru";
+import { JSX } from "react";
 
-export const WebsiteIcon: Component<{}> = () => {
+export function WebsiteIcon(): JSX.Element {
   return (
     <svg
       data-website-icon
@@ -30,16 +30,8 @@ export const WebsiteIcon: Component<{}> = () => {
           y2="5.68182"
           gradientUnits="userSpaceOnUse"
         >
-          <stop
-            offset="0.330129"
-            stop-color="currentColor"
-            stop-opacity="0.7"
-          />
-          <stop
-            offset="0.906847"
-            stop-color="currentColor"
-            stop-opacity="0.3"
-          />
+          <stop offset="0.330129" stopColor="currentColor" stopOpacity="0.7" />
+          <stop offset="0.906847" stopColor="currentColor" stopOpacity="0.3" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_46241_30554"
@@ -49,11 +41,11 @@ export const WebsiteIcon: Component<{}> = () => {
           y2="17.7894"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="currentColor" />
-          <stop offset="0.444792" stop-color="currentColor" />
-          <stop offset="1" stop-color="currentColor" stop-opacity="0.6" />
+          <stop stopColor="currentColor" />
+          <stop offset="0.444792" stopColor="currentColor" />
+          <stop offset="1" stopColor="currentColor" stopOpacity="0.6" />
         </linearGradient>
       </defs>
     </svg>
   );
-};
+}

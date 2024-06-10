@@ -1,35 +1,39 @@
-import { JSX, Component, Getter } from "moru";
+import { JSX, useId } from "react";
 
-import { createId } from "../id.js";
-
-interface MultiLineInputProperties
-  extends Pick<JSX.HTMLTextAriaAttributes, "name" | "prop:value" | "on:input"> {
-  label: string | Getter<string>;
+interface MultiLineInputProperties {
+  name?: string;
+  label: string;
+  value: string;
+  onInput(value: string): void;
 }
 
-export const MultiLineInput: Component<MultiLineInputProperties> = ({
+export function MultiLineInput({
   name,
   label,
-  ...properties
-}) => {
-  const inputId = createId();
+  value,
+  onInput,
+}: MultiLineInputProperties): JSX.Element {
+  const inputId = useId();
 
   return (
-    <div class="input-wrap">
-      <label for={inputId} class="form__label is--textarea">
+    <div className="input-wrap">
+      <label htmlFor={inputId} className="form__label is--textarea">
         {label}
       </label>
       <textarea
-        class="input is-textarea w-input"
-        maxlength="5000"
+        className="input is-textarea w-input"
+        maxLength={5000}
         name={name}
         data-name={name}
         placeholder={label}
         data-input-anim
         id={inputId}
         data-lenis-prevent-off
-        {...properties}
+        value={value}
+        onInput={(event) => {
+          onInput(event.currentTarget.value);
+        }}
       />
     </div>
   );
-};
+}
