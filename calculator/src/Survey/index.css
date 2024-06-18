@@ -14,6 +14,16 @@
     }
   }
 
+  .columns:not(.first_step) {
+    .columns__col {
+      &:first-child {
+        width: 100%;
+        flex: 0 auto;
+        max-width: 58rem;
+      }
+    }
+  }
+
   [data-tabbed-section],
   [data-results] {
     padding: 1rem;
@@ -29,13 +39,14 @@
   }
 
   [data-tabbed-section] {
+    width: 100%;
     --tabbed-background-colour: rgb(var(--white-colour));
 
     container-name: tabbed-section;
     border-top-left-radius: var(--tabbed-border-radius);
 
     @media (--small-tablet) {
-      padding: 2.5rem;
+      padding: 4.5rem 2.5rem;
     }
 
     @media (width >= 850px) {
@@ -48,16 +59,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 1rem;
       margin-bottom: 1rem;
 
       @container tabbed-section (width >= 320px) {
-        margin-top: 1.5rem;
         margin-bottom: 2rem;
       }
 
       @container tabbed-section (width >= 340px) {
-        margin-top: 2rem;
         margin-bottom: 2.5rem;
       }
 
@@ -65,6 +73,8 @@
         font-size: 1.7rem;
         margin-top: 0;
         margin-bottom: 0;
+        line-height: 1.1;
+        text-transform: capitalize;
 
         @container tabbed-section (width >= 340px) {
           font-size: 2.75rem;
@@ -72,6 +82,10 @@
       }
 
       > span {
+        font-weight: 500;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+
         [data-label] {
           display: none;
 
@@ -120,6 +134,8 @@
         label {
           --colour-opacity: 0.7;
 
+          display: flex;
+          align-items: center;
           margin-bottom: 0.75rem;
           color: rgba(var(--dark-colour) / var(--colour-opacity));
 
@@ -179,7 +195,7 @@
               width: 1rem;
               height: 1rem;
               margin-right: 0.5rem;
-              content: url("./check-icon.svg");
+              content: "";
               border: 1px solid rgba(var(--dark-colour) / var(--colour-opacity));
               background-color: rgb(var(--white-colour));
             }
@@ -188,7 +204,11 @@
           &:checked + label {
             &::before {
               border-color: rgb(var(--blue-colour));
-              background-color: rgb(var(--blue-colour));
+              background-image: url("./check-icon.svg"),
+                linear-gradient(
+                  rgb(var(--blue-colour)),
+                  rgb(var(--blue-colour))
+                );
             }
           }
         }

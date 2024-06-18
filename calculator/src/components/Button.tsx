@@ -13,7 +13,7 @@ interface ButtonProperties extends PropsWithChildren {
   onClick?(): void;
 }
 
-const BUTTON_STATIC_CLASSES = "button is-small-simple";
+const BUTTON_STATIC_CLASSES = "button";
 const BUTTON_VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: "",
   "secondary-on-light": "is-border-grey",
@@ -32,12 +32,12 @@ export function Button({
     <button
       type={type}
       className={`${BUTTON_STATIC_CLASSES} ${BUTTON_VARIANT_CLASSES[variant]} ${className ?? ""}`}
-      data-hover
+      data-hover=""
       disabled={disabled}
       onClick={onClick}
     >
       <div className="button__overflow">
-        <div data-hover-elem className="button__texts">
+        <div data-hover-elem="" className="button__texts">
           <div className="button__text">{children}</div>
           <div className="button__text is-absolute">{children}</div>
         </div>
