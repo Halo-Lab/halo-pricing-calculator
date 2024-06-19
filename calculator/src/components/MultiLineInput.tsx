@@ -26,9 +26,9 @@ export function MultiLineInput({
         name={name}
         data-name={name}
         placeholder={label}
-        data-input-anim
+        data-input-anim=""
         id={inputId}
-        data-lenis-prevent-off
+        data-lenis-prevent-off=""
         value={value}
         onInput={(event) => {
           onInput(event.currentTarget.value);
