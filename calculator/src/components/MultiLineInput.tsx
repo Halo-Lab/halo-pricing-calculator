@@ -16,24 +16,24 @@ export function MultiLineInput({
   const inputId = useId();
 
   return (
-    <div className="input-wrap">
-      <label htmlFor={inputId} className="form__label is--textarea">
-        {label}
-      </label>
+    <div className="input-wrap" data-multiline-input="true">
       <textarea
         className="input is-textarea w-input"
         maxLength={5000}
         name={name}
         data-name={name}
         placeholder={label}
-        data-input-anim
+        data-input-anim=""
         id={inputId}
-        data-lenis-prevent-off
+        data-lenis-prevent-off=""
         value={value}
         onInput={(event) => {
           onInput(event.currentTarget.value);
         }}
       />
+      <label htmlFor={inputId} className="form__label is--textarea">
+        {label}
+      </label>
     </div>
   );
 }

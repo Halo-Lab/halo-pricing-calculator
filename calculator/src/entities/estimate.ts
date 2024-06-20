@@ -80,7 +80,7 @@ abstract class EstimateAssessmentBase extends Condition {
   protected clamp(actualDelta: number): number {
     return Math.max(
       this.minimalDelta ?? Number.MIN_VALUE,
-      Math.min(actualDelta, this.maximalDelta ?? Number.MAX_VALUE),
+      Math.min(actualDelta, this.maximalDelta ?? Number.MAX_VALUE)
     );
   }
 }
@@ -88,7 +88,7 @@ abstract class EstimateAssessmentBase extends Condition {
 export class EstimateExactAssessment extends EstimateAssessmentBase {
   constructor(
     public operand: number,
-    options?: EstimateAssessmentOptions,
+    options?: EstimateAssessmentOptions
   ) {
     super(options);
   }
@@ -132,7 +132,7 @@ export class EstimateRangeAssessment extends EstimateAssessmentBase {
   constructor(
     public minOperand: number,
     public maxOperand: number,
-    options?: EstimateAssessmentOptions,
+    options?: EstimateAssessmentOptions
   ) {
     super(options);
   }
@@ -180,7 +180,7 @@ export class EstimateUnknownAssessment extends EstimateAssessmentBase {
   }
 
   override toString(): string {
-    return "+? days";
+    return "+0 days";
   }
 }
 

@@ -23,10 +23,14 @@ export function Entry({}: EntryProperties): JSX.Element {
   const firstQuestion = useSelector((store) => store.questionsByStep[0][0]);
 
   return (
-    <>
-      <LeftCard />
-      <RightCard question={firstQuestion} />
-    </>
+    <div className="columns first_step">
+      <div className="columns__col">
+        <LeftCard />
+      </div>
+      <div className="columns__col">
+        <RightCard question={firstQuestion} />
+      </div>
+    </div>
   );
 }
 
@@ -56,8 +60,18 @@ function LeftCard(): JSX.Element {
           onClick={() => {
             window.location.pathname = "/contact-us";
           }}
+          class="is-large"
         >
           get a rough estimate
+        </Button>
+        <Button
+          variant="secondary-on-dark"
+          onClick={() => {
+            window.location.pathname = "/contact-us";
+          }}
+          class="is-large short"
+        >
+          get estimate
         </Button>
       </footer>
     </section>
@@ -119,7 +133,12 @@ function RightCard({ question }: RightCardProperties): JSX.Element {
           );
         })}
 
-        <Button type="submit" disabled={shouldWaitForAnswers} variant="primary">
+        <Button
+          type="submit"
+          disabled={shouldWaitForAnswers}
+          variant="primary"
+          class="is-small-simple"
+        >
           next
         </Button>
       </form>

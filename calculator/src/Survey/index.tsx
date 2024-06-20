@@ -25,11 +25,14 @@ export function Survey({}: SurveyProperties): JSX.Element {
   const questions = useSelector((store) => store.questionsByStep[currentStep]);
 
   return (
-    <>
-      {questions ? <QuestionsBlock questions={questions} /> : <FinalStage />}
-
-      <ResultsBlock />
-    </>
+    <div className="columns">
+      <div className="columns__col">
+        {questions ? <QuestionsBlock questions={questions} /> : <FinalStage />}
+      </div>
+      <div className="columns__col">
+        <ResultsBlock />
+      </div>
+    </div>
   );
 }
 
@@ -165,7 +168,7 @@ function ResultsBlock(): JSX.Element {
       .map((optionReference) => options.get(optionReference))
       .flatMap((option) => {
         return option?.estimates.map((estimateReference) =>
-          estimates.get(estimateReference),
+          estimates.get(estimateReference)
         );
       })
       .filter((estimate): estimate is Estimate => !!estimate?.text)
@@ -179,7 +182,7 @@ function ResultsBlock(): JSX.Element {
       (accumulator: EstimateRange, estimate) => {
         return estimate.assessment.applyTo(accumulator);
       },
-      [0, 0],
+      [0, 0]
     );
   }, [estimatesOfSelectedOptions]);
 

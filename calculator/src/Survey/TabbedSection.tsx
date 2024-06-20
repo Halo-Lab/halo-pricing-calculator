@@ -33,7 +33,7 @@ export function TabbedSection({
 
   useEffect(() => {
     const currentStepComment = comments.find(
-      (comment) => comment.step === currentStep - 1,
+      (comment) => comment.step === currentStep - 1
     );
 
     if (currentStepComment) {
@@ -44,7 +44,7 @@ export function TabbedSection({
   }, [currentStep, comments]);
 
   return (
-    <div>
+    <>
       <h4>estimation of website</h4>
 
       <section data-tabbed-section>
@@ -101,6 +101,6 @@ export function TabbedSection({
           </div>
         </footer>
       </section>
-    </div>
+    </>
   );
 }
