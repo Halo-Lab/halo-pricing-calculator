@@ -22,14 +22,7 @@
       border-color var(--base-transition-time),
       transform var(--base-transition-time), opacity var(--base-transition-time);
 
-    padding-left: 1rem;
-    padding-right: 1rem;
     color: rgb(var(--dark-colour));
-
-    @media (--small-tablet) {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
   }
 
   @layer base {
