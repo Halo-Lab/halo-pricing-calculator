@@ -83,7 +83,7 @@
           font-size: 1.875rem;
         }
 
-        @container tabbed-section (width >= 850px) {
+        @container tabbed-section (width >= 840px) {
           font-size: 2.75rem;
         }
       }
@@ -142,6 +142,7 @@
           margin-bottom: 1rem;
 
           @container tabbed-section (width >= 480px) {
+            font-size: 1rem;
             margin-bottom: 1.5rem;
           }
 
@@ -157,6 +158,7 @@
           font-weight: 400;
           align-items: center;
           margin-bottom: 1rem;
+          width: fit-content;
           color: rgba(var(--dark-colour) / var(--colour-opacity));
 
           @container tabbed-section (width >= 480px) {
@@ -299,6 +301,15 @@
           }
         }
 
+        .input-wrap {
+          &:focus-within label,
+          input:not(:placeholder-shown) + label {
+            top: 0;
+            font-size: 0.875rem;
+            transform: translateY(-0.2rem);
+          }
+        }
+
         input:where([type="email"], [type="text"]) {
           order: 1;
 
@@ -333,6 +344,17 @@
         margin-top: 2.5rem;
       }
 
+      [data-multiline-input] {
+        margin-bottom: 2rem;
+
+        &:focus-within label,
+        textarea:not(:placeholder-shown) + label {
+          top: 0;
+          font-size: 0.875rem;
+          transform: translateY(-0.2rem);
+        }
+      }
+
       [data-buttons] {
         @container tabbed-section (width >= 350px) {
           display: flex;
@@ -349,6 +371,7 @@
 
         button[type="button"] {
           display: block;
+          height: 2.5rem;
           width: 100%;
           padding: 0.625rem 1.25rem;
 

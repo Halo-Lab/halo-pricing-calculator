@@ -21,9 +21,6 @@ export function SingleLineInput({
 
   return (
     <div className="input-wrap">
-      <label htmlFor={id} className="form__label">
-        {label}
-      </label>
       <input
         id={id}
         type={type}
@@ -32,13 +29,17 @@ export function SingleLineInput({
         name={name}
         data-name={name}
         placeholder={label}
-        data-input-anim
+        data-input-anim=""
         value={value}
         required={required}
         onInput={(event) => {
           onInput(event.currentTarget.value);
         }}
       />
+      <label htmlFor={id} className="form__label">
+        {label}
+        {required && <span className="text-color-red">*</span>}
+      </label>
     </div>
   );
 }

@@ -16,10 +16,7 @@ export function MultiLineInput({
   const inputId = useId();
 
   return (
-    <div className="input-wrap">
-      <label htmlFor={inputId} className="form__label is--textarea">
-        {label}
-      </label>
+    <div className="input-wrap" data-multiline-input="true">
       <textarea
         className="input is-textarea w-input"
         maxLength={5000}
@@ -34,6 +31,9 @@ export function MultiLineInput({
           onInput(event.currentTarget.value);
         }}
       />
+      <label htmlFor={inputId} className="form__label is--textarea">
+        {label}
+      </label>
     </div>
   );
 }
