@@ -202,7 +202,7 @@ export const estimates: Estimate[] = [];
       question: questions[2].id,
       condition: new SomeOf(
         new Selected(questions[2].options[1]),
-        new Selected(questions[2].options[2]),
+        new Selected(questions[2].options[2])
       ),
     }),
   ],
@@ -219,7 +219,7 @@ export const estimates: Estimate[] = [];
             condition: new SomeOf(
               questions[3].options
                 .slice(0, -1)
-                .map((option) => new Selected(option)),
+                .map((option) => new Selected(option))
             ),
           }),
         },
@@ -240,7 +240,7 @@ export const estimates: Estimate[] = [];
             condition: new SomeOf(
               questions[3].options
                 .slice(0, -1)
-                .map((option) => new Selected(option)),
+                .map((option) => new Selected(option))
             ),
           }),
         },
@@ -267,7 +267,7 @@ export const estimates: Estimate[] = [];
             condition: new SomeOf(
               questions[3].options
                 .slice(1, -1)
-                .map((option) => new Selected(option)),
+                .map((option) => new Selected(option))
             ),
             operationKind: EstimationOperationKind.Multiplication,
           }),
@@ -317,7 +317,7 @@ export const estimates: Estimate[] = [];
       question: questions[4].id,
       condition: new SomeOf(
         new Selected(questions[2].options[1]),
-        new Selected(questions[2].options[2]),
+        new Selected(questions[2].options[2])
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -325,7 +325,7 @@ export const estimates: Estimate[] = [];
       question: questions[2].id,
       condition: new SomeOf(
         new Selected(questions[2].options[0]),
-        new Selected(questions[2].options[3]),
+        new Selected(questions[2].options[3])
       ),
     }),
   ],
@@ -503,7 +503,7 @@ export const estimates: Estimate[] = [];
       question: questions[1].id,
       condition: new All(
         new Selected(questions[1].options[1]),
-        new Not(new Selected(questions[1].options[0])),
+        new Not(new Selected(questions[1].options[0]))
       ),
     }),
   ],
@@ -622,7 +622,7 @@ export const estimates: Estimate[] = [];
           assessment: new EstimateExactAssessment(24, {
             condition: new SomeOf(
               new Selected(questions[2].options[0]),
-              new Selected(questions[10].options[0]),
+              new Selected(questions[10].options[0])
             ),
           }),
         },
@@ -636,7 +636,7 @@ export const estimates: Estimate[] = [];
           assessment: new EstimateRangeAssessment(24, 48, {
             condition: new SomeOf(
               new Selected(questions[2].options[0]),
-              new Selected(questions[10].options[0]),
+              new Selected(questions[10].options[0])
             ),
           }),
         },
@@ -646,12 +646,12 @@ export const estimates: Estimate[] = [];
             condition: new All(
               new SomeOf(
                 new Selected(questions[2].options[2]),
-                new Selected(questions[10].options[2]),
+                new Selected(questions[10].options[2])
               ),
               new SomeOf(
                 new Selected(questions[3].options[0]),
-                new Selected(questions[11].options[0]),
-              ),
+                new Selected(questions[11].options[0])
+              )
             ),
           }),
         },
@@ -661,12 +661,12 @@ export const estimates: Estimate[] = [];
             condition: new All(
               new SomeOf(
                 new Selected(questions[2].options[2]),
-                new Selected(questions[10].options[2]),
+                new Selected(questions[10].options[2])
               ),
               new SomeOf(
                 new Selected(questions[3].options[1]),
-                new Selected(questions[11].options[1]),
-              ),
+                new Selected(questions[11].options[1])
+              )
             ),
           }),
         },
@@ -676,12 +676,12 @@ export const estimates: Estimate[] = [];
             condition: new All(
               new SomeOf(
                 new Selected(questions[2].options[2]),
-                new Selected(questions[10].options[2]),
+                new Selected(questions[10].options[2])
               ),
               new SomeOf(
                 new Selected(questions[3].options[2]),
-                new Selected(questions[11].options[2]),
-              ),
+                new Selected(questions[11].options[2])
+              )
             ),
           }),
         },
@@ -691,12 +691,12 @@ export const estimates: Estimate[] = [];
             condition: new All(
               new SomeOf(
                 new Selected(questions[2].options[2]),
-                new Selected(questions[10].options[2]),
+                new Selected(questions[10].options[2])
               ),
               new SomeOf(
                 new Selected(questions[3].options[3]),
-                new Selected(questions[11].options[3]),
-              ),
+                new Selected(questions[11].options[3])
+              )
             ),
           }),
         },
@@ -1028,7 +1028,7 @@ export const estimates: Estimate[] = [];
       question: questions[18].id,
       condition: new SomeOf(
         new Selected(questions[2].options[2]),
-        new Selected(questions[10].options[2]),
+        new Selected(questions[10].options[2])
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -1037,9 +1037,9 @@ export const estimates: Estimate[] = [];
       condition: new All(
         new SomeOf(
           new Selected(questions[2].options[2]),
-          new Selected(questions[10].options[2]),
+          new Selected(questions[10].options[2])
         ),
-        new Not(new Selected(questions[13].options[2])),
+        new Not(new Selected(questions[13].options[2]))
       ),
     }),
   ],
@@ -1309,19 +1309,20 @@ export const estimates: Estimate[] = [];
       condition: new All(
         new Selected(questions[1].options[2]),
         new Not(
-          new SomeOf(
+          new All(
             new Selected(questions[1].options[0]),
-            new Selected(questions[1].options[1]),
-          ),
-        ),
+            new Selected(questions[1].options[1])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
       step: QuestionStep.New,
       question: questions[9].id,
       condition: new All(
+        new Selected(questions[1].options[0]),
         new Selected(questions[1].options[2]),
-        new Not(new Selected(questions[1].options[1])),
+        new Not(new Selected(questions[1].options[1]))
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -1333,9 +1334,9 @@ export const estimates: Estimate[] = [];
         new Not(
           new SomeOf(
             new Selected(questions[2].options[2]),
-            new Selected(questions[10].options[2]),
-          ),
-        ),
+            new Selected(questions[10].options[2])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -1346,9 +1347,9 @@ export const estimates: Estimate[] = [];
         new Not(
           new SomeOf(
             new Selected(questions[2].options[2]),
-            new Selected(questions[10].options[2]),
-          ),
-        ),
+            new Selected(questions[10].options[2])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -1545,7 +1546,7 @@ questions[8].previous.push(
     step: QuestionStep.Same,
     question: questions[29].id,
     condition: new Not(new Selected(questions[1].options[0])),
-  }),
+  })
 );
 questions[29].next.push(questions[8].id);
 /* 30 */ createQuestion({
@@ -1593,8 +1594,8 @@ questions[29].next.push(questions[8].id);
           assessment: new EstimateUnknownAssessment({
             condition: new Not(
               new SomeOf(
-                questions[30].options.map((option) => new Selected(option)),
-              ),
+                questions[30].options.map((option) => new Selected(option))
+              )
             ),
           }),
         },
@@ -1626,8 +1627,8 @@ questions[29].next.push(questions[8].id);
           assessment: new EstimateUnknownAssessment({
             condition: new Not(
               new SomeOf(
-                questions[30].options.map((option) => new Selected(option)),
-              ),
+                questions[30].options.map((option) => new Selected(option))
+              )
             ),
           }),
         },
@@ -1659,8 +1660,8 @@ questions[29].next.push(questions[8].id);
           assessment: new EstimateUnknownAssessment({
             condition: new Not(
               new SomeOf(
-                questions[30].options.map((option) => new Selected(option)),
-              ),
+                questions[30].options.map((option) => new Selected(option))
+              )
             ),
           }),
         },
@@ -1691,7 +1692,7 @@ questions[29].next.push(questions[8].id);
       question: questions[29].id,
       condition: new All(
         new Selected(questions[1].options[0]),
-        new Selected(questions[29].options[3]),
+        new Selected(questions[29].options[3])
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -1699,7 +1700,7 @@ questions[29].next.push(questions[8].id);
       question: questions[9].id,
       condition: new All(
         new Not(new Selected(questions[1].options[0])),
-        new Selected(questions[29].options[3]),
+        new Selected(questions[29].options[3])
       ),
     }),
   ],
@@ -1708,7 +1709,7 @@ questions[30].previous.push(
   new PreviousQuestionConditionalLink({
     step: QuestionStep.Same,
     question: questions[31].id,
-  }),
+  })
 );
 questions[31].next.push(questions[30].id);
 /* 32 */ createQuestion({
@@ -1822,7 +1823,7 @@ questions[31].next.push(questions[30].id);
       condition: new All(
         new Selected(questions[29].options[0]),
         new Not(new Selected(questions[29].options[3])),
-        new Selected(questions[1].options[0]),
+        new Selected(questions[1].options[0])
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -1831,7 +1832,7 @@ questions[31].next.push(questions[30].id);
       condition: new All(
         new Selected(questions[29].options[0]),
         new Not(new Selected(questions[29].options[3])),
-        new Not(new Selected(questions[1].options[0])),
+        new Not(new Selected(questions[1].options[0]))
       ),
     }),
   ],
@@ -2088,9 +2089,9 @@ questions[31].next.push(questions[30].id);
           new SomeOf(
             questions[1].options
               .slice(0, -1)
-              .map((option) => new Selected(option)),
-          ),
-        ),
+              .map((option) => new Selected(option))
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2103,9 +2104,9 @@ questions[31].next.push(questions[30].id);
           new SomeOf(
             questions[1].options
               .slice(1, -1)
-              .map((option) => new Selected(option)),
-          ),
-        ),
+              .map((option) => new Selected(option))
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2119,9 +2120,9 @@ questions[31].next.push(questions[30].id);
           new SomeOf(
             new Selected(questions[13].options[2]),
             new Selected(questions[2].options[2]),
-            new Selected(questions[10].options[2]),
-          ),
-        ),
+            new Selected(questions[10].options[2])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2134,9 +2135,9 @@ questions[31].next.push(questions[30].id);
         new Not(
           new SomeOf(
             new Selected(questions[2].options[2]),
-            new Selected(questions[10].options[2]),
-          ),
-        ),
+            new Selected(questions[10].options[2])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2148,8 +2149,8 @@ questions[31].next.push(questions[30].id);
         new Not(new Selected(questions[1].options[2])),
         new SomeOf(
           new Selected(questions[2].options[2]),
-          new Selected(questions[10].options[2]),
-        ),
+          new Selected(questions[10].options[2])
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2162,9 +2163,9 @@ questions[31].next.push(questions[30].id);
         new Not(
           new SomeOf(
             new Selected(questions[29].options[0]),
-            new Selected(questions[29].options[3]),
-          ),
-        ),
+            new Selected(questions[29].options[3])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2177,9 +2178,9 @@ questions[31].next.push(questions[30].id);
         new Not(
           new SomeOf(
             new Selected(questions[29].options[0]),
-            new Selected(questions[29].options[3]),
-          ),
-        ),
+            new Selected(questions[29].options[3])
+          )
+        )
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2189,7 +2190,7 @@ questions[31].next.push(questions[30].id);
         new Selected(questions[1].options[2]),
         new Selected(questions[1].options[3]),
         new Selected(questions[29].options[3]),
-        new Not(new Selected(questions[29].options[0])),
+        new Not(new Selected(questions[29].options[0]))
       ),
     }),
     new PreviousQuestionConditionalLink({
@@ -2198,7 +2199,7 @@ questions[31].next.push(questions[30].id);
       condition: new All(
         new Selected(questions[1].options[2]),
         new Selected(questions[1].options[3]),
-        new Selected(questions[29].options[0]),
+        new Selected(questions[29].options[0])
       ),
     }),
   ],
@@ -3061,7 +3062,7 @@ questions[16].previous.push(
     step: QuestionStep.Same,
     question: questions[56].id,
     condition: new Selected(questions[0].options[1]),
-  }),
+  })
 );
 questions[56].next.push(questions[16].id);
 /* 57 */ createQuestion({
@@ -3129,7 +3130,7 @@ function createQuestion({
 }: MinimalQuestionData): void {
   const questionData: QuestionData = Object.assign(
     { id: createId<Reference<Question>>(), next: [], options: [] },
-    minimalData,
+    minimalData
   );
 
   const question = new Question(questionData);
