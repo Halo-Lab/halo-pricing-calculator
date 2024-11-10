@@ -10,8 +10,8 @@ export function LeftCard(): JSX.Element {
 
   return (
     <Box
-      width="fill"
-      aspectRatio={1.09}
+      width={gte(680) ? ".5fr" : "fill"}
+      height="fill"
       vertical
       spacing={range(525, 680) || gte(975) ? 3.125 : 1}
       padding={

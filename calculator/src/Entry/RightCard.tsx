@@ -32,7 +32,8 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
   return (
     <Box
       vertical
-      width="fill"
+      width={gte(680) ? ".5fr" : "fill"}
+      height="fill"
       padding={
         range(525, 680) || gte(975)
           ? [4.5, 2.5, 2.5]

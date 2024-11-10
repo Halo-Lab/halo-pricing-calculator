@@ -34,6 +34,8 @@ export type ElementCSSProperties = Opaque<
     | "height"
     | "maxWidth"
     | "maxHeight"
+    | "minWidth"
+    | "minHeight"
     | "margin"
     | "padding"
     | "marginLeft"

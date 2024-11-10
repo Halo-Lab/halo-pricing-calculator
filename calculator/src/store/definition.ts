@@ -16,9 +16,7 @@ export interface Store {
 }
 
 export function createStore(): Store {
-  const answers = new Set<Reference<Option>>([
-    (questions[0] as any).options[0],
-  ]);
+  const answers = new Set<Reference<Option>>();
   const questionsDictionary = Dictionary.from(questions);
 
   return {
@@ -27,7 +25,7 @@ export function createStore(): Store {
     estimates: Dictionary.from(estimates),
 
     answers,
-    currentStep: 1,
+    currentStep: 0,
     questionsSequence: createQuestionsSequence(questionsDictionary, answers),
   };
 }

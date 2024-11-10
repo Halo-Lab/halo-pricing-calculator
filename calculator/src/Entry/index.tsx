@@ -17,12 +17,8 @@ export function Entry({}: EntryProperties): JSX.Element {
 
   return (
     <Box spacing={lt(725) ? 1 : 2} width="fill" vertical={isUpToSmallTablet}>
-      <Box width={isUpToSmallTablet ? "fill" : ".5fr"}>
-        <LeftCard />
-      </Box>
-      <Box width={isUpToSmallTablet ? "fill" : ".5fr"}>
-        <RightCard question={firstQuestion as RegularQuestion} />
-      </Box>
+      <LeftCard />
+      <RightCard question={firstQuestion as RegularQuestion} />
     </Box>
   );
 }
