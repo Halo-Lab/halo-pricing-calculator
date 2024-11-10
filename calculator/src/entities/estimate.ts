@@ -63,12 +63,6 @@ abstract class EstimateAssessmentBase extends Condition {
    */
   abstract applyTo(range: EstimateRange): EstimateRange;
 
-  /**
-   * Returns human-readable representation of the current {@link Estimate}'s
-   * numeric part.
-   */
-  abstract override toString(): string;
-
   override matches(answers: Set<Reference<Option>>): boolean {
     return this.condition?.matches(answers) ?? true;
   }
@@ -79,8 +73,8 @@ abstract class EstimateAssessmentBase extends Condition {
    */
   protected clamp(actualDelta: number): number {
     return Math.max(
-      this.minimalDelta ?? Number.MIN_VALUE,
-      Math.min(actualDelta, this.maximalDelta ?? Number.MAX_VALUE)
+      this.minimalDelta ?? Number.NEGATIVE_INFINITY,
+      Math.min(actualDelta, this.maximalDelta ?? Number.POSITIVE_INFINITY),
     );
   }
 }
@@ -88,7 +82,7 @@ abstract class EstimateAssessmentBase extends Condition {
 export class EstimateExactAssessment extends EstimateAssessmentBase {
   constructor(
     public operand: number,
-    options?: EstimateAssessmentOptions
+    options?: EstimateAssessmentOptions,
   ) {
     super(options);
   }
@@ -111,28 +105,13 @@ export class EstimateExactAssessment extends EstimateAssessmentBase {
       }
     }
   }
-
-  override toString(): string {
-    const sign = this.operand >= 0 ? "+" : "";
-
-    switch (this.operationKind) {
-      case EstimationOperationKind.Addition: {
-        const days = Estimate.toDays(this.clamp(this.operand));
-
-        return `${sign}${days} day${days === 1 ? "" : "s"}`;
-      }
-      case EstimationOperationKind.Multiplication: {
-        return `${sign}${this.operand * 100}%`;
-      }
-    }
-  }
 }
 
 export class EstimateRangeAssessment extends EstimateAssessmentBase {
   constructor(
     public minOperand: number,
     public maxOperand: number,
-    options?: EstimateAssessmentOptions
+    options?: EstimateAssessmentOptions,
   ) {
     super(options);
   }
@@ -156,42 +135,14 @@ export class EstimateRangeAssessment extends EstimateAssessmentBase {
       }
     }
   }
-
-  override toString(): string {
-    const sign = this.minOperand >= 0 ? "+" : "";
-
-    switch (this.operationKind) {
-      case EstimationOperationKind.Addition: {
-        const minDays = Estimate.toDays(this.clamp(this.minOperand));
-        const maxDays = Estimate.toDays(this.clamp(this.maxOperand));
-
-        return `${sign}${minDays}-${maxDays} days`;
-      }
-      case EstimationOperationKind.Multiplication: {
-        return `${sign}${this.minOperand * 100}-${this.maxOperand * 100}%`;
-      }
-    }
-  }
-}
-
-export class EstimateUnknownAssessment extends EstimateAssessmentBase {
-  override applyTo(range: EstimateRange): EstimateRange {
-    return range;
-  }
-
-  override toString(): string {
-    return "+0 days";
-  }
 }
 
 export type EstimateAssessment =
   | EstimateExactAssessment
-  | EstimateRangeAssessment
-  | EstimateUnknownAssessment;
+  | EstimateRangeAssessment;
 
 export interface EstimateData {
   id: Reference<Estimate>;
-  text: string;
   option: Reference<Option>;
   assessment: EstimateAssessment;
 }
@@ -208,13 +159,6 @@ export class Estimate extends Entity<Estimate> {
   }
 
   /**
-   * Estimate's display text.
-   * It can be used as a short description of the estimate.
-   *
-   * The empty string means this estimate won't be shown to the user.
-   */
-  text: string;
-  /**
    * A reference to containing this estimate {@link Option}.
    */
   option: Reference<Option>;
@@ -223,10 +167,9 @@ export class Estimate extends Entity<Estimate> {
    */
   assessment: EstimateAssessment;
 
-  constructor({ id, text, option, assessment }: EstimateData) {
+  constructor({ id, option, assessment }: EstimateData) {
     super(id);
 
-    this.text = text;
     this.option = option;
     this.assessment = assessment;
   }

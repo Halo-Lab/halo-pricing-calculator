@@ -1,0 +1,10 @@
+.c-checkbox {
+  cursor: pointer;
+
+  & > input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}

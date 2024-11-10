@@ -1,0 +1,7 @@
+.c-button {
+  /* these style shall be applied only in case there are no global ones */
+  :where(&) {
+    cursor: pointer;
+    background-color: transparent;
+  }
+}

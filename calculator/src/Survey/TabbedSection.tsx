@@ -27,13 +27,13 @@ export function TabbedSection({
 
   const dispatch = useDispatch();
 
-  const steps = useSelector((store) => store.questionsByStep.length + 1);
+  const steps = useSelector((store) => store.questionsSequence.length + 1);
   const comments = useSelector((store) => store.comments);
   const currentStep = useSelector((store) => store.currentStep + 1);
 
   useEffect(() => {
     const currentStepComment = comments.find(
-      (comment) => comment.step === currentStep - 1
+      (comment) => comment.step === currentStep - 1,
     );
 
     if (currentStepComment) {

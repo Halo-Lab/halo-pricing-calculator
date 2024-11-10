@@ -1,0 +1,17 @@
+.c-img {
+  &.c-img-fit-fill {
+    object-fit: fill;
+  }
+
+  &.c-img-fit-contain {
+    object-fit: contain;
+  }
+
+  &.c-img-fit-cover {
+    object-fit: cover;
+  }
+
+  &.c-img-fit-scale-down {
+    object-fit: scale-down;
+  }
+}

@@ -1,17 +1,12 @@
 import { JSX } from "react";
 
+import { Box } from "./ui/Box";
 import { Entry } from "./Entry";
 import { Survey } from "./Survey";
-import { useSelector } from "./Store";
-
-import "./Application.css";
+import { useSelector } from "./store/Provider";
 
 export function Application(): JSX.Element {
   const currentStep = useSelector((store) => store.currentStep);
 
-  return (
-    <main data-step={currentStep}>
-      {currentStep === 0 ? <Entry /> : <Survey />}
-    </main>
-  );
+  return <Box width="fill">{currentStep ? <Survey /> : <Entry />}</Box>;
 }

@@ -2,23 +2,12 @@ import { Option } from "./option.js";
 import { Condition } from "./condition.js";
 import { Entity, Reference } from "./entity.js";
 
-export enum QuestionStep {
-  New = "new",
-  Same = "same",
-}
-
 export interface ConditionalPreviousQuestionLinkData {
-  step: QuestionStep;
   question: Reference<Question>;
   condition?: Condition;
 }
 
 export class PreviousQuestionConditionalLink extends Condition {
-  /**
-   * Indicates whether this {@link Question} sits on the same
-   * page as the {@link this#previous} one.
-   */
-  step: QuestionStep;
   /**
    * A reference to the previous {@link Question}.
    */
@@ -33,14 +22,9 @@ export class PreviousQuestionConditionalLink extends Condition {
    */
   condition?: Condition;
 
-  constructor({
-    step,
-    question,
-    condition,
-  }: ConditionalPreviousQuestionLinkData) {
+  constructor({ question, condition }: ConditionalPreviousQuestionLinkData) {
     super();
 
-    this.step = step;
     this.question = question;
     this.condition = condition;
   }
@@ -54,14 +38,12 @@ export interface QuestionData {
   id: Reference<Question>;
   text: string;
   next: Reference<Question>[];
-  title?: string;
-  options: Reference<Option>[];
+  title: string;
   previous: PreviousQuestionConditionalLink[];
-  multiple?: boolean;
   optional?: boolean;
 }
 
-export class Question extends Entity<Question> {
+export abstract class Question extends Entity<Question> {
   /**
    * Question's text.
    */
@@ -71,10 +53,6 @@ export class Question extends Entity<Question> {
    */
   next: Reference<Question>[];
   /**
-   * References to all options (answers) of this question.
-   */
-  options: Reference<Option>[];
-  /**
    * Links to all possible previous questions.
    * This property impacts the position of the following questions.
    *
@@ -83,38 +61,81 @@ export class Question extends Entity<Question> {
    */
   previous: PreviousQuestionConditionalLink[];
   /**
-   * Indicates whether multiple answers are permitted for this
-   * question.
-   */
-  multiple: boolean;
-  /**
    * Defines the common title for grouped questions.
-   * Many questions may have it, but only the first one will be used.
+   * All questions under one group have to have the same title.
    */
-  title?: string;
+  title: string;
   /**
    * Indicates whether the current question needs to be answered.
    */
   optional?: boolean;
 
-  constructor({
-    id,
-    text,
-    next,
-    title,
-    options,
-    previous,
-    multiple,
-    optional,
-  }: QuestionData) {
+  constructor({ id, text, next, title, previous, optional }: QuestionData) {
     super(id);
 
     this.text = text;
     this.next = next;
     this.title = title;
-    this.options = options;
     this.previous = previous;
-    this.multiple = multiple ?? false;
     this.optional = optional;
+  }
+}
+
+export interface RegularQuestionData extends QuestionData {
+  options: Reference<Option>[];
+  multiple?: boolean;
+}
+
+export class RegularQuestion extends Question {
+  /**
+   * References to all options (answers) of this question.
+   */
+  options: Reference<Option>[];
+  /**
+   * Indicates whether multiple answers are permitted for this
+   * question.
+   */
+  multiple: boolean;
+
+  constructor({ options, multiple, ...data }: RegularQuestionData) {
+    super(data);
+
+    this.options = options;
+    this.multiple = multiple ?? false;
+  }
+}
+
+export interface DescriptionQuestionData extends QuestionData {
+  // TODO: these properties must be combined into one with the Rich Text value type.
+  helpPoints: Array<string>;
+  helpMessage: string;
+}
+
+export class DescriptionQuestion extends Question {
+  helpMessage: string;
+  helpPoints: Array<string>;
+
+  constructor({ helpPoints, helpMessage, ...data }: DescriptionQuestionData) {
+    super(data);
+
+    this.helpPoints = helpPoints;
+    this.helpMessage = helpMessage;
+  }
+}
+
+export interface FilesQuestionData extends QuestionData {
+  files: Array<File>;
+  necessityExplanation: string;
+}
+
+export class FilesQuestion extends Question {
+  files: Array<File>;
+  necessityExplanation: string;
+
+  constructor({ files, necessityExplanation, ...data }: FilesQuestionData) {
+    super(data);
+
+    this.files = files;
+    this.necessityExplanation = necessityExplanation;
   }
 }

@@ -1,0 +1,63 @@
+.c-box {
+  /* children orientation */
+  &.c-vertical {
+    &.c-reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &:not(.c-vertical) {
+    &.c-reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &:has(> .c-box:where(.c-absolute, .c-fixed, .c-sticky)) {
+    &,
+    & > :not(:where(.c-absolute, .c-fixed, .c-sticky)) {
+      position: relative;
+    }
+  }
+
+  &.c-absolute {
+    position: absolute;
+  }
+
+  &.c-fixed {
+    position: fixed;
+  }
+
+  &.c-sticky {
+    position: sticky;
+  }
+
+  &.c-above {
+    left: 0;
+    bottom: 100%;
+  }
+
+  &.c-below {
+    bottom: 0;
+    left: 0;
+  }
+
+  &.c-on-left {
+    top: 0;
+    right: 100%;
+  }
+
+  &.c-on-right {
+    top: 0;
+    right: 0;
+  }
+
+  &.c-in-front {
+    top: 0;
+    left: 0;
+  }
+
+  &.c-behind-content {
+    top: 0;
+    left: 0;
+  }
+}

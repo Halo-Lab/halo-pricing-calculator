@@ -1,0 +1,6 @@
+.c-svg {
+  /* forbid filling svgs by default, but allow global style to override this rule */
+  :where(&) {
+    fill: none;
+  }
+}

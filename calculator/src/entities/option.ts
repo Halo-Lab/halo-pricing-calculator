@@ -5,6 +5,7 @@ import { Reference, Entity } from "./entity.js";
 export interface OptionData {
   id: Reference<Option>;
   text: string;
+  icon?: string;
   question: Reference<Question>;
   estimates: Reference<Estimate>[];
 }
@@ -15,6 +16,10 @@ export class Option extends Entity<Option> {
    */
   text: string;
   /**
+   * Option's identifier of an associated icon.
+   */
+  icon?: string;
+  /**
    * A reference to the {@link Question} containing this option.
    */
   question: Reference<Question>;
@@ -23,10 +28,11 @@ export class Option extends Entity<Option> {
    */
   estimates: Reference<Estimate>[];
 
-  constructor({ id, text, question, estimates }: OptionData) {
+  constructor({ id, text, icon, question, estimates }: OptionData) {
     super(id);
 
     this.text = text;
+    this.icon = icon;
     this.question = question;
     this.estimates = estimates;
   }

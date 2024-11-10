@@ -76,7 +76,7 @@ export function FinalStage(): JSX.Element {
                 options: store.options,
                 comments: store.comments,
                 estimates: store.estimates,
-                questionsByStep: store.questionsByStep,
+                questionsByStep: store.questionsSequence,
               });
 
               submit.click();

@@ -4,16 +4,162 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Halo's pricing calculator</title>
+
     <script type="module" src="./index.tsx"></script>
+
     <style>
+      @font-face {
+        font-family: "Suisse";
+        src: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/64898a9a755cff6cdd51cdbc_SuisseIntl-Light-WebS.woff")
+          format("woff");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Suisse";
+        src: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/64898b98472fde4d3b43bb30_SuisseIntl-Regular-WebS.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Suisse";
+        src: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/64898c27173d67d93385a14f_SuisseIntl-Medium-WebS.woff")
+          format("woff");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Suisse";
+        src: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/64898ce7a7d0827c9f783359_SuisseIntl-Bold-WebS.woff")
+          format("woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --blue-dark: #02021e;
+        --blue-dark-70: rgba(2, 2, 30, 0.7);
+        --blue-dark-30: rgba(2, 2, 30, 0.3);
+        --blue: #3719ca;
+        --grey-dark: #6d6978;
+        --grey-light: #f5f5f7;
+        --yellow: #fdc448;
+        --white: white;
+        --white-70: rgba(255, 255, 255, 0.7);
+        --white-30: rgba(255, 255, 255, 0.3);
+        --white-20: rgba(255, 255, 255, 0.2);
+        --blue-light: #255fef;
+        --tomato: #eb4e3d;
+        --purple: #7057d6;
+        --grey: #cdcdcd;
+        --grey-medium: #9a9aa5;
+        --red: #fa0000;
+        --blue-link: #0000eb;
+        --transparent: transparent;
+      }
+
       body {
-        background-color: #02022e;
+        background-color: var(--blue-dark);
+        margin: 0;
+        padding: 0 1rem;
+        color: rgb(var(--blue-dark));
+        font-family: Suisse, sans-serif;
       }
 
       body > header {
         color: white;
         padding: 1rem;
         text-align: center;
+      }
+
+      .container {
+        z-index: 2;
+        width: 100%;
+        max-width: 82rem;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+      }
+
+      .button {
+        z-index: 2;
+        grid-column-gap: 0.75rem;
+        background-color: var(--blue);
+        color: #fff;
+        text-align: center;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 20rem;
+        justify-content: center;
+        align-items: center;
+        padding: 1.1rem 0.75rem 1.1rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.4;
+        transition: all 0.4s;
+        display: flex;
+        position: relative;
+        transform: translate(0);
+      }
+
+      .button:hover {
+        border-width: 0.0625rem;
+        color: var(--white);
+        background-color: #3827c7;
+      }
+
+      .button.is-border-white {
+        border: 0.0625rem solid var(--white);
+        color: var(--white);
+        background-color: #3827c700;
+      }
+
+      .button.is-border-white:hover {
+        background-color: var(--white);
+        color: var(--blue-dark);
+      }
+
+      .button.is-border-grey {
+        border: 0.0625rem solid var(--grey-medium);
+        color: var(--blue-dark);
+        background-color: #3827c700;
+      }
+
+      .button__overflow {
+        z-index: 1;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .button__text {
+        flex: none;
+        display: block;
+      }
+
+      .button__text.is-absolute {
+        position: absolute;
+        inset: 0%;
+        transform: translateY(150%);
+      }
+
+      .button__texts {
+        transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+        position: relative;
+        transform: translate(0);
+      }
+
+      .button__texts.active {
+        transform: translateY(-150%);
       }
     </style>
   </head>
@@ -26,6 +172,6 @@
       </p>
     </header>
 
-    <div id="calculator-root"></div>
+    <div id="calculator-root" class="container"></div>
   </body>
 </html>

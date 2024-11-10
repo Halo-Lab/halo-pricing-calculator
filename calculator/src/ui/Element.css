@@ -1,0 +1,156 @@
+.c-element {
+  box-sizing: border-box;
+
+  display: inline-flex;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: inherit;
+  /* don't inherit browser's text weight */
+  font-weight: inherit;
+  text-decoration: none;
+  /* make this style as the default instead of "none" */
+  border-style: solid;
+  border-width: 0;
+  /* add a small transition to every element */
+  transition-duration: 0.12s;
+
+  /* children orientation */
+  &.c-vertical {
+    flex-direction: column;
+  }
+
+  /* self alignment as a child */
+  &.c-align-x-start {
+    .c-element.c-vertical > & {
+      align-self: start;
+    }
+  }
+
+  &.c-align-y-start {
+    .c-element:not(.c-vertical) > & {
+      align-self: start;
+    }
+  }
+
+  &.c-try-fill-height {
+    &:not(.c-absolute, .c-fixed, .c-sticky) {
+      .c-element.c-vertical > & {
+        height: var(--c-element-height);
+      }
+
+      .c-element:not(.c-vertical) > & {
+        /* In a horizontally oriented flex container to streatch an element align-self
+           property must be used instead of the height. Otherwise, it will be set as
+           auto effectively taking the space of its children only.
+         */
+        align-self: stretch;
+      }
+    }
+
+    &:where(.c-absolute, .c-fixed, .c-sticky) {
+      height: var(--c-element-height);
+    }
+  }
+
+  &.c-align-x-center {
+    .c-element:not(.c-vertical) > & {
+      &:where(
+          :not(:has(~ .c-element:where(.c-align-x-center, .c-align-x-end))),
+          :has(
+              + style[data-c-id]
+                + .c-element:where(.c-align-x-center, .c-align-x-end)
+            )
+        ) {
+        margin-left: auto;
+        margin-right: auto;
+
+        &
+          + style[data-c-id]
+          + .c-element:where(.c-align-x-center, .c-align-x-end) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .c-element.c-vertical > & {
+      align-self: center;
+    }
+  }
+
+  &.c-align-y-center {
+    .c-element:not(.c-vertical) > & {
+      align-self: center;
+    }
+
+    .c-element.c-vertical > & {
+      &:where(
+          :not(:has(~ .c-element:where(.c-align-y-center, .c-align-y-end))),
+          :has(
+              + style[data-c-id]
+                + .c-element:where(.c-align-y-center, .c-align-y-end)
+            )
+        ) {
+        margin-top: auto;
+        margin-bottom: auto;
+
+        &
+          + style[data-c-id]
+          + .c-element:where(.c-align-y-center, .c-align-y-end) {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &.c-align-x-end {
+    .c-element:not(.c-vertical) > & {
+      &:where(
+          :not(:has(~ .c-element:where(.c-align-x-center, .c-align-x-end))),
+          :has(
+              + style[data-c-id]
+                + .c-element:where(.c-align-x-center, .c-align-x-end)
+            )
+        ) {
+        margin-left: auto;
+
+        &
+          + style[data-c-id]
+          + .c-element:where(.c-align-x-center, .c-align-x-end) {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+
+    .c-element.c-vertical > & {
+      align-self: end;
+    }
+  }
+
+  &.c-align-y-end {
+    .c-element:not(.c-vertical) > & {
+      align-self: end;
+    }
+
+    .c-element.c-vertical > & {
+      &:where(
+          :not(:has(~ .c-element:where(.c-align-y-center, .c-align-y-end))),
+          :has(
+              + style[data-c-id]
+                + .c-element:where(.c-align-y-center, .c-align-y-end)
+            )
+        ) {
+        margin-top: auto;
+
+        &
+          + style[data-c-id]
+          + .c-element:where(.c-align-y-center, .c-align-y-end) {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.c-text {
+  --c-font-side-offset: calc(var(--c-font-size) * (var(--c-font-spacing) / -2));
+
+  /* margins in pseudoelements are working only if the container is block */
+  display: inline-block;
+  font-size: var(--c-font-size);
+  line-height: calc(var(--c-font-real-height-ratio) + var(--c-font-spacing));
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+  }
+
+  &::before {
+    margin-bottom: calc(
+      var(--c-font-side-offset) + var(--c-font-side-offset-correction)
+    );
+  }
+
+  &::after {
+    margin-top: var(--c-font-side-offset);
+  }
+}
