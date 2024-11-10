@@ -13,7 +13,7 @@ export function LeftCard(): JSX.Element {
       width={gte(680) ? ".5fr" : "fill"}
       height="fill"
       vertical
-      spacing={range(525, 680) || gte(975) ? 3.125 : 1}
+      spacing={range(525, 680) || gte(975) ? 3.125 : 1.75}
       padding={
         range(525, 680) || gte(975)
           ? [6.25, 2.5, 2.5]
