@@ -147,7 +147,7 @@ export function Questionnaire(): JSX.Element {
           padding={
             gte(1050) ? [0, 0, 0, range(1050, 1125) ? 0.75 : 1.25] : undefined
           }
-          spacing={gte(640) ? 4 : 2.75}
+          spacing={gte(1050) ? 1 : range(640, 1050) ? 4 : 2.75}
           width={gte(1290) ? ".78fr" : range(1050, 1290) ? ".75fr" : "fill"}
         >
           {questionBlock}

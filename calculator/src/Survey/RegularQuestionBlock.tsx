@@ -26,7 +26,7 @@ export function RegularQuestionBlock({
   selected,
 }: RegularQuestionBlockProps): JSX.Element {
   const dispatch = useDispatch();
-  const { gte } = useBreakpoints();
+  const { gte, range } = useBreakpoints();
 
   const optionElements = options.map((option) => {
     const isCurrentOptionChecked = selected.has(option.id);
@@ -109,43 +109,40 @@ export function RegularQuestionBlock({
   });
 
   return (
-    <Box
-      width="fill"
-      spacing={gte(1050) ? 2 : 1.5}
-      vertical
-      padding={gte(1050) ? [4, 0, 0, 0] : undefined}
-    >
-      <Text
-        width={gte(550) ? ".8fr" : undefined}
-        size={gte(550) ? 2.125 : 1.5}
-        weight={500}
-        spacing={0.4}
-        density={0.9973}
-      >
-        {question.text}
-      </Text>
+    <Box width="fill" minHeight={gte(1050) ? 18.75 : undefined}>
+      <Box vertical spacing={gte(1050) ? 2 : 1.5} alignY="center" width="fill">
+        <Text
+          width={gte(1050) ? ".9fr" : range(550, 1050) ? ".8fr" : undefined}
+          size={gte(550) ? 2.125 : 1.5}
+          weight={500}
+          spacing={0.4}
+          density={0.9973}
+        >
+          {question.text}
+        </Text>
 
-      {gte(680) ? (
-        (() => {
-          const [firstColumn, secondColumn] =
-            spreadElementsAcrossColumns(optionElements);
+        {gte(680) ? (
+          (() => {
+            const [firstColumn, secondColumn] =
+              spreadElementsAcrossColumns(optionElements);
 
-          return (
-            <Box width="fill" spacing={1}>
-              <Box width=".5fr" spacing={1} vertical>
-                {firstColumn}
+            return (
+              <Box width="fill" spacing={1}>
+                <Box width=".5fr" spacing={1} vertical>
+                  {firstColumn}
+                </Box>
+                <Box width=".5fr" spacing={1} vertical>
+                  {secondColumn}
+                </Box>
               </Box>
-              <Box width=".5fr" spacing={1} vertical>
-                {secondColumn}
-              </Box>
-            </Box>
-          );
-        })()
-      ) : (
-        <Box vertical width="fill" spacing={0.5}>
-          {optionElements}
-        </Box>
-      )}
+            );
+          })()
+        ) : (
+          <Box vertical width="fill" spacing={0.5}>
+            {optionElements}
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 }

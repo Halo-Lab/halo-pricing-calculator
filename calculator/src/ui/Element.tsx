@@ -75,6 +75,8 @@ export interface ElementProps<CP extends ElementCSSProperties>
   height?: Space;
   maxWidth?: Space;
   maxHeight?: Space;
+  minWidth?: Space;
+  minHeight?: Space;
   padding?: number | [number, number?, number?, number?];
   aspectRatio?: number | [number, number];
   clipX?: Clip;
@@ -111,6 +113,8 @@ export const Element = forwardRef(
       height,
       maxWidth,
       maxHeight,
+      minWidth,
+      minHeight,
       clipX,
       clipY,
       moveUp,
@@ -154,6 +158,8 @@ export const Element = forwardRef(
     }
     style.maxWidth = computeSpace(maxWidth);
     style.maxHeight = computeSpace(maxHeight);
+    style.minWidth = computeSpace(minWidth);
+    style.minHeight = computeSpace(minHeight);
     style.overflowX = clipMap[clipX as Clip];
     style.overflowY = clipMap[clipY as Clip];
 

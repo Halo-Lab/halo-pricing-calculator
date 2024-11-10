@@ -34,6 +34,7 @@ export function QuestionGroupLabel({
         size={gte(1050) ? 0.875 : 1.125}
         weight={500}
         density={0.98}
+        spacing={.3}
         alignY="center"
         color={color}
       >
