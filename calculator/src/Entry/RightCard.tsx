@@ -4,7 +4,6 @@ import { Color } from "../palettes/colours";
 import { Option } from "../entities/option";
 import { Region } from "../ui/region";
 import { useBreakpoints } from "../ui/Responsiveness";
-import { MoveToNextStep } from "../store/actions";
 import { RegularQuestion } from "../entities/question";
 import { Icon, IconVariant } from "../components/icons";
 import { Box, BoxDecoration } from "../ui/Box";
@@ -12,6 +11,7 @@ import { Svg, SvgDecoration } from "../ui/Svg";
 import { Text, TextDecoration } from "../ui/Text";
 import { useDispatch, useSelector } from "../store/Provider";
 import { Button, ButtonDecoration } from "../ui/Button";
+import { AddAnswer, MoveToNextStep } from "../store/actions";
 
 interface RightCardProperties {
   question: RegularQuestion;
@@ -154,7 +154,10 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                   range(700, 750) ? 1.5 : range(375, 680) || gte(750) ? 2 : 1
                 }
                 region={Region().description("Select platform")}
-                onPress={() => dispatch(new MoveToNextStep())}
+                onPress={() => {
+                  dispatch(new AddAnswer(option.id));
+                  dispatch(new MoveToNextStep());
+                }}
                 decorations={[
                   ButtonDecoration()
                     .borderRadius(100)
