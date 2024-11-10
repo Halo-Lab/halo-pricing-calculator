@@ -10,6 +10,8 @@ export type TextCSSProperties = Opaque<
   Omit<
     ElementCSSProperties,
     | "font"
+    | "whiteSpace"
+    | "overflowWrap"
     | "fontFamily"
     | "fontWeight"
     | "fontSize"
@@ -18,6 +20,8 @@ export type TextCSSProperties = Opaque<
   >,
   "TextCSSProperties"
 >;
+
+export type TextBreaking = "anywhere" | "forbid" | "prefer-newlines";
 
 export const TextDecoration = Decoration<TextCSSProperties>;
 
@@ -30,6 +34,7 @@ export interface TextProps<T extends keyof HTMLElementTagNameMap>
   family?: string;
   spacing?: number;
   density?: ElementCSSProperties["letterSpacing"];
+  breaking?: TextBreaking;
   realHeightRatio?: number;
   sideOffsetCorrection?: number;
 }
@@ -44,6 +49,7 @@ export const Text = forwardRef(
       family,
       spacing = 0,
       density,
+      breaking,
       realHeightRatio = 0.74,
       sideOffsetCorrection = 0.05,
       _extend,
@@ -64,6 +70,13 @@ export const Text = forwardRef(
               ["--c-font-side-offset-correction"]: units(sideOffsetCorrection),
               ["--c-font-size"]: units(size),
               color: color,
+              whiteSpace:
+                breaking === "forbid"
+                  ? "nowrap"
+                  : breaking === "prefer-newlines"
+                    ? "pre-line"
+                    : undefined,
+              overflowWrap: breaking === "anywhere" ? "break-word" : undefined,
               fontFamily: family,
               fontWeight: weight,
               letterSpacing:

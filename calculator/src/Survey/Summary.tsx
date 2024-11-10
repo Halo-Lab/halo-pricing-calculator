@@ -35,8 +35,19 @@ export function Summary(): JSX.Element {
 
     return (
       <Box key={title} spacing={0.5} width="fill">
-        <Icon variant="check" color={Color.white} width={1} height={1} />
-        <Text alignY="center" size={gte(425) ? 1 : 0.75} color={Color.white}>
+        <Icon
+          alignY="center"
+          variant="check"
+          color={Color.white}
+          width={1}
+          height={1}
+        />
+        <Text
+          spacing={0.3}
+          alignY="center"
+          size={gte(425) ? 1 : 0.75}
+          color={Color.white}
+        >
           {title}
         </Text>
         <Text
@@ -44,6 +55,7 @@ export function Summary(): JSX.Element {
           size={gte(425) ? 1 : 0.75}
           alignX="end"
           color={Color.white70}
+          breaking="forbid"
         >
           {daysText}
         </Text>
