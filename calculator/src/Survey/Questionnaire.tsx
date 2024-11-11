@@ -76,8 +76,8 @@ export function Questionnaire(): JSX.Element {
           inFront={
             <Box
               width="fill"
-              height={`1fr - ${gte(550) ? 1.5 : 2.3}`}
-              moveDown={gte(550) ? 1.5 : 2.3}
+              height={`1fr - ${range(1085, 1150) ? 1.7 : range(550, 1085) ? 1.5 : 2.3}`}
+              moveDown={range(1085, 1150) ? 1.7 : range(550, 1085) ? 1.5 : 2.3}
               decorations={BoxDecoration()
                 .backgroundColor(Color.white)
                 .borderRadius(1)}
