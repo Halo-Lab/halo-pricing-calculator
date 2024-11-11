@@ -161,6 +161,43 @@
       .button__texts.active {
         transform: translateY(-150%);
       }
+
+      .input-wrap {
+        z-index: 1;
+        flex: 1;
+        position: relative;
+        transform: translate(0);
+      }
+
+      .form__label {
+        z-index: 2;
+        grid-column-gap: 0.3em;
+        grid-row-gap: 0.3em;
+        color: #02021e80;
+        margin-bottom: 0;
+        margin-left: -0.25rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+        font-weight: 400;
+        line-height: 1;
+        transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0%;
+        right: auto;
+        transform: translateY(1.4rem);
+      }
+
+      .form__label.active {
+        font-size: 0.875rem;
+        transform: translateY(-0.2rem);
+      }
+
+      .form__label.is--textarea {
+        background-color: var(--white);
+        top: -0.2rem;
+      }
     </style>
   </head>
   <body>

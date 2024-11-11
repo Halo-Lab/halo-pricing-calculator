@@ -14,6 +14,7 @@ export type DecorationDependency =
   | "any-child";
 
 export type DecorationState =
+  | "active"
   | "hovered"
   | "focused"
   | "checked"
@@ -36,6 +37,8 @@ export type CSSDecorationBuilder<
   O extends AnyCSSProperties,
   D = {},
 > = UniqueTraitOf<O> & {
+  readonly state: DecorationState | undefined;
+  readonly dependencies: ReadonlyArray<DecorationDependency>;
   take(entries: O): CSSDecorationBuilder<O, D>;
   toString(elementId: string): string;
   dependOn(dependency: DecorationDependency): CSSDecorationBuilder<O, D>;
@@ -53,6 +56,8 @@ export function Decoration<O extends AnyCSSProperties>(
 
   const decorationBuilder: CSSDecorationBuilder<O> = new Proxy(
     {
+      state,
+      dependencies,
       take(providedEntries) {
         Object.assign(entries, providedEntries);
 
@@ -134,6 +139,7 @@ export function Decoration<O extends AnyCSSProperties>(
 }
 
 const stateToCSS: Record<DecorationState, string> = {
+  active: ":active",
   hovered: ":hover",
   focused: ":focus",
   checked: ":checked",

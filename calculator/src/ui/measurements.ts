@@ -8,7 +8,7 @@ export type MathOperator = "+" | "-" | "*" | "/";
 export type MathExpression =
   `${number | Fraction} ${MathOperator} ${number | Fraction}`;
 
-export type Space = number | "fill" | Fraction | MathExpression;
+export type Space = "fill" | number | Fraction | MathExpression;
 
 export function computeSpace(value: Space | undefined): string | undefined {
   return typeof value === "number"

@@ -1,39 +1,42 @@
-import { JSX, useId } from "react";
+import { JSX } from "react";
 
-interface MultiLineInputProperties {
-  name?: string;
+import { Text } from "../ui/Text";
+import { Color } from "../palettes/colours";
+import { Input, InputProps } from "../ui/Input";
+
+type MultiLineInputProperties = Omit<
+  InputProps,
+  "type" | "multiline" | "_extendUnderlyingInput"
+> & {
   label: string;
-  value: string;
-  onInput(value: string): void;
-}
+};
 
 export function MultiLineInput({
-  name,
   label,
-  value,
-  onInput,
+  ...props
 }: MultiLineInputProperties): JSX.Element {
-  const inputId = useId();
-
   return (
-    <div className="input-wrap" data-multiline-input="true">
-      <textarea
-        className="input is-textarea w-input"
-        maxLength={5000}
-        name={name}
-        data-name={name}
-        placeholder={label}
-        data-input-anim=""
-        id={inputId}
-        data-lenis-prevent-off=""
-        value={value}
-        onInput={(event) => {
-          onInput(event.currentTarget.value);
+    <Input
+      type="text"
+      multiline
+      data-multiline-input="true"
+      _extendUnderlyingInput={{
+        className: "input w-input is-textarea",
+        maxLength: 5000,
+        // @ts-expect-error
+        "data-input-anim": "",
+        "data-lenis-prevent-off": "",
+      }}
+      {...props}
+    >
+      <Text
+        _extend={{
+          className: "form__label is--textarea",
         }}
-      />
-      <label htmlFor={inputId} className="form__label is--textarea">
+      >
         {label}
-      </label>
-    </div>
+        {props.required ? <Text color={Color.red}>*</Text> : null}
+      </Text>
+    </Input>
   );
 }

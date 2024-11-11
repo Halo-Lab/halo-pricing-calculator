@@ -6,52 +6,46 @@ import { ProgressChip } from "./ProgressChip";
 import { SectionsList } from "./SectionsList";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { AnimatedButton } from "../components/AnimatedButton";
-import { RegularQuestion } from "../entities/question";
 import { Box, BoxDecoration } from "../ui/Box";
 import { QuestionGroupLabel } from "./QuestionGroupLabel";
 import { RegularQuestionBlock } from "./RegularQuestionBlock";
 import { Text, TextDecoration } from "../ui/Text";
 import { useDispatch, useSelector } from "../store/Provider";
+import { DescriptionQuestionBlock } from "./DescriptionQuestionBlock";
 import { MoveToNextStep, MoveToPreviousStep } from "../store/actions";
+import { DescriptionQuestion, RegularQuestion } from "../entities/question";
 
 export function Questionnaire(): JSX.Element {
   const dispatch = useDispatch();
   const { lt, gte, range } = useBreakpoints();
-  const { question, options, currentStep, totalSteps, selected } = useSelector(
-    (store) => {
+  const { question, options, currentStep, totalSteps, selected, description } =
+    useSelector((store) => {
       const question = store.questionsSequence[store.currentStep];
-      const options = (question as RegularQuestion).options.map(
-        (reference) => store.options.get(reference)!,
-      );
 
       return {
-        currentStep: store.currentStep + 1,
-        totalSteps: store.questionsSequence.length,
+        options: store.options,
         question,
-        options,
         selected: store.answers,
+        totalSteps: store.questionsSequence.length,
+        currentStep: store.currentStep + 1,
+        description: store.projectDescription,
       };
-    },
-  );
+    });
 
-  const questionBlock =
-    question instanceof RegularQuestion ? (
-      <RegularQuestionBlock
-        question={question}
-        options={options}
-        selected={selected}
-      />
-    ) : null;
-
-  const shouldGlobalEnterBeReacted = useMemo(() => {
-    return question instanceof RegularQuestion
-      ? question.options.some((reference) => selected.has(reference))
-      : true;
+  const isUserAbleToMoveFurther = useMemo(() => {
+    return (
+      question.optional ||
+      (question instanceof RegularQuestion
+        ? question.options.some((reference) => selected.has(reference))
+        : question instanceof DescriptionQuestion
+          ? description
+          : true)
+    );
   }, [question, selected]);
 
   useEffect(() => {
     const onKeyUp = (event: KeyboardEvent) => {
-      if (event.key === "Enter" && shouldGlobalEnterBeReacted) {
+      if (event.key === "Enter" && isUserAbleToMoveFurther) {
         dispatch(new MoveToNextStep());
       }
     };
@@ -61,7 +55,7 @@ export function Questionnaire(): JSX.Element {
     return () => {
       removeEventListener("keyup", onKeyUp);
     };
-  }, [shouldGlobalEnterBeReacted]);
+  }, [isUserAbleToMoveFurther]);
 
   return (
     <Box
@@ -150,7 +144,18 @@ export function Questionnaire(): JSX.Element {
           spacing={gte(1050) ? 1 : range(640, 1050) ? 4 : 2.75}
           width={gte(1290) ? ".78fr" : range(1050, 1290) ? ".75fr" : "fill"}
         >
-          {questionBlock}
+          {question instanceof RegularQuestion ? (
+            <RegularQuestionBlock
+              options={options}
+              question={question}
+              selected={selected}
+            />
+          ) : question instanceof DescriptionQuestion ? (
+            <DescriptionQuestionBlock
+              question={question}
+              description={description ?? ""}
+            />
+          ) : null}
 
           <Box
             width="fill"
@@ -164,7 +169,7 @@ export function Questionnaire(): JSX.Element {
             >
               back
             </AnimatedButton>
-            {gte(1050) && shouldGlobalEnterBeReacted ? (
+            {gte(1050) && isUserAbleToMoveFurther ? (
               <Box alignY="center" alignX="end" spacing={0.25}>
                 <Text size={0.75}>press</Text>
                 <Text as="kbd" size={0.75} weight={500}>
@@ -177,16 +182,13 @@ export function Questionnaire(): JSX.Element {
               width={gte(450) ? undefined : "fill"}
               variant="primary"
               onPress={() => {
-                if (
-                  !question.optional &&
-                  options.every((option) => !selected.has(option.id))
-                ) {
+                if (isUserAbleToMoveFurther) {
+                  dispatch(new MoveToNextStep());
+                } else {
                   // TODO: show a tooltip that user has to select something
                   console.warn(
                     "You really need to implement a hint for the user that he/she needs to select at least one option.",
                   );
-                } else {
-                  dispatch(new MoveToNextStep());
                 }
               }}
             >

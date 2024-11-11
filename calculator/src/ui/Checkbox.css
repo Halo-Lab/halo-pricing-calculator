@@ -1,7 +1,7 @@
 .c-checkbox {
   cursor: pointer;
 
-  & > input[type="checkbox"] {
+  & > input:where([type="checkbox"], [type="radio"]) {
     position: absolute;
     opacity: 0;
     height: 0;

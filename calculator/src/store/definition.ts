@@ -11,6 +11,8 @@ export interface Store {
   estimates: Dictionary<Estimate>;
 
   answers: Set<Reference<Option>>;
+  projectFiles?: Array<File>;
+  projectDescription?: string;
   currentStep: number;
   questionsSequence: Array<Question>;
 }

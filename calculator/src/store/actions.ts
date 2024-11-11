@@ -74,3 +74,23 @@ export class MoveToPreviousStep extends Action {
     };
   }
 }
+
+export class AddProjectDescription extends Action {
+  constructor(private text: string) {
+    super();
+  }
+
+  override reduce(store: Store): Partial<Store> {
+    return {
+      projectDescription: this.text,
+    };
+  }
+}
+
+export class RemoveProjectDescription extends Action {
+  override reduce(store: Store): Partial<Store> {
+    return {
+      projectDescription: undefined,
+    };
+  }
+}
