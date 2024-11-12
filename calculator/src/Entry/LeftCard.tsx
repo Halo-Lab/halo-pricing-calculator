@@ -97,7 +97,7 @@ export function LeftCard(): JSX.Element {
         }
         color={Color.white}
         weight={500}
-        spacing={range(475, 680) || gte(825) ? 0.35 : 0.15}
+        spacing={0.35}
         decorations={TextDecoration().textTransform("uppercase")}
       >
         project <br /> cost <br /> calculator

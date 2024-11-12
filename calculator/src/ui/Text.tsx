@@ -10,6 +10,7 @@ export type TextCSSProperties = Opaque<
   Omit<
     ElementCSSProperties,
     | "font"
+    | "color"
     | "whiteSpace"
     | "overflowWrap"
     | "fontFamily"
@@ -29,7 +30,7 @@ export interface TextProps<T extends keyof HTMLElementTagNameMap>
   extends Omit<ElementProps<TextCSSProperties>, "as" | "height"> {
   as?: T;
   size?: number;
-  color?: TextCSSProperties["color"];
+  color?: ElementCSSProperties["color"];
   weight?: number;
   family?: string;
   spacing?: number;

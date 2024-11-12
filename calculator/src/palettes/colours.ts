@@ -3,7 +3,9 @@ export type PredefinedColor = keyof typeof Color;
 export const Color = {
   blueDark: "var(--blue-dark)",
   blueDark70: "var(--blue-dark-70)",
+  blueDark50: "rgb(2 2 30 / .5)",
   blueDark30: "var(--blue-dark-30)",
+  blueDark20: "rgb(2 2 30 / .2)",
   blueDark15: "rgb(2 2 30 / .15)",
   blue: "var(--blue)",
   greyDark: "var(--grey-dark)",

@@ -5,8 +5,8 @@ import { Svg } from "../ui/Svg";
 import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
 import { useDispatch } from "../store/Provider";
-import { MultiLineInput } from "../components/MultiLineInput";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { DescriptionInput } from "../components/DescriptionInput";
 import { DescriptionQuestion } from "../entities/question";
 import { AddProjectDescription } from "../store/actions";
 
@@ -57,7 +57,7 @@ export function DescriptionQuestionBlock({
         </Box>
       </Box>
 
-      <MultiLineInput
+      <DescriptionInput
         value={description}
         label="About the project"
         required={!question.optional}

@@ -1,16 +1,4 @@
 .c-input {
-  &
-    > :where(
-      textarea,
-      input:where(
-          [type="text"],
-          [type="email"],
-          [type="password"],
-          [type="search"]
-        )
-    ) {
-    flex: 1;
-    resize: none;
-    outline: none;
-  }
+  resize: none;
+  outline: none;
 }

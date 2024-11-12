@@ -1,4 +1,12 @@
-export function units(amount: number, unit = "rem"): string {
+export function units(amount: number, unit?: string /* = "rem" */): string {
+  const isUnitPopulated = unit != null;
+
+  // Temporarily convert units to pixels
+  if (!isUnitPopulated || unit === "rem") {
+    amount *= 16;
+    unit = "px";
+  }
+
   return `${amount}${unit}`;
 }
 

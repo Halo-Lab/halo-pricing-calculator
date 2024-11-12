@@ -35,9 +35,6 @@ export const Button = forwardRef(
             // is focused and the Enter is pressed.
             return onPress as EventHandler<SyntheticEvent>;
           },
-          tabIndex() {
-            return 0;
-          },
           className(value = "") {
             return `${value} c-button`;
           },

@@ -66,6 +66,35 @@
         --transparent: transparent;
       }
 
+      /* Fluid responsive */
+      html {
+        font-size: 1rem;
+      }
+
+      @media screen and (min-width: 1801px) {
+        html {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media screen and (max-width: 1800px) and (min-width: 992px) {
+        html {
+          font-size: calc(1.1vw);
+        }
+      }
+
+      @media screen and (max-width: 991px) and (min-width: 480px) {
+        html {
+          font-size: calc(0.3rem + 1.5vw);
+        }
+      }
+
+      @media screen and (max-width: 479px) and (min-width: 320px) {
+        html {
+          font-size: 5vw;
+        }
+      }
+
       body {
         background-color: var(--blue-dark);
         margin: 0;
