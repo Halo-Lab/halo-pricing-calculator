@@ -126,6 +126,7 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
               <Text
                 size={0.875}
                 weight={500}
+                spacing={.3}
                 density={1.04375}
                 alignY="center"
                 decorations={TextDecoration()
