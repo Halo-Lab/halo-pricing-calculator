@@ -91,6 +91,10 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                         : 1.35
         }
         weight={500}
+        decorations={
+          // remove Webflow's default text-transform for the h1
+          TextDecoration().textTransform("none")
+        }
       >
         {question.text}
       </Text>
@@ -125,6 +129,7 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 density={1.04375}
                 alignY="center"
                 decorations={TextDecoration()
+                  .flex(1)
                   .textTransform("uppercase")
                   .fontFeatureSettings("'liga' off, 'clig' off")}
               >
