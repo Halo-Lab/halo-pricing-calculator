@@ -118,6 +118,8 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 .backgroundColor(Color.greyLight)}
             >
               <Icon
+                color={Color.blue}
+                invertColor={Color.white}
                 variant={option.icon as IconVariant}
                 width={range(375, 680) || gte(750) ? 2.5 : 1.5}
                 height={range(375, 680) || gte(750) ? 2.5 : 1.5}
@@ -126,7 +128,7 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
               <Text
                 size={0.875}
                 weight={500}
-                spacing={.3}
+                spacing={0.3}
                 density={1.04375}
                 alignY="center"
                 decorations={TextDecoration()

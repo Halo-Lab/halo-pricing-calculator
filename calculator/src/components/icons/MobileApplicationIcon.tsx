@@ -3,67 +3,64 @@ import { JSX } from "react";
 import { Svg } from "../../ui/Svg";
 import { IconComponentProps } from ".";
 
-export function MobileApplicationIcon(props: IconComponentProps): JSX.Element {
+export function MobileApplicationIcon({
+  invertColor,
+  ...props
+}: IconComponentProps): JSX.Element {
   return (
-    <Svg viewBox="0 0 40 40" {...props}>
-      <rect width="40" height="40" rx="20" fill="#3827C7" />
-      <rect
-        width="33.9453"
-        height="33.9453"
-        transform="translate(2.85938 3.57129)"
-        fill="#3827C7"
-      />
+    <Svg viewBox="0 0 56 56" {...props}>
+      <rect width="56" height="56" rx="28" fill="currentColor" />
       <circle
-        cx="23.1414"
-        cy="13.7254"
-        r="6.02425"
-        fill="url(#paint0_linear_51293_76969)"
+        cx="32.3988"
+        cy="19.2152"
+        r="8.43395"
+        fill="url(#paint0_linear_51293_81295)"
       />
       <rect
-        x="9.80078"
-        y="14.4697"
-        width="12.0137"
-        height="12.118"
-        rx="0.869301"
-        fill="url(#paint1_linear_51293_76969)"
+        x="13.7188"
+        y="20.2578"
+        width="16.8192"
+        height="16.9653"
+        rx="1.21702"
+        fill="url(#paint1_linear_51293_81295)"
       />
       <path
-        d="M20.4172 21.5474C20.9987 20.5402 22.4525 20.5402 23.034 21.5474L27.5317 29.3376C28.1132 30.3448 27.3863 31.6038 26.2233 31.6038H17.2279C16.0649 31.6038 15.338 30.3448 15.9195 29.3376L20.4172 21.5474Z"
-        fill="url(#paint2_linear_51293_76969)"
+        d="M28.5833 30.167C29.3974 28.7568 31.4327 28.7568 32.2468 30.167L38.5436 41.0732C39.3577 42.4833 38.34 44.246 36.7118 44.246H24.1183C22.4901 44.246 21.4724 42.4833 22.2865 41.0732L28.5833 30.167Z"
+        fill="url(#paint2_linear_51293_81295)"
       />
       <defs>
         <linearGradient
-          id="paint0_linear_51293_76969"
-          x1="27.8988"
-          y1="8.77586"
-          x2="21.8458"
-          y2="19.5515"
+          id="paint0_linear_51293_81295"
+          x1="39.0591"
+          y1="12.2858"
+          x2="30.5849"
+          y2="27.3717"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.390982" stopColor="white" stopOpacity="0.35" />
-          <stop offset="0.829412" stopColor="white" stopOpacity="0.15" />
+          <stop offset="0.390982" stopColor={invertColor} stopOpacity="0.35" />
+          <stop offset="0.829412" stopColor={invertColor} stopOpacity="0.15" />
         </linearGradient>
         <linearGradient
-          id="paint1_linear_51293_76969"
-          x1="7.71182"
-          y1="29.3279"
-          x2="24.3998"
-          y2="15.2498"
+          id="paint1_linear_51293_81295"
+          x1="10.7942"
+          y1="41.0593"
+          x2="34.1574"
+          y2="21.3499"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.443473" stopColor="white" stopOpacity="0.7" />
-          <stop offset="1" stopColor="white" stopOpacity="0.3" />
+          <stop offset="0.443473" stopColor={invertColor} stopOpacity="0.7" />
+          <stop offset="1" stopColor={invertColor} stopOpacity="0.3" />
         </linearGradient>
         <linearGradient
-          id="paint2_linear_51293_76969"
-          x1="14.1238"
-          y1="32.1683"
-          x2="26.1543"
-          y2="25.4377"
+          id="paint2_linear_51293_81295"
+          x1="19.7726"
+          y1="45.0363"
+          x2="36.6153"
+          y2="35.6134"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.683926" stopColor="white" />
-          <stop offset="1" stopColor="white" stopOpacity="0.6" />
+          <stop offset="0.683926" stopColor={invertColor} />
+          <stop offset="1" stopColor={invertColor} stopOpacity="0.6" />
         </linearGradient>
       </defs>
     </Svg>
