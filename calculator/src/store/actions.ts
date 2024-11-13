@@ -3,7 +3,11 @@ import { Dispatch } from "react";
 import { Action } from "./Provider";
 import { Option } from "../entities/option";
 import { Reference } from "../entities/entity";
-import { RegularQuestion } from "../entities/question";
+import {
+  FilesQuestion,
+  RegularQuestion,
+  DescriptionQuestion,
+} from "../entities/question";
 import {
   Store,
   createStore,
@@ -79,6 +83,14 @@ export class MoveToPreviousStep extends Action {
     return {
       answers,
       currentStep: store.currentStep - 1,
+      projectFiles:
+        currentQuestion instanceof FilesQuestion
+          ? undefined
+          : store.projectFiles,
+      projectDescription:
+        currentQuestion instanceof DescriptionQuestion
+          ? undefined
+          : store.projectDescription,
     };
   }
 }

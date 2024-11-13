@@ -19,12 +19,32 @@ export function DescriptionQuestionBlock({
   question,
   description,
 }: DescriptionQuestionBlockProps): JSX.Element {
-  const { gte } = useBreakpoints();
+  const { gte, range } = useBreakpoints();
   const dispatch = useDispatch();
 
   return (
     <Box vertical spacing={2} width="fill">
-      <Box vertical spacing={1} width="fill">
+      <Box
+        vertical
+        spacing={1.5}
+        maxWidth={
+          gte(1825)
+            ? ".64fr"
+            : range(1650, 1750)
+              ? ".65fr"
+              : range(1470, 1650)
+                ? ".73fr"
+                : range(1300, 1350)
+                  ? ".85fr"
+                  : range(950, 1050)
+                    ? ".55fr"
+                    : range(750, 950)
+                      ? ".7fr"
+                      : range(525, 750) || range(1350, 1470)
+                        ? ".8fr"
+                        : "fill"
+        }
+      >
         <Text size={1.5} spacing={0.4} weight={500}>
           {question.text}
         </Text>
@@ -34,7 +54,7 @@ export function DescriptionQuestionBlock({
         <Box width="fill" spacing={0.75} vertical>
           {question.helpPoints.map((helpPoint, index) => {
             return (
-              <Box key={index} spacing={0.75}>
+              <Box key={index} spacing={0.875}>
                 <Svg
                   width={0.75}
                   height={0.75}

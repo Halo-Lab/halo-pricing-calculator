@@ -54,7 +54,7 @@ export function Questionnaire(): JSX.Element {
           ? description
           : true)
     );
-  }, [question, selected]);
+  }, [question, selected, description]);
 
   useEffect(() => {
     const onKeyUp = (event: KeyboardEvent) => {

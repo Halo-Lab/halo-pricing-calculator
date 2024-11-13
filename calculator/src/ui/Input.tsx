@@ -97,6 +97,9 @@ export const Input = forwardRef(
           type() {
             return type;
           },
+          value() {
+            return value;
+          },
           autoComplete() {
             return hint;
           },

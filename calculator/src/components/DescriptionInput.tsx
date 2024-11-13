@@ -31,8 +31,8 @@ export function DescriptionInput({
       {...props}
     >
       <Text
-        size={isFocused ? 0.75 : 1}
-        moveDown={isFocused ? 0 : 1.25}
+        size={value || isFocused ? 0.75 : 1}
+        moveDown={value || isFocused ? 0 : 1.25}
         color={Color.blueDark50}
         decorations={TextDecoration().transitionTimingFunction(
           "cubic-bezier(.215,.61,.355,1)",
