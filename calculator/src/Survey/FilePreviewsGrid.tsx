@@ -4,6 +4,7 @@ import { Box } from "../ui/Box";
 import { ProjectFile } from "../store/definition";
 import { FilePreview } from "./FilePreview";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { groupElementsBy } from "./groupElementsBy";
 import { SmallFileUploadZone } from "./SmallFileUploadZone";
 
 interface FilePreviewsGridProps {
@@ -58,26 +59,5 @@ export function FilePreviewsGrid({
         );
       })}
     </Box>
-  );
-}
-
-function groupElementsBy<A>(
-  elements: Array<A>,
-  groupLength: number,
-): Array<Array<A>> {
-  return elements.reduce<Array<Array<A>>>(
-    (accumulator, element) => {
-      let lastGroup = accumulator.at(-1)!;
-
-      if (lastGroup.length === groupLength) {
-        lastGroup = [];
-        accumulator.push(lastGroup);
-      }
-
-      lastGroup.push(element);
-
-      return accumulator;
-    },
-    [[]],
   );
 }

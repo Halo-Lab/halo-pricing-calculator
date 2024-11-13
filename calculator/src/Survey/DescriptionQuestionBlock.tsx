@@ -5,8 +5,8 @@ import { Svg } from "../ui/Svg";
 import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
 import { useDispatch } from "../store/Provider";
+import { FloatingInput } from "../components/FloatingInput";
 import { useBreakpoints } from "../ui/Responsiveness";
-import { DescriptionInput } from "../components/DescriptionInput";
 import { DescriptionQuestion } from "../entities/question";
 import { AddProjectDescription } from "../store/actions";
 
@@ -77,10 +77,12 @@ export function DescriptionQuestionBlock({
         </Box>
       </Box>
 
-      <DescriptionInput
+      <FloatingInput
+        type="text"
         value={description}
         label="About the project"
         required={!question.optional}
+        multiline
         onChange={(event) =>
           dispatch(new AddProjectDescription(event.currentTarget.value))
         }

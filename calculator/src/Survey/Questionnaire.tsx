@@ -20,7 +20,13 @@ import {
   DescriptionQuestion,
 } from "../entities/question";
 
-export function Questionnaire(): JSX.Element {
+interface QuestionnaireProps {
+  userReachedTheEnd(): void;
+}
+
+export function Questionnaire({
+  userReachedTheEnd,
+}: QuestionnaireProps): JSX.Element {
   const dispatch = useDispatch();
   const { lt, gte, range } = useBreakpoints();
   const {
@@ -201,7 +207,11 @@ export function Questionnaire(): JSX.Element {
               variant="primary"
               onPress={() => {
                 if (isUserAbleToMoveFurther) {
-                  dispatch(new MoveToNextStep());
+                  if (currentStep === totalSteps) {
+                    userReachedTheEnd();
+                  } else {
+                    dispatch(new MoveToNextStep());
+                  }
                 } else {
                   // TODO: show a tooltip that user has to select something
                   console.warn(
@@ -210,7 +220,9 @@ export function Questionnaire(): JSX.Element {
                 }
               }}
             >
-              next
+              {isUserAbleToMoveFurther && currentStep === totalSteps
+                ? "get an estimate"
+                : "next"}
             </AnimatedButton>
           </Box>
         </Box>

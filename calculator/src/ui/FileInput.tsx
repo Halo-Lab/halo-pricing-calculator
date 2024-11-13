@@ -56,7 +56,7 @@ export const FileInput = forwardRef(
       <Box
         _extend={extend(_extend, {
           className(value = "") {
-            return `${value} c-file-input ${draggingDetected ? "c-drag-over" : ""}`;
+            return `${value} c-file-input ${draggingDetected ? "c-drag-over-zone" : ""}`;
           },
           onDrop() {
             if (isDraggingAllowed) {

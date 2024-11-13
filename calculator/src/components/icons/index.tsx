@@ -6,6 +6,8 @@ import { PlusIcon } from "./PlusIcon";
 import { SaaSIcon } from "./SaaSIcon";
 import { Web3Icon } from "./Web3Icon";
 import { CloseIcon } from "./CloseIcon";
+import { StarsIcon } from "./StarsIcon";
+import { HeartIcon } from "./HeartIcon";
 import { CheckIcon } from "./CheckIcon";
 import { AgencyIcon } from "./AgencyIcon";
 import { LoaderIcon } from "./LoaderIcon";
@@ -14,12 +16,17 @@ import { FashionIcon } from "./FashionIcon";
 import { FinanceIcon } from "./FinanceIcon";
 import { WellnessIcon } from "./WellnessIcon";
 import { DownloadIcon } from "./DownloadIcon";
+import { HaloLogoIcon } from "./HaloLogoIcon";
+import { LinkedInIcon } from "./LinkedInIcon";
+import { CalendarIcon } from "./CalendarIcon";
 import { LogisticsIcon } from "./LogisticsIcon";
+import { OpenBookIcon } from "./OpenBookIcon";
 import { InsuranceIcon } from "./InsuranceIcon";
 import { ECommerceIcon } from "./ECommerceIcon";
 import { EducationIcon } from "./EducationIcon";
 import { HealthcareIcon } from "./HealthcareIcon";
 import { RealEstateIcon } from "./RealEstateIcon";
+import { WritingPenIcon } from "./WritingPenIcon";
 import { ChevronRightIcon } from "./ChevronRightIcon";
 import { EntertainmentIcon } from "./EntertainmentIcon";
 import { SocialNetworkIcon } from "./SocialNetworkIcon";
@@ -33,7 +40,9 @@ export type IconVariant =
   | "plus"
   | "saas"
   | "close"
+  | "stars"
   | "check"
+  | "heart"
   | "agency"
   | "loader"
   | "fashion"
@@ -44,9 +53,14 @@ export type IconVariant =
   | "education"
   | "logistics"
   | "insurance"
+  | "halo-logo"
+  | "linkedin"
+  | "calendar"
   | "healthcare"
   | "e-commerce"
+  | "open-book"
   | "real-estate"
+  | "writing-pen"
   | "entertainment"
   | "chevron-right"
   | "social-network"
@@ -60,7 +74,9 @@ const ICON_COMPONENTS: Record<IconVariant, FC<IconComponentProps>> = {
   plus: PlusIcon,
   saas: SaaSIcon,
   close: CloseIcon,
+  stars: StarsIcon,
   check: CheckIcon,
+  heart: HeartIcon,
   agency: AgencyIcon,
   loader: LoaderIcon,
   fashion: FashionIcon,
@@ -68,13 +84,18 @@ const ICON_COMPONENTS: Record<IconVariant, FC<IconComponentProps>> = {
   website: WebsiteIcon,
   wellness: WellnessIcon,
   download: DownloadIcon,
+  linkedin: LinkedInIcon,
+  calendar: CalendarIcon,
   insurance: InsuranceIcon,
   education: EducationIcon,
   logistics: LogisticsIcon,
   healthcare: HealthcareIcon,
   entertainment: EntertainmentIcon,
+  "open-book": OpenBookIcon,
+  "halo-logo": HaloLogoIcon,
   "e-commerce": ECommerceIcon,
   "real-estate": RealEstateIcon,
+  "writing-pen": WritingPenIcon,
   "chevron-right": ChevronRightIcon,
   "social-network": SocialNetworkIcon,
   "web-application": WebApplicationIcon,

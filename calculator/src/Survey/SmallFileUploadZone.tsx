@@ -60,7 +60,9 @@ export function SmallFileUploadZone({
         decorations={[
           TextDecoration().opacity(0),
           TextDecoration("hovered").dependOn("direct-parent").opacity(1),
-          TextDecoration("dragging").dependOn("any-parent").opacity(1),
+          TextDecoration("dragging-over-drop-zone")
+            .dependOn("any-parent")
+            .opacity(1),
         ]}
       >
         Add screens

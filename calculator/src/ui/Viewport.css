@@ -1,0 +1,12 @@
+.c-viewport {
+  width: 100%;
+  min-height: 100%;
+
+  & & {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* make next viewports after the first one go on top of each other */
+    z-index: 1;
+  }
+}

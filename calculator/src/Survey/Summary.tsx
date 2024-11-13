@@ -9,7 +9,11 @@ import { Box, BoxDecoration } from "../ui/Box";
 import { Estimate, EstimateRange } from "../entities/estimate";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
 
-export function Summary(): JSX.Element {
+interface SummaryProps {
+  shouldRestrictHeight: boolean;
+}
+
+export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
   const { gte, range } = useBreakpoints();
   const groupedEstimates = useSelector((store) => {
     const groupedEstimates: Record<string, EstimateRange> = {};
@@ -109,8 +113,8 @@ export function Summary(): JSX.Element {
         <Box
           vertical
           width="fill"
-          maxHeight={4.75}
-          clipY="scrollable"
+          maxHeight={shouldRestrictHeight ? 4.75 : undefined}
+          clipY={shouldRestrictHeight ? "scrollable" : undefined}
           spacing={gte(1050) ? 0.75 : 0.5}
         >
           {resultElements}

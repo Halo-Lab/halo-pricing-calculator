@@ -1,30 +1,36 @@
 import { JSX, useState } from "react";
 
 import { Color } from "../palettes/colours";
-import { Input, InputProps } from "../ui/Input";
+import { Input, InputDecoration, InputProps } from "../ui/Input";
 import { Text, TextDecoration } from "../ui/Text";
 import { Box, BoxDecoration, BoxProps } from "../ui/Box";
 
-interface DescriptionInputProps
-  extends Pick<InputProps, "required" | "value" | "onChange">,
+interface FloatingInputProps
+  extends Pick<
+      InputProps,
+      "required" | "value" | "onChange" | "multiline" | "type" | "hint"
+    >,
     Omit<BoxProps, "as" | "vertical" | "width" | "decorations"> {
   label: string;
 }
 
-export function DescriptionInput({
+export function FloatingInput({
+  type,
+  hint,
   label,
   value,
   onChange,
   required,
+  multiline,
   ...props
-}: DescriptionInputProps): JSX.Element {
+}: FloatingInputProps): JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
     <Box
       vertical
       width="fill"
-      spacing={0.25}
+      spacing={0.35}
       decorations={BoxDecoration()
         .borderBottomWidth("1px")
         .borderBottomColor(Color.blueDark20)}
@@ -41,15 +47,18 @@ export function DescriptionInput({
         {label}
         {required ? <Text color={Color.red}>*</Text> : null}
       </Text>
+      {/* @ts-expect-error */}
       <Input
-        type="text"
+        type={type}
+        hint={hint}
         width="fill"
-        multiline
-        rows={5}
-        spacing={0.4}
+        multiline={multiline}
+        rows={multiline ? 5 : undefined}
+        spacing={multiline ? 0.4 : undefined}
         value={value}
         required={required}
         onChange={onChange}
+        padding={[0, 0, 1, 0]}
         onFocus={() => setIsFocused(true)}
         onFocusLost={() => setIsFocused(false)}
       />
