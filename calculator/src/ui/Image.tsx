@@ -17,7 +17,7 @@ export type ImageFit = "contain" | "cover" | "fill" | "scale-down";
 export interface ImageProps
   extends Omit<ElementProps<ImageCSSProperties>, "as" | "children"> {
   fit?: ImageFit;
-  source: string | Array<string>;
+  source: string | URL | Array<string | URL>;
   description: string;
 }
 
@@ -35,7 +35,9 @@ export const Image = forwardRef(
             return `${value} c-img ${fit ? `c-img-fit-${fit}` : ""}`;
           },
           src() {
-            return Array.isArray(source) ? source.join(", ") : source;
+            return Array.isArray(source)
+              ? source.map(sourceToString).join(", ")
+              : sourceToString(source);
           },
           alt() {
             return description;
@@ -46,3 +48,7 @@ export const Image = forwardRef(
     );
   },
 );
+
+function sourceToString(source: string | URL): string {
+  return source instanceof URL ? source.toString() : source;
+}

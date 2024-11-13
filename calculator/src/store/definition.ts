@@ -5,13 +5,26 @@ import { Reference } from "../entities/entity";
 import { Dictionary } from "../dictionary";
 import { estimates, options, questions } from "../data";
 
+export enum ProjectFileAcceptance {
+  Unknown,
+  Accepted,
+  TooLarge,
+  FailedToProcess,
+  NotSupportedExtension,
+}
+
+export interface ProjectFile {
+  original: File;
+  acceptance: ProjectFileAcceptance;
+}
+
 export interface Store {
   options: Dictionary<Option>;
   questions: Dictionary<Question>;
   estimates: Dictionary<Estimate>;
 
   answers: Set<Reference<Option>>;
-  projectFiles?: Array<File>;
+  projectFiles?: Array<ProjectFile>;
   projectDescription?: string;
   currentStep: number;
   questionsSequence: Array<Question>;

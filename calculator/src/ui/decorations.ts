@@ -18,6 +18,7 @@ export type DecorationState =
   | "hovered"
   | "focused"
   | "checked"
+  | "dragging"
   | "readonly"
   | "writable";
 
@@ -145,6 +146,7 @@ const stateToCSS: Record<DecorationState, string> = {
   checked: ":checked",
   readonly: ":read-only",
   writable: ":read-write",
+  dragging: ".c-drag-over",
 };
 
 function toKebabCase(key: string): string {

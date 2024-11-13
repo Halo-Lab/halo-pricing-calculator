@@ -7,30 +7,43 @@ import { SectionsList } from "./SectionsList";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { AnimatedButton } from "../components/AnimatedButton";
 import { Box, BoxDecoration } from "../ui/Box";
+import { FilesQuestionBlock } from "./FilesQuestionBlock";
 import { QuestionGroupLabel } from "./QuestionGroupLabel";
 import { RegularQuestionBlock } from "./RegularQuestionBlock";
 import { Text, TextDecoration } from "../ui/Text";
 import { useDispatch, useSelector } from "../store/Provider";
 import { DescriptionQuestionBlock } from "./DescriptionQuestionBlock";
 import { MoveToNextStep, MoveToPreviousStep } from "../store/actions";
-import { DescriptionQuestion, RegularQuestion } from "../entities/question";
+import {
+  FilesQuestion,
+  RegularQuestion,
+  DescriptionQuestion,
+} from "../entities/question";
 
 export function Questionnaire(): JSX.Element {
   const dispatch = useDispatch();
   const { lt, gte, range } = useBreakpoints();
-  const { question, options, currentStep, totalSteps, selected, description } =
-    useSelector((store) => {
-      const question = store.questionsSequence[store.currentStep];
+  const {
+    question,
+    options,
+    currentStep,
+    totalSteps,
+    selected,
+    description,
+    projectFiles,
+  } = useSelector((store) => {
+    const question = store.questionsSequence[store.currentStep];
 
-      return {
-        options: store.options,
-        question,
-        selected: store.answers,
-        totalSteps: store.questionsSequence.length,
-        currentStep: store.currentStep + 1,
-        description: store.projectDescription,
-      };
-    });
+    return {
+      options: store.options,
+      question,
+      selected: store.answers,
+      totalSteps: store.questionsSequence.length,
+      currentStep: store.currentStep + 1,
+      description: store.projectDescription,
+      projectFiles: store.projectFiles,
+    };
+  });
 
   const isUserAbleToMoveFurther = useMemo(() => {
     return (
@@ -141,7 +154,7 @@ export function Questionnaire(): JSX.Element {
           padding={
             gte(1050) ? [0, 0, 0, range(1050, 1125) ? 0.75 : 1.25] : undefined
           }
-          spacing={gte(1050) ? 1 : range(640, 1050) ? 4 : 2.75}
+          spacing={gte(1050) ? 2 : range(640, 1050) ? 4 : 2.75}
           width={gte(1290) ? ".78fr" : range(1050, 1290) ? ".75fr" : "fill"}
         >
           {question instanceof RegularQuestion ? (
@@ -154,6 +167,11 @@ export function Questionnaire(): JSX.Element {
             <DescriptionQuestionBlock
               question={question}
               description={description ?? ""}
+            />
+          ) : question instanceof FilesQuestion ? (
+            <FilesQuestionBlock
+              question={question}
+              files={projectFiles ?? []}
             />
           ) : null}
 

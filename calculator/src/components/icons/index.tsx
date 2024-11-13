@@ -2,14 +2,18 @@ import { FC, JSX } from "react";
 
 import { IoTIcon } from "./IoTIcon";
 import { SvgProps } from "../../ui/Svg";
+import { PlusIcon } from "./PlusIcon";
 import { SaaSIcon } from "./SaaSIcon";
 import { Web3Icon } from "./Web3Icon";
+import { CloseIcon } from "./CloseIcon";
 import { CheckIcon } from "./CheckIcon";
 import { AgencyIcon } from "./AgencyIcon";
+import { LoaderIcon } from "./LoaderIcon";
 import { WebsiteIcon } from "./WebsiteIcon";
 import { FashionIcon } from "./FashionIcon";
 import { FinanceIcon } from "./FinanceIcon";
 import { WellnessIcon } from "./WellnessIcon";
+import { DownloadIcon } from "./DownloadIcon";
 import { LogisticsIcon } from "./LogisticsIcon";
 import { InsuranceIcon } from "./InsuranceIcon";
 import { ECommerceIcon } from "./ECommerceIcon";
@@ -26,13 +30,17 @@ import { MobileApplicationIcon } from "./MobileApplicationIcon";
 export type IconVariant =
   | "iot"
   | "web3"
+  | "plus"
   | "saas"
+  | "close"
   | "check"
   | "agency"
+  | "loader"
   | "fashion"
   | "website"
   | "finance"
   | "wellness"
+  | "download"
   | "education"
   | "logistics"
   | "insurance"
@@ -49,13 +57,17 @@ export type IconVariant =
 const ICON_COMPONENTS: Record<IconVariant, FC<IconComponentProps>> = {
   iot: IoTIcon,
   web3: Web3Icon,
+  plus: PlusIcon,
   saas: SaaSIcon,
+  close: CloseIcon,
   check: CheckIcon,
   agency: AgencyIcon,
+  loader: LoaderIcon,
   fashion: FashionIcon,
   finance: FinanceIcon,
   website: WebsiteIcon,
   wellness: WellnessIcon,
+  download: DownloadIcon,
   insurance: InsuranceIcon,
   education: EducationIcon,
   logistics: LogisticsIcon,

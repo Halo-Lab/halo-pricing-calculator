@@ -1,0 +1,10 @@
+.c-file-input {
+  cursor: pointer;
+
+  & > input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}

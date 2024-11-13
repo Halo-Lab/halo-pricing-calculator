@@ -1,4 +1,4 @@
-import { JSX, Ref, forwardRef, EventHandler, SyntheticEvent } from "react";
+import { JSX, Ref, forwardRef, PointerEventHandler } from "react";
 
 import { extend } from "./Element";
 import { Decoration, Opaque } from "./decorations";
@@ -14,7 +14,7 @@ export type ButtonCSSProperties = Opaque<
 export const ButtonDecoration = Decoration<ButtonCSSProperties>;
 
 export interface ButtonProps extends Omit<BoxProps<"button">, "as"> {
-  onPress?: EventHandler<SyntheticEvent<HTMLButtonElement>>;
+  onPress?: PointerEventHandler<HTMLButtonElement>;
 }
 
 export const Button = forwardRef(
@@ -30,10 +30,10 @@ export const Button = forwardRef(
           type() {
             return "button";
           },
-          onClick() {
+          onPointerUp() {
             // React will automatically call this function when element
             // is focused and the Enter is pressed.
-            return onPress as EventHandler<SyntheticEvent>;
+            return onPress;
           },
           className(value = "") {
             return `${value} c-button`;
