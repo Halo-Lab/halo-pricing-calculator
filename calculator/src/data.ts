@@ -156,7 +156,7 @@ enum QuestionGroup {
     }),
   ],
 });
-// Website and Web application
+// Website
 /* 2 */ createRegularQuestion({
   text: "What type of services do you need?",
   title: QuestionGroup.Services,
@@ -173,12 +173,18 @@ enum QuestionGroup {
   previous: [
     new PreviousQuestionConditionalLink({
       question: questions[1].id,
-      condition: new Not(
-        new Selected((questions[0] as RegularQuestion).options[2]),
-      ),
+      condition: new Selected((questions[0] as RegularQuestion).options[0]),
     }),
   ],
   multiple: true,
+  optionToGroupMap(index, optionId) {
+    switch (index) {
+      case 0:
+        return QuestionGroup.WebDesign;
+      case 1:
+        return QuestionGroup.WebDevelopment;
+    }
+  },
 });
 // Website
 /* 3 */ createRegularQuestion({
@@ -505,6 +511,14 @@ enum QuestionGroup {
     }),
   ],
   multiple: true,
+  optionToGroupMap(index, optionId) {
+    switch (index) {
+      case 0:
+        return QuestionGroup.BrandingMarketing;
+      case 1:
+        return QuestionGroup.SEO;
+    }
+  },
 });
 /* 14 */ createRegularQuestion({
   text: "What kind of branding services do you need?",
@@ -777,15 +791,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
-  previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[2].id,
-      condition: new All(
-        new Selected((questions[0] as RegularQuestion).options[1]),
-        new Selected((questions[2] as RegularQuestion).options[0]),
-      ),
-    }),
-  ],
+  previous: [],
 });
 /* 24 */ createRegularQuestion({
   text: "What type of design do you need?",
@@ -1058,14 +1064,6 @@ enum QuestionGroup {
         new Selected((questions[2] as RegularQuestion).options[1]),
       ),
     }),
-    new PreviousQuestionConditionalLink({
-      question: questions[2].id,
-      condition: new All(
-        new Not(new Selected((questions[2] as RegularQuestion).options[0])),
-        new Selected((questions[2] as RegularQuestion).options[1]),
-        new Selected((questions[0] as RegularQuestion).options[1]),
-      ),
-    }),
   ],
   optional: true,
 });
@@ -1189,6 +1187,12 @@ enum QuestionGroup {
       ),
     }),
   ],
+  optionToGroupMap(index, optionId) {
+    switch (index) {
+      case 0:
+        return QuestionGroup.BrandingMarketing;
+    }
+  },
 });
 /* 36 */ createRegularQuestion({
   text: "What kind of branding services do you need?",
@@ -1308,6 +1312,14 @@ enum QuestionGroup {
     }),
   ],
   multiple: true,
+  optionToGroupMap(index, optionId) {
+    switch (index) {
+      case 0:
+        return QuestionGroup.UXUIDesign;
+      case 1:
+        return QuestionGroup.AppDevelopment;
+    }
+  },
 });
 /* 41 */ createRegularQuestion({
   text: "How many screens do you expect the app to include?",
@@ -1529,11 +1541,61 @@ enum QuestionGroup {
       condition: new Selected((questions[40] as RegularQuestion).options[1]),
     }),
   ],
+  optionToGroupMap(index, optionId) {
+    switch (index) {
+      case 0:
+        return QuestionGroup.BrandingMarketing;
+    }
+  },
 });
 questions[36].previous.push(
   new PreviousQuestionConditionalLink({
     question: questions[49].id,
     condition: new Selected((questions[49] as RegularQuestion).options[0]),
+  }),
+);
+/* 50 */ createRegularQuestion({
+  text: "What type of services do you need?",
+  title: QuestionGroup.Services,
+  options: [
+    {
+      text: "UI/UX design",
+      estimates: [new EstimateRangeAssessment(80, 160)],
+    },
+    {
+      text: "Web development",
+      estimates: [new EstimateRangeAssessment(96, 200)],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[1].id,
+      condition: new Selected((questions[0] as RegularQuestion).options[1]),
+    }),
+  ],
+  multiple: true,
+  optionToGroupMap(index, optionId) {
+    switch (index) {
+      case 0:
+        return QuestionGroup.UXUIDesign;
+      case 1:
+        return QuestionGroup.WebDevelopment;
+    }
+  },
+});
+questions[23].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[50].id,
+    condition: new Selected((questions[50] as RegularQuestion).options[0]),
+  }),
+);
+questions[29].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[50].id,
+    condition: new All(
+      new Not(new Selected((questions[50] as RegularQuestion).options[0])),
+      new Selected((questions[50] as RegularQuestion).options[1]),
+    ),
   }),
 );
 
@@ -1555,12 +1617,20 @@ interface MinimalOptionWithEstimates {
 }
 
 interface MinimalRegularQuestionData
-  extends Omit<RegularQuestionData, "id" | "next" | "options"> {
+  extends Omit<
+    RegularQuestionData,
+    "id" | "next" | "options" | "optionToGroupMap"
+  > {
   options: MinimalOptionWithEstimates[];
+  optionToGroupMap?: (
+    index: number,
+    optionId: Reference<Option>,
+  ) => string | undefined;
 }
 
 function createRegularQuestion({
   options: minimalOptionsData,
+  optionToGroupMap,
   ...minimalData
 }: MinimalRegularQuestionData): void {
   const questionData: RegularQuestionData = Object.assign(
@@ -1600,6 +1670,22 @@ function createRegularQuestion({
       });
     },
   );
+
+  if (optionToGroupMap) {
+    question.optionToGroupMap = question.options
+      .map(
+        (optionId, index) =>
+          [optionId, optionToGroupMap(index, optionId)] as const,
+      )
+      .filter(([_, groupId]) => groupId)
+      .reduce<Record<Reference<Option>, string>>(
+        (accumulator, [optionId, groupId]) => {
+          accumulator[optionId] = groupId!;
+          return accumulator;
+        },
+        {},
+      );
+  }
 }
 
 interface MinimalDescriptionQuestionData

@@ -30,20 +30,22 @@ export function SectionsList(props: SectionsListProps): JSX.Element {
 
   return (
     <Box vertical spacing={1} {...props}>
-      {Array.from(list).map((title, index) => (
-        <QuestionGroupLabel
-          step={
-            index < currentQuestionIndex
-              ? "past"
-              : index === currentQuestionIndex
-                ? "current"
-                : "future"
-          }
-          key={title}
-        >
-          {title}
-        </QuestionGroupLabel>
-      ))}
+      {Array.from(list)
+        .concat("Receive an estimate")
+        .map((title, index) => (
+          <QuestionGroupLabel
+            step={
+              index < currentQuestionIndex
+                ? "past"
+                : index === currentQuestionIndex
+                  ? "current"
+                  : "future"
+            }
+            key={title}
+          >
+            {title}
+          </QuestionGroupLabel>
+        ))}
     </Box>
   );
 }

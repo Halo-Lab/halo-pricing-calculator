@@ -5,6 +5,7 @@ import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
 import { useSelector } from "../store/Provider";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { RegularQuestion } from "../entities/question";
 import { Box, BoxDecoration } from "../ui/Box";
 import { Estimate, EstimateRange } from "../entities/estimate";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
@@ -22,13 +23,18 @@ export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
       const option = store.options.get(reference)!;
       const question = store.questions.get(option.question)!;
 
+      const groupTitle =
+        question instanceof RegularQuestion
+          ? (question.optionToGroupMap?.[option.id] ?? question.title)
+          : question.title;
+
       const range = option.estimates.reduce<EstimateRange>(
         (range, reference) =>
           store.estimates.get(reference)!.assessment.applyTo(range),
-        groupedEstimates[question.title] ?? [0, 0],
+        groupedEstimates[groupTitle] ?? [0, 0],
       );
 
-      groupedEstimates[question.title] = range;
+      groupedEstimates[groupTitle] = range;
     });
 
     return Object.entries(groupedEstimates);

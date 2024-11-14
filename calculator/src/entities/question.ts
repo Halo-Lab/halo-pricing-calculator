@@ -86,6 +86,7 @@ export type OptionsLayoutMode = "only-single-column";
 export interface RegularQuestionData extends QuestionData {
   options: Reference<Option>[];
   multiple?: boolean;
+  optionToGroupMap?: Record<Reference<Option>, string>;
   optionsLayoutMode?: OptionsLayoutMode;
 }
 
@@ -104,10 +105,21 @@ export class RegularQuestion extends Question {
    * avoid two-column layout for options of this question.
    */
   optionsLayoutMode?: OptionsLayoutMode;
+  /**
+   * If questions itself should not provide a Summary entry,
+   * its options may contribute to other groups. This map contains
+   * relations of which option adds assessment to which group.
+   *
+   * When selected option is intended to contribute to another group
+   * the title of the current question, which option belongs to,
+   * will not appear in Summary.
+   */
+  optionToGroupMap?: Record<Reference<Option>, string>;
 
   constructor({
     options,
     multiple,
+    optionToGroupMap,
     optionsLayoutMode,
     ...data
   }: RegularQuestionData) {
@@ -115,6 +127,7 @@ export class RegularQuestion extends Question {
 
     this.options = options;
     this.multiple = multiple ?? false;
+    this.optionToGroupMap = optionToGroupMap;
     this.optionsLayoutMode = optionsLayoutMode;
   }
 }
