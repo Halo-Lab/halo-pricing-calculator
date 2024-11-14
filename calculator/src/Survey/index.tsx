@@ -28,7 +28,10 @@ export function Survey(): JSX.Element {
       {isDataSendFormVisible && (
         <SendEmailForm
           closeForm={() => setIsDataSendFormVisible(false)}
-          onEmailSent={() => { setIsDataSendFormVisible(false); setShouldFinalWordsFrameBeVisible(true) }}
+          onEmailSent={() => {
+            setIsDataSendFormVisible(false);
+            setShouldFinalWordsFrameBeVisible(true);
+          }}
         />
       )}
     </>

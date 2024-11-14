@@ -11,7 +11,11 @@ export type DecorationDependency =
   | "any-previous-sibling"
   | "any-next-sibling"
   | "direct-children"
-  | "any-child";
+  | "any-child"
+  | `${string & {}}-parent`
+  | `${string & {}}-child`
+  | `${string & {}}-previous-sibling`
+  | `${string & {}}-next-sibling`;
 
 export type DecorationState =
   | "active"
@@ -108,6 +112,25 @@ export function Decoration<O extends AnyCSSProperties>(
                   return `${elementClass}:has(> ${dependencySelector})`;
                 case "any-child":
                   return `${elementClass}:has(${dependencySelector})`;
+                default: {
+                  if (dependency.endsWith("-parent")) {
+                    const name = dependency.slice(0, -7);
+
+                    return `[data-c-name="${name}"]${dependencyState} ${elementClass}`;
+                  } else if (dependency.endsWith("-child")) {
+                    const name = dependency.slice(0, -6);
+
+                    return `${elementClass}:has([data-c-name="${name}"]${dependencyState})`;
+                  } else if (dependency.endsWith("-next-sibling")) {
+                    const name = dependency.slice(0, -13);
+
+                    return `${elementClass}:has(~ [data-c-name="${name}"]${dependencyState})`;
+                  } else if (dependency.endsWith("-previous-sibling")) {
+                    const name = dependency.slice(0, -13);
+
+                    return `[data-c-name="${name}"]${dependencyState} ~ ${elementClass}`;
+                  }
+                }
               }
             })
             .join(",") + `{${rules}}`

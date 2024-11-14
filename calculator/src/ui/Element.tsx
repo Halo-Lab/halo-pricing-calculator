@@ -72,6 +72,7 @@ export type Clip = "hidden" | "scrollable";
 export interface ElementProps<CP extends ElementCSSProperties>
   extends PropsWithChildren {
   as: string;
+  name?: string & {};
 
   width?: Space;
   height?: Space;
@@ -109,6 +110,7 @@ export const Element = forwardRef(
   (
     {
       as,
+      name,
       alignX = "start",
       alignY = "start",
       width,
@@ -230,6 +232,7 @@ export const Element = forwardRef(
         ref,
         style: undefined,
         className,
+        [`data-c-name`]: name,
       },
       children,
     );

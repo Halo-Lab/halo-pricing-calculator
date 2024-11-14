@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { Color } from "../palettes/colours";
 import { Option } from "../entities/option";
-import { Region } from "../ui/region";
+import { Button } from "../ui/Button";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { RegularQuestion } from "../entities/question";
 import { Icon, IconVariant } from "../components/icons";
@@ -10,7 +10,6 @@ import { Box, BoxDecoration } from "../ui/Box";
 import { Svg, SvgDecoration } from "../ui/Svg";
 import { Text, TextDecoration } from "../ui/Text";
 import { useDispatch, useSelector } from "../store/Provider";
-import { Button, ButtonDecoration } from "../ui/Button";
 import { AddAnswer, MoveToNextStep } from "../store/actions";
 
 interface RightCardProperties {
@@ -102,7 +101,8 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
       <Box vertical spacing={1} width="fill">
         {platformOptions.map((option) => {
           return (
-            <Box
+            <Button
+              name="Platform selector"
               spacing={range(450, 680) || gte(800) ? 1 : 0.7}
               width="fill"
               key={option.id}
@@ -116,6 +116,10 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
               decorations={BoxDecoration()
                 .borderRadius(6.25)
                 .backgroundColor(Color.greyLight)}
+              onPress={() => {
+                dispatch(new AddAnswer(option.id));
+                dispatch(new MoveToNextStep());
+              }}
             >
               <Icon
                 color={Color.blue}
@@ -133,6 +137,7 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 alignY="center"
                 decorations={TextDecoration()
                   .flex(1)
+                  .textAlign("left")
                   .textTransform("uppercase")
                   .fontFeatureSettings("'liga' off, 'clig' off")}
               >
@@ -145,14 +150,14 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                   decorations={[
                     TextDecoration().opacity(0).transitionProperty("opacity"),
                     TextDecoration("hovered")
-                      .dependOn("direct-next-sibling")
+                      .dependOn("direct-parent")
                       .opacity(0.7),
                   ]}
                 >
                   I need it!
                 </Text>
               ) : null}
-              <Button
+              <Box
                 alignX="end"
                 alignY="center"
                 width={
@@ -161,16 +166,13 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 height={
                   range(700, 750) ? 1.5 : range(375, 680) || gte(750) ? 2 : 1
                 }
-                region={Region().description("Select platform")}
-                onPress={() => {
-                  dispatch(new AddAnswer(option.id));
-                  dispatch(new MoveToNextStep());
-                }}
                 decorations={[
-                  ButtonDecoration()
+                  BoxDecoration()
                     .borderRadius(100)
                     .transitionProperty("background-color"),
-                  ButtonDecoration("hovered").backgroundColor(Color.blueDark),
+                  BoxDecoration("hovered")
+                    .dependOn("direct-parent")
+                    .backgroundColor(Color.blueDark),
                 ]}
               >
                 <Icon
@@ -180,12 +182,12 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                   decorations={[
                     SvgDecoration().transitionProperty("color"),
                     SvgDecoration("hovered")
-                      .dependOn("direct-parent")
+                      .dependOn("Platform selector-parent")
                       .color(Color.white),
                   ]}
                 />
-              </Button>
-            </Box>
+              </Box>
+            </Button>
           );
         })}
       </Box>
