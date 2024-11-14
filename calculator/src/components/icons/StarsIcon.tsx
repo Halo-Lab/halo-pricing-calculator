@@ -13,7 +13,7 @@ export function StarsIcon({
       <circle cx="32" cy="32" r="32" fill="url(#pattern0_51457_6274)" />
       <circle cx="32" cy="32" r="32" fill="#355EE7" />
       <circle cx="32" cy="32" r="32" fill="url(#pattern1_51457_6274)" />
-      <circle cx="32" cy="32" r="32" stroke="#040322" />
+      <circle cx="32" cy="32" r="31" stroke="#040322" />
       <defs>
         <pattern
           id="pattern0_51457_6274"
