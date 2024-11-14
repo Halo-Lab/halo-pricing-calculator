@@ -7,13 +7,15 @@ import { useBreakpoints } from "../ui/Responsiveness";
 import { Icon, IconVariant } from "../components/icons";
 import { Text, TextDecoration } from "../ui/Text";
 import { Link, LinkDecoration } from "../ui/Link";
+import { Button, ButtonDecoration } from "../ui/Button";
 
 export interface CTACardData {
   text: string;
   mainIcon: IconVariant;
-  anchorText: string;
-  anchorIcon: IconVariant;
-  anchorLink: string;
+  interactiveElementText: string;
+  interactiveElementIcon: IconVariant;
+  interactiveElementLink?: string;
+  interactiveElementDataAttributes?: Record<`data-${string}`, string>;
 }
 
 interface CTACardProps extends CTACardData {}
@@ -21,11 +23,38 @@ interface CTACardProps extends CTACardData {}
 export function CTACard({
   text,
   mainIcon,
-  anchorIcon,
-  anchorText,
-  anchorLink,
+  interactiveElementIcon,
+  interactiveElementText,
+  interactiveElementLink,
+  interactiveElementDataAttributes,
 }: CTACardProps): JSX.Element {
   const { gte } = useBreakpoints();
+
+  const interactiveElementContent = (
+    <>
+      <Text
+        alignX="center"
+        alignY="center"
+        size={0.875}
+        weight={500}
+        density={1.04375}
+        color={Color.white}
+        decorations={TextDecoration()
+          .fontFeatureSettings("'liga' off, 'clig' off")
+          .textTransform("uppercase")}
+      >
+        {interactiveElementText}
+      </Text>
+      <Icon
+        alignX="end"
+        width={2}
+        height={2}
+        color={Color.white}
+        invertColor={Color.chryslerBlue}
+        variant={interactiveElementIcon}
+      />
+    </>
+  );
 
   return (
     <Box
@@ -57,37 +86,33 @@ export function CTACard({
         </Text>
       </Box>
 
-      <Link
-        alignY="end"
-        url={anchorLink}
-        width="fill"
-        padding={0.25}
-        decorations={LinkDecoration()
-          .borderRadius(2.5)
-          .backgroundColor(Color.chryslerBlue)}
-      >
-        <Text
-          alignX="center"
-          alignY="center"
-          size={0.875}
-          weight={500}
-          density={1.04375}
-          color={Color.white}
-          decorations={TextDecoration()
-            .fontFeatureSettings("'liga' off, 'clig' off")
-            .textTransform("uppercase")}
+      {interactiveElementLink ? (
+        <Link
+          url={interactiveElementLink}
+          openIn="new-tab"
+          alignY="end"
+          width="fill"
+          padding={0.25}
+          decorations={LinkDecoration()
+            .borderRadius(2.5)
+            .backgroundColor(Color.chryslerBlue)}
+          _extend={interactiveElementDataAttributes}
         >
-          {anchorText}
-        </Text>
-        <Icon
-          alignX="end"
-          width={2}
-          height={2}
-          color={Color.white}
-          invertColor={Color.chryslerBlue}
-          variant={anchorIcon}
-        />
-      </Link>
+          {interactiveElementContent}
+        </Link>
+      ) : (
+        <Button
+          alignY="end"
+          width="fill"
+          padding={0.25}
+          decorations={ButtonDecoration()
+            .borderRadius(2.5)
+            .backgroundColor(Color.chryslerBlue)}
+          _extend={interactiveElementDataAttributes}
+        >
+          {interactiveElementContent}
+        </Button>
+      )}
     </Box>
   );
 }

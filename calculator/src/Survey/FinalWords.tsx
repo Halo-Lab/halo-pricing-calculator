@@ -12,23 +12,27 @@ const ctaCards: Array<CTACardData> = [
   {
     text: "In a hurry? Book a call and we’ll discuss your project right away!",
     mainIcon: "halo-logo",
-    anchorText: "book a call",
-    anchorIcon: "calendar",
-    anchorLink: "#",
+    interactiveElementText: "book a call",
+    interactiveElementIcon: "calendar",
+    interactiveElementDataAttributes: {
+      "data-remodal-id": "booking",
+    },
   },
   {
     text: "Stay ahead of the game! Sign up for our blog’s tips and advice.",
     mainIcon: "stars",
-    anchorText: "subscribe",
-    anchorIcon: "open-book",
-    anchorLink: "#",
+    interactiveElementText: "subscribe",
+    interactiveElementIcon: "open-book",
+    interactiveElementDataAttributes: {
+      "data-remodal-id": "subscribe",
+    },
   },
   {
     text: " If you want to know the latest news, connect with us on LinkedIn!",
     mainIcon: "linkedin",
-    anchorText: "follow us",
-    anchorIcon: "heart",
-    anchorLink: "#",
+    interactiveElementText: "follow us",
+    interactiveElementIcon: "heart",
+    interactiveElementLink: "https://www.linkedin.com/company/halolabteam/",
   },
 ];
 
