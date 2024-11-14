@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
 
 import { Action } from "./Provider";
-import { Option } from "../entities/option";
 import { Reference } from "../entities/entity";
+import { Option, OptionSelection } from "../entities/option";
 import {
   FilesQuestion,
   RegularQuestion,
@@ -30,11 +30,30 @@ export class AddAnswer extends Action {
   override reduce(store: Store): Partial<Store> {
     const answers = new Set(store.answers);
     const option = store.options.get(this.option)!;
-    const question = store.questions.get(option.question)!;
+    // only RegularQuestions have options
+    const question = store.questions.get(option.question) as RegularQuestion;
 
-    if (question instanceof RegularQuestion && !question.multiple) {
+    if (question.multiple) {
+      if (option.selection === OptionSelection.Exclusive) {
+        question.options.forEach((optionReference) => {
+          answers.delete(optionReference);
+        });
+      } else {
+        question.options.forEach((optionReference) => {
+          const option = store.options.get(optionReference)!;
+
+          if (option.selection === OptionSelection.Exclusive) {
+            answers.delete(optionReference);
+          }
+        });
+      }
+    } else {
       question.options.forEach((optionReference) => {
-        answers.delete(optionReference);
+        const option = store.options.get(optionReference)!;
+
+        if (option.selection !== OptionSelection.Inclusive) {
+          answers.delete(optionReference);
+        }
       });
     }
 

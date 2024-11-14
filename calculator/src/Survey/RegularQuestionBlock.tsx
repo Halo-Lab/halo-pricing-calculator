@@ -1,17 +1,17 @@
 import { JSX } from "react";
 
+import { Box } from "../ui/Box";
 import { Color } from "../palettes/colours";
 import { Option } from "../entities/option";
-import { Checkbox } from "../ui/Checkbox";
 import { Reference } from "../entities/entity";
 import { Dictionary } from "../dictionary";
 import { useDispatch } from "../store/Provider";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { RegularQuestion } from "../entities/question";
 import { Icon, IconVariant } from "../components/icons";
-import { Box, BoxDecoration } from "../ui/Box";
 import { Text, TextDecoration } from "../ui/Text";
 import { AddAnswer, RemoveAnswer } from "../store/actions";
+import { Button, ButtonDecoration } from "../ui/Button";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
 
 interface RegularQuestionBlockProps {
@@ -32,7 +32,7 @@ export function RegularQuestionBlock({
     const option = options.get(reference)!;
     const isCurrentOptionChecked = selected.has(option.id);
 
-    const optionDecoration = BoxDecoration()
+    const buttonDecoration = ButtonDecoration()
       .borderWidth(0.125)
       .borderRadius(999)
       .borderColor(isCurrentOptionChecked ? Color.blue : Color.greyLight)
@@ -41,24 +41,21 @@ export function RegularQuestionBlock({
       );
 
     return (
-      <Checkbox
+      <Button
         key={option.id}
-        checked={isCurrentOptionChecked}
         padding={
           option.icon ? [0.5, gte(525) ? 1.5 : 1, 0.5, 0.5] : [0.875, 1.5]
         }
         width="fill"
         spacing={0.75}
-        onChange={() =>
+        onPress={() => {
           dispatch(
             isCurrentOptionChecked
               ? new RemoveAnswer(option.id)
               : new AddAnswer(option.id),
-          )
-        }
-        groupId={question.id}
-        onlyOne={!question.multiple}
-        decorations={optionDecoration}
+          );
+        }}
+        decorations={buttonDecoration}
       >
         {option.icon && (
           <Icon
@@ -87,7 +84,7 @@ export function RegularQuestionBlock({
           variant="check"
           color={isCurrentOptionChecked ? Color.homeBlue : Color.transparent}
         />
-      </Checkbox>
+      </Button>
     );
   });
 

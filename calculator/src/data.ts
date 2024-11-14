@@ -1,8 +1,8 @@
-import { Option } from "./entities/option.js";
 import { createId } from "./id.js";
 import { Reference } from "./entities/entity.js";
 import { IconVariant } from "./components/icons/index.js";
 import { All, Not, Selected } from "./entities/condition.js";
+import { Option, OptionSelection } from "./entities/option.js";
 import {
   Estimate,
   EstimateAssessment,
@@ -259,19 +259,19 @@ enum QuestionGroup {
   ],
 });
 /* 6 */ createRegularQuestion({
-  text: "Do you need unique illustrations for the website?",
+  text: "What type of visuals do you need on the website?",
   title: QuestionGroup.WebDesign,
   options: [
     {
-      text: "Stock images will do just fine",
+      text: "Stock images",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Need unique illustrations",
+      text: "Unique illustrations",
       estimates: [new EstimateRangeAssessment(20, 40)],
     },
     {
-      text: "I want custom 3d elements",
+      text: "Custom 3d elements",
       estimates: [new EstimateRangeAssessment(16, 40)],
     },
     {
@@ -284,6 +284,7 @@ enum QuestionGroup {
       question: questions[5].id,
     }),
   ],
+  multiple: true,
 });
 /* 7 */ createRegularQuestion({
   text: "Do you already have wireframes?",
@@ -435,6 +436,7 @@ enum QuestionGroup {
       question: questions[10].id,
     }),
   ],
+  multiple: true,
 });
 /* 12 */ createRegularQuestion({
   text: "What additional features are needed?",
@@ -462,6 +464,7 @@ enum QuestionGroup {
     },
     {
       text: "No, it's nothing special",
+      selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -470,6 +473,7 @@ enum QuestionGroup {
       question: questions[11].id,
     }),
   ],
+  multiple: true,
 });
 /* 13 */ createRegularQuestion({
   text: "Do you need any additional services?",
@@ -485,6 +489,7 @@ enum QuestionGroup {
     },
     {
       text: "I don't need it right now",
+      selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -565,6 +570,7 @@ enum QuestionGroup {
     },
     {
       text: "Need to discuss",
+      selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -573,6 +579,7 @@ enum QuestionGroup {
       question: questions[15].id,
     }),
   ],
+  multiple: true,
 });
 /* 17 */ createRegularQuestion({
   text: "Do you need any additional marketing materials?",
@@ -588,6 +595,7 @@ enum QuestionGroup {
     },
     {
       text: "Need to discuss",
+      selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -596,6 +604,7 @@ enum QuestionGroup {
       question: questions[16].id,
     }),
   ],
+  multiple: true,
 });
 /* 18 */ createRegularQuestion({
   text: "How many pages are there on your site?",
@@ -882,6 +891,95 @@ enum QuestionGroup {
   ],
 });
 /* 28 */ createRegularQuestion({
+  text: "What level of prototyping do you need?",
+  title: QuestionGroup.UXUIDesign,
+  options: [
+    {
+      text: "Wireframes",
+      estimates: [
+        new EstimateExactAssessment(0),
+        new EstimateRangeAssessment(4, 40, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[0],
+          ),
+        }),
+        new EstimateRangeAssessment(24, 80, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[1],
+          ),
+        }),
+        new EstimateRangeAssessment(44, 160, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[2],
+          ),
+        }),
+        new EstimateExactAssessment(160, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[3],
+          ),
+        }),
+      ],
+    },
+    {
+      text: "Interactive prototype",
+      estimates: [
+        new EstimateExactAssessment(0),
+        new EstimateRangeAssessment(4, 20, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[0],
+          ),
+        }),
+        new EstimateRangeAssessment(24, 40, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[1],
+          ),
+        }),
+        new EstimateRangeAssessment(44, 80, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[2],
+          ),
+        }),
+        new EstimateExactAssessment(80, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[3],
+          ),
+        }),
+      ],
+    },
+    {
+      text: "Full prototype with animation",
+      estimates: [
+        new EstimateExactAssessment(0),
+        new EstimateRangeAssessment(8, 40, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[0],
+          ),
+        }),
+        new EstimateRangeAssessment(48, 80, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[1],
+          ),
+        }),
+        new EstimateRangeAssessment(88, 160, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[2],
+          ),
+        }),
+        new EstimateExactAssessment(160, {
+          condition: new Selected(
+            (questions[23] as RegularQuestion).options[3],
+          ),
+        }),
+      ],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[27].id,
+    }),
+  ],
+});
+/* 29 */ createRegularQuestion({
   text: "Select the features required for your web application",
   title: QuestionGroup.WebDevelopment,
   options: [
@@ -952,7 +1050,7 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[27].id,
+      question: questions[28].id,
       condition: new All(
         new Selected((questions[2] as RegularQuestion).options[0]),
         new Selected((questions[2] as RegularQuestion).options[1]),
@@ -967,8 +1065,9 @@ enum QuestionGroup {
       ),
     }),
   ],
+  optional: true,
 });
-/* 29 */ createRegularQuestion({
+/* 30 */ createRegularQuestion({
   text: "Do you already have a website and product/client data that needs to be migrated?",
   title: QuestionGroup.WebDevelopment,
   options: [
@@ -983,11 +1082,11 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[28].id,
+      question: questions[29].id,
     }),
   ],
 });
-/* 30 */ createRegularQuestion({
+/* 31 */ createRegularQuestion({
   text: "Do you need back-end development?",
   title: QuestionGroup.WebDevelopment,
   options: [
@@ -1014,11 +1113,11 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[29].id,
+      question: questions[30].id,
     }),
   ],
 });
-/* 31 */ createRegularQuestion({
+/* 32 */ createRegularQuestion({
   text: "How many monthly users do you expect?",
   title: QuestionGroup.WebDevelopment,
   options: [
@@ -1041,21 +1140,12 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[30].id,
-    }),
-  ],
-});
-/* 32 */ createDescriptionQuestion({
-  text: "Describe how your product will be used:",
-  title: QuestionGroup.WebDevelopment,
-  previous: [
-    new PreviousQuestionConditionalLink({
       question: questions[31].id,
     }),
   ],
 });
-/* 33 */ createFilesQuestion({
-  text: "Do you have screens of your application?",
+/* 33 */ createDescriptionQuestion({
+  text: "Describe how your product will be used:",
   title: QuestionGroup.WebDevelopment,
   previous: [
     new PreviousQuestionConditionalLink({
@@ -1063,7 +1153,16 @@ enum QuestionGroup {
     }),
   ],
 });
-/* 34 */ createRegularQuestion({
+/* 34 */ createFilesQuestion({
+  text: "Do you have screens of your application?",
+  title: QuestionGroup.WebDevelopment,
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[33].id,
+    }),
+  ],
+});
+/* 35 */ createRegularQuestion({
   text: "Do you need marketing services?",
   title: QuestionGroup.Additionals,
   options: [
@@ -1078,17 +1177,17 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[33].id,
+      question: questions[34].id,
     }),
     new PreviousQuestionConditionalLink({
-      question: questions[27].id,
+      question: questions[28].id,
       condition: new Not(
         new Selected((questions[2] as RegularQuestion).options[1]),
       ),
     }),
   ],
 });
-/* 35 */ createRegularQuestion({
+/* 36 */ createRegularQuestion({
   text: "What kind of branding services do you need?",
   title: QuestionGroup.BrandingMarketing,
   options: [
@@ -1107,12 +1206,12 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[34].id,
-      condition: new Selected((questions[34] as RegularQuestion).options[0]),
+      question: questions[35].id,
+      condition: new Selected((questions[35] as RegularQuestion).options[0]),
     }),
   ],
 });
-/* 36 */ createRegularQuestion({
+/* 37 */ createRegularQuestion({
   text: "Do you need naming?",
   title: QuestionGroup.Additionals,
   options: [
@@ -1131,11 +1230,11 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[35].id,
+      question: questions[36].id,
     }),
   ],
 });
-/* 37 */ createRegularQuestion({
+/* 38 */ createRegularQuestion({
   text: "Do you need unique elements in your brand?",
   title: QuestionGroup.Additionals,
   options: [
@@ -1149,16 +1248,18 @@ enum QuestionGroup {
     },
     {
       text: "Need to discuss",
+      selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[36].id,
+      question: questions[37].id,
     }),
   ],
+  multiple: true,
 });
-/* 38 */ createRegularQuestion({
+/* 39 */ createRegularQuestion({
   text: "Do you need any additional marketing materials?",
   title: QuestionGroup.Additionals,
   options: [
@@ -1172,17 +1273,19 @@ enum QuestionGroup {
     },
     {
       text: "Need to discuss",
+      selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[37].id,
+      question: questions[38].id,
     }),
   ],
+  multiple: true,
 });
 // Mobile application
-/* 39 */ createRegularQuestion({
+/* 40 */ createRegularQuestion({
   text: "What type of services do you need?",
   title: QuestionGroup.Services,
   options: [
@@ -1203,7 +1306,7 @@ enum QuestionGroup {
   ],
   multiple: true,
 });
-/* 40 */ createRegularQuestion({
+/* 41 */ createRegularQuestion({
   text: "How many screens do you expect the app to include?",
   title: QuestionGroup.UXUIDesign,
   options: [
@@ -1226,12 +1329,12 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[39].id,
-      condition: new Selected((questions[39] as RegularQuestion).options[0]),
+      question: questions[40].id,
+      condition: new Selected((questions[40] as RegularQuestion).options[0]),
     }),
   ],
 });
-/* 41 */ createRegularQuestion({
+/* 42 */ createRegularQuestion({
   text: "What level of design do you need?",
   title: QuestionGroup.UXUIDesign,
   options: [
@@ -1250,11 +1353,11 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[40].id,
+      question: questions[41].id,
     }),
   ],
 });
-/* 42 */ createRegularQuestion({
+/* 43 */ createRegularQuestion({
   text: "What level of prototyping do you need?",
   title: QuestionGroup.UXUIDesign,
   options: [
@@ -1273,11 +1376,11 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[41].id,
+      question: questions[42].id,
     }),
   ],
 });
-/* 43 */ createRegularQuestion({
+/* 44 */ createRegularQuestion({
   text: "What type of platforms do you need?",
   title: QuestionGroup.AppDevelopment,
   options: [
@@ -1300,22 +1403,22 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[42].id,
+      question: questions[43].id,
       condition: new All(
-        new Selected((questions[39] as RegularQuestion).options[0]),
-        new Selected((questions[39] as RegularQuestion).options[1]),
+        new Selected((questions[40] as RegularQuestion).options[0]),
+        new Selected((questions[40] as RegularQuestion).options[1]),
       ),
     }),
     new PreviousQuestionConditionalLink({
-      question: questions[39].id,
+      question: questions[40].id,
       condition: new All(
-        new Selected((questions[39] as RegularQuestion).options[1]),
-        new Not(new Selected((questions[39] as RegularQuestion).options[0])),
+        new Selected((questions[40] as RegularQuestion).options[1]),
+        new Not(new Selected((questions[40] as RegularQuestion).options[0])),
       ),
     }),
   ],
 });
-/* 44 */ createRegularQuestion({
+/* 45 */ createRegularQuestion({
   text: "Select the features required for your web application",
   title: QuestionGroup.AppDevelopment,
   options: [
@@ -1350,12 +1453,13 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[43].id,
+      question: questions[44].id,
     }),
   ],
+  optional: true,
   multiple: true,
 });
-/* 45 */ createRegularQuestion({
+/* 46 */ createRegularQuestion({
   text: "Do you require an admin web panel for managing app content?",
   title: QuestionGroup.AppDevelopment,
   options: [
@@ -1374,21 +1478,12 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[44].id,
-    }),
-  ],
-});
-/* 46 */ createDescriptionQuestion({
-  text: "Describe how your product will be used:",
-  title: QuestionGroup.AppDevelopment,
-  previous: [
-    new PreviousQuestionConditionalLink({
       question: questions[45].id,
     }),
   ],
 });
-/* 47 */ createFilesQuestion({
-  text: "Do you have screens of your application?",
+/* 47 */ createDescriptionQuestion({
+  text: "Describe how your product will be used:",
   title: QuestionGroup.AppDevelopment,
   previous: [
     new PreviousQuestionConditionalLink({
@@ -1396,7 +1491,16 @@ enum QuestionGroup {
     }),
   ],
 });
-/* 48 */ createRegularQuestion({
+/* 48 */ createFilesQuestion({
+  text: "Do you have screens of your application?",
+  title: QuestionGroup.AppDevelopment,
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[47].id,
+    }),
+  ],
+});
+/* 49 */ createRegularQuestion({
   text: "Do you need any additional services?",
   title: QuestionGroup.Additionals,
   options: [
@@ -1411,21 +1515,21 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[42].id,
+      question: questions[43].id,
       condition: new Not(
-        new Selected((questions[39] as RegularQuestion).options[1]),
+        new Selected((questions[40] as RegularQuestion).options[1]),
       ),
     }),
     new PreviousQuestionConditionalLink({
-      question: questions[47].id,
-      condition: new Selected((questions[39] as RegularQuestion).options[1]),
+      question: questions[48].id,
+      condition: new Selected((questions[40] as RegularQuestion).options[1]),
     }),
   ],
 });
-questions[35].previous.push(
+questions[36].previous.push(
   new PreviousQuestionConditionalLink({
-    question: questions[48].id,
-    condition: new Selected((questions[48] as RegularQuestion).options[0]),
+    question: questions[49].id,
+    condition: new Selected((questions[49] as RegularQuestion).options[0]),
   }),
 );
 
@@ -1442,6 +1546,7 @@ function insertQuestionToModuleVariable(question: Question): void {
 interface MinimalOptionWithEstimates {
   text: string;
   icon?: IconVariant;
+  selection?: OptionSelection;
   estimates: EstimateAssessment[];
 }
 
@@ -1463,31 +1568,34 @@ function createRegularQuestion({
 
   insertQuestionToModuleVariable(question);
 
-  minimalOptionsData.forEach(({ text, icon, estimates: minimalEstimates }) => {
-    const option = new Option({
-      id: createId(),
-      text,
-      icon,
-      question: question.id,
-      estimates: [],
-    });
-
-    question.options.push(option.id);
-
-    options.push(option);
-
-    minimalEstimates.forEach((assessment) => {
-      const estimate = new Estimate({
+  minimalOptionsData.forEach(
+    ({ text, icon, selection, estimates: minimalEstimates }) => {
+      const option = new Option({
         id: createId(),
-        option: option.id,
-        assessment,
+        text,
+        icon,
+        question: question.id,
+        estimates: [],
+        selection,
       });
 
-      option.estimates.push(estimate.id);
+      question.options.push(option.id);
 
-      estimates.push(estimate);
-    });
-  });
+      options.push(option);
+
+      minimalEstimates.forEach((assessment) => {
+        const estimate = new Estimate({
+          id: createId(),
+          option: option.id,
+          assessment,
+        });
+
+        option.estimates.push(estimate.id);
+
+        estimates.push(estimate);
+      });
+    },
+  );
 }
 
 interface MinimalDescriptionQuestionData
