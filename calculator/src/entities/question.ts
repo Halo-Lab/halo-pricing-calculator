@@ -81,9 +81,12 @@ export abstract class Question extends Entity<Question> {
   }
 }
 
+export type OptionsLayoutMode = "only-single-column";
+
 export interface RegularQuestionData extends QuestionData {
   options: Reference<Option>[];
   multiple?: boolean;
+  optionsLayoutMode?: OptionsLayoutMode;
 }
 
 export class RegularQuestion extends Question {
@@ -96,12 +99,23 @@ export class RegularQuestion extends Question {
    * question.
    */
   multiple: boolean;
+  /**
+   * Temporary setting that forces UI on some breakpoints to
+   * avoid two-column layout for options of this question.
+   */
+  optionsLayoutMode?: OptionsLayoutMode;
 
-  constructor({ options, multiple, ...data }: RegularQuestionData) {
+  constructor({
+    options,
+    multiple,
+    optionsLayoutMode,
+    ...data
+  }: RegularQuestionData) {
     super(data);
 
     this.options = options;
     this.multiple = multiple ?? false;
+    this.optionsLayoutMode = optionsLayoutMode;
   }
 }
 

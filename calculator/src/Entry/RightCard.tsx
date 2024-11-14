@@ -73,15 +73,15 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
       <Text
         as="h1"
         size={
-          range(640, 680) || gte(1250)
+          range(640, 680) || gte(1370)
             ? 2.75
-            : range(575, 640) || range(1175, 1250)
+            : range(575, 640) || range(1270, 1370)
               ? 2.55
-              : range(500, 575) || range(950, 975) || range(1100, 1175)
+              : range(500, 575) || range(950, 975) || range(1175, 1270)
                 ? 2.25
-                : range(450, 500) || range(900, 950) || range(1050, 1100)
+                : range(450, 500) || range(900, 950) || range(1100, 1175)
                   ? 2.1
-                  : range(425, 450) || range(800, 900) || range(975, 1050)
+                  : range(425, 450) || range(800, 900) || range(975, 1100)
                     ? 1.85
                     : range(375, 425) || range(750, 800)
                       ? 1.65
@@ -132,7 +132,7 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
               <Text
                 size={0.875}
                 weight={500}
-                spacing={0.3}
+                spacing={0.5}
                 density={1.04375}
                 alignY="center"
                 decorations={TextDecoration()

@@ -20,10 +20,10 @@ export function ProgressChip({
 
   return (
     <Box
-      padding={gte(1050) ? undefined : [0.5, 0.75]}
+      padding={gte(1100) ? undefined : [0.5, 0.75]}
       spacing={0.2}
       decorations={
-        gte(1050)
+        gte(1100)
           ? undefined
           : BoxDecoration()
               .borderRadius(62.5)
@@ -34,8 +34,8 @@ export function ProgressChip({
       <Text
         color={Color.blueDark}
         weight={500}
-        size={gte(1050) ? 0.875 : 0.75}
-        density={gte(1050) ? 1.04375 : 1.0375}
+        size={gte(1100) ? 0.875 : 0.75}
+        density={gte(1100) ? 1.04375 : 1.0375}
         decorations={TextDecoration().fontFeatureSettings(
           "'liga' off, 'clig' off",
         )}
@@ -45,8 +45,8 @@ export function ProgressChip({
       <Text
         color={Color.blueDark30}
         weight={500}
-        size={gte(1050) ? 0.875 : 0.75}
-        density={gte(1050) ? 1.04375 : 1.0375}
+        size={gte(1100) ? 0.875 : 0.75}
+        density={gte(1100) ? 1.04375 : 1.0375}
         decorations={TextDecoration().fontFeatureSettings(
           "'liga' off, 'clig' off",
         )}
@@ -56,8 +56,8 @@ export function ProgressChip({
       <Text
         color={Color.blueDark30}
         weight={500}
-        size={gte(1050) ? 0.875 : 0.75}
-        density={gte(1050) ? 1.04375 : 1.0375}
+        size={gte(1100) ? 0.875 : 0.75}
+        density={gte(1100) ? 1.04375 : 1.0375}
         decorations={TextDecoration().fontFeatureSettings(
           "'liga' off, 'clig' off",
         )}

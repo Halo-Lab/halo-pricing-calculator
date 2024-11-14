@@ -89,10 +89,10 @@ export function RegularQuestionBlock({
   });
 
   return (
-    <Box width="fill" minHeight={gte(1050) ? 18.75 : undefined}>
-      <Box vertical spacing={gte(1050) ? 2 : 1.5} alignY="center" width="fill">
+    <Box width="fill" minHeight={gte(1100) ? 18.75 : undefined}>
+      <Box vertical spacing={gte(1100) ? 2 : 1.5} alignY="center" width="fill">
         <Text
-          width={gte(1050) ? ".9fr" : range(550, 1050) ? ".8fr" : undefined}
+          width={gte(1100) ? ".9fr" : range(550, 1100) ? ".8fr" : undefined}
           size={gte(550) ? 2.125 : 1.5}
           weight={500}
           spacing={0.4}
@@ -101,7 +101,8 @@ export function RegularQuestionBlock({
           {question.text}
         </Text>
 
-        {gte(680) ? (
+        {range(680, 1100) ||
+        (gte(1300) && question.optionsLayoutMode !== "only-single-column") ? (
           (() => {
             const [firstColumn, secondColumn] =
               spreadElementsAcrossColumns(optionElements);

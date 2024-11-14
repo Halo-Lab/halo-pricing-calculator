@@ -70,15 +70,15 @@ export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
   return (
     <Box
       vertical
-      width={gte(1050) ? ".275fr" : "fill"}
-      padding={gte(1050) ? 2 : range(450, 1050) ? 2.5 : 1}
+      width={gte(1200) ? ".275fr" : range(1100, 1200) ? ".3fr" : "fill"}
+      padding={gte(1100) ? 2 : range(450, 1100) ? 2.5 : 1}
       spacing={gte(680) ? 1.5 : 1}
       decorations={BoxDecoration()
         .borderRadius(1)
         .backgroundColor(Color.homeBlue)}
     >
       <Text
-        size={gte(1050) ? 2.125 : range(680, 1050) ? 1.875 : 1.5}
+        size={gte(1100) ? 2.125 : range(680, 1100) ? 1.875 : 1.5}
         weight={500}
         density={0.97}
         color={Color.white}
@@ -86,7 +86,7 @@ export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
         Summary
       </Text>
 
-      {range(680, 1050) ? (
+      {range(680, 1100) ? (
         <Box width="fill" spacing={3}>
           {(() => {
             const [firstColumn, secondColumn] =
@@ -115,7 +115,7 @@ export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
           width="fill"
           maxHeight={shouldRestrictHeight ? 4.75 : undefined}
           clipY={shouldRestrictHeight ? "scrollable" : undefined}
-          spacing={gte(1050) ? 0.75 : 0.5}
+          spacing={gte(1100) ? 0.75 : 0.5}
         >
           {resultElements}
         </Box>

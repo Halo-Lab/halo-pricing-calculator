@@ -23,7 +23,7 @@ export function QuestionGroupLabel({
       ? Color.blueDark30
       : step === "past"
         ? Color.blueDark
-        : gte(1050)
+        : gte(1100)
           ? Color.homeBlue
           : Color.blueDark;
 
@@ -31,7 +31,7 @@ export function QuestionGroupLabel({
     <Box spacing={0.5} {...props}>
       <StepMarker step={step} />
       <Text
-        size={gte(1050) ? 0.875 : 1.125}
+        size={gte(1100) ? 0.875 : 1.125}
         weight={500}
         density={0.98}
         spacing={0.3}

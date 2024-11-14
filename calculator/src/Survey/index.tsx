@@ -15,7 +15,7 @@ export function Survey(): JSX.Element {
 
   return (
     <>
-      <Box width="fill" vertical={lt(1050)} spacing={lt(1050) ? 1 : 2}>
+      <Box width="fill" vertical={lt(1100)} spacing={lt(1100) ? 1 : 2}>
         {shouldFinalWordsFrameBeVisible ? (
           <FinalWords />
         ) : (

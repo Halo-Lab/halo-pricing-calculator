@@ -668,6 +668,7 @@ enum QuestionGroup {
       question: questions[18].id,
     }),
   ],
+  optionsLayoutMode: "only-single-column",
 });
 /* 20 */ createRegularQuestion({
   text: "Do we need to improve your backlink profile?",
@@ -889,6 +890,7 @@ enum QuestionGroup {
       question: questions[26].id,
     }),
   ],
+  optionsLayoutMode: "only-single-column",
 });
 /* 28 */ createRegularQuestion({
   text: "What level of prototyping do you need?",
@@ -1116,6 +1118,7 @@ enum QuestionGroup {
       question: questions[30].id,
     }),
   ],
+  optionsLayoutMode: "only-single-column",
 });
 /* 32 */ createRegularQuestion({
   text: "How many monthly users do you expect?",
@@ -1458,6 +1461,7 @@ enum QuestionGroup {
   ],
   optional: true,
   multiple: true,
+  optionsLayoutMode: "only-single-column",
 });
 /* 46 */ createRegularQuestion({
   text: "Do you require an admin web panel for managing app content?",

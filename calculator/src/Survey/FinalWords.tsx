@@ -73,7 +73,7 @@ export function FinalWords(): JSX.Element {
         </Box>
       }
       vertical
-      width="fill"
+      width={gte(1200) ? ".725fr" : range(1100, 1200) ? ".7fr" : "fill"}
       spacing={2}
       padding={
         gte(425)
@@ -94,10 +94,10 @@ export function FinalWords(): JSX.Element {
 
       <Box
         width="fill"
-        vertical={lt(920) || range(1050, 1200)}
+        vertical={lt(920) || range(1100, 1200)}
         spacing={lt(725) ? 1 : 2}
       >
-        {range(625, 920) || range(1050, 1200)
+        {range(625, 920) || range(1100, 1200)
           ? groupElementsBy(ctaCards, 2).map((group, index) => (
               <Box key={index} alignX="center" spacing={gte(725) ? 2 : 1}>
                 {group.map(renderCTACard)}

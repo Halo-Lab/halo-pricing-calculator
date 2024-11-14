@@ -18,7 +18,7 @@ export function FilePreviewsGrid({
 }: FilePreviewsGridProps): JSX.Element {
   const { gte, range } = useBreakpoints();
 
-  const groupLength = range(980, 1050)
+  const groupLength = range(980, 1100)
     ? 7
     : range(890, 980) || gte(1680)
       ? 6
@@ -26,7 +26,7 @@ export function FilePreviewsGrid({
         ? 5
         : range(590, 750) || range(1200, 1420)
           ? 4
-          : range(430, 590) || range(1050, 1200)
+          : range(430, 590) || range(1100, 1200)
             ? 3
             : 2;
 
