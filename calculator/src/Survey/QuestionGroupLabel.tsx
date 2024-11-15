@@ -1,9 +1,9 @@
 import { JSX, PropsWithChildren } from "react";
 
-import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
 import { Box, BoxProps } from "../ui/Box";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { Text, TextDecoration } from "../ui/Text";
 import { StepMarker, StepMarkerProps } from "./StepMarker";
 
 export interface QuestionGroupLabelProps
@@ -37,6 +37,7 @@ export function QuestionGroupLabel({
         spacing={0.3}
         alignY="center"
         color={color}
+        decorations={TextDecoration().flex(1)}
       >
         {children}
       </Text>
