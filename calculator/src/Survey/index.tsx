@@ -1,17 +1,41 @@
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 
 import { Box } from "../ui/Box";
 import { Summary } from "./Summary";
 import { FinalWords } from "./FinalWords";
+import { useSelector } from "../store/Provider";
 import { Questionnaire } from "./Questionnaire";
-import { SendEmailForm } from "./SendEmailForm";
 import { useBreakpoints } from "../ui/Responsiveness";
+// import { SendEmailForm } from "./SendEmailForm";
+import { fillWebflowModalForm } from "./fillWebflowModalForm";
+
+declare namespace globalThis {
+  let onEstimateSent: VoidFunction | undefined;
+}
 
 export function Survey(): JSX.Element {
   const { lt } = useBreakpoints();
+  const store = useSelector((store) => store);
   const [isDataSendFormVisible, setIsDataSendFormVisible] = useState(false);
   const [shouldFinalWordsFrameBeVisible, setShouldFinalWordsFrameBeVisible] =
     useState(false);
+
+  useEffect(() => {
+    if (isDataSendFormVisible) {
+      const onEstimateSent = () => {
+        setIsDataSendFormVisible(false);
+        setShouldFinalWordsFrameBeVisible(true);
+      };
+
+      globalThis.onEstimateSent = onEstimateSent;
+
+      fillWebflowModalForm(store);
+
+      return () => {
+        delete globalThis.onEstimateSent;
+      };
+    }
+  }, [isDataSendFormVisible, store]);
 
   return (
     <>
@@ -25,7 +49,7 @@ export function Survey(): JSX.Element {
         )}
         <Summary shouldRestrictHeight={!shouldFinalWordsFrameBeVisible} />
       </Box>
-      {isDataSendFormVisible && (
+      {/* isDataSendFormVisible && (
         <SendEmailForm
           closeForm={() => setIsDataSendFormVisible(false)}
           onEmailSent={() => {
@@ -33,7 +57,7 @@ export function Survey(): JSX.Element {
             setShouldFinalWordsFrameBeVisible(true);
           }}
         />
-      )}
+      ) */}
     </>
   );
 }

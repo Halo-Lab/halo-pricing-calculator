@@ -76,6 +76,9 @@ export function Questionnaire({
     };
   }, [isUserAbleToMoveFurther]);
 
+  const isUserAtTheEndOfQuestionsSequence =
+    isUserAbleToMoveFurther && currentStep === totalSteps;
+
   return (
     <Box
       width={gte(1200) ? ".725fr" : range(1100, 1200) ? ".7fr" : "fill"}
@@ -206,23 +209,26 @@ export function Questionnaire({
               width={gte(450) ? undefined : "fill"}
               variant="primary"
               onPress={() => {
-                if (isUserAbleToMoveFurther) {
-                  if (currentStep === totalSteps) {
-                    userReachedTheEnd();
-                  } else {
-                    dispatch(new MoveToNextStep());
-                  }
-                } else {
+                if (isUserAtTheEndOfQuestionsSequence) {
+                  userReachedTheEnd();
+                } else if (isUserAbleToMoveFurther) {
+                  dispatch(new MoveToNextStep());
+                } else if (import.meta.env.DEV) {
                   // TODO: show a tooltip that user has to select something
                   console.warn(
                     "You really need to implement a hint for the user that he/she needs to select at least one option.",
                   );
                 }
               }}
+              _extend={{
+                // Attach this attribute at the end so Webflow can react on it.
+                // @ts-expect-error data attributes are added to the extend interface
+                "data-remodal-target": isUserAtTheEndOfQuestionsSequence
+                  ? "calculator"
+                  : undefined,
+              }}
             >
-              {isUserAbleToMoveFurther && currentStep === totalSteps
-                ? "get an estimate"
-                : "next"}
+              {isUserAtTheEndOfQuestionsSequence ? "get an estimate" : "next"}
             </AnimatedButton>
           </Box>
         </Box>
