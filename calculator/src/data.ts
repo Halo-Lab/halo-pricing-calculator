@@ -1056,15 +1056,7 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(40, 80)],
     },
   ],
-  previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[28].id,
-      condition: new All(
-        new Selected((questions[2] as RegularQuestion).options[0]),
-        new Selected((questions[2] as RegularQuestion).options[1]),
-      ),
-    }),
-  ],
+  previous: [],
   optional: true,
 });
 /* 30 */ createRegularQuestion({
@@ -1548,6 +1540,7 @@ enum QuestionGroup {
     }
   },
 });
+questions[49].next.push(questions[36].id);
 questions[36].previous.push(
   new PreviousQuestionConditionalLink({
     question: questions[49].id,
@@ -1583,17 +1576,29 @@ questions[36].previous.push(
     }
   },
 });
+questions[50].next.push(questions[23].id);
 questions[23].previous.push(
   new PreviousQuestionConditionalLink({
     question: questions[50].id,
     condition: new Selected((questions[50] as RegularQuestion).options[0]),
   }),
 );
+questions[50].next.push(questions[29].id);
 questions[29].previous.push(
   new PreviousQuestionConditionalLink({
     question: questions[50].id,
     condition: new All(
       new Not(new Selected((questions[50] as RegularQuestion).options[0])),
+      new Selected((questions[50] as RegularQuestion).options[1]),
+    ),
+  }),
+);
+questions[28].next.push(questions[29].id);
+questions[29].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[28].id,
+    condition: new All(
+      new Selected((questions[50] as RegularQuestion).options[0]),
       new Selected((questions[50] as RegularQuestion).options[1]),
     ),
   }),
