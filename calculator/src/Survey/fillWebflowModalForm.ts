@@ -59,6 +59,9 @@ function generatePrompt(store: Store): string {
         );
       })
       .join("\n") +
+    (store.projectDescription
+      ? `\n\nAdditionally I've written a description of how my project will be used:\n    ${store.projectDescription}`
+      : "") +
     "\n\nA summary of declared estimates is the following:\n" +
     groupedEstimates
       .map(
