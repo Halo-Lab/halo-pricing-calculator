@@ -35,7 +35,9 @@ export function AnimatedButton({
       _extend={extend(_extend, {
         // Attach this attribute at the end so Webflow can react on it.
         // @ts-expect-error data attributes are added to the extend interface
-        "data-hover": true,
+        "data-hover"() {
+          return "";
+        },
       })}
       {...props}
     >
@@ -46,7 +48,7 @@ export function AnimatedButton({
             className: "button__texts",
             // Attach this attribute at the end so Webflow can react on it.
             // @ts-expect-error data attributes are added to the extend interface
-            "data-hover-elem": true,
+            "data-hover-elem": "",
           }}
         >
           <Text
