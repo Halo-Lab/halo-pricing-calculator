@@ -1058,6 +1058,7 @@ enum QuestionGroup {
   ],
   previous: [],
   optional: true,
+  multiple: true,
 });
 /* 30 */ createRegularQuestion({
   text: "Do you already have a website and product/client data that needs to be migrated?",
@@ -1171,12 +1172,6 @@ enum QuestionGroup {
   previous: [
     new PreviousQuestionConditionalLink({
       question: questions[34].id,
-    }),
-    new PreviousQuestionConditionalLink({
-      question: questions[28].id,
-      condition: new Not(
-        new Selected((questions[2] as RegularQuestion).options[1]),
-      ),
     }),
   ],
   optionToGroupMap(index, optionId) {
@@ -1600,6 +1595,16 @@ questions[29].previous.push(
     condition: new All(
       new Selected((questions[50] as RegularQuestion).options[0]),
       new Selected((questions[50] as RegularQuestion).options[1]),
+    ),
+  }),
+);
+questions[28].next.push(questions[35].id);
+questions[35].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[28].id,
+    condition: new All(
+      new Selected((questions[50] as RegularQuestion).options[0]),
+      new Not(new Selected((questions[50] as RegularQuestion).options[1])),
     ),
   }),
 );

@@ -3,11 +3,11 @@ import { JSX } from "react";
 import { Icon } from "../components/icons";
 import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
+import { daysText } from "../utilities/daysText";
 import { useSelector } from "../store/Provider";
 import { useBreakpoints } from "../ui/Responsiveness";
-import { RegularQuestion } from "../entities/question";
 import { Box, BoxDecoration } from "../ui/Box";
-import { Estimate, EstimateRange } from "../entities/estimate";
+import { calculateEstimates } from "../store/selectors";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
 
 interface SummaryProps {
@@ -16,34 +16,7 @@ interface SummaryProps {
 
 export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
   const { gte, range } = useBreakpoints();
-  const [totalEstimates, groupedEstimates] = useSelector((store) => {
-    let totalEstimates: EstimateRange = [0, 0];
-    const groupedEstimates: Record<string, EstimateRange> = {};
-
-    store.answers.forEach((reference) => {
-      const option = store.options.get(reference)!;
-      const question = store.questions.get(option.question)!;
-
-      const groupTitle =
-        question instanceof RegularQuestion
-          ? (question.optionToGroupMap?.[option.id] ?? question.title)
-          : question.title;
-
-      groupedEstimates[groupTitle] = option.estimates.reduce<EstimateRange>(
-        (range, reference) =>
-          store.estimates.get(reference)!.assessment.applyTo(range),
-        groupedEstimates[groupTitle] ?? [0, 0],
-      );
-
-      totalEstimates = option.estimates.reduce<EstimateRange>(
-        (range, reference) =>
-          store.estimates.get(reference)!.assessment.applyTo(range),
-        totalEstimates,
-      );
-    });
-
-    return [totalEstimates, Object.entries(groupedEstimates)];
-  });
+  const [totalEstimates, groupedEstimates] = useSelector(calculateEstimates);
 
   const resultElements = groupedEstimates.map(([title, [from, to]]) => {
     return (
@@ -185,8 +158,4 @@ export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
       </Box>
     </Box>
   );
-}
-
-function daysText(from: number, to: number): string {
-  return `${from === to ? Estimate.toDays(from) : `${Estimate.toDays(from)}-${Estimate.toDays(to)}`} days`;
 }
