@@ -1,9 +1,9 @@
 import { JSX } from "react";
 
-import { Box } from "../ui/Box";
 import { Color } from "../palettes/colours";
 import { extend } from "../ui/Element";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { Box, BoxDecoration } from "../ui/Box";
 import { Text, TextDecoration } from "../ui/Text";
 import { Button, ButtonDecoration, ButtonProps } from "../ui/Button";
 
@@ -50,6 +50,7 @@ export function AnimatedButton({
             // @ts-expect-error data attributes are added to the extend interface
             "data-hover-elem": "",
           }}
+          decorations={BoxDecoration().transitionDuration(".3s")}
         >
           <Text
             size={gte(900) ? 0.875 : 0.75}
