@@ -1,7 +1,7 @@
 import { JSX, useState } from "react";
 
 import { Color } from "../palettes/colours";
-import { Input, InputDecoration, InputProps } from "../ui/Input";
+import { Input, InputProps } from "../ui/Input";
 import { Text, TextDecoration } from "../ui/Text";
 import { Box, BoxDecoration, BoxProps } from "../ui/Box";
 
@@ -31,18 +31,23 @@ export function FloatingInput({
       vertical
       width="fill"
       spacing={0.35}
-      decorations={BoxDecoration()
-        .borderBottomWidth("1px")
-        .borderBottomColor(Color.blueDark20)}
+      decorations={[
+        BoxDecoration()
+          .borderBottomWidth("1px")
+          .borderBottomColor(isFocused ? Color.blue : Color.blueDark20),
+        BoxDecoration("hovered")
+          .dependOn("any-child")
+          .borderBottomColor(Color.blueDark50),
+      ]}
       {...props}
     >
       <Text
         size={value || isFocused ? 0.75 : 1}
         moveDown={value || isFocused ? 0 : 1.25}
         color={Color.blueDark50}
-        decorations={TextDecoration().transitionTimingFunction(
-          "cubic-bezier(.215,.61,.355,1)",
-        )}
+        decorations={TextDecoration()
+          .transitionDuration(".3s")
+          .transitionTimingFunction("cubic-bezier(.215,.61,.355,1)")}
       >
         {label}
         {required ? <Text color={Color.red}>*</Text> : null}
