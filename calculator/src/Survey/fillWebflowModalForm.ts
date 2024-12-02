@@ -73,7 +73,7 @@ function generatePrompt(store: Store): string {
   );
 }
 
-function groupQuestionsBasedOnAnswers(
+export function groupQuestionsBasedOnAnswers(
   store: Store,
 ): Record<string, Record<Reference<Question>, Array<Option>>> {
   const groups: Record<string, Record<Reference<Question>, Array<Option>>> = {};

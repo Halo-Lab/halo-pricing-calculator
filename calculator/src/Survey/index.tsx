@@ -6,8 +6,9 @@ import { FinalWords } from "./FinalWords";
 import { useSelector } from "../store/Provider";
 import { Questionnaire } from "./Questionnaire";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { sendProjectEstimatesAndAccompanyingData } from "./sendProjectEstimatesAndAccompanyingData";
 // import { SendEmailForm } from "./SendEmailForm";
-import { fillWebflowModalForm } from "./fillWebflowModalForm";
+// import { fillWebflowModalForm } from "./fillWebflowModalForm";
 
 declare namespace globalThis {
   let onEstimateSent: VoidFunction | undefined;
@@ -22,14 +23,16 @@ export function Survey(): JSX.Element {
 
   useEffect(() => {
     if (isDataSendFormVisible) {
-      const onEstimateSent = () => {
+      const onEstimateSent = async () => {
+        await sendProjectEstimatesAndAccompanyingData(store);
+
         setIsDataSendFormVisible(false);
         setShouldFinalWordsFrameBeVisible(true);
       };
 
       globalThis.onEstimateSent = onEstimateSent;
 
-      fillWebflowModalForm(store);
+      // fillWebflowModalForm(store);
 
       return () => {
         delete globalThis.onEstimateSent;
