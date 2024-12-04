@@ -129,9 +129,15 @@ export function LeftCard(): JSX.Element {
                 : 2
           }
           source={[
-            import.meta.env.BASE_URL + "/images/avatar-of-the-woman.avif",
-            import.meta.env.BASE_URL + "/images/avatar-of-the-woman.webp",
-            import.meta.env.BASE_URL + "/images/avatar-of-the-woman.png",
+            import.meta.env.VITE_PUBLIC_ASSETS_URL +
+              import.meta.env.BASE_URL +
+              "/images/avatar-of-the-woman.avif",
+            import.meta.env.VITE_PUBLIC_ASSETS_URL +
+              import.meta.env.BASE_URL +
+              "/images/avatar-of-the-woman.webp",
+            import.meta.env.VITE_PUBLIC_ASSETS_URL +
+              import.meta.env.BASE_URL +
+              "/images/avatar-of-the-woman.png",
           ]}
           description="Smiling woman on yellow background"
           decorations={ImageDecoration()

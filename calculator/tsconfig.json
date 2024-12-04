@@ -1,7 +1,5 @@
 {
   "extends": "../tsconfig",
-  "compilerOptions": {
-    "types": ["vite/client"]
-  },
+  "compilerOptions": {},
   "include": ["**/*.ts", "**/*.tsx"]
 }
