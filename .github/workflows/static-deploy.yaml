@@ -28,6 +28,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      VITE_SERVER_BASE_URL: "https://dmsnknnqqv.eu-west-3.awsapprunner.com"
+      VITE_PUBLIC_ASSETS_URL: "https://halo-lab.github.io"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
