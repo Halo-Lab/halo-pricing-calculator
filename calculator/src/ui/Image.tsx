@@ -35,9 +35,17 @@ export const Image = forwardRef(
             return `${value} c-img ${fit ? `c-img-fit-${fit}` : ""}`;
           },
           src() {
+            // It is assumed that URLs are sorted from the highest to the lowest quality.
+            const lastSource = Array.isArray(source) ? source.at(-1) : source;
+
+            if (lastSource) {
+              return sourceToString(lastSource);
+            }
+          },
+          srcSet() {
             return Array.isArray(source)
-              ? source.map(sourceToString).join(", ")
-              : sourceToString(source);
+              ? source.slice(0, -1).map(sourceToString).join(", ")
+              : undefined;
           },
           alt() {
             return description;

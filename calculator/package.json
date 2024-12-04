@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "browserslist": "^4.24.2",
-    "lightningcss": "^1.27.0",
-    "vite": "^5.4.10"
+    "lightningcss": "^1.28.2",
+    "vite": "^6.0.2"
   }
 }

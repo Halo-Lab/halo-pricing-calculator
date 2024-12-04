@@ -128,7 +128,11 @@ export function LeftCard(): JSX.Element {
                 ? 3
                 : 2
           }
-          source="https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6655c989d8c17acc9e11cce7_calculator-manager.webp"
+          source={[
+            import.meta.env.BASE_URL + "/images/avatar-of-the-woman.avif",
+            import.meta.env.BASE_URL + "/images/avatar-of-the-woman.webp",
+            import.meta.env.BASE_URL + "/images/avatar-of-the-woman.png",
+          ]}
           description="Smiling woman on yellow background"
           decorations={ImageDecoration()
             .backgroundColor(Color.coolGray20)

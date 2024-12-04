@@ -60,9 +60,9 @@
       &:where(
           :not(:has(~ .c-element:where(.c-align-x-center, .c-align-x-end))),
           :has(
-              + style[data-c-id]
-                + .c-element:where(.c-align-x-center, .c-align-x-end)
-            )
+            + style[data-c-id]
+              + .c-element:where(.c-align-x-center, .c-align-x-end)
+          )
         ) {
         margin-left: auto;
         margin-right: auto;
@@ -89,9 +89,9 @@
       &:where(
           :not(:has(~ .c-element:where(.c-align-y-center, .c-align-y-end))),
           :has(
-              + style[data-c-id]
-                + .c-element:where(.c-align-y-center, .c-align-y-end)
-            )
+            + style[data-c-id]
+              + .c-element:where(.c-align-y-center, .c-align-y-end)
+          )
         ) {
         margin-top: auto;
         margin-bottom: auto;
@@ -110,9 +110,9 @@
       &:where(
           :not(:has(~ .c-element:where(.c-align-x-center, .c-align-x-end))),
           :has(
-              + style[data-c-id]
-                + .c-element:where(.c-align-x-center, .c-align-x-end)
-            )
+            + style[data-c-id]
+              + .c-element:where(.c-align-x-center, .c-align-x-end)
+          )
         ) {
         margin-left: auto;
 
@@ -139,9 +139,9 @@
       &:where(
           :not(:has(~ .c-element:where(.c-align-y-center, .c-align-y-end))),
           :has(
-              + style[data-c-id]
-                + .c-element:where(.c-align-y-center, .c-align-y-end)
-            )
+            + style[data-c-id]
+              + .c-element:where(.c-align-y-center, .c-align-y-end)
+          )
         ) {
         margin-top: auto;
 
