@@ -82,7 +82,23 @@ export function Questionnaire({
   return (
     <Box
       width={gte(1200) ? ".725fr" : range(1100, 1200) ? ".7fr" : "fill"}
-      padding={gte(450) ? [gte(1100) ? 1.5 : 3.5, 2.5, 2.5] : [1.875, 1, 1, 1]}
+      padding={
+        gte(450)
+          ? [
+              gte(1600)
+                ? 2.2
+                : range(1400, 1600)
+                  ? 2
+                  : range(1300, 1400)
+                    ? 1.75
+                    : range(1100, 1300)
+                      ? 1.5
+                      : 3.5,
+              2.5,
+              2.5,
+            ]
+          : [1.875, 1, 1, 1]
+      }
       spacing={gte(1100) ? 1.75 : range(640, 1100) ? 4 : 2.75}
       vertical
       behindContent={
@@ -93,7 +109,15 @@ export function Questionnaire({
             <Box
               width="fill"
               height={`1fr - ${range(550, 1100) ? 1.5 : 2.3}`}
-              moveDown={range(550, 1100) ? 1.5 : 2.3}
+              moveDown={
+                gte(1730)
+                  ? 3.5
+                  : range(1470, 1730)
+                    ? 3
+                    : range(550, 1100)
+                      ? 1.5
+                      : 2.3
+              }
               decorations={BoxDecoration()
                 .backgroundColor(Color.white)
                 .borderRadius(1)}
