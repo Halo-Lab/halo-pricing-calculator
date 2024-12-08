@@ -10,10 +10,10 @@
     "deploy-graphql": "sanity graphql deploy"
   },
   "dependencies": {
-    "@sanity/icons": "^2.11.8",
-    "@sanity/ui": "^2.1.6",
-    "@sanity/vision": "^3.41.0",
-    "sanity": "^3.41.0",
-    "styled-components": "^6.1.8"
+    "@sanity/icons": "^3.5.0",
+    "@sanity/ui": "^2.10.1",
+    "@sanity/vision": "^3.66.1",
+    "sanity": "^3.66.1",
+    "styled-components": "^6.1.13"
   }
 }
