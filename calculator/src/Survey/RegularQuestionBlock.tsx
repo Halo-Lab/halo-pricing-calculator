@@ -105,7 +105,15 @@ export function RegularQuestionBlock({
     >
       <Box vertical spacing={gte(1100) ? 2 : 1.5} alignY="center" width="fill">
         <Text
-          width={gte(1100) ? ".9fr" : range(550, 1100) ? ".8fr" : undefined}
+          width={
+            gte(1515)
+              ? ".5fr"
+              : range(1300, 1515)
+                ? ".6fr"
+                : range(550, 1300)
+                  ? ".8fr"
+                  : undefined
+          }
           size={gte(550) ? 2.125 : 1.5}
           weight={500}
           spacing={0.4}
