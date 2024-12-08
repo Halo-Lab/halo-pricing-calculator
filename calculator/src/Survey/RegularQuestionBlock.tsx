@@ -89,7 +89,20 @@ export function RegularQuestionBlock({
   });
 
   return (
-    <Box width="fill" minHeight={gte(1100) ? 18.75 : undefined}>
+    <Box
+      width="fill"
+      minHeight={
+        gte(1600)
+          ? 21.3
+          : range(1400, 1600)
+            ? 21.5
+            : range(1300, 1400)
+              ? 21.75
+              : range(1100, 1300)
+                ? 22
+                : undefined
+      }
+    >
       <Box vertical spacing={gte(1100) ? 2 : 1.5} alignY="center" width="fill">
         <Text
           width={gte(1100) ? ".9fr" : range(550, 1100) ? ".8fr" : undefined}

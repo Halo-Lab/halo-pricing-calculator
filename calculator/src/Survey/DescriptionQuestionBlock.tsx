@@ -23,7 +23,22 @@ export function DescriptionQuestionBlock({
   const dispatch = useDispatch();
 
   return (
-    <Box vertical spacing={2} width="fill">
+    <Box
+      vertical
+      spacing={2}
+      width="fill"
+      minHeight={
+        gte(1600)
+          ? 21.3
+          : range(1400, 1600)
+            ? 21.5
+            : range(1300, 1400)
+              ? 21.75
+              : range(1100, 1300)
+                ? 22
+                : undefined
+      }
+    >
       <Box
         vertical
         spacing={1.5}
