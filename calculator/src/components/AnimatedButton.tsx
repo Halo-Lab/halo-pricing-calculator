@@ -9,17 +9,19 @@ import { Button, ButtonDecoration, ButtonProps } from "../ui/Button";
 
 export type ButtonVariant = "primary" | "secondary-light";
 
-interface ButtonProperties
+interface AnimatedButtonProperties
   extends Omit<ButtonProps, "padding" | "decorations"> {
   variant: ButtonVariant;
+  disabled?: boolean;
 }
 
 export function AnimatedButton({
   variant,
   children,
+  disabled,
   _extend,
   ...props
-}: ButtonProperties): JSX.Element {
+}: AnimatedButtonProperties): JSX.Element {
   const { gte } = useBreakpoints();
 
   return (
@@ -31,6 +33,7 @@ export function AnimatedButton({
           variant === "secondary-light" ? Color.blueDark30 : "currentColor",
         )
         .backgroundColor(variant === "primary" ? Color.blue : undefined)
+        .opacity(disabled ? 0.3 : undefined)
         .borderRadius(6.25)}
       _extend={extend(_extend, {
         // Attach this attribute at the end so Webflow can react on it.

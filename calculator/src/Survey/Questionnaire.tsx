@@ -210,6 +210,7 @@ export function Questionnaire({
               alignX="end"
               width={gte(450) ? undefined : "fill"}
               variant="primary"
+              disabled={!isUserAbleToMoveFurther}
               onPress={() => {
                 if (isUserAtTheEndOfQuestionsSequence) {
                   userReachedTheEnd();
