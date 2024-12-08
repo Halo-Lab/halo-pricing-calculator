@@ -2,6 +2,7 @@ import { JSX, useState } from "react";
 
 import { Icon } from "../components/icons";
 import { Color } from "../palettes/colours";
+import { SvgDecoration } from "../ui/Svg";
 import { Text, TextDecoration } from "../ui/Text";
 import { Button, ButtonDecoration, ButtonProps } from "../ui/Button";
 
@@ -30,6 +31,7 @@ export function SmallFileUploadZone({
         ButtonDecoration()
           .backgroundColor(Color.greyLight)
           .borderRadius(1)
+          .transitionDuration(".24s")
           .borderWidth(0.0625)
           .borderStyle("dashed")
           .borderColor(isDragging ? Color.blueDark : Color.blueDark30),
@@ -52,13 +54,14 @@ export function SmallFileUploadZone({
         variant="plus"
         alignX="center"
         invertColor={Color.white}
+        decorations={SvgDecoration().transitionDuration(".24s")}
       />
       <Text
         alignX="center"
         size={0.875}
         weight={500}
         decorations={[
-          TextDecoration().opacity(0),
+          TextDecoration().transitionDuration(".24s").opacity(0),
           TextDecoration("hovered").dependOn("direct-parent").opacity(1),
           TextDecoration("dragging-over-drop-zone")
             .dependOn("any-parent")
