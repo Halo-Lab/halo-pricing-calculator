@@ -50,7 +50,7 @@ export function Survey(): JSX.Element {
             userReachedTheEnd={() => setIsDataSendFormVisible(true)}
           />
         )}
-        <Summary shouldRestrictHeight={!shouldFinalWordsFrameBeVisible} />
+        <Summary />
       </Box>
       {/* isDataSendFormVisible && (
         <SendEmailForm

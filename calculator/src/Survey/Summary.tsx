@@ -10,11 +10,9 @@ import { Box, BoxDecoration } from "../ui/Box";
 import { calculateEstimates } from "../store/selectors";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
 
-interface SummaryProps {
-  shouldRestrictHeight: boolean;
-}
+interface SummaryProps {}
 
-export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
+export function Summary({}: SummaryProps): JSX.Element {
   const { gte, range } = useBreakpoints();
   const [totalEstimates, groupedEstimates] = useSelector(calculateEstimates);
 
@@ -105,13 +103,7 @@ export function Summary({ shouldRestrictHeight }: SummaryProps): JSX.Element {
             })()}
           </Box>
         ) : (
-          <Box
-            vertical
-            width="fill"
-            maxHeight={shouldRestrictHeight ? 4.75 : undefined}
-            clipY={shouldRestrictHeight ? "scrollable" : undefined}
-            spacing={gte(1100) ? 0.75 : 0.5}
-          >
+          <Box vertical width="fill" spacing={gte(1100) ? 0.75 : 0.5}>
             {resultElements}
           </Box>
         )}
