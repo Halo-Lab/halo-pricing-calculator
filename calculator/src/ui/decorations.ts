@@ -136,7 +136,7 @@ export function Decoration<O extends AnyCSSProperties>(
             .join(",") + `{${rules}}`
         );
       },
-      dependOn(dependency) {
+      dependOn(dependency: DecorationDependency) {
         if (!dependencies.includes(dependency)) {
           dependencies.push(dependency);
         }

@@ -46,7 +46,7 @@ export const FileInput = forwardRef(
     }: FileInputProps,
     ref?: Ref<HTMLInputElement>,
   ): JSX.Element => {
-    const inputRef = useRef<HTMLInputElement | null>();
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const [draggingDetected, setIsDraggingDetected] = useState(false);
 
     const isClickingAllowed = mode !== "only-drop";
