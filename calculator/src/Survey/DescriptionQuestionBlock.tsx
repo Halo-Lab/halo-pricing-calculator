@@ -63,17 +63,16 @@ export function DescriptionQuestionBlock({
         <Text size={1.5} spacing={0.4} weight={500}>
           {question.text}
         </Text>
-        <Text spacing={0.6} color={Color.blueDark70}>
+        <Text spacing={1} color={Color.blueDark70}>
           {question.helpMessage}
         </Text>
-        <Box width="fill" spacing={0.75} vertical>
+        <Box width="fill" spacing={1} vertical>
           {question.helpPoints.map((helpPoint, index) => {
             return (
-              <Box key={index} spacing={0.875}>
+              <Box key={index} spacing={0.75}>
                 <Svg
                   width={0.75}
                   height={0.75}
-                  alignY="center"
                   viewBox="0 0 12 12"
                   color={Color.blueDark70}
                 >
@@ -83,7 +82,7 @@ export function DescriptionQuestionBlock({
                     fill="#02021E"
                   />
                 </Svg>
-                <Text width="fill" spacing={0.6} color={Color.blueDark70}>
+                <Text width="fill" spacing={1} color={Color.blueDark70}>
                   {helpPoint}
                 </Text>
               </Box>
