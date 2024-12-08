@@ -81,7 +81,7 @@ export function CTACard({
       <Box width="fill" spacing={2} vertical>
         <Icon variant={mainIcon} width={4} height={4} />
 
-        <Text size={1.125} weight={500} spacing={0.4} density={0.9775}>
+        <Text size={1.125} weight={500} spacing={0.65} density={0.9775}>
           {text}
         </Text>
       </Box>

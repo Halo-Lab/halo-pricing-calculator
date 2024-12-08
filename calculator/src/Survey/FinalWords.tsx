@@ -15,7 +15,7 @@ const ctaCards: Array<CTACardData> = [
     interactiveElementText: "book a call",
     interactiveElementIcon: "calendar",
     interactiveElementDataAttributes: {
-      "data-remodal-id": "booking",
+      "data-remodal-target": "booking-3",
     },
   },
   {
@@ -24,7 +24,7 @@ const ctaCards: Array<CTACardData> = [
     interactiveElementText: "subscribe",
     interactiveElementIcon: "open-book",
     interactiveElementDataAttributes: {
-      "data-remodal-id": "subscribe",
+      "data-remodal-target": "subscribe",
     },
   },
   {
@@ -78,13 +78,17 @@ export function FinalWords(): JSX.Element {
       }
       vertical
       width={gte(1200) ? ".725fr" : range(1100, 1200) ? ".7fr" : "fill"}
-      spacing={2}
+      spacing={gte(1295) ? 2.25 : 2}
       padding={
-        gte(425)
-          ? [5, 2.5, 2.5]
-          : range(375, 425)
-            ? [3, 1.5, 1.5]
-            : [2, 1, 1, 1]
+        gte(1295)
+          ? [5.625, 4, 4]
+          : range(950, 1295)
+            ? [5.625, 2.5, 2.5]
+            : range(425, 950)
+              ? [5, 2.5, 2.5]
+              : range(375, 425)
+                ? [3, 1.5, 1.5]
+                : [2, 1, 1, 1]
       }
     >
       <Text
@@ -92,6 +96,7 @@ export function FinalWords(): JSX.Element {
         weight={500}
         spacing={0.5}
         density={0.945}
+        maxWidth={41.25}
       >
         Thanks! We’ll send the estimate to your email shortly.
       </Text>
