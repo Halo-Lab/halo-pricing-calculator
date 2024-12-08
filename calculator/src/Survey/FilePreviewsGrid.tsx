@@ -31,7 +31,7 @@ export function FilePreviewsGrid({
             : 2;
 
   return (
-    <Box vertical spacing={1} alignX="center">
+    <Box vertical spacing={1}>
       {groupElementsBy(files, groupLength).map((group, index, groups) => {
         const isLastGroup = groups.length - 1 === index;
 
