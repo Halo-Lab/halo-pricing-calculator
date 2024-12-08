@@ -75,7 +75,14 @@ export const Image = forwardRef(
                 }
               }
 
-              return <source srcSet={srcSet} media={media} type={type} />;
+              return (
+                <source
+                  key={srcSet}
+                  srcSet={srcSet}
+                  media={media}
+                  type={type}
+                />
+              );
             })
           : null}
         <img
