@@ -1,4 +1,4 @@
-import { JSX, useEffect, useMemo } from "react";
+import { JSX, useMemo } from "react";
 
 import { Svg } from "../ui/Svg";
 import { Color } from "../palettes/colours";
@@ -61,20 +61,6 @@ export function Questionnaire({
           : true)
     );
   }, [question, selected, description]);
-
-  useEffect(() => {
-    const onKeyUp = (event: KeyboardEvent) => {
-      if (event.key === "Enter" && isUserAbleToMoveFurther) {
-        dispatch(new MoveToNextStep());
-      }
-    };
-
-    addEventListener("keyup", onKeyUp);
-
-    return () => {
-      removeEventListener("keyup", onKeyUp);
-    };
-  }, [isUserAbleToMoveFurther]);
 
   const isUserAtTheEndOfQuestionsSequence =
     isUserAbleToMoveFurther && currentStep === totalSteps;
@@ -220,14 +206,6 @@ export function Questionnaire({
             >
               back
             </AnimatedButton>
-            {gte(1100) && isUserAbleToMoveFurther ? (
-              <Box alignY="center" alignX="end" spacing={0.25}>
-                <Text size={0.75}>press</Text>
-                <Text as="kbd" size={0.75} weight={500}>
-                  Enter
-                </Text>
-              </Box>
-            ) : null}
             <AnimatedButton
               alignX="end"
               width={gte(450) ? undefined : "fill"}
