@@ -17,11 +17,16 @@ export function calculateEstimates(
         ? (question.optionToGroupMap?.[option.id] ?? question.title)
         : question.title;
 
-    groupedEstimates[groupTitle] = option.estimates.reduce<EstimateRange>(
+    const groupEstimate = option.estimates.reduce<EstimateRange>(
       (range, reference) =>
         store.estimates.get(reference)!.assessment.applyTo(range),
       groupedEstimates[groupTitle] ?? [0, 0],
     );
+
+    // Create a group when there is non-zero estimate.
+    if (groupEstimate[0] || groupEstimate[1]) {
+      groupedEstimates[groupTitle] = groupEstimate;
+    }
 
     totalEstimates = option.estimates.reduce<EstimateRange>(
       (range, reference) =>
