@@ -105,6 +105,7 @@ export function FilePreview({
               color={Color.white}
               size={0.875}
               spacing={0.6}
+              weight={500}
               alignX="center"
               decorations={TextDecoration().textAlign("center")}
             >
