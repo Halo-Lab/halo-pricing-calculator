@@ -87,14 +87,9 @@ export function groupQuestionsBasedOnAnswers(
         ? (question.optionToGroupMap?.[reference] ?? question.title)
         : question.title;
 
-    // "void" is a special group which should never appear anywhere.
-    // Any data assigned to it gets abandoned.
-    // {@see data.ts} file to learn which questions end up there.
-    if (title !== "void") {
-      groups[title] ??= {};
-      groups[title][question.id] ??= [];
-      groups[title][question.id].push(option);
-    }
+    groups[title] ??= {};
+    groups[title][question.id] ??= [];
+    groups[title][question.id].push(option);
   });
 
   return groups;

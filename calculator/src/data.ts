@@ -26,8 +26,8 @@ export const questions: Question[] = [];
 export const estimates: Estimate[] = [];
 
 enum QuestionGroup {
-  Projects = "Project type", // Should not appear in Summary.
-  Industries = "Industries", // Should not appear in Summary.
+  Projects = "Project type",
+  Industries = "Industries",
   Services = "Type of service", // Should not appear in Summary.
   Additionals = "Additional services", // Should not appear in Summary.
   WebDesign = "Web design",
@@ -37,13 +37,6 @@ enum QuestionGroup {
   UXUIDesign = "UX/UI design",
   AppDevelopment = "App development",
   Final = "Receive an estimate", // Should not appear in Summary.
-
-  /**
-   * Special group which can absorb some groups or their estimates
-   * to prevent their appearance in the Summary. This groupd is never
-   * going to be shown in Summary and participate in estimation calculation.
-   */
-  Void = "void",
 }
 
 /* 0 */ createRegularQuestion({
@@ -71,9 +64,6 @@ enum QuestionGroup {
     // },
   ],
   previous: [],
-  optionToGroupMap() {
-    return QuestionGroup.Void;
-  },
 });
 /* 1 */ createRegularQuestion({
   text: "Choose the industry of your product",
@@ -165,9 +155,6 @@ enum QuestionGroup {
       question: questions[0].id,
     }),
   ],
-  optionToGroupMap() {
-    return QuestionGroup.Void;
-  },
 });
 // Website
 /* 2 */ createRegularQuestion({
