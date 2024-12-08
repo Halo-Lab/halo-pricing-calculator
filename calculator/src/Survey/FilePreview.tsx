@@ -1,4 +1,4 @@
-import { JSX, useEffect, useMemo } from "react";
+import { JSX, useEffect, useMemo, useState } from "react";
 
 import { Icon } from "../components/icons";
 import { Color } from "../palettes/colours";
@@ -20,6 +20,7 @@ export function FilePreview({
   projectFile,
   ...props
 }: FilePreviewProps): JSX.Element {
+  const [isCloseButtonHovered, setIsCloseButtonHovered] = useState(false);
   const dispatch = useDispatch();
   const objectUrl = useMemo(
     () =>
@@ -69,12 +70,20 @@ export function FilePreview({
             onPress={() => {
               dispatch(new RemoveProjectFile(projectFile.original));
             }}
+            _extend={{
+              onPointerEnter() {
+                setIsCloseButtonHovered(true);
+              },
+              onPointerLeave() {
+                setIsCloseButtonHovered(false);
+              },
+            }}
           >
             <Icon
               variant="close"
               width="fill"
               height="fill"
-              invertColor={Color.white}
+              invertColor={isCloseButtonHovered ? Color.greyLight : Color.white}
             />
           </Button>
 
