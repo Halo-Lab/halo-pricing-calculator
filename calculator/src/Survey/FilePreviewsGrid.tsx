@@ -1,4 +1,4 @@
-import { Fragment, JSX } from "react";
+import { Fragment, JSX, useEffect, useRef } from "react";
 
 import { Box } from "../ui/Box";
 import { ProjectFile } from "../store/definition";
@@ -16,6 +16,7 @@ export function FilePreviewsGrid({
   files,
   isDragging,
 }: FilePreviewsGridProps): JSX.Element {
+  const lastRowRef = useRef<HTMLElement>(null);
   const { gte, range } = useBreakpoints();
 
   const groupLength = range(980, 1100)
@@ -30,14 +31,46 @@ export function FilePreviewsGrid({
             ? 3
             : 2;
 
+  useEffect(() => {
+    lastRowRef.current?.parentElement?.scrollTo({
+      top: lastRowRef.current.parentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [files, groupLength]);
+
   return (
-    <Box vertical spacing={1}>
+    <Box
+      vertical
+      spacing={1}
+      maxHeight={
+        /* Height of single FilePreview card
+        6.875 *
+        Number of fully visible cards
+        3 +
+        Number of spaces between fully visible cards
+        2 *
+        Spacing amount
+        1 +
+        Arbitrary visible height of the next FilePreview card
+        2.375 */ 25
+      }
+      clipY="scrollable"
+    >
       {groupElementsBy(files, groupLength).map((group, index, groups) => {
         const isLastGroup = groups.length - 1 === index;
+        const canPlusButtonFitIntoLastRow = group.length < groupLength;
 
         return (
           <Fragment key={index}>
-            <Box spacing={1} width="fill">
+            <Box
+              spacing={1}
+              width="fill"
+              ref={
+                isLastGroup && canPlusButtonFitIntoLastRow
+                  ? lastRowRef
+                  : undefined
+              }
+            >
               {group.map((projectFile, index) => {
                 return (
                   <FilePreview
@@ -46,12 +79,12 @@ export function FilePreviewsGrid({
                   />
                 );
               })}
-              {isLastGroup && group.length < groupLength ? (
+              {isLastGroup && canPlusButtonFitIntoLastRow ? (
                 <SmallFileUploadZone isDragging={isDragging} />
               ) : null}
             </Box>
-            {isLastGroup && group.length >= groupLength ? (
-              <Box spacing={1} width="fill">
+            {isLastGroup && !canPlusButtonFitIntoLastRow ? (
+              <Box spacing={1} width="fill" ref={lastRowRef}>
                 <SmallFileUploadZone isDragging={isDragging} />
               </Box>
             ) : null}
