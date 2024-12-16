@@ -46,6 +46,7 @@ export function FloatingInput({
         moveDown={value || isFocused ? 0 : 1.25}
         color={Color.blueDark50}
         decorations={TextDecoration()
+          .pointerEvents("none")
           .transitionDuration(".3s")
           .transitionTimingFunction("cubic-bezier(.215,.61,.355,1)")}
       >
