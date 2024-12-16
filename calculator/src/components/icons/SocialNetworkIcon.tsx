@@ -8,18 +8,18 @@ export function SocialNetworkIcon({
   ...props
 }: IconComponentProps): JSX.Element {
   return (
-    <Svg viewBox="0 0 72 72" {...props}>
-      <circle cx="36" cy="36" r="28" fill="currentColor" />
+    <Svg viewBox="0 0 56 56" {...props}>
+      <circle cx="28" cy="28" r="28" fill="currentColor" />
       <path
-        d="M49.9961 42.0003C49.9961 37.9502 46.7128 34.667 42.6628 34.667C38.6127 34.667 35.3294 37.9502 35.3294 42.0003C35.3294 46.0504 38.6127 49.3337 42.6628 49.3337H47.6544C48.9477 49.3337 49.9961 48.2852 49.9961 46.9919V42.0003Z"
+        d="M41.9961 34.0003C41.9961 29.9502 38.7128 26.667 34.6628 26.667C30.6127 26.667 27.3294 29.9502 27.3294 34.0003C27.3294 38.0504 30.6127 41.3337 34.6628 41.3337H39.6544C40.9477 41.3337 41.9961 40.2852 41.9961 38.9919V34.0003Z"
         fill="url(#paint0_linear_51293_81389)"
       />
       <path
-        d="M22.6641 34.3333C22.6641 27.5218 28.1859 22 34.9974 22C41.8089 22 47.3307 27.5218 47.3307 34.3333C47.3307 41.1448 41.8089 46.6667 34.9974 46.6667H26.6024C24.4273 46.6667 22.6641 44.9034 22.6641 42.7283V34.3333Z"
+        d="M14.6641 26.3333C14.6641 19.5218 20.1859 14 26.9974 14C33.8089 14 39.3307 19.5218 39.3307 26.3333C39.3307 33.1448 33.8089 38.6667 26.9974 38.6667H18.6024C16.4273 38.6667 14.6641 36.9034 14.6641 34.7283V26.3333Z"
         fill="url(#paint1_linear_51293_81389)"
       />
       <path
-        d="M31.332 35H37.9987"
+        d="M23.332 27H29.9987"
         stroke="url(#paint2_linear_51293_81389)"
         strokeWidth="2.66667"
         strokeLinecap="round"
@@ -28,10 +28,10 @@ export function SocialNetworkIcon({
       <defs>
         <linearGradient
           id="paint0_linear_51293_81389"
-          x1="39.8591"
-          y1="34.6966"
-          x2="53.6628"
-          y2="53.667"
+          x1="31.8591"
+          y1="26.6966"
+          x2="45.6628"
+          y2="45.667"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.282633" stopColor={invertColor} stopOpacity="0.3" />
@@ -39,10 +39,10 @@ export function SocialNetworkIcon({
         </linearGradient>
         <linearGradient
           id="paint1_linear_51293_81389"
-          x1="47.3307"
-          y1="18.3333"
-          x2="27.188"
-          y2="50.4142"
+          x1="39.3307"
+          y1="10.3333"
+          x2="19.188"
+          y2="42.4142"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.447812" stopColor={invertColor} />
@@ -50,10 +50,10 @@ export function SocialNetworkIcon({
         </linearGradient>
         <linearGradient
           id="paint2_linear_51293_81389"
-          x1="31.332"
-          y1="37.5"
-          x2="36.0475"
-          y2="38.5953"
+          x1="23.332"
+          y1="29.5"
+          x2="28.0475"
+          y2="30.5953"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.492893" stopColor="#7E73DB" />
