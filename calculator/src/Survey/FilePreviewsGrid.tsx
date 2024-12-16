@@ -1,11 +1,11 @@
-import { Fragment, JSX, useEffect, useRef } from "react";
+import { Fragment, JSX, useEffect, useMemo, useRef } from "react";
 
 import { Box } from "../ui/Box";
-import { ProjectFile } from "../store/definition";
 import { FilePreview } from "./FilePreview";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { groupElementsBy } from "./groupElementsBy";
 import { SmallFileUploadZone } from "./SmallFileUploadZone";
+import { ProjectFile, ProjectFileAcceptance } from "../store/definition";
 
 interface FilePreviewsGridProps {
   files: Array<ProjectFile>;
@@ -31,12 +31,18 @@ export function FilePreviewsGrid({
             ? 3
             : 2;
 
+  const validFiles = useMemo(() => {
+    return files.filter(
+      (file) => file.acceptance !== ProjectFileAcceptance.NotSupportedExtension,
+    );
+  }, [files]);
+
   useEffect(() => {
     lastRowRef.current?.parentElement?.scrollTo({
       top: lastRowRef.current.parentElement.scrollHeight,
       behavior: "smooth",
     });
-  }, [files, groupLength]);
+  }, [validFiles, groupLength]);
 
   return (
     <Box
@@ -56,7 +62,7 @@ export function FilePreviewsGrid({
       }
       clipY="scrollable"
     >
-      {groupElementsBy(files, groupLength).map((group, index, groups) => {
+      {groupElementsBy(validFiles, groupLength).map((group, index, groups) => {
         const isLastGroup = groups.length - 1 === index;
         const canPlusButtonFitIntoLastRow = group.length < groupLength;
 
