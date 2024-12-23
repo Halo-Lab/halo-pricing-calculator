@@ -1024,10 +1024,6 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(24, 40)],
     },
     {
-      text: "Cloud storage, file upload/download",
-      estimates: [new EstimateRangeAssessment(24, 40)],
-    },
-    {
       text: "Maps & Location services",
       estimates: [new EstimateRangeAssessment(24, 40)],
     },
