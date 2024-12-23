@@ -175,16 +175,18 @@ export const Element = forwardRef(
         "rotate3d(var(--c-rotate-x, 0), var(--c-rotate-y, 0), var(--c-rotate-z, 0), var(--c-rotate-a, 0deg)) " +
         "scale3d(var(--c-scale-x, 1), var(--c-scale-y, 1), var(--c-scale-z, 1))";
 
-      style["--c-translate-x"] = moveLeft
-        ? "-" + computeSpace(moveLeft)
-        : moveRight
-          ? computeSpace(moveRight)
-          : undefined;
-      style["--c-translate-y"] = moveUp
-        ? "-" + computeSpace(moveUp)
-        : moveDown
-          ? computeSpace(moveDown)
-          : undefined;
+      style["--c-translate-x"] =
+        moveLeft != null
+          ? "-" + computeSpace(moveLeft)
+          : moveRight != null
+            ? computeSpace(moveRight)
+            : undefined;
+      style["--c-translate-y"] =
+        moveUp != null
+          ? "-" + computeSpace(moveUp)
+          : moveDown != null
+            ? computeSpace(moveDown)
+            : undefined;
 
       if (Array.isArray(rotate)) {
         const [x, y, z, a] = rotate;
@@ -192,18 +194,18 @@ export const Element = forwardRef(
         style["--c-rotate-y"] = units(y);
         style["--c-rotate-z"] = units(z);
         style["--c-rotate-a"] = units(a, "deg");
-      } else if (rotate) {
+      } else if (rotate != null) {
         style["--c-rotate-a"] = units(rotate, "deg");
       }
 
-      if (scale) {
+      if (scale != null) {
         let x = 1,
           y = 1,
           z = 1;
         if (Array.isArray(scale)) {
           [x, y, z = 1] = scale;
         } else {
-          z = scale;
+          x = y = z = scale;
         }
 
         style["--c-scale-x"] = x;

@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { Color } from "../palettes/colours";
 import { Option } from "../entities/option";
 import { Button } from "../ui/Button";
+import { Reference } from "../entities/entity";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { RegularQuestion } from "../entities/question";
 import { Icon, IconVariant } from "../components/icons";
@@ -17,6 +18,7 @@ interface RightCardProperties {
 }
 
 export function RightCard({ question }: RightCardProperties): JSX.Element {
+  const [isHovered, setIsHovered] = useState<Reference<Option> | undefined>();
   const dispatch = useDispatch();
   const { gte, range } = useBreakpoints();
 
@@ -120,6 +122,14 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 dispatch(new AddAnswer(option.id));
                 dispatch(new MoveToNextStep());
               }}
+              _extend={{
+                onPointerEnter() {
+                  setIsHovered(option.id);
+                },
+                onPointerLeave() {
+                  setIsHovered(undefined);
+                },
+              }}
             >
               <Icon
                 color={Color.blue}
@@ -143,20 +153,23 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
               >
                 {option.text}
               </Text>
+
               {range(425, 680) || range(925, 975) || gte(1050) ? (
-                <Text
+                <Box
+                  clipY="hidden"
                   alignX="end"
                   alignY="center"
-                  decorations={[
-                    TextDecoration().opacity(0).transitionProperty("opacity"),
-                    TextDecoration("hovered")
-                      .dependOn("direct-parent")
-                      .opacity(0.7),
-                  ]}
+                  padding={[0.2, 0]}
                 >
-                  I need it!
-                </Text>
+                  <Text
+                    moveDown={isHovered === option.id ? 0 : 1}
+                    decorations={TextDecoration().transitionDuration(".3s")}
+                  >
+                    I need it!
+                  </Text>
+                </Box>
               ) : null}
+
               <Box
                 alignX="end"
                 alignY="center"
@@ -166,21 +179,38 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 height={
                   range(700, 750) ? 1.5 : range(375, 680) || gte(750) ? 2 : 1
                 }
-                decorations={[
-                  BoxDecoration()
-                    .borderRadius(100)
-                    .transitionProperty("background-color"),
-                  BoxDecoration("hovered")
-                    .dependOn("direct-parent")
-                    .backgroundColor(Color.blueDark),
-                ]}
+                clipX="hidden"
+                decorations={BoxDecoration().borderRadius(100)}
+                behindContent={
+                  <Box
+                    width="fill"
+                    height="fill"
+                    scale={isHovered === option.id ? 1 : 0}
+                    decorations={BoxDecoration()
+                      .borderRadius(100)
+                      .backgroundColor(Color.blueDark)
+                      .transitionProperty("transform")
+                      .transitionDuration(".3s")}
+                  />
+                }
+                inFront={
+                  <Icon
+                    width="fill"
+                    height="fill"
+                    variant="chevron-right"
+                    moveLeft={isHovered === option.id ? 0 : 1.5}
+                    color={Color.white}
+                    decorations={SvgDecoration().transitionDuration(".3s")}
+                  />
+                }
               >
                 <Icon
                   width="fill"
                   height="fill"
                   variant="chevron-right"
+                  moveRight={isHovered === option.id ? 1.5 : 0}
                   decorations={[
-                    SvgDecoration().transitionProperty("color"),
+                    SvgDecoration().transitionDuration(".3s"),
                     SvgDecoration("hovered")
                       .dependOn("Platform selector-parent")
                       .color(Color.white),
