@@ -88,7 +88,7 @@ interface EstimatedQuestion {
 interface QuestionGroup {
   title: string;
   questions: Array<EstimatedQuestion>;
-  totalEstimate: EstimateRange;
+  totalEstimate?: EstimateRange;
 }
 
 interface QuestionnaireResults {
@@ -115,9 +115,9 @@ function prepareQuestionnaireResults(store: Store): string {
   };
 
   for (const groupTitle in groups) {
-    const [, groupEstimate] = groupedEstimates.find(
+    const maybeGroupedEstimate = groupedEstimates.find(
       ([title]) => title === groupTitle,
-    )!;
+    );
 
     const answeredQuestions = Object.entries(groups[groupTitle]).map(
       ([questionReference, selectedOptions]): EstimatedQuestion => {
@@ -140,7 +140,7 @@ function prepareQuestionnaireResults(store: Store): string {
     results.questionGroups.push({
       title: groupTitle,
       questions: answeredQuestions,
-      totalEstimate: groupEstimate,
+      totalEstimate: maybeGroupedEstimate?.[1],
     });
   }
 
