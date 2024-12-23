@@ -65,6 +65,14 @@ export function Questionnaire({
   const isUserAtTheEndOfQuestionsSequence =
     isUserAbleToMoveFurther && currentStep === totalSteps;
 
+  const biggerWhiteBoxAreaOffset = gte(1730)
+    ? 3.5
+    : range(1470, 1730)
+      ? 3
+      : range(550, 1100)
+        ? 1.5
+        : 2.3;
+
   return (
     <Box
       width={gte(1200) ? ".725fr" : range(1100, 1200) ? ".7fr" : "fill"}
@@ -94,16 +102,8 @@ export function Questionnaire({
           inFront={
             <Box
               width="fill"
-              height={`1fr - ${range(550, 1100) ? 1.5 : 2.3}`}
-              moveDown={
-                gte(1730)
-                  ? 3.5
-                  : range(1470, 1730)
-                    ? 3
-                    : range(550, 1100)
-                      ? 1.5
-                      : 2.3
-              }
+              height={`1fr - ${biggerWhiteBoxAreaOffset}`}
+              moveDown={biggerWhiteBoxAreaOffset}
               decorations={BoxDecoration()
                 .backgroundColor(Color.white)
                 .borderRadius(1)}

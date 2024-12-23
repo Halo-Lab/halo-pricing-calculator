@@ -13,7 +13,7 @@ import { FilePreviewsGrid } from "./FilePreviewsGrid";
 import { FileInput, FileInputDecoration } from "../ui/FileInput";
 
 interface FilesQuestionBlockProps
-  extends Omit<BoxProps, "as" | "width" | "spacing"> {
+  extends Omit<BoxProps, "as" | "width" | "minHeight" | "spacing"> {
   files: Array<ProjectFile>;
   question: FilesQuestion;
 }
@@ -28,8 +28,14 @@ export function FilesQuestionBlock({
   const [isDragging, setIsDragging] = useState(false);
 
   return (
-    <Box vertical width="fill" spacing={2} {...props}>
-      <Box width="fill" spacing={1} vertical>
+    <Box
+      vertical
+      width="fill"
+      minHeight={gte(1100) ? 21.5 : undefined}
+      spacing={2.375}
+      {...props}
+    >
+      <Box width="fill" spacing={1.25} vertical>
         <Text size={1.5} weight={500} spacing={0.4}>
           {question.text}
         </Text>
@@ -43,7 +49,7 @@ export function FilesQuestionBlock({
         vertical
         width="fill"
         padding={files.length ? undefined : gte(550) ? 3.125 : 1.75}
-        spacing={1.5}
+        spacing={1.875}
         decorations={
           files.length
             ? undefined

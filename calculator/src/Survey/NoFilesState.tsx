@@ -18,7 +18,7 @@ export function NoFilesState(): JSX.Element {
         height={3.5}
         invertColor={Color.white}
       />
-      <Box width="fill" spacing={0.75} vertical>
+      <Box width="fill" spacing={1.125} vertical>
         <Box alignX="center" spacing={0.2} vertical={lt(375)}>
           <Text weight={500} color={Color.blue}>
             Click to Upload
