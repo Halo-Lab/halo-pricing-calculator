@@ -11,6 +11,7 @@ import { FilesQuestionBlock } from "./FilesQuestionBlock";
 import { QuestionGroupLabel } from "./QuestionGroupLabel";
 import { RegularQuestionBlock } from "./RegularQuestionBlock";
 import { Text, TextDecoration } from "../ui/Text";
+import { ProjectFileAcceptance } from "../store/definition";
 import { useDispatch, useSelector } from "../store/Provider";
 import { DescriptionQuestionBlock } from "./DescriptionQuestionBlock";
 import { MoveToNextStep, MoveToPreviousStep } from "../store/actions";
@@ -61,6 +62,12 @@ export function Questionnaire({
           : true)
     );
   }, [question, selected, description]);
+
+  const supportedProjectFiles = useMemo(() => {
+    return projectFiles?.filter(
+      (file) => file.acceptance !== ProjectFileAcceptance.NotSupportedExtension,
+    );
+  }, [projectFiles]);
 
   const isUserAtTheEndOfQuestionsSequence =
     isUserAbleToMoveFurther && currentStep === totalSteps;
@@ -190,49 +197,71 @@ export function Questionnaire({
           ) : question instanceof FilesQuestion ? (
             <FilesQuestionBlock
               question={question}
-              files={projectFiles ?? []}
+              files={supportedProjectFiles ?? []}
             />
           ) : null}
 
           <Box
             width="fill"
-            vertical={lt(450)}
+            vertical={lt(540)}
+            reverse={lt(540)}
             spacing={gte(1250) ? 1.5 : range(1100, 1250) ? 1 : 0.75}
           >
             <AnimatedButton
-              width={gte(450) ? undefined : "fill"}
+              width={gte(540) ? undefined : "fill"}
               variant="secondary-light"
               onPress={() => dispatch(new MoveToPreviousStep())}
             >
               back
             </AnimatedButton>
-            <AnimatedButton
+
+            <Box
               alignX="end"
-              width={gte(450) ? undefined : "fill"}
-              variant="primary"
-              disabled={!isUserAbleToMoveFurther}
-              onPress={() => {
-                if (isUserAtTheEndOfQuestionsSequence) {
-                  userReachedTheEnd();
-                } else if (isUserAbleToMoveFurther) {
-                  dispatch(new MoveToNextStep());
-                } else if (import.meta.env.DEV) {
-                  // TODO: show a tooltip that user has to select something
-                  console.warn(
-                    "You really need to implement a hint for the user that he/she needs to select at least one option.",
-                  );
-                }
-              }}
-              _extend={{
-                // Attach this attribute at the end so Webflow can react on it.
-                // @ts-expect-error data attributes are added to the extend interface
-                "data-remodal-target": isUserAtTheEndOfQuestionsSequence
-                  ? "calculator"
-                  : undefined,
-              }}
+              spacing={gte(540) ? 1.5 : 0.35}
+              width={gte(540) ? undefined : "fill"}
+              vertical={lt(540)}
+              reverse={gte(540)}
             >
-              {isUserAtTheEndOfQuestionsSequence ? "get an estimate" : "next"}
-            </AnimatedButton>
+              <AnimatedButton
+                width="fill"
+                variant="primary"
+                disabled={!isUserAbleToMoveFurther}
+                onPress={() => {
+                  if (isUserAtTheEndOfQuestionsSequence) {
+                    userReachedTheEnd();
+                  } else if (isUserAbleToMoveFurther) {
+                    dispatch(new MoveToNextStep());
+                  } else if (import.meta.env.DEV) {
+                    // TODO: show a tooltip that user has to select something
+                    console.warn(
+                      "You really need to implement a hint for the user that he/she needs to select at least one option.",
+                    );
+                  }
+                }}
+                _extend={{
+                  // Attach this attribute at the end so Webflow can react on it.
+                  // @ts-expect-error data attributes are added to the extend interface
+                  "data-remodal-target": isUserAtTheEndOfQuestionsSequence
+                    ? "calculator"
+                    : undefined,
+                }}
+              >
+                {isUserAtTheEndOfQuestionsSequence ? "get an estimate" : "next"}
+              </AnimatedButton>
+
+              {question instanceof FilesQuestion &&
+              projectFiles?.length !== supportedProjectFiles?.length ? (
+                <Text
+                  size={0.875}
+                  alignY="center"
+                  alignX={lt(540) ? "center" : undefined}
+                  color={Color.red}
+                  breaking="forbid"
+                >
+                  Please upload a *.png *.jpeg *.pdf files
+                </Text>
+              ) : null}
+            </Box>
           </Box>
         </Box>
       </Box>
