@@ -7,20 +7,24 @@ import { groupQuestionsBasedOnAnswers } from "./fillWebflowModalForm";
 
 export async function sendProjectEstimatesAndAccompanyingData(
   store: Store,
+  name: string,
+  email: string,
+  phone?: string,
+  countryCode?: string,
 ): Promise<void> {
   const form = getForm();
 
   if (form) {
-    const name =
-      form.querySelector<HTMLInputElement>("#Calculator-Name")!.value;
-    const email =
-      form.querySelector<HTMLInputElement>("#Calculator-email")!.value;
-    const phone = form.querySelector<HTMLInputElement>(
-      '[name="phone_full"]',
-    )!.value;
-    const countryCode = form.querySelector<HTMLInputElement>(
-      '[name="country_code"]',
-    )!.value;
+    // const name =
+    //   form.querySelector<HTMLInputElement>("#Calculator-Name")!.value;
+    // const email =
+    //   form.querySelector<HTMLInputElement>("#Calculator-email")!.value;
+    // const phone = form.querySelector<HTMLInputElement>(
+    //   '[name="phone_full"]',
+    // )!.value;
+    // const countryCode = form.querySelector<HTMLInputElement>(
+    //   '[name="country_code"]',
+    // )!.value;
 
     /**
      * The content is going to be:
@@ -41,12 +45,16 @@ export async function sendProjectEstimatesAndAccompanyingData(
 
     body.set("name", name);
     body.set("email", email);
-    body.set("phone", phone);
-    body.set("countryCode", countryCode);
     body.set("questionnaire", prepareQuestionnaireResults(store));
     store.projectFiles
       ?.filter((file) => file.acceptance === ProjectFileAcceptance.Accepted)
       .forEach((file) => body.append("files", file.original));
+    if (phone) {
+      body.set("phone", phone);
+    }
+    if (countryCode) {
+      body.set("countryCode", countryCode);
+    }
     if (store.projectDescription) {
       body.set("description", store.projectDescription);
     }

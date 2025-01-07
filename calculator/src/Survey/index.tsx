@@ -11,7 +11,17 @@ import { sendProjectEstimatesAndAccompanyingData } from "./sendProjectEstimatesA
 // import { fillWebflowModalForm } from "./fillWebflowModalForm";
 
 declare namespace globalThis {
-  let onEstimateSent: VoidFunction | undefined;
+  interface OnEstimateSent {
+    (name: string, email: string): Promise<void>;
+    (
+      name: string,
+      email: string,
+      phone: string,
+      countryCode: string,
+    ): Promise<void>;
+  }
+
+  let onEstimateSent: OnEstimateSent | undefined;
 }
 
 export function Survey(): JSX.Element {
@@ -23,8 +33,19 @@ export function Survey(): JSX.Element {
 
   useEffect(() => {
     if (isDataSendFormVisible) {
-      const onEstimateSent = async () => {
-        await sendProjectEstimatesAndAccompanyingData(store);
+      const onEstimateSent = async (
+        name: string,
+        email: string,
+        phone?: string,
+        countryCode?: string,
+      ): Promise<void> => {
+        await sendProjectEstimatesAndAccompanyingData(
+          store,
+          name,
+          email,
+          phone,
+          countryCode,
+        );
 
         setIsDataSendFormVisible(false);
         setShouldFinalWordsFrameBeVisible(true);
