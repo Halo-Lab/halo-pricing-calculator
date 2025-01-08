@@ -1,7 +1,7 @@
 import { Store } from "../store/definition";
 import { Option } from "../entities/option";
-import { daysText } from "../utilities/daysText";
 import { Reference } from "../entities/entity";
+import { displayDuration } from "../utilities/duration";
 import { calculateEstimates } from "../store/selectors";
 import { Question, RegularQuestion } from "../entities/question";
 
@@ -66,10 +66,10 @@ function generatePrompt(store: Store): string {
     groupedEstimates
       .map(
         ([title, range], index) =>
-          `${index + 1}. ${title} - ${daysText(range[0], range[1])}`,
+          `${index + 1}. ${title} - ${displayDuration(range[0], range[1])}`,
       )
       .join("\n") +
-    `\n\nThe total estimate is ${daysText(totalEstimates[0], totalEstimates[1])}`
+    `\n\nThe total estimate is ${displayDuration(totalEstimates[0], totalEstimates[1])}`
   );
 }
 

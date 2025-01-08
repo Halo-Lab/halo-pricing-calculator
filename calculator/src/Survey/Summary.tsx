@@ -3,9 +3,9 @@ import { JSX } from "react";
 import { Icon } from "../components/icons";
 import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
-import { daysText } from "../utilities/daysText";
 import { useSelector } from "../store/Provider";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { displayDuration } from "../utilities/duration";
 import { Box, BoxDecoration } from "../ui/Box";
 import { calculateEstimates } from "../store/selectors";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
@@ -41,7 +41,7 @@ export function Summary({}: SummaryProps): JSX.Element {
           color={Color.white70}
           breaking="forbid"
         >
-          {daysText(from, to)}
+          {displayDuration(from, to)}
         </Text>
       </Box>
     );
@@ -144,7 +144,7 @@ export function Summary({}: SummaryProps): JSX.Element {
             alignX="end"
             color={gte(1100) ? Color.homeBlue : Color.yellow}
           >
-            {daysText(totalEstimates[0], totalEstimates[1])}
+            {displayDuration(totalEstimates[0], totalEstimates[1])}
           </Text>
         </Box>
       </Box>
