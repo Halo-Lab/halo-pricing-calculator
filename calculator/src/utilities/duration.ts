@@ -11,9 +11,9 @@ export function displayDuration(from: number, to: number): string {
     const fromDays = Estimate.toDays(from);
 
     if (toDays >= 30 && fromDays >= 30) {
-      return `${toMonths(fromDays)}-${toMonths(toDays)} ${nounOf(2, true)}`;
+      return `${toMonths(fromDays)} - ${toMonths(toDays)} ${nounOf(2, true)}`;
     } else {
-      return `${fromDays}-${toDays} ${nounOf(2, false)}`;
+      return `${fromDays} - ${toDays} ${nounOf(2, false)}`;
     }
   }
 }

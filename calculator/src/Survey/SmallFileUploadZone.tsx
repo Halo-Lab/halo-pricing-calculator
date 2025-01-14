@@ -54,14 +54,14 @@ export function SmallFileUploadZone({
         variant="plus"
         alignX="center"
         invertColor={Color.white}
-        decorations={SvgDecoration().transitionDuration(".24s")}
+        decorations={SvgDecoration().transitionDuration(".3s")}
       />
       <Text
         alignX="center"
         size={0.875}
         weight={500}
         decorations={[
-          TextDecoration().transitionDuration(".24s").opacity(0),
+          TextDecoration().transitionDuration(".3s").opacity(0),
           TextDecoration("hovered").dependOn("direct-parent").opacity(1),
           TextDecoration("dragging-over-drop-zone")
             .dependOn("any-parent")

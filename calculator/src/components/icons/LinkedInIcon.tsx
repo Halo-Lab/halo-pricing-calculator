@@ -10,7 +10,6 @@ export function LinkedInIcon({
   return (
     <Svg viewBox="0 0 64 64" {...props}>
       <circle cx="32" cy="32" r="32" fill="#007EBB" />
-      <circle cx="32" cy="32" r="31" stroke="#040322" />
       <g clipPath="url(#clip0_51457_6278)">
         <path
           fillRule="evenodd"
