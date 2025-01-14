@@ -3,7 +3,7 @@ import { EstimateRange } from "../entities/estimate";
 import { RegularQuestion } from "../entities/question";
 
 export function calculateEstimates(
-  store: Store,
+  store: Pick<Store, "answers" | "options" | "questions" | "estimates">,
 ): [EstimateRange, Array<[string, EstimateRange]>] {
   let totalEstimates: EstimateRange = [0, 0];
   const groupedEstimates: Record<string, EstimateRange> = {};

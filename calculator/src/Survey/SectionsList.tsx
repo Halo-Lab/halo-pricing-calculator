@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, useMemo } from "react";
 
 import { useSelector } from "../store/Provider";
 import { Box, BoxProps } from "../ui/Box";
@@ -13,12 +13,15 @@ export interface SectionsListProps
   extends Omit<BoxProps, "vertical" | "spacing"> {}
 
 export function SectionsList(props: SectionsListProps): JSX.Element {
-  const { list, currentQuestionIndex } = useSelector((store) => {
-    return store.questionsSequence.reduce<SectionsList>(
+  const currentStep = useSelector((store) => store.currentStep);
+  const questionsSequence = useSelector((store) => store.questionsSequence);
+
+  const { list, currentQuestionIndex } = useMemo(() => {
+    return questionsSequence.reduce<SectionsList>(
       (accumulator, question, index) => {
         accumulator.list.add(question.title);
 
-        if (store.currentStep === index) {
+        if (currentStep === index) {
           accumulator.currentQuestionIndex = accumulator.list.size - 1;
         }
 
@@ -26,7 +29,7 @@ export function SectionsList(props: SectionsListProps): JSX.Element {
       },
       { list: new Set(), currentQuestionIndex: 0 },
     );
-  });
+  }, [currentStep, questionsSequence]);
 
   return (
     <Box vertical spacing={1} {...props}>

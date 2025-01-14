@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, useMemo } from "react";
 
 import { Icon } from "../components/icons";
 import { Text } from "../ui/Text";
@@ -14,38 +14,80 @@ interface SummaryProps {}
 
 export function Summary({}: SummaryProps): JSX.Element {
   const { gte, range } = useBreakpoints();
-  const [totalEstimates, groupedEstimates] = useSelector(calculateEstimates);
 
-  const resultElements = groupedEstimates.map(([title, [from, to]]) => {
-    return (
-      <Box key={title} spacing={0.5} width="fill">
-        <Icon
-          alignY="center"
-          variant="check"
-          color={Color.white}
-          width={1}
-          height={1}
-        />
-        <Text
-          spacing={0.3}
-          alignY="center"
-          size={gte(425) ? 1 : 0.75}
-          color={Color.white}
-        >
-          {title}
-        </Text>
-        <Text
-          alignY="center"
-          size={gte(425) ? 1 : 0.75}
-          alignX="end"
-          color={Color.white70}
-          breaking="forbid"
-        >
-          {displayDuration(from, to)}
-        </Text>
-      </Box>
-    );
-  });
+  const options = useSelector((store) => store.options);
+  const answers = useSelector((store) => store.answers);
+  const estimates = useSelector((store) => store.estimates);
+  const questions = useSelector((store) => store.questions);
+
+  const [totalEstimates, groupedEstimates] = useMemo(
+    () =>
+      calculateEstimates({
+        options,
+        answers,
+        estimates,
+        questions,
+      }),
+    [options, answers, estimates, questions],
+  );
+
+  const resultElements = useMemo(
+    () =>
+      groupedEstimates.map(([title, [from, to]]) => {
+        return (
+          <Box key={title} spacing={0.5} width="fill">
+            <Icon
+              alignY="center"
+              variant="check"
+              color={Color.white}
+              width={1}
+              height={1}
+            />
+            <Text
+              spacing={0.3}
+              alignY="center"
+              size={gte(425) ? 1 : 0.75}
+              color={Color.white}
+            >
+              {title}
+            </Text>
+            <Text
+              alignY="center"
+              size={gte(425) ? 1 : 0.75}
+              alignX="end"
+              color={Color.white70}
+              breaking="forbid"
+            >
+              {displayDuration(from, to)}
+            </Text>
+          </Box>
+        );
+      }),
+    [groupedEstimates, gte(425)],
+  );
+
+  const gridElements = useMemo(() => {
+    if (range(680, 1100)) {
+      const [firstColumn, secondColumn] =
+        spreadElementsAcrossColumns(resultElements);
+
+      return (
+        <>
+          <Box vertical spacing={1} width=".5fr">
+            {firstColumn}
+          </Box>
+          <Box
+            width={0.0625}
+            height="fill"
+            decorations={BoxDecoration().backgroundColor(Color.white30)}
+          />
+          <Box vertical spacing={1} width=".5fr">
+            {secondColumn}
+          </Box>
+        </>
+      );
+    }
+  }, [resultElements, range(680, 1100)]);
 
   return (
     <Box
@@ -81,26 +123,7 @@ export function Summary({}: SummaryProps): JSX.Element {
 
         {range(680, 1100) ? (
           <Box width="fill" spacing={3}>
-            {(() => {
-              const [firstColumn, secondColumn] =
-                spreadElementsAcrossColumns(resultElements);
-
-              return (
-                <>
-                  <Box vertical spacing={1} width=".5fr">
-                    {firstColumn}
-                  </Box>
-                  <Box
-                    width={0.0625}
-                    height="fill"
-                    decorations={BoxDecoration().backgroundColor(Color.white30)}
-                  />
-                  <Box vertical spacing={1} width=".5fr">
-                    {secondColumn}
-                  </Box>
-                </>
-              );
-            })()}
+            {gridElements}
           </Box>
         ) : (
           <Box vertical width="fill" spacing={gte(1100) ? 0.75 : 0.5}>

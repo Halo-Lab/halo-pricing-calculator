@@ -5,7 +5,6 @@ import { Icon } from "../components/icons";
 import { Link } from "../ui/Link";
 import { Color } from "../palettes/colours";
 import { units } from "../ui/measurements";
-import { useSelector } from "../store/Provider";
 import { FloatingInput } from "../components/FloatingInput";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { Svg, SvgDecoration } from "../ui/Svg";
@@ -23,7 +22,6 @@ export function SendEmailForm({
   onEmailSent,
 }: SendEmailFormProps): JSX.Element {
   const { gte } = useBreakpoints();
-  const store = useSelector((store) => store);
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
 

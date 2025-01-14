@@ -30,27 +30,16 @@ export function Questionnaire({
 }: QuestionnaireProps): JSX.Element {
   const dispatch = useDispatch();
   const { lt, gte, range } = useBreakpoints();
-  const {
-    question,
-    options,
-    currentStep,
-    totalSteps,
-    selected,
-    description,
-    projectFiles,
-  } = useSelector((store) => {
-    const question = store.questionsSequence[store.currentStep];
 
-    return {
-      options: store.options,
-      question,
-      selected: store.answers,
-      totalSteps: store.questionsSequence.length,
-      currentStep: store.currentStep + 1,
-      description: store.projectDescription,
-      projectFiles: store.projectFiles,
-    };
-  });
+  const question = useSelector(
+    (store) => store.questionsSequence[store.currentStep],
+  );
+  const options = useSelector((store) => store.options);
+  const selected = useSelector((store) => store.answers);
+  const totalSteps = useSelector((store) => store.questionsSequence.length);
+  const description = useSelector((store) => store.projectDescription);
+  const projectFiles = useSelector((store) => store.projectFiles);
+  const currentStep = useSelector((store) => store.currentStep + 1);
 
   const isUserAbleToMoveFurther = useMemo(() => {
     return (

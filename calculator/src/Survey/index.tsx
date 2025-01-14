@@ -3,7 +3,7 @@ import { JSX, useEffect, useState } from "react";
 import { Box } from "../ui/Box";
 import { Summary } from "./Summary";
 import { FinalWords } from "./FinalWords";
-import { useSelector } from "../store/Provider";
+import { useStore } from "../store/Provider";
 import { Questionnaire } from "./Questionnaire";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { sendProjectEstimatesAndAccompanyingData } from "./sendProjectEstimatesAndAccompanyingData";
@@ -25,11 +25,12 @@ declare namespace globalThis {
 }
 
 export function Survey(): JSX.Element {
-  const { lt } = useBreakpoints();
-  const store = useSelector((store) => store);
   const [isDataSendFormVisible, setIsDataSendFormVisible] = useState(false);
   const [shouldFinalWordsFrameBeVisible, setShouldFinalWordsFrameBeVisible] =
     useState(false);
+
+  const store = useStore();
+  const { lt } = useBreakpoints();
 
   useEffect(() => {
     if (isDataSendFormVisible) {
