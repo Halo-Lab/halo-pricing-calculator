@@ -9,16 +9,18 @@ import { Button, ButtonDecoration, ButtonProps } from "../ui/Button";
 
 export type ButtonVariant = "primary" | "secondary-light";
 
-interface AnimatedButtonProperties
-  extends Omit<ButtonProps, "padding" | "decorations"> {
+interface AnimatedButtonProperties extends Omit<ButtonProps, "decorations"> {
+  icon?: JSX.Element;
   variant: ButtonVariant;
   disabled?: boolean;
 }
 
 export function AnimatedButton({
+  icon,
   variant,
   children,
   disabled,
+  padding,
   _extend,
   ...props
 }: AnimatedButtonProperties): JSX.Element {
@@ -26,7 +28,7 @@ export function AnimatedButton({
 
   return (
     <Button
-      padding={[0.875, 1.25]}
+      padding={padding ?? [0.875, 1.25]}
       decorations={ButtonDecoration()
         .borderWidth(0.0625)
         .borderColor(
@@ -44,7 +46,11 @@ export function AnimatedButton({
       })}
       {...props}
     >
-      <Box width="fill" _extend={{ className: "button__overflow" }}>
+      <Box
+        alignY="center"
+        width="fill"
+        _extend={{ className: "button__overflow" }}
+      >
         <Box
           width="fill"
           _extend={{
@@ -81,6 +87,7 @@ export function AnimatedButton({
           </Text>
         </Box>
       </Box>
+      {icon}
     </Button>
   );
 }

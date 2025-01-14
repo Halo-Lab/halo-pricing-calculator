@@ -9,12 +9,10 @@ import { ProjectFile, ProjectFileAcceptance } from "../store/definition";
 
 interface FilePreviewsGridProps {
   files: Array<ProjectFile>;
-  isDragging: boolean;
 }
 
 export function FilePreviewsGrid({
   files,
-  isDragging,
 }: FilePreviewsGridProps): JSX.Element {
   const lastRowRef = useRef<HTMLElement>(null);
   const { gte, range } = useBreakpoints();
@@ -86,12 +84,12 @@ export function FilePreviewsGrid({
                 );
               })}
               {isLastGroup && canPlusButtonFitIntoLastRow ? (
-                <SmallFileUploadZone isDragging={isDragging} />
+                <SmallFileUploadZone />
               ) : null}
             </Box>
             {isLastGroup && !canPlusButtonFitIntoLastRow ? (
               <Box spacing={1} width="fill" ref={lastRowRef}>
-                <SmallFileUploadZone isDragging={isDragging} />
+                <SmallFileUploadZone />
               </Box>
             ) : null}
           </Fragment>

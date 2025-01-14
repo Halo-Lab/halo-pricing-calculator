@@ -1,4 +1,4 @@
-import { JSX, useState } from "react";
+import { JSX } from "react";
 
 import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
@@ -25,7 +25,6 @@ export function FilesQuestionBlock({
 }: FilesQuestionBlockProps): JSX.Element {
   const { gte } = useBreakpoints();
   const dispatch = useDispatch();
-  const [isDragging, setIsDragging] = useState(false);
 
   return (
     <Box
@@ -61,17 +60,10 @@ export function FilesQuestionBlock({
                 .borderColor(Color.blueDark30)
         }
         onFiles={(files) => {
-          setIsDragging(false);
           dispatch(new AddProjectFiles(files));
         }}
-        onDropZoneEnter={() => setIsDragging(true)}
-        onDropZoneLeave={() => setIsDragging(false)}
       >
-        {files.length ? (
-          <FilePreviewsGrid files={files} isDragging={isDragging} />
-        ) : (
-          <NoFilesState />
-        )}
+        {files.length ? <FilePreviewsGrid files={files} /> : <NoFilesState />}
       </FileInput>
     </Box>
   );

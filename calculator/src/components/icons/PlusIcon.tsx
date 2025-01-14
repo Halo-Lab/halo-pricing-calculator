@@ -12,10 +12,10 @@ export function PlusIcon({
       <circle
         cx="24"
         cy="24"
-        r="23.76"
+        r="23"
         fill="currentColor"
         stroke="currentColor"
-        strokeWidth="0.48"
+        strokeWidth="0.5"
       />
       <path
         d="M16.2227 23.998L31.7782 23.998"

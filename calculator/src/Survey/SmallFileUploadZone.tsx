@@ -1,4 +1,4 @@
-import { JSX, useState } from "react";
+import { JSX } from "react";
 
 import { Icon } from "../components/icons";
 import { Color } from "../palettes/colours";
@@ -10,16 +10,11 @@ interface SmallFileUploadZoneProps
   extends Omit<
     ButtonProps,
     "width" | "height" | "spacing" | "decorations" | "_extend"
-  > {
-  isDragging: boolean;
-}
+  > {}
 
-export function SmallFileUploadZone({
-  isDragging,
-  ...props
-}: SmallFileUploadZoneProps): JSX.Element {
-  const [isHovered, setIsHovered] = useState(false);
-
+export function SmallFileUploadZone(
+  props: SmallFileUploadZoneProps,
+): JSX.Element {
   return (
     <Button
       width={6.875}
@@ -31,30 +26,33 @@ export function SmallFileUploadZone({
         ButtonDecoration()
           .backgroundColor(Color.greyLight)
           .borderRadius(1)
-          .transitionDuration(".24s")
+          .transitionDuration(".3s")
           .borderWidth(0.0625)
           .borderStyle("dashed")
-          .borderColor(isDragging ? Color.blueDark : Color.blueDark30),
+          .borderColor(Color.blueDark30),
         ButtonDecoration("hovered").borderColor(Color.blueDark),
+        ButtonDecoration("dragging-over-drop-zone")
+          .dependOn("any-parent")
+          .borderColor(Color.blueDark),
       ]}
-      _extend={{
-        onPointerEnter() {
-          setIsHovered(true);
-        },
-        onPointerLeave() {
-          setIsHovered(false);
-        },
-      }}
       {...props}
     >
       <Icon
         width={3}
         height={3}
-        moveDown={isHovered || isDragging ? 0 : 0.625}
+        moveDown={0.625}
         variant="plus"
         alignX="center"
         invertColor={Color.white}
-        decorations={SvgDecoration().transitionDuration(".3s")}
+        decorations={[
+          SvgDecoration().transitionDuration(".3s"),
+          SvgDecoration("hovered")
+            .dependOn("direct-parent")
+            ["--c-translate-y"](0),
+          SvgDecoration("dragging-over-drop-zone")
+            .dependOn("any-parent")
+            ["--c-translate-y"](0),
+        ]}
       />
       <Text
         alignX="center"

@@ -171,7 +171,7 @@ export const Element = forwardRef(
       (moveUp ?? moveDown ?? moveLeft ?? moveRight ?? rotate ?? scale) != null
     ) {
       style.transform =
-        "translate3d(var(--c-translate-x, 0rem), var(--c-translate-y, 0rem), 0rem) " +
+        "translate3d(var(--c-translate-x, 0rem), var(--c-translate-y, 0rem), 0.01rem) " +
         "rotate3d(var(--c-rotate-x, 0), var(--c-rotate-y, 0), var(--c-rotate-z, 0), var(--c-rotate-a, 0deg)) " +
         "scale3d(var(--c-scale-x, 1), var(--c-scale-y, 1), var(--c-scale-z, 1))";
 

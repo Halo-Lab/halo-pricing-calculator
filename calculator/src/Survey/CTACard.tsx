@@ -2,12 +2,12 @@ import { JSX } from "react";
 
 import { Box } from "../ui/Box";
 import { Svg } from "../ui/Svg";
+import { Link } from "../ui/Link";
 import { Color } from "../palettes/colours";
 import { useBreakpoints } from "../ui/Responsiveness";
+import { AnimatedButton } from "../components/AnimatedButton";
 import { Icon, IconVariant } from "../components/icons";
 import { Text, TextDecoration } from "../ui/Text";
-import { Link, LinkDecoration } from "../ui/Link";
-import { Button, ButtonDecoration } from "../ui/Button";
 
 export interface CTACardData {
   text: string;
@@ -30,8 +30,24 @@ export function CTACard({
 }: CTACardProps): JSX.Element {
   const { gte } = useBreakpoints();
 
-  const interactiveElementContent = (
-    <>
+  const interactableElement = (
+    <AnimatedButton
+      alignY="end"
+      width="fill"
+      variant="primary"
+      padding={0.25}
+      icon={
+        <Icon
+          alignX="end"
+          width={2}
+          height={2}
+          color={Color.white}
+          invertColor={Color.chryslerBlue}
+          variant={interactiveElementIcon}
+        />
+      }
+      _extend={interactiveElementDataAttributes}
+    >
       <Text
         alignX="center"
         alignY="center"
@@ -45,15 +61,7 @@ export function CTACard({
       >
         {interactiveElementText}
       </Text>
-      <Icon
-        alignX="end"
-        width={2}
-        height={2}
-        color={Color.white}
-        invertColor={Color.chryslerBlue}
-        variant={interactiveElementIcon}
-      />
-    </>
+    </AnimatedButton>
   );
 
   return (
@@ -78,7 +86,7 @@ export function CTACard({
       vertical
       maxWidth={15.3125}
     >
-      <Box width="fill" spacing={2} vertical>
+      <Box width="fill" alignY="center" spacing={2} vertical>
         <Icon variant={mainIcon} width={4} height={4} />
 
         <Text size={1.125} weight={500} spacing={0.65} density={0.9775}>
@@ -92,26 +100,12 @@ export function CTACard({
           openIn="new-tab"
           alignY="end"
           width="fill"
-          padding={0.25}
-          decorations={LinkDecoration()
-            .borderRadius(2.5)
-            .backgroundColor(Color.chryslerBlue)}
           _extend={interactiveElementDataAttributes}
         >
-          {interactiveElementContent}
+          {interactableElement}
         </Link>
       ) : (
-        <Button
-          alignY="end"
-          width="fill"
-          padding={0.25}
-          decorations={ButtonDecoration()
-            .borderRadius(2.5)
-            .backgroundColor(Color.chryslerBlue)}
-          _extend={interactiveElementDataAttributes}
-        >
-          {interactiveElementContent}
-        </Button>
+        interactableElement
       )}
     </Box>
   );
