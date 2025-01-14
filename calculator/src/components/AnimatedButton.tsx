@@ -78,7 +78,9 @@ export function AnimatedButton({
             weight={500}
             alignX="center"
             color={variant === "primary" ? Color.white : undefined}
-            decorations={TextDecoration().textTransform("uppercase")}
+            decorations={TextDecoration()
+              .textAlign("center")
+              .textTransform("uppercase")}
             _extend={{
               className: "button__text is-absolute",
             }}
