@@ -1,4 +1,3 @@
-import { createId } from "../id";
 import { Reference } from "../entities/entity";
 import { EstimateRange } from "../entities/estimate";
 import { calculateEstimates } from "../store/selectors";
@@ -65,7 +64,9 @@ export async function sendProjectEstimatesAndAccompanyingData(
       {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data; boundary=" + createId(),
+          // Don't do this. Just don't.
+          // https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
+          // "Content-Type": "multipart/form-data; boundary=" + crypto.generateUUID(),
         },
         body,
       },
