@@ -1,3 +1,4 @@
+import { createId } from "../id";
 import { Reference } from "../entities/entity";
 import { EstimateRange } from "../entities/estimate";
 import { calculateEstimates } from "../store/selectors";
@@ -64,7 +65,7 @@ export async function sendProjectEstimatesAndAccompanyingData(
       {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data; boundary=" + createId(),
         },
         body,
       },
