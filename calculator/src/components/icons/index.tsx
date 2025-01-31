@@ -1,6 +1,7 @@
 import { FC, JSX } from "react";
 
 import { IoTIcon } from "./IoTIcon";
+import { PdfIcon } from "./PdfIcon";
 import { SvgProps } from "../../ui/Svg";
 import { PlusIcon } from "./PlusIcon";
 import { SaaSIcon } from "./SaaSIcon";
@@ -36,6 +37,7 @@ import { MobileApplicationIcon } from "./MobileApplicationIcon";
 
 export type IconVariant =
   | "iot"
+  | 'pdf'
   | "web3"
   | "plus"
   | "saas"
@@ -70,6 +72,7 @@ export type IconVariant =
 
 const ICON_COMPONENTS: Record<IconVariant, FC<IconComponentProps>> = {
   iot: IoTIcon,
+  pdf: PdfIcon,
   web3: Web3Icon,
   plus: PlusIcon,
   saas: SaaSIcon,

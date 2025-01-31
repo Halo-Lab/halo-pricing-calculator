@@ -12,6 +12,7 @@ import { QuestionGroupLabel } from "./QuestionGroupLabel";
 import { RegularQuestionBlock } from "./RegularQuestionBlock";
 import { Text, TextDecoration } from "../ui/Text";
 import { ProjectFileAcceptance } from "../store/definition";
+import { useApplicationContainer } from "../ApplicationContainerRefProvider";
 import { useDispatch, useSelector } from "../store/Provider";
 import { DescriptionQuestionBlock } from "./DescriptionQuestionBlock";
 import { MoveToNextStep, MoveToPreviousStep } from "../store/actions";
@@ -28,6 +29,7 @@ interface QuestionnaireProps {
 export function Questionnaire({
   userReachedTheEnd,
 }: QuestionnaireProps): JSX.Element {
+  const container = useApplicationContainer();
   const dispatch = useDispatch();
   const { lt, gte, range } = useBreakpoints();
 
@@ -199,7 +201,10 @@ export function Questionnaire({
             <AnimatedButton
               width={gte(540) ? undefined : "fill"}
               variant="secondary-light"
-              onPress={() => dispatch(new MoveToPreviousStep())}
+              onPress={() => {
+                container.scrollToTop();
+                dispatch(new MoveToPreviousStep());
+              }}
             >
               back
             </AnimatedButton>
@@ -216,6 +221,8 @@ export function Questionnaire({
                 variant="primary"
                 disabled={!isUserAbleToMoveFurther}
                 onPress={() => {
+                  container.scrollToTop();
+
                   if (isUserAtTheEndOfQuestionsSequence) {
                     userReachedTheEnd();
                   } else if (isUserAbleToMoveFurther) {

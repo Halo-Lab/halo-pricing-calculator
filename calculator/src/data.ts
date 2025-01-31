@@ -752,7 +752,7 @@ enum QuestionGroup {
     },
     {
       text: "More than 10 articles",
-      estimates: [new EstimateExactAssessment(0)],
+      estimates: [new EstimateExactAssessment(32)],
     },
     {
       text: "Need to discuss",

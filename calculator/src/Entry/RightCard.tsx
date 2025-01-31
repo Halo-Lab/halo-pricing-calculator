@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { JSX, useMemo, useState } from "react";
 
 import { Color } from "../palettes/colours";
 import { Option } from "../entities/option";
@@ -10,6 +10,7 @@ import { Icon, IconVariant } from "../components/icons";
 import { Box, BoxDecoration } from "../ui/Box";
 import { Svg, SvgDecoration } from "../ui/Svg";
 import { Text, TextDecoration } from "../ui/Text";
+import { useApplicationContainer } from "../ApplicationContainerRefProvider";
 import { useDispatch, useSelector } from "../store/Provider";
 import { AddAnswer, MoveToNextStep } from "../store/actions";
 
@@ -18,6 +19,7 @@ interface RightCardProperties {
 }
 
 export function RightCard({ question }: RightCardProperties): JSX.Element {
+  const container = useApplicationContainer();
   const [isHovered, setIsHovered] = useState<Reference<Option> | undefined>();
   const dispatch = useDispatch();
   const { gte, range } = useBreakpoints();
@@ -119,6 +121,7 @@ export function RightCard({ question }: RightCardProperties): JSX.Element {
                 .borderRadius(6.25)
                 .backgroundColor(Color.greyLight)}
               onPress={() => {
+                container.scrollToTop();
                 dispatch(new AddAnswer(option.id));
                 dispatch(new MoveToNextStep());
               }}

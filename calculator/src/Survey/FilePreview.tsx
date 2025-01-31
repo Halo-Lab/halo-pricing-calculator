@@ -25,7 +25,9 @@ export function FilePreview({
   const objectUrl = useMemo(
     () =>
       projectFile.acceptance === ProjectFileAcceptance.Accepted
-        ? URL.createObjectURL(projectFile.original)
+        ? projectFile.original.type === "application/pdf"
+          ? null
+          : URL.createObjectURL(projectFile.original)
         : null,
     [projectFile],
   );
@@ -135,7 +137,9 @@ export function FilePreview({
           description="Uploaded image"
           decorations={ImageDecoration().borderRadius(1)}
         />
-      ) : null}
+      ) : (
+        <Icon variant="pdf" alignX="center" alignY="center" width={2.625} />
+      )}
     </Box>
   );
 }
