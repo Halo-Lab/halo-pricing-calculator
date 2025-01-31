@@ -138,7 +138,13 @@ export function FilePreview({
           decorations={ImageDecoration().borderRadius(1)}
         />
       ) : (
-        <Icon variant="pdf" alignX="center" alignY="center" width={2.625} />
+        <Icon
+          color="white"
+          variant="pdf"
+          alignX="center"
+          alignY="center"
+          width={2.625}
+        />
       )}
     </Box>
   );
