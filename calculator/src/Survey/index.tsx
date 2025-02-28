@@ -26,8 +26,8 @@ declare namespace globalThis {
 
 export function Survey(): JSX.Element {
   const [isDataSendFormVisible, setIsDataSendFormVisible] = useState(false);
-  const [shouldFinalWordsFrameBeVisible, setShouldFinalWordsFrameBeVisible] =
-    useState(false);
+  const [dataForFinalWordsFrame, setDataForFinalWordsFrame] =
+    useState<string>();
 
   const store = useStore();
   const { lt } = useBreakpoints();
@@ -49,7 +49,7 @@ export function Survey(): JSX.Element {
         );
 
         setIsDataSendFormVisible(false);
-        setShouldFinalWordsFrameBeVisible(true);
+        setDataForFinalWordsFrame(email);
       };
 
       globalThis.onEstimateSent = onEstimateSent;
@@ -65,8 +65,8 @@ export function Survey(): JSX.Element {
   return (
     <>
       <Box width="fill" vertical={lt(1100)} spacing={lt(1100) ? 1 : 2}>
-        {shouldFinalWordsFrameBeVisible ? (
-          <FinalWords />
+        {dataForFinalWordsFrame ? (
+          <FinalWords email={dataForFinalWordsFrame} />
         ) : (
           <Questionnaire
             userReachedTheEnd={() => setIsDataSendFormVisible(true)}

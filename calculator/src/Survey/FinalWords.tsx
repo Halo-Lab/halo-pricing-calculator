@@ -36,7 +36,11 @@ const ctaCards: Array<CTACardData> = [
   },
 ];
 
-export function FinalWords(): JSX.Element {
+interface FinalWordsProps {
+  email: string;
+}
+
+export function FinalWords({ email }: FinalWordsProps): JSX.Element {
   const { lt, gte, range } = useBreakpoints();
 
   return (
@@ -98,7 +102,7 @@ export function FinalWords(): JSX.Element {
         density={0.945}
         maxWidth={41.25}
       >
-        Thanks! We’ll send the estimate to your email shortly.
+        Thanks! We’ll send the estimate to your email shortly "{email}".
       </Text>
 
       <Box

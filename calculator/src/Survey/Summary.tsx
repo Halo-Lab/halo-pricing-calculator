@@ -89,10 +89,18 @@ export function Summary({}: SummaryProps): JSX.Element {
     }
   }, [resultElements, range(680, 1100)]);
 
+  const totalEstimatesText = useMemo(() => {
+    if (totalEstimates[0] || totalEstimates[1]) {
+      return displayDuration(totalEstimates[0], totalEstimates[1]);
+    } else {
+      return "Need answers";
+    }
+  }, [totalEstimates]);
+
   return (
     <Box
       vertical
-      width={gte(1200) ? ".275fr" : range(1100, 1200) ? ".3fr" : "fill"}
+      width={gte(1200) ? ".29fr" : range(1100, 1200) ? ".3fr" : "fill"}
       padding={gte(1100) ? undefined : range(450, 1100) ? 2.5 : 1}
       spacing={gte(1100) ? 1 : range(680, 1100) ? 2 : 1.5}
       decorations={
@@ -167,7 +175,7 @@ export function Summary({}: SummaryProps): JSX.Element {
             alignX="end"
             color={gte(1100) ? Color.homeBlue : Color.yellow}
           >
-            {displayDuration(totalEstimates[0], totalEstimates[1])}
+            {totalEstimatesText}
           </Text>
         </Box>
       </Box>

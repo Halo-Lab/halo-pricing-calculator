@@ -86,7 +86,7 @@ export function CTACard({
       vertical
       maxWidth={15.3125}
     >
-      <Box width="fill" alignY="center" spacing={2} vertical>
+      <Box width="fill" spacing={2} vertical>
         <Icon variant={mainIcon} width={4} height={4} />
 
         <Text size={1.125} weight={500} spacing={0.65} density={0.9775}>

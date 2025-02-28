@@ -73,7 +73,7 @@ export function Questionnaire({
 
   return (
     <Box
-      width={gte(1200) ? ".725fr" : range(1100, 1200) ? ".7fr" : "fill"}
+      width={gte(1200) ? ".71fr" : range(1100, 1200) ? ".7fr" : "fill"}
       padding={
         gte(450)
           ? [

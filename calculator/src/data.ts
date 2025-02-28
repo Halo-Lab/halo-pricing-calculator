@@ -357,13 +357,6 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[8].id,
-      condition: new All(
-        new Selected((questions[2] as RegularQuestion).options[0]),
-        new Selected((questions[2] as RegularQuestion).options[1]),
-      ),
-    }),
-    new PreviousQuestionConditionalLink({
       question: questions[2].id,
       condition: new All(
         new Not(new Selected((questions[2] as RegularQuestion).options[0])),
@@ -404,7 +397,17 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
+      question: questions[8].id,
+      condition: new All(
+        new Selected((questions[2] as RegularQuestion).options[0]),
+        new Selected((questions[2] as RegularQuestion).options[1]),
+      ),
+    }),
+    new PreviousQuestionConditionalLink({
       question: questions[9].id,
+      condition: new Not(
+        new Selected((questions[2] as RegularQuestion).options[0]),
+      ),
     }),
   ],
 });
@@ -752,7 +755,7 @@ enum QuestionGroup {
     },
     {
       text: "More than 10 articles",
-      estimates: [new EstimateExactAssessment(32)],
+      estimates: [new EstimateExactAssessment(96)],
     },
     {
       text: "Need to discuss",
