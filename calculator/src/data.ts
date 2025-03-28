@@ -242,6 +242,25 @@ enum QuestionGroup {
   ],
 });
 /* 5 */ createRegularQuestion({
+  text: "Do you already have wireframes?",
+  title: QuestionGroup.WebDesign,
+  options: [
+    {
+      text: "Yes, we're all set",
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
+      text: "No, it needs to be designed",
+      estimates: [new EstimateExactAssessment(16)],
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[4].id,
+    }),
+  ],
+});
+/* 6 */ createRegularQuestion({
   text: "Do you have a content?",
   title: QuestionGroup.WebDesign,
   options: [
@@ -260,11 +279,11 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[4].id,
+      question: questions[5].id,
     }),
   ],
 });
-/* 6 */ createRegularQuestion({
+/* 7 */ createRegularQuestion({
   text: "What type of visuals do you need on the website?",
   title: QuestionGroup.WebDesign,
   options: [
@@ -287,29 +306,10 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[5].id,
-    }),
-  ],
-  multiple: true,
-});
-/* 7 */ createRegularQuestion({
-  text: "Do you already have wireframes?",
-  title: QuestionGroup.WebDesign,
-  options: [
-    {
-      text: "Yes, we're all set",
-      estimates: [new EstimateExactAssessment(0)],
-    },
-    {
-      text: "No, it needs to be designed",
-      estimates: [new EstimateExactAssessment(16)],
-    },
-  ],
-  previous: [
-    new PreviousQuestionConditionalLink({
       question: questions[6].id,
     }),
   ],
+  multiple: true,
 });
 /* 8 */ createRegularQuestion({
   text: "How fast do you need to complete the project?",
