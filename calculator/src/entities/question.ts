@@ -81,13 +81,10 @@ export abstract class Question extends Entity<Question> {
   }
 }
 
-export type OptionsLayoutMode = "only-single-column";
-
 export interface RegularQuestionData extends QuestionData {
   options: Reference<Option>[];
   multiple?: boolean;
   optionToGroupMap?: Record<Reference<Option>, string>;
-  optionsLayoutMode?: OptionsLayoutMode;
 }
 
 export class RegularQuestion extends Question {
@@ -100,11 +97,6 @@ export class RegularQuestion extends Question {
    * question.
    */
   multiple: boolean;
-  /**
-   * Temporary setting that forces UI on some breakpoints to
-   * avoid two-column layout for options of this question.
-   */
-  optionsLayoutMode?: OptionsLayoutMode;
   /**
    * If questions itself should not provide a Summary entry,
    * its options may contribute to other groups. This map contains
@@ -120,7 +112,6 @@ export class RegularQuestion extends Question {
     options,
     multiple,
     optionToGroupMap,
-    optionsLayoutMode,
     ...data
   }: RegularQuestionData) {
     super(data);
@@ -128,7 +119,6 @@ export class RegularQuestion extends Question {
     this.options = options;
     this.multiple = multiple ?? false;
     this.optionToGroupMap = optionToGroupMap;
-    this.optionsLayoutMode = optionsLayoutMode;
   }
 }
 

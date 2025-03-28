@@ -114,8 +114,7 @@ export function RegularQuestionBlock({
           {question.text}
         </Text>
 
-        {range(680, 1100) ||
-        (gte(1300) && question.optionsLayoutMode !== "only-single-column") ? (
+        {gte(680) && question.options.length > 3 ? (
           (() => {
             const [firstColumn, secondColumn] =
               spreadElementsAcrossColumns(optionElements);
