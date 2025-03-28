@@ -158,7 +158,7 @@ enum QuestionGroup {
 });
 // Website
 /* 2 */ createRegularQuestion({
-  text: "What type of services do you need?",
+  text: "Which service are you looking for?",
   title: QuestionGroup.Services,
   options: [
     {
@@ -188,7 +188,7 @@ enum QuestionGroup {
 });
 // Website
 /* 3 */ createRegularQuestion({
-  text: "How many pages does your website need?",
+  text: "How many pages will your website have?",
   title: QuestionGroup.WebDesign,
   options: [
     {
@@ -219,7 +219,7 @@ enum QuestionGroup {
   ],
 });
 /* 4 */ createRegularQuestion({
-  text: "What level of design do you need?",
+  text: "What design type do you prefer for your website?",
   title: QuestionGroup.WebDesign,
   options: [
     {
@@ -234,6 +234,10 @@ enum QuestionGroup {
       text: "Template design",
       estimates: [new EstimateExactAssessment(0)],
     },
+    {
+      text: "I'm not sure yet",
+      estimates: [new EstimateExactAssessment(0)],
+    },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
@@ -242,16 +246,20 @@ enum QuestionGroup {
   ],
 });
 /* 5 */ createRegularQuestion({
-  text: "Do you already have wireframes?",
+  text: "Do you already have wireframes, or do we need to build them from scratch?",
   title: QuestionGroup.WebDesign,
   options: [
     {
-      text: "Yes, we're all set",
+      text: "Yes, they're all set",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "No, it needs to be designed",
+      text: "No, they need to be designed",
       estimates: [new EstimateExactAssessment(16)],
+    },
+    {
+      text: "I need advice on this",
+      estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
@@ -261,19 +269,19 @@ enum QuestionGroup {
   ],
 });
 /* 6 */ createRegularQuestion({
-  text: "Do you have a content?",
+  text: "Do you have your content ready to go?",
   title: QuestionGroup.WebDesign,
   options: [
     {
-      text: "Yes, the content is ready",
+      text: "Yes, it's ready!",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "I'll prepare it myself",
+      text: "I'll handle it myself",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "No, I need content writing",
+      text: "No, I need help with content writing",
       estimates: [new EstimateRangeAssessment(24, 32)],
     },
   ],
@@ -284,7 +292,7 @@ enum QuestionGroup {
   ],
 });
 /* 7 */ createRegularQuestion({
-  text: "What type of visuals do you need on the website?",
+  text: "What kinds of images or visuals do you envision for your website?",
   title: QuestionGroup.WebDesign,
   options: [
     {
@@ -312,15 +320,15 @@ enum QuestionGroup {
   multiple: true,
 });
 /* 8 */ createRegularQuestion({
-  text: "How fast do you need to complete the project?",
+  text: "How quickly do you need the project to be completed?",
   title: QuestionGroup.WebDesign,
   options: [
     {
-      text: "Standard",
+      text: "Within the standard timeframe",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Fast",
+      text: "As fast as possible",
       estimates: [
         new EstimateExactAssessment(0.6, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -335,7 +343,7 @@ enum QuestionGroup {
   ],
 });
 /* 9 */ createRegularQuestion({
-  text: "How many pages will there be on the site?",
+  text: "How many pages will your website have?",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
@@ -367,7 +375,7 @@ enum QuestionGroup {
   ],
 });
 /* 10 */ createRegularQuestion({
-  text: "What development platform do you prefer?",
+  text: "How would you like your website to be built?",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
@@ -379,7 +387,7 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "Development without CMS",
+      text: "Custom development (no CMS)",
       estimates: [
         new EstimateExactAssessment(1.2, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -391,7 +399,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -412,11 +420,11 @@ enum QuestionGroup {
   ],
 });
 /* 11 */ createRegularQuestion({
-  text: "What devices should be supported?",
+  text: "What devices should your website be optimized for?",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
-      text: "Desktop and mobile only",
+      text: "Desktop and mobile",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
@@ -435,10 +443,6 @@ enum QuestionGroup {
         }),
       ],
     },
-    {
-      text: "Other",
-      estimates: [new EstimateExactAssessment(0)],
-    },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
@@ -448,7 +452,7 @@ enum QuestionGroup {
   multiple: true,
 });
 /* 12 */ createRegularQuestion({
-  text: "What additional features are needed?",
+  text: "What additional features should be included in your website?",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
@@ -472,7 +476,7 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(8, 12)],
     },
     {
-      text: "No, it's nothing special",
+      text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
@@ -485,7 +489,7 @@ enum QuestionGroup {
   multiple: true,
 });
 /* 13 */ createRegularQuestion({
-  text: "Do you need any additional services?",
+  text: "Do you need any other services to go along with the project?",
   title: QuestionGroup.Additionals,
   options: [
     {
@@ -497,7 +501,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "I don't need it right now",
+      text: "Not right now, thanks",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
@@ -524,7 +528,7 @@ enum QuestionGroup {
   },
 });
 /* 14 */ createRegularQuestion({
-  text: "What kind of branding services do you need?",
+  text: "What branding services are you looking for?",
   title: QuestionGroup.BrandingMarketing,
   options: [
     {
@@ -539,6 +543,10 @@ enum QuestionGroup {
       text: "Advanced Brand Guidelines",
       estimates: [new EstimateRangeAssessment(120, 160)],
     },
+    {
+      text: "I'd like to discuss it",
+      estimates: [new EstimateExactAssessment(0)],
+    },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
@@ -551,19 +559,19 @@ enum QuestionGroup {
   ],
 });
 /* 15 */ createRegularQuestion({
-  text: "Do you need naming?",
+  text: "Do you need help with naming?",
   title: QuestionGroup.BrandingMarketing,
   options: [
     {
-      text: "Yes, I need to develop a name",
+      text: "Yes, I'd like a name developed",
       estimates: [new EstimateExactAssessment(40)],
     },
     {
-      text: "No, I already got a name",
+      text: "No, I already have a name",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -574,7 +582,7 @@ enum QuestionGroup {
   ],
 });
 /* 16 */ createRegularQuestion({
-  text: "Do you need unique elements in your brand?",
+  text: "Do you want any unique elements for your brand?",
   title: QuestionGroup.BrandingMarketing,
   options: [
     {
@@ -586,7 +594,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(40)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
@@ -603,17 +611,17 @@ enum QuestionGroup {
   title: QuestionGroup.BrandingMarketing,
   options: [
     {
+      text: "I'd like to discuss it",
+      selection: OptionSelection.Exclusive,
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
       text: "Pitch Deck designs",
       estimates: [new EstimateRangeAssessment(12, 32)],
     },
     {
       text: "Promo video",
       estimates: [new EstimateRangeAssessment(12, 32)],
-    },
-    {
-      text: "Need to discuss",
-      selection: OptionSelection.Exclusive,
-      estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
@@ -624,7 +632,7 @@ enum QuestionGroup {
   multiple: true,
 });
 /* 18 */ createRegularQuestion({
-  text: "How many pages are there on your site?",
+  text: "How many pages does your website have?",
   title: QuestionGroup.SEO,
   options: [
     {
@@ -632,16 +640,12 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(32)],
     },
     {
-      text: "Up to 1000 pages",
+      text: "Up to 1,000 pages",
       estimates: [new EstimateExactAssessment(48)],
     },
     {
-      text: "Up to 10,000 pages",
+      text: "Over 10,000 pages",
       estimates: [new EstimateExactAssessment(72)],
-    },
-    {
-      text: "Need to discuss",
-      estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
@@ -664,7 +668,7 @@ enum QuestionGroup {
   ],
 });
 /* 19 */ createRegularQuestion({
-  text: "Do you need to update the content?",
+  text: "Does your website content need an update?",
   title: QuestionGroup.SEO,
   options: [
     {
@@ -672,11 +676,11 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(32)],
     },
     {
-      text: "No, it's fine",
+      text: "No, the content is good as is",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -687,19 +691,19 @@ enum QuestionGroup {
   ],
 });
 /* 20 */ createRegularQuestion({
-  text: "Do we need to improve your backlink profile?",
+  text: "Would you like to improve your website's backlink profile?",
   title: QuestionGroup.SEO,
   options: [
+    {
+      text: "I'm not sure yet",
+      estimates: [new EstimateExactAssessment(0)],
+    },
     {
       text: "Yes, I need to improve it",
       estimates: [new EstimateExactAssessment(16)],
     },
     {
-      text: "No, the content is up to date",
-      estimates: [new EstimateExactAssessment(0)],
-    },
-    {
-      text: "Need to discuss",
+      text: "No, it's already good",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -710,7 +714,7 @@ enum QuestionGroup {
   ],
 });
 /* 21 */ createRegularQuestion({
-  text: "What type of audit do you need?",
+  text: "What type of audit do you need for your website?",
   title: QuestionGroup.SEO,
   options: [
     {
@@ -726,7 +730,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(24)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -737,7 +741,7 @@ enum QuestionGroup {
   ],
 });
 /* 22 */ createRegularQuestion({
-  text: "How much content do you need?",
+  text: "How much content do you need to be created?",
   title: QuestionGroup.SEO,
   options: [
     {
@@ -757,7 +761,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(96)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -769,7 +773,7 @@ enum QuestionGroup {
 });
 // Web application
 /* 23 */ createRegularQuestion({
-  text: "How many pages does your web app need?",
+  text: "How many pages will your web app have?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -785,18 +789,14 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(32, 80)],
     },
     {
-      text: "> 20 pages",
+      text: "20-30+ pages",
       estimates: [new EstimateRangeAssessment(160, 280)],
-    },
-    {
-      text: "Need to discuss",
-      estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [],
 });
 /* 24 */ createRegularQuestion({
-  text: "What type of design do you need?",
+  text: "What design type do you prefer for your web app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -808,7 +808,11 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "From design libraries",
+      text: "Template-based design",
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
+      text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -819,7 +823,7 @@ enum QuestionGroup {
   ],
 });
 /* 25 */ createRegularQuestion({
-  text: "What devices should be supported?",
+  text: "What devices should your app be optimized for",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -827,7 +831,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Desktop, mobile and tablet",
+      text: "All screen sizes",
       estimates: [
         new EstimateExactAssessment(2, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -842,10 +846,6 @@ enum QuestionGroup {
         }),
       ],
     },
-    {
-      text: "Other",
-      estimates: [new EstimateExactAssessment(0)],
-    },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
@@ -854,7 +854,7 @@ enum QuestionGroup {
   ],
 });
 /* 26 */ createRegularQuestion({
-  text: "What types of users will use the application?",
+  text: "Will your app have a single user type or multiple?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -862,12 +862,16 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Multiple user types ",
+      text: "Multiple user types",
       estimates: [
         new EstimateRangeAssessment(1.2, 2, {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+    },
+    {
+      text: "I'm not sure yet",
+      estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
@@ -877,7 +881,7 @@ enum QuestionGroup {
   ],
 });
 /* 27 */ createRegularQuestion({
-  text: "Will users have personal profiles?",
+  text: "Will users have personal profiles in your app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -889,7 +893,11 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "No, users won’t have profiles",
+      text: "No, profiles aren't needed",
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
+      text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -900,7 +908,7 @@ enum QuestionGroup {
   ],
 });
 /* 28 */ createRegularQuestion({
-  text: "What level of prototyping do you need?",
+  text: "What kind of prototype do you need to visualize your app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -930,7 +938,7 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "Interactive prototype",
+      text: "Clickable prototype",
       estimates: [
         new EstimateExactAssessment(0),
         new EstimateRangeAssessment(4, 20, {
@@ -956,7 +964,7 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "Full prototype with animation",
+      text: "Full experience prototype",
       estimates: [
         new EstimateExactAssessment(0),
         new EstimateRangeAssessment(8, 40, {
@@ -981,6 +989,10 @@ enum QuestionGroup {
         }),
       ],
     },
+    {
+      text: "I'm not sure yet",
+      estimates: [new EstimateExactAssessment(0)],
+    },
   ],
   previous: [
     new PreviousQuestionConditionalLink({
@@ -989,7 +1001,7 @@ enum QuestionGroup {
   ],
 });
 /* 29 */ createRegularQuestion({
-  text: "Select the features required for your web application",
+  text: "Choose the necessary features for your web application",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
@@ -1052,13 +1064,17 @@ enum QuestionGroup {
       text: "Notification control",
       estimates: [new EstimateRangeAssessment(40, 80)],
     },
+    {
+      text: "Not sure yet, let's discuss",
+      estimates: [new EstimateExactAssessment(0)],
+    },
   ],
   previous: [],
   optional: true,
   multiple: true,
 });
 /* 30 */ createRegularQuestion({
-  text: "Do you already have a website and product/client data that needs to be migrated?",
+  text: "Do you need to migrate a website, product data, or client information?",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
@@ -1077,7 +1093,7 @@ enum QuestionGroup {
   ],
 });
 /* 31 */ createRegularQuestion({
-  text: "Do you need back-end development?",
+  text: "Do you need back-end development for your project?",
   title: QuestionGroup.WebDevelopment,
   options: [
     {
@@ -1085,7 +1101,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "You can use some CMS or low-code solutions",
+      text: "A CMS or low-code solution will work",
       estimates: [
         new EstimateRangeAssessment(1.15, 1.3, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -1093,7 +1109,7 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "Yes, full custom backend development is needed",
+      text: "Yes, I need a fully custom back-end",
       estimates: [
         new EstimateRangeAssessment(2, 2.5, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -1116,11 +1132,11 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Less than 100,000 users",
+      text: "Up to 100,000 users",
       estimates: [new EstimateRangeAssessment(24, 48)],
     },
     {
-      text: "Less than 1 million users",
+      text: "Up to 1 million users",
       estimates: [new EstimateRangeAssessment(40, 56)],
     },
     {
@@ -1144,7 +1160,7 @@ enum QuestionGroup {
   ],
 });
 /* 34 */ createFilesQuestion({
-  text: "Do you have screens of your application?",
+  text: "Do you have any screens or designs for your app?",
   title: QuestionGroup.WebDevelopment,
   previous: [
     new PreviousQuestionConditionalLink({
@@ -1153,15 +1169,15 @@ enum QuestionGroup {
   ],
 });
 /* 35 */ createRegularQuestion({
-  text: "Do you need marketing services?",
+  text: "Do you need help with branding & marketing?",
   title: QuestionGroup.Additionals,
   options: [
     {
-      text: "Yes, Branding & Marketing",
+      text: "Yes, I need branding & marketing",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "I don't need it right now",
+      text: "No, not right now",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -1178,7 +1194,7 @@ enum QuestionGroup {
   },
 });
 /* 36 */ createRegularQuestion({
-  text: "What kind of branding services do you need?",
+  text: "What branding services are you looking for?",
   title: QuestionGroup.BrandingMarketing,
   options: [
     {
@@ -1202,19 +1218,19 @@ enum QuestionGroup {
   ],
 });
 /* 37 */ createRegularQuestion({
-  text: "Do you need naming?",
+  text: "Do you need help with naming?",
   title: QuestionGroup.Additionals,
   options: [
     {
-      text: "Yes, I need to develop a name",
+      text: "Yes, I'd like a name developed",
       estimates: [new EstimateExactAssessment(40)],
     },
     {
-      text: "No, I already got a name",
+      text: "No, I already have a name",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -1225,7 +1241,7 @@ enum QuestionGroup {
   ],
 });
 /* 38 */ createRegularQuestion({
-  text: "Do you need unique elements in your brand?",
+  text: "Do you want any unique elements for your brand?",
   title: QuestionGroup.Additionals,
   options: [
     {
@@ -1237,7 +1253,7 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(40)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
@@ -1262,7 +1278,7 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(16, 40)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
     },
@@ -1276,7 +1292,7 @@ enum QuestionGroup {
 });
 // Mobile application
 /* 40 */ createRegularQuestion({
-  text: "What type of services do you need?",
+  text: "Which services are you looking for?",
   title: QuestionGroup.Services,
   options: [
     {
@@ -1305,7 +1321,7 @@ enum QuestionGroup {
   },
 });
 /* 41 */ createRegularQuestion({
-  text: "How many screens do you expect the app to include?",
+  text: "How many screens will your app include?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -1321,7 +1337,7 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(160, 240)],
     },
     {
-      text: "Need to discuss",
+      text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -1333,7 +1349,7 @@ enum QuestionGroup {
   ],
 });
 /* 42 */ createRegularQuestion({
-  text: "What level of design do you need?",
+  text: "What design type do your prefer for your mobile app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -1345,7 +1361,11 @@ enum QuestionGroup {
       ],
     },
     {
-      text: "From design libraries",
+      text: "Template-based design",
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
+      text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -1356,7 +1376,7 @@ enum QuestionGroup {
   ],
 });
 /* 43 */ createRegularQuestion({
-  text: "What level of prototyping do you need?",
+  text: "What kind of prototype do you need to visualize your app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -1364,11 +1384,15 @@ enum QuestionGroup {
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Interactive prototype",
+      text: "Clickable prototype",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Full prototype with animation",
+      text: "Full experience prototype",
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
+      text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -1379,19 +1403,19 @@ enum QuestionGroup {
   ],
 });
 /* 44 */ createRegularQuestion({
-  text: "What type of platforms do you need?",
+  text: "Which platforms do you need your app for?",
   title: QuestionGroup.AppDevelopment,
   options: [
     {
-      text: "iOS app",
+      text: "iOS only",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Android app",
+      text: "Android only",
       estimates: [new EstimateExactAssessment(0)],
     },
     {
-      text: "Both platforms ",
+      text: "Both platforms",
       estimates: [
         new EstimateExactAssessment(1.3, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -1417,7 +1441,7 @@ enum QuestionGroup {
   ],
 });
 /* 45 */ createRegularQuestion({
-  text: "Select the features required for your web application",
+  text: "Choose the necessary features for your mobile application",
   title: QuestionGroup.AppDevelopment,
   options: [
     {
@@ -1441,12 +1465,16 @@ enum QuestionGroup {
       estimates: [new EstimateRangeAssessment(120, 240)],
     },
     {
-      text: "Chats, notifications, live data updates",
+      text: "Chats, notifications, real-data updates",
       estimates: [new EstimateRangeAssessment(80, 160)],
     },
     {
       text: "Offline mode",
       estimates: [new EstimateRangeAssessment(160, 240)],
+    },
+    {
+      text: "Not sure yet, let's discuss",
+      estimates: [new EstimateExactAssessment(0)],
     },
   ],
   previous: [
@@ -1458,7 +1486,7 @@ enum QuestionGroup {
   multiple: true,
 });
 /* 46 */ createRegularQuestion({
-  text: "Do you require an admin web panel for managing app content?",
+  text: "Do you need an admin panel to manage your app's content?",
   title: QuestionGroup.AppDevelopment,
   options: [
     {
@@ -1471,6 +1499,10 @@ enum QuestionGroup {
     },
     {
       text: "No",
+      estimates: [new EstimateExactAssessment(0)],
+    },
+    {
+      text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
     },
   ],
@@ -1490,7 +1522,7 @@ enum QuestionGroup {
   ],
 });
 /* 48 */ createFilesQuestion({
-  text: "Do you have screens of your application?",
+  text: "Do you have any screens or designs for your app?",
   title: QuestionGroup.AppDevelopment,
   previous: [
     new PreviousQuestionConditionalLink({
@@ -1538,7 +1570,7 @@ questions[36].previous.push(
   }),
 );
 /* 50 */ createRegularQuestion({
-  text: "What type of services do you need?",
+  text: "Which service are you looking for?",
   title: QuestionGroup.Services,
   options: [
     {
