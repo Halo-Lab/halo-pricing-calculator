@@ -47,20 +47,24 @@ enum QuestionGroup {
       text: "Website",
       icon: "website",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Project type",
     },
     {
       text: "Web application",
       icon: "web-application",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Project type",
     },
     {
       text: "Mobile application",
       icon: "mobile-application",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Project type",
     },
     // {
     //   text: "Desktop application",
     //   estimates: [new EstimateExactAssessment(0)],
+    //   summaryLabel: 'Project type'
     // },
   ],
   previous: [],
@@ -73,81 +77,97 @@ enum QuestionGroup {
       text: "SaaS",
       icon: "saas",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Healthcare",
       icon: "healthcare",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Finance",
       icon: "finance",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Education",
       icon: "education",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Transportation & Logistics",
       icon: "logistics",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "IoT",
       icon: "iot",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Insurance",
       icon: "insurance",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Wellness & Sport",
       icon: "wellness",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Real Estate",
       icon: "real-estate",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Web3",
       icon: "web3",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Social network",
       icon: "social-network",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Agency",
       icon: "agency",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Beauty & Fashion",
       icon: "fashion",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Entertainment",
       icon: "entertainment",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "E-commerce",
       icon: "e-commerce",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
     {
       text: "Other industries",
       icon: "other-industries",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Industry",
     },
   ],
   previous: [
@@ -164,10 +184,12 @@ enum QuestionGroup {
     {
       text: "Web design",
       estimates: [new EstimateRangeAssessment(80, 160)],
+      summaryLabel: "Web design",
     },
     {
       text: "Web development",
       estimates: [new EstimateRangeAssessment(96, 200)],
+      summaryLabel: "Web dev",
     },
   ],
   previous: [
@@ -177,14 +199,6 @@ enum QuestionGroup {
     }),
   ],
   multiple: true,
-  optionToGroupMap(index, optionId) {
-    switch (index) {
-      case 0:
-        return QuestionGroup.WebDesign;
-      case 1:
-        return QuestionGroup.WebDevelopment;
-    }
-  },
 });
 // Website
 /* 3 */ createRegularQuestion({
@@ -194,18 +208,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Web design",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(24, 48)],
+      summaryLabel: "Web design",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(64, 112)],
+      summaryLabel: "Web design",
     },
     {
       text: ">20 pages",
       estimates: [new EstimateRangeAssessment(144, 280)],
+      summaryLabel: "Web design",
     },
   ],
   previous: [
@@ -229,14 +247,17 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Custom design",
     },
     {
       text: "Template design",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Template design",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Design type",
     },
   ],
   previous: [
@@ -252,14 +273,17 @@ enum QuestionGroup {
     {
       text: "Yes, they're all set",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Wireframes",
     },
     {
       text: "No, they need to be designed",
       estimates: [new EstimateExactAssessment(16)],
+      summaryLabel: "Wireframes",
     },
     {
       text: "I need advice on this",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Wireframes",
     },
   ],
   previous: [
@@ -275,14 +299,17 @@ enum QuestionGroup {
     {
       text: "Yes, it's ready!",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Content",
     },
     {
       text: "I'll handle it myself",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Content",
     },
     {
       text: "No, I need help with content writing",
       estimates: [new EstimateRangeAssessment(24, 32)],
+      summaryLabel: "Content",
     },
   ],
   previous: [
@@ -298,18 +325,22 @@ enum QuestionGroup {
     {
       text: "Stock images",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Stock images",
     },
     {
       text: "Unique illustrations",
       estimates: [new EstimateRangeAssessment(20, 40)],
+      summaryLabel: "Illustrations",
     },
     {
       text: "Custom 3d elements",
       estimates: [new EstimateRangeAssessment(16, 40)],
+      summaryLabel: "3d elements",
     },
     {
       text: "AI generated images",
       estimates: [new EstimateRangeAssessment(16, 40)],
+      summaryLabel: "AI images",
     },
   ],
   previous: [
@@ -326,6 +357,7 @@ enum QuestionGroup {
     {
       text: "Within the standard timeframe",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Standard speed",
     },
     {
       text: "As fast as possible",
@@ -334,6 +366,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Fast development",
     },
   ],
   previous: [
@@ -349,18 +382,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Pages",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(40, 100)],
+      summaryLabel: "Pages",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(72, 180)],
+      summaryLabel: "Pages",
     },
     {
       text: ">20 pages",
       estimates: [new EstimateRangeAssessment(200, 300)],
+      summaryLabel: "Pages",
     },
   ],
   previous: [
@@ -385,6 +422,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Project stack",
     },
     {
       text: "Custom development (no CMS)",
@@ -393,14 +431,17 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Project stack",
     },
     {
       text: "No-code (Webflow)",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Project stack",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Project stack",
     },
   ],
   previous: [
@@ -426,6 +467,7 @@ enum QuestionGroup {
     {
       text: "Desktop and mobile",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Desktop and mobile",
     },
     {
       text: "Big screens (1920px, 2k, 4k)",
@@ -434,6 +476,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Big screens",
     },
     {
       text: "Tablet (landscape & portrait)",
@@ -442,6 +485,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Tablet",
     },
   ],
   previous: [
@@ -458,27 +502,33 @@ enum QuestionGroup {
     {
       text: "Map and geolocation support",
       estimates: [new EstimateRangeAssessment(8, 12)],
+      summaryLabel: "Geo support",
     },
     {
       text: "Analytics tools",
       estimates: [new EstimateExactAssessment(4)],
+      summaryLabel: "Analytics",
     },
     {
       text: "Payment systems (Stripe, PayPal)",
       estimates: [new EstimateRangeAssessment(16, 24)],
+      summaryLabel: "Payments",
     },
     {
       text: "Cloud storage, file upload",
       estimates: [new EstimateRangeAssessment(8, 12)],
+      summaryLabel: "File handling",
     },
     {
       text: "User support and chat",
       estimates: [new EstimateRangeAssessment(8, 12)],
+      summaryLabel: "Chat",
     },
     {
       text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Features",
     },
   ],
   previous: [
@@ -495,15 +545,18 @@ enum QuestionGroup {
     {
       text: "Yes, Branding & Marketing",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Branding & Marketing",
     },
     {
       text: "SEO will come in handy",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "SEO",
     },
     {
       text: "Not right now, thanks",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Services",
     },
   ],
   previous: [
@@ -518,14 +571,6 @@ enum QuestionGroup {
     }),
   ],
   multiple: true,
-  optionToGroupMap(index, optionId) {
-    switch (index) {
-      case 0:
-        return QuestionGroup.BrandingMarketing;
-      case 1:
-        return QuestionGroup.SEO;
-    }
-  },
 });
 /* 14 */ createRegularQuestion({
   text: "What branding services are you looking for?",
@@ -534,18 +579,22 @@ enum QuestionGroup {
     {
       text: "Just a logo",
       estimates: [new EstimateRangeAssessment(40, 56)],
+      summaryLabel: "Logo",
     },
     {
       text: "Basic Brand Guidelines",
       estimates: [new EstimateExactAssessment(80)],
+      summaryLabel: "Basic Brand",
     },
     {
       text: "Advanced Brand Guidelines",
       estimates: [new EstimateRangeAssessment(120, 160)],
+      summaryLabel: "Advanced Brand",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Branding",
     },
   ],
   previous: [
@@ -565,14 +614,17 @@ enum QuestionGroup {
     {
       text: "Yes, I'd like a name developed",
       estimates: [new EstimateExactAssessment(40)],
+      summaryLabel: "Naming",
     },
     {
       text: "No, I already have a name",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Naming",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Naming",
     },
   ],
   previous: [
@@ -588,15 +640,18 @@ enum QuestionGroup {
     {
       text: "Mascots (brand characters)",
       estimates: [new EstimateExactAssessment(40)],
+      summaryLabel: "Mascots",
     },
     {
       text: "Illustrations",
       estimates: [new EstimateExactAssessment(40)],
+      summaryLabel: "Illustrations",
     },
     {
       text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Unique elements",
     },
   ],
   previous: [
@@ -614,14 +669,17 @@ enum QuestionGroup {
       text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Marketing materials",
     },
     {
       text: "Pitch Deck designs",
       estimates: [new EstimateRangeAssessment(12, 32)],
+      summaryLabel: "Pitch Deck",
     },
     {
       text: "Promo video",
       estimates: [new EstimateRangeAssessment(12, 32)],
+      summaryLabel: "Promo video",
     },
   ],
   previous: [
@@ -638,14 +696,17 @@ enum QuestionGroup {
     {
       text: "Up to 100 pages",
       estimates: [new EstimateExactAssessment(32)],
+      summaryLabel: "SEO pages",
     },
     {
       text: "Up to 1,000 pages",
       estimates: [new EstimateExactAssessment(48)],
+      summaryLabel: "SEO pages",
     },
     {
       text: "Over 10,000 pages",
       estimates: [new EstimateExactAssessment(72)],
+      summaryLabel: "SEO pages",
     },
   ],
   previous: [
@@ -674,14 +735,17 @@ enum QuestionGroup {
     {
       text: "Yes, I need to update the content",
       estimates: [new EstimateExactAssessment(32)],
+      summaryLabel: "SEO content",
     },
     {
       text: "No, the content is good as is",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "SEO content",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "SEO content",
     },
   ],
   previous: [
@@ -697,14 +761,17 @@ enum QuestionGroup {
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "SEO backlinks",
     },
     {
       text: "Yes, I need to improve it",
       estimates: [new EstimateExactAssessment(16)],
+      summaryLabel: "SEO backlinks",
     },
     {
       text: "No, it's already good",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "SEO backlinks",
     },
   ],
   previous: [
@@ -720,18 +787,22 @@ enum QuestionGroup {
     {
       text: "Full SEO audit",
       estimates: [new EstimateExactAssessment(72)],
+      summaryLabel: "SEO audit",
     },
     {
       text: "Technical audit",
       estimates: [new EstimateExactAssessment(32)],
+      summaryLabel: "SEO audit",
     },
     {
       text: "Backlink profile audit",
       estimates: [new EstimateExactAssessment(24)],
+      summaryLabel: "SEO audit",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "SEO audit",
     },
   ],
   previous: [
@@ -747,22 +818,27 @@ enum QuestionGroup {
     {
       text: "3 articles",
       estimates: [new EstimateRangeAssessment(8, 16)],
+      summaryLabel: "Articles",
     },
     {
       text: "5 articles",
       estimates: [new EstimateExactAssessment(16)],
+      summaryLabel: "Articles",
     },
     {
       text: "10 articles",
       estimates: [new EstimateExactAssessment(32)],
+      summaryLabel: "Articles",
     },
     {
       text: "More than 10 articles",
       estimates: [new EstimateExactAssessment(96)],
+      summaryLabel: "Articles",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Articles",
     },
   ],
   previous: [
@@ -779,18 +855,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "UI pages",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(24, 64)],
+      summaryLabel: "UI pages",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(32, 80)],
+      summaryLabel: "UI pages",
     },
     {
       text: "20-30+ pages",
       estimates: [new EstimateRangeAssessment(160, 280)],
+      summaryLabel: "UI pages",
     },
   ],
   previous: [],
@@ -806,14 +886,17 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Custom design",
     },
     {
       text: "Template-based design",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Template design",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Design type",
     },
   ],
   previous: [
@@ -829,6 +912,7 @@ enum QuestionGroup {
     {
       text: "Desktop only",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Optimization",
     },
     {
       text: "All screen sizes",
@@ -837,6 +921,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Optimization",
     },
     {
       text: "Desktop and mobile",
@@ -845,6 +930,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Optimization",
     },
   ],
   previous: [
@@ -860,6 +946,7 @@ enum QuestionGroup {
     {
       text: "Single user type",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Account types",
     },
     {
       text: "Multiple user types",
@@ -868,10 +955,12 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Account types",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Account types",
     },
   ],
   previous: [
@@ -891,14 +980,17 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Personal profiles",
     },
     {
       text: "No, profiles aren't needed",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "No profiles",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Profiles",
     },
   ],
   previous: [
@@ -936,6 +1028,7 @@ enum QuestionGroup {
           ),
         }),
       ],
+      summaryLabel: "Wireframes",
     },
     {
       text: "Clickable prototype",
@@ -962,6 +1055,7 @@ enum QuestionGroup {
           ),
         }),
       ],
+      summaryLabel: "Clickable prototype",
     },
     {
       text: "Full experience prototype",
@@ -988,10 +1082,12 @@ enum QuestionGroup {
           ),
         }),
       ],
+      summaryLabel: "Full prototype",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Prototype",
     },
   ],
   previous: [
@@ -1007,46 +1103,57 @@ enum QuestionGroup {
     {
       text: "User registration & profiles",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "User profile",
     },
     {
       text: "New database",
       estimates: [new EstimateRangeAssessment(24, 40)],
+      summaryLabel: "Database",
     },
     {
       text: "Chat support",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "Chat support",
     },
     {
       text: "Video/Audio calls (3rd party)",
       estimates: [new EstimateRangeAssessment(40, 120)],
+      summaryLabel: "Calls",
     },
     {
       text: "User-to-user text messaging",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "PtP messaging",
     },
     {
       text: "Payments (Stripe, PayPal, etc.)",
       estimates: [new EstimateRangeAssessment(40, 120)],
+      summaryLabel: "Payments",
     },
     {
       text: "Email subscription services",
       estimates: [new EstimateRangeAssessment(8, 24)],
+      summaryLabel: "Email subs",
     },
     {
       text: "Cloud storage, file upload/download",
       estimates: [new EstimateRangeAssessment(24, 40)],
+      summaryLabel: "File handling",
     },
     {
       text: "Maps & Location services",
       estimates: [new EstimateRangeAssessment(24, 40)],
+      summaryLabel: "Maps & Locations",
     },
     {
       text: "CDN (Content Delivery Network)",
       estimates: [new EstimateRangeAssessment(24, 40)],
+      summaryLabel: "CDN",
     },
     {
       text: "User management",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "User management",
     },
     {
       text: "Content management",
@@ -1055,18 +1162,22 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Content management",
     },
     {
       text: "Reporting & Analytics",
       estimates: [new EstimateRangeAssessment(40, 120)],
+      summaryLabel: "Analytics",
     },
     {
       text: "Notification control",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "Notifications",
     },
     {
       text: "Not sure yet, let's discuss",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Additional features",
     },
   ],
   previous: [],
@@ -1080,10 +1191,12 @@ enum QuestionGroup {
     {
       text: "Yes",
       estimates: [new EstimateRangeAssessment(24, 40)],
+      summaryLabel: "Migration",
     },
     {
       text: "No",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Migration",
     },
   ],
   previous: [
@@ -1099,6 +1212,7 @@ enum QuestionGroup {
     {
       text: "No, it's on my team",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Back-end",
     },
     {
       text: "A CMS or low-code solution will work",
@@ -1107,6 +1221,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Low-code back-end",
     },
     {
       text: "Yes, I need a fully custom back-end",
@@ -1115,6 +1230,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Full back-end",
     },
   ],
   previous: [
@@ -1130,18 +1246,22 @@ enum QuestionGroup {
     {
       text: "Less than 10,000 users",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Visitors",
     },
     {
       text: "Up to 100,000 users",
       estimates: [new EstimateRangeAssessment(24, 48)],
+      summaryLabel: "Visitors",
     },
     {
       text: "Up to 1 million users",
       estimates: [new EstimateRangeAssessment(40, 56)],
+      summaryLabel: "Visitors",
     },
     {
       text: "More than 1 million users",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "Visitors",
     },
   ],
   previous: [
@@ -1175,10 +1295,12 @@ enum QuestionGroup {
     {
       text: "Yes, I need branding & marketing",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Branding & marketing",
     },
     {
       text: "No, not right now",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Branding & marketing",
     },
   ],
   previous: [
@@ -1186,12 +1308,6 @@ enum QuestionGroup {
       question: questions[34].id,
     }),
   ],
-  optionToGroupMap(index, optionId) {
-    switch (index) {
-      case 0:
-        return QuestionGroup.BrandingMarketing;
-    }
-  },
 });
 /* 36 */ createRegularQuestion({
   text: "What branding services are you looking for?",
@@ -1200,14 +1316,17 @@ enum QuestionGroup {
     {
       text: "Just a logo",
       estimates: [new EstimateRangeAssessment(40, 56)],
+      summaryLabel: "Logo",
     },
     {
       text: "Basic Brand Guidelines",
       estimates: [new EstimateRangeAssessment(80, 120)],
+      summaryLabel: "Basic Brand",
     },
     {
       text: "Advanced Brand Guidelines",
       estimates: [new EstimateRangeAssessment(160, 240)],
+      summaryLabel: "Advanced Brand",
     },
   ],
   previous: [
@@ -1224,14 +1343,17 @@ enum QuestionGroup {
     {
       text: "Yes, I'd like a name developed",
       estimates: [new EstimateExactAssessment(40)],
+      summaryLabel: "Naming",
     },
     {
       text: "No, I already have a name",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Naming",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Naming",
     },
   ],
   previous: [
@@ -1247,15 +1369,18 @@ enum QuestionGroup {
     {
       text: "Mascots (brand characters)",
       estimates: [new EstimateExactAssessment(40)],
+      summaryLabel: "Mascots",
     },
     {
       text: "Illustrations",
       estimates: [new EstimateExactAssessment(40)],
+      summaryLabel: "Illustrations",
     },
     {
       text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Unique elements",
     },
   ],
   previous: [
@@ -1272,15 +1397,18 @@ enum QuestionGroup {
     {
       text: "Pitch Deck designs",
       estimates: [new EstimateRangeAssessment(80, 120)],
+      summaryLabel: "Pitch deck",
     },
     {
       text: "Promo video",
       estimates: [new EstimateRangeAssessment(16, 40)],
+      summaryLabel: "Promo video",
     },
     {
       text: "I'd like to discuss it",
       selection: OptionSelection.Exclusive,
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Marketing materials",
     },
   ],
   previous: [
@@ -1298,10 +1426,12 @@ enum QuestionGroup {
     {
       text: "UI/UX design",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "UI/UX design",
     },
     {
       text: "App development",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "App development",
     },
   ],
   previous: [
@@ -1311,14 +1441,6 @@ enum QuestionGroup {
     }),
   ],
   multiple: true,
-  optionToGroupMap(index, optionId) {
-    switch (index) {
-      case 0:
-        return QuestionGroup.UXUIDesign;
-      case 1:
-        return QuestionGroup.AppDevelopment;
-    }
-  },
 });
 /* 41 */ createRegularQuestion({
   text: "How many screens will your app include?",
@@ -1327,18 +1449,22 @@ enum QuestionGroup {
     {
       text: "1-10 screens",
       estimates: [new EstimateRangeAssessment(40, 80)],
+      summaryLabel: "Screens",
     },
     {
       text: "10-25 screens",
       estimates: [new EstimateRangeAssessment(80, 160)],
+      summaryLabel: "Screens",
     },
     {
       text: "25+ screens",
       estimates: [new EstimateRangeAssessment(160, 240)],
+      summaryLabel: "Screens",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Screens",
     },
   ],
   previous: [
@@ -1359,14 +1485,17 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Custom UI",
     },
     {
       text: "Template-based design",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Template UI",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Design type",
     },
   ],
   previous: [
@@ -1399,6 +1528,7 @@ enum QuestionGroup {
           ),
         }),
       ],
+      summaryLabel: "Wireframes",
     },
     {
       text: "Clickable prototype",
@@ -1420,6 +1550,7 @@ enum QuestionGroup {
           ),
         }),
       ],
+      summaryLabel: "Clickable prototype",
     },
     {
       text: "Full experience prototype",
@@ -1441,10 +1572,12 @@ enum QuestionGroup {
           ),
         }),
       ],
+      summaryLabel: "Full prototype",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Prototype type",
     },
   ],
   previous: [
@@ -1460,10 +1593,12 @@ enum QuestionGroup {
     {
       text: "iOS only",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "OS support",
     },
     {
       text: "Android only",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "OS support",
     },
     {
       text: "Both platforms",
@@ -1472,6 +1607,7 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "OS support",
     },
   ],
   previous: [
@@ -1498,34 +1634,42 @@ enum QuestionGroup {
     {
       text: "Payments (Stripe, PayPal, etc.)",
       estimates: [new EstimateRangeAssessment(80, 240)],
+      summaryLabel: "Payments",
     },
     {
       text: "User authentication (login/signup)",
       estimates: [new EstimateRangeAssessment(24, 80)],
+      summaryLabel: "Auth",
     },
     {
       text: "Maps & Location services",
       estimates: [new EstimateRangeAssessment(80, 240)],
+      summaryLabel: "Maps & Locations",
     },
     {
       text: "Media uploads (e.g., photos, videos, documents)",
       estimates: [new EstimateRangeAssessment(80, 120)],
+      summaryLabel: "File handling",
     },
     {
       text: "Database management, cloud storage, user management",
       estimates: [new EstimateRangeAssessment(120, 240)],
+      summaryLabel: "Storage",
     },
     {
       text: "Chats, notifications, real-data updates",
       estimates: [new EstimateRangeAssessment(80, 160)],
+      summaryLabel: "Real-time system",
     },
     {
       text: "Offline mode",
       estimates: [new EstimateRangeAssessment(160, 240)],
+      summaryLabel: "Offline mode",
     },
     {
       text: "Not sure yet, let's discuss",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Additional features",
     },
   ],
   previous: [
@@ -1547,14 +1691,17 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
+      summaryLabel: "Admin panel",
     },
     {
       text: "No",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Admin panel",
     },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Admin panel",
     },
   ],
   previous: [
@@ -1588,10 +1735,12 @@ enum QuestionGroup {
     {
       text: "Yes, Branding & Marketing",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Branding & Marketing",
     },
     {
       text: "I don't need it right now",
       estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Services",
     },
   ],
   previous: [
@@ -1606,12 +1755,6 @@ enum QuestionGroup {
       condition: new Selected((questions[40] as RegularQuestion).options[1]),
     }),
   ],
-  optionToGroupMap(index, optionId) {
-    switch (index) {
-      case 0:
-        return QuestionGroup.BrandingMarketing;
-    }
-  },
 });
 questions[49].next.push(questions[36].id);
 questions[36].previous.push(
@@ -1627,10 +1770,12 @@ questions[36].previous.push(
     {
       text: "UI/UX design",
       estimates: [new EstimateRangeAssessment(80, 160)],
+      summaryLabel: "UI/UX design",
     },
     {
       text: "Web development",
       estimates: [new EstimateRangeAssessment(96, 200)],
+      summaryLabel: "Web dev",
     },
   ],
   previous: [
@@ -1640,14 +1785,6 @@ questions[36].previous.push(
     }),
   ],
   multiple: true,
-  optionToGroupMap(index, optionId) {
-    switch (index) {
-      case 0:
-        return QuestionGroup.UXUIDesign;
-      case 1:
-        return QuestionGroup.WebDevelopment;
-    }
-  },
 });
 questions[50].next.push(questions[23].id);
 questions[23].previous.push(
@@ -1702,23 +1839,16 @@ interface MinimalOptionWithEstimates {
   icon?: IconVariant;
   selection?: OptionSelection;
   estimates: EstimateAssessment[];
+  summaryLabel: string;
 }
 
 interface MinimalRegularQuestionData
-  extends Omit<
-    RegularQuestionData,
-    "id" | "next" | "options" | "optionToGroupMap"
-  > {
+  extends Omit<RegularQuestionData, "id" | "next" | "options"> {
   options: MinimalOptionWithEstimates[];
-  optionToGroupMap?: (
-    index: number,
-    optionId: Reference<Option>,
-  ) => string | undefined;
 }
 
 function createRegularQuestion({
   options: minimalOptionsData,
-  optionToGroupMap,
   ...minimalData
 }: MinimalRegularQuestionData): void {
   const questionData: RegularQuestionData = Object.assign(
@@ -1731,7 +1861,7 @@ function createRegularQuestion({
   insertQuestionToModuleVariable(question);
 
   minimalOptionsData.forEach(
-    ({ text, icon, selection, estimates: minimalEstimates }) => {
+    ({ text, icon, selection, estimates: minimalEstimates, summaryLabel }) => {
       const option = new Option({
         id: createId(),
         text,
@@ -1739,6 +1869,7 @@ function createRegularQuestion({
         question: question.id,
         estimates: [],
         selection,
+        summaryLabel,
       });
 
       question.options.push(option.id);
@@ -1758,22 +1889,6 @@ function createRegularQuestion({
       });
     },
   );
-
-  if (optionToGroupMap) {
-    question.optionToGroupMap = question.options
-      .map(
-        (optionId, index) =>
-          [optionId, optionToGroupMap(index, optionId)] as const,
-      )
-      .filter(([_, groupId]) => groupId)
-      .reduce<Record<Reference<Option>, string>>(
-        (accumulator, [optionId, groupId]) => {
-          accumulator[optionId] = groupId!;
-          return accumulator;
-        },
-        {},
-      );
-  }
 }
 
 interface MinimalDescriptionQuestionData

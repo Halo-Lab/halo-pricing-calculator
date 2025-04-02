@@ -9,6 +9,7 @@ export interface OptionData {
   question: Reference<Question>;
   estimates: Reference<Estimate>[];
   selection?: OptionSelection;
+  summaryLabel: string;
 }
 
 /**
@@ -27,9 +28,13 @@ export enum OptionSelection {
 
 export class Option extends Entity<Option> {
   /**
-   * Option's text
+   * Option's text.
    */
   text: string;
+  /**
+   * Option's label which will be shown in `Summary` block.
+   */
+  summaryLabel: string;
   /**
    * Option's identifier of an associated icon.
    */
@@ -52,7 +57,15 @@ export class Option extends Entity<Option> {
    */
   selection?: OptionSelection;
 
-  constructor({ id, text, icon, question, estimates, selection }: OptionData) {
+  constructor({
+    id,
+    text,
+    icon,
+    question,
+    estimates,
+    selection,
+    summaryLabel,
+  }: OptionData) {
     super(id);
 
     this.text = text;
@@ -60,5 +73,6 @@ export class Option extends Entity<Option> {
     this.question = question;
     this.estimates = estimates;
     this.selection = selection;
+    this.summaryLabel = summaryLabel;
   }
 }

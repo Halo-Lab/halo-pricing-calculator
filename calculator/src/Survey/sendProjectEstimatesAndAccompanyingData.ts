@@ -3,7 +3,7 @@ import { EstimateRange } from "../entities/estimate";
 import { calculateEstimates } from "../store/selectors";
 import { Question, RegularQuestion } from "../entities/question";
 import { ProjectFileAcceptance, Store } from "../store/definition";
-import { groupQuestionsBasedOnAnswers } from "./fillWebflowModalForm";
+import { groupQuestionsBasedOnAnswers } from "./groupQuestionsBasedOnAnswers";
 
 export async function sendProjectEstimatesAndAccompanyingData(
   store: Store,

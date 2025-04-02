@@ -84,7 +84,6 @@ export abstract class Question extends Entity<Question> {
 export interface RegularQuestionData extends QuestionData {
   options: Reference<Option>[];
   multiple?: boolean;
-  optionToGroupMap?: Record<Reference<Option>, string>;
 }
 
 export class RegularQuestion extends Question {
@@ -97,28 +96,12 @@ export class RegularQuestion extends Question {
    * question.
    */
   multiple: boolean;
-  /**
-   * If questions itself should not provide a Summary entry,
-   * its options may contribute to other groups. This map contains
-   * relations of which option adds assessment to which group.
-   *
-   * When selected option is intended to contribute to another group
-   * the title of the current question, which option belongs to,
-   * will not appear in Summary.
-   */
-  optionToGroupMap?: Record<Reference<Option>, string>;
 
-  constructor({
-    options,
-    multiple,
-    optionToGroupMap,
-    ...data
-  }: RegularQuestionData) {
+  constructor({ options, multiple, ...data }: RegularQuestionData) {
     super(data);
 
     this.options = options;
     this.multiple = multiple ?? false;
-    this.optionToGroupMap = optionToGroupMap;
   }
 }
 

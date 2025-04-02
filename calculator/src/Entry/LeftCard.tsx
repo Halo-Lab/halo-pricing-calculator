@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 import { Svg } from "../ui/Svg";
 import { Color } from "../palettes/colours";
 import { useBreakpoints } from "../ui/Responsiveness";

@@ -7,8 +7,6 @@ import { useStore } from "../store/Provider";
 import { Questionnaire } from "./Questionnaire";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { sendProjectEstimatesAndAccompanyingData } from "./sendProjectEstimatesAndAccompanyingData";
-// import { SendEmailForm } from "./SendEmailForm";
-// import { fillWebflowModalForm } from "./fillWebflowModalForm";
 
 declare namespace globalThis {
   interface OnEstimateSent {
@@ -54,8 +52,6 @@ export function Survey(): JSX.Element {
 
       globalThis.onEstimateSent = onEstimateSent;
 
-      // fillWebflowModalForm(store);
-
       return () => {
         delete globalThis.onEstimateSent;
       };
@@ -63,26 +59,15 @@ export function Survey(): JSX.Element {
   }, [isDataSendFormVisible, store]);
 
   return (
-    <>
-      <Box width="fill" vertical={lt(1100)} spacing={lt(1100) ? 1 : 2}>
-        {dataForFinalWordsFrame ? (
-          <FinalWords email={dataForFinalWordsFrame} />
-        ) : (
-          <Questionnaire
-            userReachedTheEnd={() => setIsDataSendFormVisible(true)}
-          />
-        )}
-        <Summary />
-      </Box>
-      {/* isDataSendFormVisible && (
-        <SendEmailForm
-          closeForm={() => setIsDataSendFormVisible(false)}
-          onEmailSent={() => {
-            setIsDataSendFormVisible(false);
-            setShouldFinalWordsFrameBeVisible(true);
-          }}
+    <Box width="fill" vertical={lt(1100)} spacing={lt(1100) ? 1 : 2}>
+      {dataForFinalWordsFrame ? (
+        <FinalWords email={dataForFinalWordsFrame} />
+      ) : (
+        <Questionnaire
+          userReachedTheEnd={() => setIsDataSendFormVisible(true)}
         />
-      ) */}
-    </>
+      )}
+      <Summary scrollable={!dataForFinalWordsFrame} />
+    </Box>
   );
 }

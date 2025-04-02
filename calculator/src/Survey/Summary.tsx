@@ -10,9 +10,11 @@ import { Box, BoxDecoration } from "../ui/Box";
 import { calculateEstimates } from "../store/selectors";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
 
-interface SummaryProps {}
+interface SummaryProps {
+  scrollable: boolean;
+}
 
-export function Summary({}: SummaryProps): JSX.Element {
+export function Summary({ scrollable }: SummaryProps): JSX.Element {
   const { gte, range } = useBreakpoints();
 
   const options = useSelector((store) => store.options);
@@ -93,7 +95,7 @@ export function Summary({}: SummaryProps): JSX.Element {
     if (totalEstimates[0] || totalEstimates[1]) {
       return displayDuration(totalEstimates[0], totalEstimates[1]);
     } else {
-      return "Need answers";
+      return "Add details to see!";
     }
   }, [totalEstimates]);
 
@@ -134,7 +136,13 @@ export function Summary({}: SummaryProps): JSX.Element {
             {gridElements}
           </Box>
         ) : (
-          <Box vertical width="fill" spacing={gte(1100) ? 0.75 : 0.5}>
+          <Box
+            vertical
+            width="fill"
+            spacing={gte(1100) ? 0.75 : 0.5}
+            maxHeight={scrollable && gte(1100) ? 10 : undefined}
+            clipY={scrollable && gte(1100) ? "scrollable" : undefined}
+          >
             {resultElements}
           </Box>
         )}

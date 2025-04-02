@@ -37,7 +37,7 @@ import { MobileApplicationIcon } from "./MobileApplicationIcon";
 
 export type IconVariant =
   | "iot"
-  | 'pdf'
+  | "pdf"
   | "web3"
   | "plus"
   | "saas"
