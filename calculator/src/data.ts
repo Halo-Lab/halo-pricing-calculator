@@ -1381,15 +1381,66 @@ enum QuestionGroup {
   options: [
     {
       text: "Wireframes",
-      estimates: [new EstimateExactAssessment(0)],
+      estimates: [
+        new EstimateExactAssessment(0),
+        new EstimateRangeAssessment(4, 80, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[0],
+          ),
+        }),
+        new EstimateRangeAssessment(44, 200, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[1],
+          ),
+        }),
+        new EstimateRangeAssessment(280, 320, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[2],
+          ),
+        }),
+      ],
     },
     {
       text: "Clickable prototype",
-      estimates: [new EstimateExactAssessment(0)],
+      estimates: [
+        new EstimateExactAssessment(0),
+        new EstimateRangeAssessment(4, 40, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[0],
+          ),
+        }),
+        new EstimateRangeAssessment(44, 100, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[1],
+          ),
+        }),
+        new EstimateRangeAssessment(120, 160, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[2],
+          ),
+        }),
+      ],
     },
     {
       text: "Full experience prototype",
-      estimates: [new EstimateExactAssessment(0)],
+      estimates: [
+        new EstimateExactAssessment(0),
+        new EstimateRangeAssessment(8, 80, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[0],
+          ),
+        }),
+        new EstimateRangeAssessment(88, 200, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[1],
+          ),
+        }),
+        new EstimateRangeAssessment(320, 400, {
+          condition: new Selected(
+            (questions[41] as RegularQuestion).options[2],
+          ),
+        }),
+      ],
     },
     {
       text: "I'm not sure yet",
@@ -1738,11 +1789,11 @@ function createDescriptionQuestion(
     id: createId<Reference<Question>>(),
     next: [],
     helpMessage:
-      "Please pay attention to the following points, as they will help us provide the most accurate estimate for your project:",
+      "To help us provide the most accurate estimate, please pay attention to the following points:",
     helpPoints: [
-      "Share your product’s problem, solution, and key details.",
+      "Tell us about your product's purpose, key features, and the problem it solves.",
       "No need to be overly detailed, but clarity is key.",
-      "If you're just starting, share a competitor’s link and explain how you want to stand out.",
+      "If you're just starting, share a competitor's link and explain how you want to stand out.",
     ],
     ...options,
   };
