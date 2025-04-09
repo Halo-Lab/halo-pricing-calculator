@@ -23,13 +23,18 @@ export function ApplicationContainerRefProvider({
         ref: containerRef,
         scrollToTop() {
           // Make sure to scroll after ref is populated.
-          setTimeout(() => {
-            containerRef.current?.scrollIntoView({
-              block: "start",
-              inline: "nearest",
-              behavior: "smooth",
-            });
-          });
+          setTimeout(
+            () => {
+              containerRef.current?.scrollIntoView({
+                block: "start",
+                inline: "nearest",
+                behavior: "smooth",
+              });
+            },
+            // Wait a bit longer than one frame to make sure that
+            // the layout is recalculated and the new position is known.
+            20,
+          );
         },
       }}
     >
