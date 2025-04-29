@@ -7,6 +7,7 @@ import { Viewport } from "./ui/Viewport";
 import { useSelector } from "./store/Provider";
 import { Box, BoxDecoration } from "./ui/Box";
 import { useApplicationContainer } from "./ApplicationContainerRefProvider";
+import { platformModifiers, usePlatform } from "./hooks/usePlatform";
 
 const globalStyles = `
 @keyframes spinning-loader {
@@ -21,6 +22,7 @@ const globalStyles = `
 `;
 
 export function Application(): JSX.Element {
+  const platform = usePlatform();
   const container = useApplicationContainer();
   const currentStep = useSelector((store) => store.currentStep);
 
@@ -30,6 +32,9 @@ export function Application(): JSX.Element {
         ref={container.ref}
         width="fill"
         decorations={BoxDecoration().color(Color.blueDark)}
+        _extend={{
+          className: platformModifiers[platform],
+        }}
       >
         {currentStep ? <Survey /> : <Entry />}
       </Box>
