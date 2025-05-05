@@ -142,6 +142,10 @@ export function Summary({ scrollable }: SummaryProps): JSX.Element {
             spacing={gte(1100) ? 0.75 : 0.5}
             maxHeight={scrollable && gte(1100) ? 10 : undefined}
             clipY={scrollable && gte(1100) ? "scrollable" : undefined}
+            _extend={{
+              // Prevent lenis to inerfere with the scollable block.
+              "data-lenis-prevent": "",
+            }}
           >
             {resultElements}
           </Box>
