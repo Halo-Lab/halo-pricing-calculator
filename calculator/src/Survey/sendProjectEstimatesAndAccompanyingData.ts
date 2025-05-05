@@ -12,72 +12,69 @@ export async function sendProjectEstimatesAndAccompanyingData(
   phone?: string,
   countryCode?: string,
 ): Promise<void> {
-  const form = getForm();
+  // const form = getForm();
 
-  if (form) {
-    // const name =
-    //   form.querySelector<HTMLInputElement>("#Calculator-Name")!.value;
-    // const email =
-    //   form.querySelector<HTMLInputElement>("#Calculator-email")!.value;
-    // const phone = form.querySelector<HTMLInputElement>(
-    //   '[name="phone_full"]',
-    // )!.value;
-    // const countryCode = form.querySelector<HTMLInputElement>(
-    //   '[name="country_code"]',
-    // )!.value;
+  // if (form) {
+  // const name =
+  //   form.querySelector<HTMLInputElement>("#Calculator-Name")!.value;
+  // const email =
+  //   form.querySelector<HTMLInputElement>("#Calculator-email")!.value;
+  // const phone = form.querySelector<HTMLInputElement>(
+  //   '[name="phone_full"]',
+  // )!.value;
+  // const countryCode = form.querySelector<HTMLInputElement>(
+  //   '[name="country_code"]',
+  // )!.value;
+  //   } // else should not happen
 
-    /**
-     * The content is going to be:
-     *
-     * ```ts
-     * {
-     *   name: string,
-     *   email: string,
-     *   phone: string,
-     *   countryCode: string,
-     *   questionnaire: string, // Stringified {@link QuestionnaireResults} object.
-     *   files?: Array<File>,
-     *   description?: string,
-     * }
-     * ```
-     */
-    const body = new FormData();
+  /**
+   * The content is going to be:
+   *
+   * ```ts
+   * {
+   *   name: string,
+   *   email: string,
+   *   phone: string,
+   *   countryCode: string,
+   *   questionnaire: string, // Stringified {@link QuestionnaireResults} object.
+   *   files?: Array<File>,
+   *   description?: string,
+   * }
+   * ```
+   */
+  const body = new FormData();
 
-    body.set("name", name);
-    body.set("email", email);
-    body.set("questionnaire", prepareQuestionnaireResults(store));
-    store.projectFiles
-      ?.filter((file) => file.acceptance === ProjectFileAcceptance.Accepted)
-      .forEach((file) => body.append("files", file.original));
-    if (phone) {
-      body.set("phone", phone);
-    }
-    if (countryCode) {
-      body.set("countryCode", countryCode);
-    }
-    if (store.projectDescription) {
-      body.set("description", store.projectDescription);
-    }
+  body.set("name", name);
+  body.set("email", email);
+  body.set("questionnaire", prepareQuestionnaireResults(store));
+  store.projectFiles
+    ?.filter((file) => file.acceptance === ProjectFileAcceptance.Accepted)
+    .forEach((file) => body.append("files", file.original));
+  if (phone) {
+    body.set("phone", phone);
+  }
+  if (countryCode) {
+    body.set("countryCode", countryCode);
+  }
+  if (store.projectDescription) {
+    body.set("description", store.projectDescription);
+  }
 
-    const response = await fetch(
-      `${import.meta.env.VITE_SERVER_BASE_URL}/srs`,
-      {
-        method: "POST",
-        headers: {
-          // Don't do this. Just don't.
-          // https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
-          // "Content-Type": "multipart/form-data; boundary=" + crypto.generateUUID(),
-        },
-        body,
-      },
-    );
+  const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/srs`, {
+    method: "POST",
+    headers: {
+      // Don't do this. Just don't.
+      // https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
+      // "Content-Type": "multipart/form-data; boundary=" + crypto.generateUUID(),
+    },
+    body,
+  });
 
-    if (response.ok) {
-      // Everything is good, we can definitely show final frame with CTAs.
-    } else {
-      // ?
-    }
-  } // else should not happen
+  if (response.ok) {
+    // Everything is good, we can definitely show final frame with CTAs.
+  } else {
+    // ?
+  }
 }
 
 function getForm(): HTMLFormElement | null | undefined {
