@@ -67,7 +67,7 @@ export function Survey(): JSX.Element {
           userReachedTheEnd={() => setIsDataSendFormVisible(true)}
         />
       )}
-      <Summary scrollable={!dataForFinalWordsFrame} />
+      <Summary />
     </Box>
   );
 }

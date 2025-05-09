@@ -10,11 +10,9 @@ import { Box, BoxDecoration } from "../ui/Box";
 import { calculateEstimates } from "../store/selectors";
 import { spreadElementsAcrossColumns } from "./spreadElementsAcrossColumns";
 
-interface SummaryProps {
-  scrollable: boolean;
-}
+interface SummaryProps {}
 
-export function Summary({ scrollable }: SummaryProps): JSX.Element {
+export function Summary({}: SummaryProps): JSX.Element {
   const { gte, range } = useBreakpoints();
 
   const options = useSelector((store) => store.options);
@@ -136,17 +134,7 @@ export function Summary({ scrollable }: SummaryProps): JSX.Element {
             {gridElements}
           </Box>
         ) : (
-          <Box
-            vertical
-            width="fill"
-            spacing={gte(1100) ? 0.75 : 0.5}
-            maxHeight={scrollable && gte(1100) ? 10 : undefined}
-            clipY={scrollable && gte(1100) ? "scrollable" : undefined}
-            _extend={{
-              // Prevent lenis to inerfere with the scollable block.
-              "data-lenis-prevent": "",
-            }}
-          >
+          <Box vertical width="fill" spacing={gte(1100) ? 0.75 : 0.5}>
             {resultElements}
           </Box>
         )}
