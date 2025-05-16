@@ -1639,7 +1639,7 @@ enum QuestionGroup {
     {
       text: "User authentication (login/signup)",
       estimates: [new EstimateRangeAssessment(24, 80)],
-      summaryLabel: "Auth",
+      summaryLabel: "Authentication",
     },
     {
       text: "Maps & Location services",
