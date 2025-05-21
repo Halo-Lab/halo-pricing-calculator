@@ -236,7 +236,7 @@ enum QuestionGroup {
     }),
   ],
 });
-/* 4 */ createRegularQuestion({
+/* 4 */ /* not used */ createRegularQuestion({
   text: "What design type do you prefer for your website?",
   title: QuestionGroup.WebDesign,
   options: [
@@ -261,9 +261,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[3].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[3].id,
+    // }),
   ],
 });
 /* 5 */ createRegularQuestion({
@@ -288,7 +288,7 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[4].id,
+      question: questions[3].id,
     }),
   ],
 });
@@ -875,7 +875,7 @@ enum QuestionGroup {
   ],
   previous: [],
 });
-/* 24 */ createRegularQuestion({
+/* 24 */ /* not used */ createRegularQuestion({
   text: "What design type do you prefer for your web app?",
   title: QuestionGroup.UXUIDesign,
   options: [
@@ -900,9 +900,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[23].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[23].id,
+    // }),
   ],
 });
 /* 25 */ createRegularQuestion({
@@ -935,7 +935,7 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[24].id,
+      question: questions[23].id,
     }),
   ],
 });
@@ -1474,8 +1474,8 @@ enum QuestionGroup {
     }),
   ],
 });
-/* 42 */ createRegularQuestion({
-  text: "What design type do your prefer for your mobile app?",
+/* 42 */ /* not used */ createRegularQuestion({
+  text: "What design type do you prefer for your mobile app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -1499,9 +1499,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[41].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[41].id,
+    // }),
   ],
 });
 /* 43 */ createRegularQuestion({
@@ -1582,7 +1582,7 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[42].id,
+      question: questions[41].id,
     }),
   ],
 });
