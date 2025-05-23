@@ -22,7 +22,11 @@ declare namespace globalThis {
   let onEstimateSent: OnEstimateSent | undefined;
 }
 
-export function Survey(): JSX.Element {
+interface SurveyProps {
+  returnToEntry: VoidFunction;
+}
+
+export function Survey({ returnToEntry }: SurveyProps): JSX.Element {
   const [isDataSendFormVisible, setIsDataSendFormVisible] = useState(false);
   const [dataForFinalWordsFrame, setDataForFinalWordsFrame] =
     useState<string>();
@@ -64,6 +68,7 @@ export function Survey(): JSX.Element {
         <FinalWords email={dataForFinalWordsFrame} />
       ) : (
         <Questionnaire
+          returnToEntry={returnToEntry}
           userReachedTheEnd={() => setIsDataSendFormVisible(true)}
         />
       )}

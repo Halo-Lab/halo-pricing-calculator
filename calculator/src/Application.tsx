@@ -1,10 +1,9 @@
-import { JSX } from "react";
+import { JSX, useCallback, useState } from "react";
 
 import { Entry } from "./Entry";
 import { Color } from "./palettes/colours";
 import { Survey } from "./Survey";
 import { Viewport } from "./ui/Viewport";
-import { useSelector } from "./store/Provider";
 import { Box, BoxDecoration } from "./ui/Box";
 import { useApplicationContainer } from "./ApplicationContainerRefProvider";
 import { platformModifiers, usePlatform } from "./hooks/usePlatform";
@@ -24,7 +23,15 @@ const globalStyles = `
 export function Application(): JSX.Element {
   const platform = usePlatform();
   const container = useApplicationContainer();
-  const currentStep = useSelector((store) => store.currentStep);
+  const [shouldStartSurvey, setShouldStartSurvey] = useState(false);
+
+  const startSurvey = useCallback(() => {
+    setShouldStartSurvey(true);
+  }, []);
+
+  const returnToEntry = useCallback(() => {
+    setShouldStartSurvey(false);
+  }, []);
 
   return (
     <Viewport styles={globalStyles}>
@@ -36,7 +43,11 @@ export function Application(): JSX.Element {
           className: platformModifiers[platform],
         }}
       >
-        {currentStep ? <Survey /> : <Entry />}
+        {shouldStartSurvey ? (
+          <Survey returnToEntry={returnToEntry}/>
+        ) : (
+          <Entry startSurvey={startSurvey}  />
+        )}
       </Box>
     </Viewport>
   );

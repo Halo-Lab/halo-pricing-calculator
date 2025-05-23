@@ -84,6 +84,20 @@ export class RemoveAnswer extends Action {
   }
 }
 
+export class RemoveAnswers extends Action {
+  override reduce(store: Store): Partial<Store> | void {
+    if (store.answers.size) {
+      const answers = new Set(store.answers);
+      answers.clear();
+
+      return {
+        answers,
+        questionsSequence: createQuestionsSequence(store.questions, answers),
+      };
+    }
+  }
+}
+
 export class MoveToNextStep extends Action {
   override reduce(store: Store): Partial<Store> {
     return { currentStep: store.currentStep + 1 };

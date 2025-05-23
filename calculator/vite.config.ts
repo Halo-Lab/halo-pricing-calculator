@@ -13,6 +13,7 @@ export default defineConfig({
       targets: browserslistToTargets(browserslist(">= 0.25%")),
     },
   },
+  assetsInclude: ["**/*.lottie"],
   build: {
     outDir: "../dist",
     emptyOutDir: true,

@@ -15,7 +15,11 @@ import { ProjectFileAcceptance } from "../store/definition";
 import { useApplicationContainer } from "../ApplicationContainerRefProvider";
 import { useDispatch, useSelector } from "../store/Provider";
 import { DescriptionQuestionBlock } from "./DescriptionQuestionBlock";
-import { MoveToNextStep, MoveToPreviousStep } from "../store/actions";
+import {
+  MoveToNextStep,
+  MoveToPreviousStep,
+  RemoveAnswers,
+} from "../store/actions";
 import {
   FilesQuestion,
   RegularQuestion,
@@ -23,10 +27,12 @@ import {
 } from "../entities/question";
 
 interface QuestionnaireProps {
+  returnToEntry: VoidFunction;
   userReachedTheEnd(): void;
 }
 
 export function Questionnaire({
+  returnToEntry,
   userReachedTheEnd,
 }: QuestionnaireProps): JSX.Element {
   const container = useApplicationContainer();
@@ -203,7 +209,12 @@ export function Questionnaire({
               variant="secondary-light"
               onPress={() => {
                 container.scrollToTop();
-                dispatch(new MoveToPreviousStep());
+                if (currentStep === 1) {
+                  dispatch(new RemoveAnswers());
+                  returnToEntry();
+                } else {
+                  dispatch(new MoveToPreviousStep());
+                }
               }}
             >
               back
