@@ -142,7 +142,14 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
         </Text>
         {gte(650) && (
           <Box width={15} alignX="end" alignY="center" aspectRatio={0.74}>
-            <DotLottieReact src={calculatorLottieUrl} loop autoplay />
+            <DotLottieReact
+              src={new URL(
+                calculatorLottieUrl,
+                import.meta.env.VITE_PUBLIC_ASSETS_URL,
+              ).toString()}
+              loop
+              autoplay
+            />
           </Box>
         )}
       </Box>
