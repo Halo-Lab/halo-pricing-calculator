@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 import { Svg } from "../ui/Svg";
 import { Color } from "../palettes/colours";
@@ -10,7 +10,8 @@ import { useBreakpoints } from "../ui/Responsiveness";
 import { Box, BoxDecoration } from "../ui/Box";
 import { Text, TextDecoration } from "../ui/Text";
 
-import calculatorLottieUrl from "./calculator.lottie";
+// import calculatorLottieUrl from "./calculator.lottie";
+import calculatorVideoUrl from "./calculator.webm";
 
 interface EntryProperties {
   startSurvey: VoidFunction;
@@ -142,13 +143,22 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
         </Text>
         {gte(650) && (
           <Box width={15} alignX="end" alignY="center" aspectRatio={0.74}>
-            <DotLottieReact
+            {/* <DotLottieReact
               src={new URL(
                 calculatorLottieUrl,
                 import.meta.env.VITE_PUBLIC_ASSETS_URL,
               ).toString()}
               loop
               autoplay
+            /> */}
+            <video
+              src={new URL(
+                calculatorVideoUrl,
+                import.meta.env.VITE_PUBLIC_ASSETS_URL,
+              ).toString()}
+              width="100%"
+              loop
+              autoPlay
             />
           </Box>
         )}
