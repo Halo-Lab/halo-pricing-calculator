@@ -97,39 +97,40 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
           .borderRadius(2)
           .transitionDuration(".4s")
           .transitionTimingFunction("cubic-bezier(.215,.61,.355,1)")}
-        _extend={{ className: "button__overflow" }}
       >
-        <Box
-          width="fill"
-          _extend={{
-            className: "button__texts",
-            // Attach this attribute at the end so Webflow can react on it.
-            // @ts-expect-error data attributes are added to the extend interface
-            "data-hover-elem": "",
-          }}
-          decorations={BoxDecoration().transitionDuration(".4s")}
-        >
-          <Text
-            size={gte(640) ? 1 : 0.75}
-            weight={500}
-            decorations={TextDecoration()
-              .textTransform("uppercase")
-              .textAlign("center")}
-          >
-            launch smart calculator
-          </Text>
-          <Text
-            size={gte(640) ? 1 : 0.75}
-            weight={500}
-            decorations={TextDecoration()
-              .textTransform("uppercase")
-              .textAlign("center")}
+        <Box _extend={{ className: "button__overflow" }}>
+          <Box
+            width="fill"
             _extend={{
-              className: "button__text is-absolute",
+              className: "button__texts",
+              // Attach this attribute at the end so Webflow can react on it.
+              // @ts-expect-error data attributes are added to the extend interface
+              "data-hover-elem": "",
             }}
+            decorations={BoxDecoration().transitionDuration(".4s")}
           >
-            launch smart calculator
-          </Text>
+            <Text
+              size={gte(640) ? 1 : 0.75}
+              weight={500}
+              decorations={TextDecoration()
+                .textTransform("uppercase")
+                .textAlign("center")}
+            >
+              launch smart calculator
+            </Text>
+            <Text
+              size={gte(640) ? 1 : 0.75}
+              weight={500}
+              decorations={TextDecoration()
+                .textTransform("uppercase")
+                .textAlign("center")}
+              _extend={{
+                className: "button__text is-absolute",
+              }}
+            >
+              launch smart calculator
+            </Text>
+          </Box>
         </Box>
       </Box>
     </Button>
