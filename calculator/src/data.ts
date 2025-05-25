@@ -1425,12 +1425,12 @@ enum QuestionGroup {
   options: [
     {
       text: "UI/UX design",
-      estimates: [new EstimateExactAssessment(0)],
+      estimates: [new EstimateRangeAssessment(80, 160)],
       summaryLabel: "UI/UX design",
     },
     {
       text: "App development",
-      estimates: [new EstimateExactAssessment(0)],
+      estimates: [new EstimateRangeAssessment(96, 200)],
       summaryLabel: "App development",
     },
   ],
