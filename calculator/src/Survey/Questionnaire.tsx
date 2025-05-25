@@ -208,7 +208,6 @@ export function Questionnaire({
               width={gte(540) ? undefined : "fill"}
               variant="secondary-light"
               onPress={() => {
-                container.scrollToTop();
                 if (currentStep === 1) {
                   dispatch(new RemoveAnswers());
                   returnToEntry();
@@ -232,8 +231,6 @@ export function Questionnaire({
                 variant="primary"
                 disabled={!isUserAbleToMoveFurther}
                 onPress={() => {
-                  container.scrollToTop();
-
                   if (isUserAtTheEndOfQuestionsSequence) {
                     userReachedTheEnd();
                   } else if (isUserAbleToMoveFurther) {
@@ -244,6 +241,8 @@ export function Questionnaire({
                       "You really need to implement a hint for the user that he/she needs to select at least one option.",
                     );
                   }
+
+                  container.alignUIForMaximumComfortableVisibility();
                 }}
                 _extend={{
                   // Attach this attribute at the end so Webflow can react on it.

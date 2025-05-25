@@ -2,13 +2,12 @@ import { JSX } from "react";
 // import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 import { Svg } from "../ui/Svg";
+import { Text } from "../ui/Text";
 import { Color } from "../palettes/colours";
-import { Button } from "../ui/Button";
 import { Feature } from "./Feature";
 import { LaunchButton } from "./LaunchButton";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { Box, BoxDecoration } from "../ui/Box";
-import { Text, TextDecoration } from "../ui/Text";
 
 // import calculatorLottieUrl from "./calculator.lottie";
 import calculatorVideoUrl from "./calculator.webm";

@@ -27,10 +27,12 @@ export function Application(): JSX.Element {
 
   const startSurvey = useCallback(() => {
     setShouldStartSurvey(true);
+    container.alignUIForMaximumComfortableVisibility();
   }, []);
 
   const returnToEntry = useCallback(() => {
     setShouldStartSurvey(false);
+    container.alignUIForMaximumComfortableVisibility();
   }, []);
 
   return (
@@ -44,9 +46,9 @@ export function Application(): JSX.Element {
         }}
       >
         {shouldStartSurvey ? (
-          <Survey returnToEntry={returnToEntry}/>
+          <Survey returnToEntry={returnToEntry} />
         ) : (
-          <Entry startSurvey={startSurvey}  />
+          <Entry startSurvey={startSurvey} />
         )}
       </Box>
     </Viewport>
