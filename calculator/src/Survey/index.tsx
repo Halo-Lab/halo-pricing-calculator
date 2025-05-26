@@ -55,6 +55,7 @@ export function Survey({ returnToEntry }: SurveyProps): JSX.Element {
         setIsDataSendFormVisible(false);
         // setDataForFinalWordsFrame(email);
         dispatch(new ResetStore());
+        returnToEntry();
       };
 
       globalThis.onEstimateSent = onEstimateSent;
@@ -63,7 +64,7 @@ export function Survey({ returnToEntry }: SurveyProps): JSX.Element {
         delete globalThis.onEstimateSent;
       };
     }
-  }, [isDataSendFormVisible, store]);
+  }, [isDataSendFormVisible, store, returnToEntry]);
 
   return (
     <Box width="fill" vertical={lt(1100)} spacing={lt(1100) ? 1 : 2}>
