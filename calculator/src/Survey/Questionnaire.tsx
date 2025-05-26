@@ -2,24 +2,18 @@ import { JSX, useMemo } from "react";
 
 import { Svg } from "../ui/Svg";
 import { Color } from "../palettes/colours";
+import { useSelector } from "../store/Provider";
 import { ProgressChip } from "./ProgressChip";
 import { SectionsList } from "./SectionsList";
 import { useBreakpoints } from "../ui/Responsiveness";
-import { AnimatedButton } from "../components/AnimatedButton";
 import { Box, BoxDecoration } from "../ui/Box";
 import { FilesQuestionBlock } from "./FilesQuestionBlock";
 import { QuestionGroupLabel } from "./QuestionGroupLabel";
+import { QuestionnaireActions } from "./QuestionnaireActions";
 import { RegularQuestionBlock } from "./RegularQuestionBlock";
 import { Text, TextDecoration } from "../ui/Text";
 import { ProjectFileAcceptance } from "../store/definition";
-import { useApplicationContainer } from "../ApplicationContainerRefProvider";
-import { useDispatch, useSelector } from "../store/Provider";
 import { DescriptionQuestionBlock } from "./DescriptionQuestionBlock";
-import {
-  MoveToNextStep,
-  MoveToPreviousStep,
-  RemoveAnswers,
-} from "../store/actions";
 import {
   FilesQuestion,
   RegularQuestion,
@@ -35,9 +29,7 @@ export function Questionnaire({
   returnToEntry,
   userReachedTheEnd,
 }: QuestionnaireProps): JSX.Element {
-  const container = useApplicationContainer();
-  const dispatch = useDispatch();
-  const { lt, gte, range } = useBreakpoints();
+  const { gte, range } = useBreakpoints();
 
   const question = useSelector(
     (store) => store.questionsSequence[store.currentStep],
@@ -49,25 +41,11 @@ export function Questionnaire({
   const projectFiles = useSelector((store) => store.projectFiles);
   const currentStep = useSelector((store) => store.currentStep + 1);
 
-  const isUserAbleToMoveFurther = useMemo(() => {
-    return (
-      question.optional ||
-      (question instanceof RegularQuestion
-        ? question.options.some((reference) => selected.has(reference))
-        : question instanceof DescriptionQuestion
-          ? description
-          : true)
-    );
-  }, [question, selected, description]);
-
   const supportedProjectFiles = useMemo(() => {
     return projectFiles?.filter(
       (file) => file.acceptance !== ProjectFileAcceptance.NotSupportedExtension,
     );
   }, [projectFiles]);
-
-  const isUserAtTheEndOfQuestionsSequence =
-    isUserAbleToMoveFurther && currentStep === totalSteps;
 
   const biggerWhiteBoxAreaOffset = gte(1730)
     ? 3.5
@@ -198,77 +176,11 @@ export function Questionnaire({
             />
           ) : null}
 
-          <Box
-            width="fill"
-            vertical={lt(540)}
-            reverse={lt(540)}
-            spacing={gte(1250) ? 1.5 : range(1100, 1250) ? 1 : 0.75}
-          >
-            <AnimatedButton
-              width={gte(540) ? undefined : "fill"}
-              variant="secondary-light"
-              onPress={() => {
-                if (currentStep === 1) {
-                  dispatch(new RemoveAnswers());
-                  returnToEntry();
-                } else {
-                  dispatch(new MoveToPreviousStep());
-                }
-              }}
-            >
-              back
-            </AnimatedButton>
-
-            <Box
-              alignX="end"
-              spacing={gte(540) ? 1.5 : 0.35}
-              width={gte(540) ? undefined : "fill"}
-              vertical={lt(540)}
-              reverse={gte(540)}
-            >
-              <AnimatedButton
-                width="fill"
-                variant="primary"
-                disabled={!isUserAbleToMoveFurther}
-                onPress={() => {
-                  if (isUserAtTheEndOfQuestionsSequence) {
-                    userReachedTheEnd();
-                  } else if (isUserAbleToMoveFurther) {
-                    dispatch(new MoveToNextStep());
-                  } else if (import.meta.env.DEV) {
-                    // TODO: show a tooltip that user has to select something
-                    console.warn(
-                      "You really need to implement a hint for the user that he/she needs to select at least one option.",
-                    );
-                  }
-
-                  container.alignUIForMaximumComfortableVisibility();
-                }}
-                _extend={{
-                  // Attach this attribute at the end so Webflow can react on it.
-                  // @ts-expect-error data attributes are added to the extend interface
-                  "data-remodal-target": isUserAtTheEndOfQuestionsSequence
-                    ? "calculator"
-                    : undefined,
-                }}
-              >
-                {isUserAtTheEndOfQuestionsSequence ? "get an estimate" : "next"}
-              </AnimatedButton>
-
-              {question instanceof FilesQuestion &&
-              projectFiles?.length !== supportedProjectFiles?.length ? (
-                <Text
-                  size={0.875}
-                  alignY="center"
-                  alignX={lt(540) ? "center" : undefined}
-                  color={Color.red}
-                  breaking="forbid"
-                >
-                  Please upload a *.png *.jpeg *.pdf files
-                </Text>
-              ) : null}
-            </Box>
-          </Box>
+          <QuestionnaireActions
+            returnToEntry={returnToEntry}
+            userReachedTheEnd={userReachedTheEnd}
+            supportedProjectFiles={supportedProjectFiles}
+          />
         </Box>
       </Box>
     </Box>
