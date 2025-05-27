@@ -82,7 +82,7 @@ export function DescriptionQuestionBlock({
                     fill="#02021E"
                   />
                 </Svg>
-                <Text width="fill" spacing={1} color={Color.blueDark70}>
+                <Text width="fill" spacing={0.7} color={Color.blueDark70}>
                   {helpPoint}
                 </Text>
               </Box>

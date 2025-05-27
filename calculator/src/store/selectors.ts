@@ -7,19 +7,18 @@ import {
 
 export function calculateEstimates(
   store: Pick<Store, "answers" | "options" | "questions" | "estimates">,
-): [EstimateRange, Array<[string, EstimateRange]>] {
+): [EstimateRange, Array<{ summaryLabel: string; estimateRange: EstimateRange; showOnlyLabel?: boolean }>] {
   let totalEstimates: EstimateRange = [0, 0];
-  const groupedEstimates: Record<string, EstimateRange> = {};
+  const groupedEstimates: Record<string, { estimateRange: EstimateRange; showOnlyLabel?: boolean }> = {};
 
   store.answers.forEach((reference) => {
     const option = store.options.get(reference)!;
-
     const estimateTitle = option.summaryLabel;
+    const showOnlyLabel = option.showOnlyLabel;
 
     const optionEstimate = option.estimates.reduce<EstimateRange>(
       (range, reference) => {
         const assessment = store.estimates.get(reference)!.assessment;
-
         if (
           assessment.operationKind === EstimationOperationKind.Multiplication
         ) {
@@ -30,9 +29,7 @@ export function calculateEstimates(
                   totalEstimates[1],
                 ).applyTo(range)
               : range;
-
           const nextRange = assessment.applyTo(currentRange);
-
           return [
             nextRange[0] - currentRange[0],
             nextRange[1] - currentRange[1],
@@ -41,12 +38,13 @@ export function calculateEstimates(
           return assessment.applyTo(range);
         }
       },
-      groupedEstimates[estimateTitle] ?? [0, 0],
+      groupedEstimates[estimateTitle]?.estimateRange ?? [0, 0],
     );
 
-    // Create a summary entry when there is non-zero estimate.
-    if (optionEstimate[0] || optionEstimate[1]) {
-      groupedEstimates[estimateTitle] = optionEstimate;
+    if (showOnlyLabel) {
+      groupedEstimates[estimateTitle] = { estimateRange: optionEstimate, showOnlyLabel: true };
+    } else if (optionEstimate[0] || optionEstimate[1]) {
+      groupedEstimates[estimateTitle] = { estimateRange: optionEstimate };
     }
 
     totalEstimates = option.estimates.reduce<EstimateRange>(
@@ -56,5 +54,12 @@ export function calculateEstimates(
     );
   });
 
-  return [totalEstimates, Object.entries(groupedEstimates)];
+  return [
+    totalEstimates,
+    Object.entries(groupedEstimates).map(([summaryLabel, { estimateRange, showOnlyLabel }]) => ({
+      summaryLabel,
+      estimateRange,
+      showOnlyLabel,
+    })),
+  ];
 }

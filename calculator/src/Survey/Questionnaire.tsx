@@ -58,6 +58,7 @@ export function Questionnaire({
   return (
     <Box
       width={gte(1200) ? ".71fr" : range(1100, 1200) ? ".7fr" : "fill"}
+      alignX={'center'}
       padding={
         gte(450)
           ? [
