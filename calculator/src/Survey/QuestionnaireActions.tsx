@@ -158,7 +158,7 @@ export function QuestionnaireActions({
             color={Color.red}
             breaking="forbid"
           >
-            Please upload a *.png *.jpeg *.pdf files
+            Please upload a *.pdf *.doc *.docx *.png *.jpeg files
           </Text>
         ) : null}
       </Box>

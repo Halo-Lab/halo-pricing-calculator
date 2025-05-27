@@ -10,6 +10,7 @@ export interface OptionData {
   estimates: Reference<Estimate>[];
   selection?: OptionSelection;
   summaryLabel: string;
+  showOnlyLabel?: boolean;
 }
 
 /**
@@ -35,6 +36,10 @@ export class Option extends Entity<Option> {
    * Option's label which will be shown in `Summary` block.
    */
   summaryLabel: string;
+  /**
+   * Option's label which will be shown in `Summary` block.
+   */
+  showOnlyLabel?: boolean;
   /**
    * Option's identifier of an associated icon.
    */
@@ -65,6 +70,7 @@ export class Option extends Entity<Option> {
     estimates,
     selection,
     summaryLabel,
+    showOnlyLabel,
   }: OptionData) {
     super(id);
 
@@ -74,5 +80,6 @@ export class Option extends Entity<Option> {
     this.estimates = estimates;
     this.selection = selection;
     this.summaryLabel = summaryLabel;
+    this.showOnlyLabel = showOnlyLabel;
   }
 }

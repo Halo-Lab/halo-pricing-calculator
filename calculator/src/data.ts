@@ -366,7 +366,8 @@ enum QuestionGroup {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
-      summaryLabel: "Fast development",
+      summaryLabel: "ASAP",
+      showOnlyLabel: true,
     },
   ],
   previous: [
@@ -849,7 +850,7 @@ enum QuestionGroup {
 });
 // Web application
 /* 23 */ createRegularQuestion({
-  text: "How many pages will your web app have?",
+  text: "How many pages or screens will be in your app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -994,9 +995,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[26].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[26].id,
+    // }),
   ],
 });
 /* 28 */ createRegularQuestion({
@@ -1057,33 +1058,33 @@ enum QuestionGroup {
       ],
       summaryLabel: "Clickable prototype",
     },
-    {
-      text: "Full experience prototype",
-      estimates: [
-        new EstimateExactAssessment(0),
-        new EstimateRangeAssessment(8, 40, {
-          condition: new Selected(
-            (questions[23] as RegularQuestion).options[0],
-          ),
-        }),
-        new EstimateRangeAssessment(48, 80, {
-          condition: new Selected(
-            (questions[23] as RegularQuestion).options[1],
-          ),
-        }),
-        new EstimateRangeAssessment(88, 160, {
-          condition: new Selected(
-            (questions[23] as RegularQuestion).options[2],
-          ),
-        }),
-        new EstimateExactAssessment(160, {
-          condition: new Selected(
-            (questions[23] as RegularQuestion).options[3],
-          ),
-        }),
-      ],
-      summaryLabel: "Full prototype",
-    },
+    // {
+    //   text: "Full experience prototype",
+    //   estimates: [
+    //     new EstimateExactAssessment(0),
+    //     new EstimateRangeAssessment(8, 40, {
+    //       condition: new Selected(
+    //         (questions[23] as RegularQuestion).options[0],
+    //       ),
+    //     }),
+    //     new EstimateRangeAssessment(48, 80, {
+    //       condition: new Selected(
+    //         (questions[23] as RegularQuestion).options[1],
+    //       ),
+    //     }),
+    //     new EstimateRangeAssessment(88, 160, {
+    //       condition: new Selected(
+    //         (questions[23] as RegularQuestion).options[2],
+    //       ),
+    //     }),
+    //     new EstimateExactAssessment(160, {
+    //       condition: new Selected(
+    //         (questions[23] as RegularQuestion).options[3],
+    //       ),
+    //     }),
+    //   ],
+    //   summaryLabel: "Full prototype",
+    // },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
@@ -1092,7 +1093,7 @@ enum QuestionGroup {
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[27].id,
+      question: questions[26].id,
     }),
   ],
 });
@@ -1280,7 +1281,7 @@ enum QuestionGroup {
   ],
 });
 /* 34 */ createFilesQuestion({
-  text: "Do you have any screens or designs for your app?",
+  text: "Do you have any files or documents related to your project?",
   title: QuestionGroup.WebDevelopment,
   previous: [
     new PreviousQuestionConditionalLink({
@@ -1426,7 +1427,7 @@ enum QuestionGroup {
     {
       text: "UI/UX design",
       estimates: [new EstimateRangeAssessment(80, 160)],
-      summaryLabel: "UI/UX design",
+      summaryLabel: "Custom design",
     },
     {
       text: "App development",
@@ -1443,7 +1444,7 @@ enum QuestionGroup {
   multiple: true,
 });
 /* 41 */ createRegularQuestion({
-  text: "How many screens will your app include?",
+  text: "How many pages or screens will be in your app?",
   title: QuestionGroup.UXUIDesign,
   options: [
     {
@@ -1552,28 +1553,28 @@ enum QuestionGroup {
       ],
       summaryLabel: "Clickable prototype",
     },
-    {
-      text: "Full experience prototype",
-      estimates: [
-        new EstimateExactAssessment(0),
-        new EstimateRangeAssessment(8, 80, {
-          condition: new Selected(
-            (questions[41] as RegularQuestion).options[0],
-          ),
-        }),
-        new EstimateRangeAssessment(88, 200, {
-          condition: new Selected(
-            (questions[41] as RegularQuestion).options[1],
-          ),
-        }),
-        new EstimateRangeAssessment(320, 400, {
-          condition: new Selected(
-            (questions[41] as RegularQuestion).options[2],
-          ),
-        }),
-      ],
-      summaryLabel: "Full prototype",
-    },
+    // {
+    //   text: "Full experience prototype",
+    //   estimates: [
+    //     new EstimateExactAssessment(0),
+    //     new EstimateRangeAssessment(8, 80, {
+    //       condition: new Selected(
+    //         (questions[41] as RegularQuestion).options[0],
+    //       ),
+    //     }),
+    //     new EstimateRangeAssessment(88, 200, {
+    //       condition: new Selected(
+    //         (questions[41] as RegularQuestion).options[1],
+    //       ),
+    //     }),
+    //     new EstimateRangeAssessment(320, 400, {
+    //       condition: new Selected(
+    //         (questions[41] as RegularQuestion).options[2],
+    //       ),
+    //     }),
+    //   ],
+    //   summaryLabel: "Full prototype",
+    // },
     {
       text: "I'm not sure yet",
       estimates: [new EstimateExactAssessment(0)],
@@ -1720,7 +1721,7 @@ enum QuestionGroup {
   ],
 });
 /* 48 */ createFilesQuestion({
-  text: "Do you have any screens or designs for your app?",
+  text: "Do you have any files or documents related to your project?",
   title: QuestionGroup.AppDevelopment,
   previous: [
     new PreviousQuestionConditionalLink({
@@ -1770,7 +1771,7 @@ questions[36].previous.push(
     {
       text: "UI/UX design",
       estimates: [new EstimateRangeAssessment(80, 160)],
-      summaryLabel: "UI/UX design",
+      summaryLabel: "Custom design",
     },
     {
       text: "Web development",
@@ -1840,6 +1841,7 @@ interface MinimalOptionWithEstimates {
   selection?: OptionSelection;
   estimates: EstimateAssessment[];
   summaryLabel: string;
+  showOnlyLabel?: boolean;
 }
 
 interface MinimalRegularQuestionData
@@ -1861,7 +1863,7 @@ function createRegularQuestion({
   insertQuestionToModuleVariable(question);
 
   minimalOptionsData.forEach(
-    ({ text, icon, selection, estimates: minimalEstimates, summaryLabel }) => {
+    ({ text, icon, selection, estimates: minimalEstimates, summaryLabel, showOnlyLabel }) => {
       const option = new Option({
         id: createId(),
         text,
@@ -1870,6 +1872,7 @@ function createRegularQuestion({
         estimates: [],
         selection,
         summaryLabel,
+        showOnlyLabel,
       });
 
       question.options.push(option.id);
@@ -1929,7 +1932,7 @@ function createFilesQuestion(options: MinimalFilesQuestionData): void {
     next: [],
     files: [],
     necessityExplanation:
-      "They'll help us better understand your project for a more accurate estimate.",
+      "Uploading any relevant materials (designs, specs, briefs, references, etc.) will help us better understand your project and provide a more accurate estimate.",
     ...options,
   };
   const question = new FilesQuestion(questionData);

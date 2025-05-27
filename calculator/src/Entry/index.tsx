@@ -65,9 +65,13 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
           color={Color.white}
           weight={500}
           size={
-            gte(1350)
-              ? 4.875
-              : gte(1250)
+            gte (1610)
+              ? 5.625
+              : gte(1440)
+                ? 5.1
+                : gte(1350)
+                  ? 4.875
+                  : gte(1250)
                 ? 4.2
                 : gte(975)
                   ? 3.7
@@ -78,7 +82,7 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
                       : 2
           }
           spacing={gte(975) ? 0.25 : 0.35}
-          maxWidth={53.125}
+          width={'0.755fr'}
         >
           Get an{" "}
           <Text
@@ -141,7 +145,7 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
           with a detailed roadmap and product creation plan*
         </Text>
         {gte(650) && (
-          <Box width={15} alignX="end" alignY="center" aspectRatio={0.74}>
+          <Box width={'0.195fr'} alignX="end" alignY="center" aspectRatio={0.74}>
             {/* <DotLottieReact
               src={new URL(
                 calculatorLottieUrl,

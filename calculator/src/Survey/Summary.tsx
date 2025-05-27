@@ -19,8 +19,8 @@ export function Summary({}: SummaryProps): JSX.Element {
   const answers = useSelector((store) => store.answers);
   const estimates = useSelector((store) => store.estimates);
   const questions = useSelector((store) => store.questions);
-
-  const [totalEstimates, groupedEstimates] = useMemo(
+  const currentStep = useSelector((store) => store.currentStep + 1);
+  const [totalEstimates, groupedEstimates]: [number[], Array<{ summaryLabel: string; estimateRange: number[]; showOnlyLabel?: boolean }>] = useMemo(
     () =>
       calculateEstimates({
         options,
@@ -33,9 +33,11 @@ export function Summary({}: SummaryProps): JSX.Element {
 
   const resultElements = useMemo(
     () =>
-      groupedEstimates.map(([title, [from, to]]) => {
-        return (
-          <Box key={title} spacing={0.5} width="fill">
+      groupedEstimates.map(({ summaryLabel, estimateRange, showOnlyLabel }) => {
+        const [from, to] = estimateRange;
+        if (showOnlyLabel) {
+          return (
+            <Box key={summaryLabel} spacing={0.5} width="fill">
             <Icon
               alignY="center"
               variant="check"
@@ -49,7 +51,27 @@ export function Summary({}: SummaryProps): JSX.Element {
               size={gte(425) ? 1 : 0.75}
               color={Color.white}
             >
-              {title}
+              {summaryLabel}
+            </Text>
+          </Box>
+          );
+        }
+        return (
+          <Box key={summaryLabel} spacing={0.5} width="fill">
+            <Icon
+              alignY="center"
+              variant="check"
+              color={Color.white}
+              width={1}
+              height={1}
+            />
+            <Text
+              spacing={0.3}
+              alignY="center"
+              size={gte(425) ? 1 : 0.75}
+              color={Color.white}
+            >
+              {summaryLabel}
             </Text>
             <Text
               alignY="center"
@@ -103,6 +125,7 @@ export function Summary({}: SummaryProps): JSX.Element {
       width={gte(1200) ? ".29fr" : range(1100, 1200) ? ".3fr" : "fill"}
       padding={gte(1100) ? undefined : range(450, 1100) ? 2.5 : 1}
       spacing={gte(1100) ? 1 : range(680, 1100) ? 2 : 1.5}
+      _extend={{ style: { display: currentStep > 2 ? 'flex' : 'none' } }}
       decorations={
         gte(1100)
           ? undefined

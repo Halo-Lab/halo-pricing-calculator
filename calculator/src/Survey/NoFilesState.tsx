@@ -28,7 +28,7 @@ export function NoFilesState(): JSX.Element {
           </Text>
         </Box>
         <Text alignX="center" size={0.875} color={Color.blueDark70}>
-          (*.png *.jpeg *.pdf 15 mb max)
+          ( *.pdf *.doc *.docx *.png *.jpeg 15 mb max)
         </Text>
       </Box>
     </>
