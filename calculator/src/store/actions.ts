@@ -152,6 +152,7 @@ interface KnownMime {
   type: string;
   mask: Array<number>;
   pattern: Array<number>;
+  extension?: string;
 }
 
 export class AddProjectFiles extends Action {
@@ -179,13 +180,14 @@ export class AddProjectFiles extends Action {
       type: "application/msword",
       pattern: [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1],
       mask: [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff],
+      extension: "doc",
     },
     {
       type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       pattern: [0x50, 0x4b, 0x03, 0x04],
       mask: [0xff, 0xff, 0xff, 0xff],
+      extension: "docx",
     },
-
   ];
   #fileLimitSize = 15 * 1024 ** 2; // 15 Mb in bytes
 
@@ -193,18 +195,20 @@ export class AddProjectFiles extends Action {
     super();
   }
 
-  #checkMagicNumber(fileBytes: Uint8Array): boolean {
-    return this.#mimes.some(({ mask, pattern }) => {
-      return mask.every(
-        (maskByte, index) => (fileBytes[index] & maskByte) === pattern[index],
+  #checkMagicNumber(fileBytes: Uint8Array, file: File): boolean {
+    return this.#mimes.some(({ mask, pattern, extension }) => {
+      return (
+        mask.every(
+          (maskByte, index) => (fileBytes[index] & maskByte) === pattern[index],
+        ) && (extension ? file.name.endsWith(extension) : true)
       );
     });
   }
 
   async #startFileCheck(file: File, dispatch: Dispatch<Action>): Promise<void> {
     const bytes = await new Promise<Uint8Array>((resolve) => {
-      // get only first 5 bytes to check for "magic numbers"
-      const blob = file.slice(0, 5);
+      // get only first 8 bytes to check for "magic numbers"
+      const blob = file.slice(0, 8);
       const reader = new FileReader();
 
       reader.addEventListener("loadend", () => {
@@ -213,7 +217,7 @@ export class AddProjectFiles extends Action {
       reader.readAsArrayBuffer(blob);
     });
 
-    const isFileFormatAccepted = this.#checkMagicNumber(bytes);
+    const isFileFormatAccepted = this.#checkMagicNumber(bytes, file);
 
     const updatedProjectFileAcceptance = !isFileFormatAccepted
       ? ProjectFileAcceptance.NotSupportedExtension
