@@ -82,7 +82,7 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
                       : 2
           }
           spacing={gte(975) ? 0.25 : 0.35}
-          maxWidth={gte(1610) ? 78.125 : 53.125}
+          width={'0.755fr'}
         >
           Get an{" "}
           <Text
@@ -145,7 +145,7 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
           with a detailed roadmap and product creation plan*
         </Text>
         {gte(650) && (
-          <Box width={gte(1610) ? 45 : 15} alignX="end" alignY="center" aspectRatio={0.74}>
+          <Box width={'0.195fr'} alignX="end" alignY="center" aspectRatio={0.74}>
             {/* <DotLottieReact
               src={new URL(
                 calculatorLottieUrl,
