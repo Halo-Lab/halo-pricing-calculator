@@ -995,9 +995,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[26].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[26].id,
+    // }),
   ],
 });
 /* 28 */ createRegularQuestion({
