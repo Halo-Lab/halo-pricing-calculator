@@ -158,6 +158,8 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
               width="100%"
               loop
               autoPlay
+              // It is required by Chrome.
+              muted
             />
           </Box>
         )}
