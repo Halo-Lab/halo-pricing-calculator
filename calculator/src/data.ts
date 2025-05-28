@@ -184,7 +184,7 @@ enum QuestionGroup {
     {
       text: "Web design",
       estimates: [new EstimateRangeAssessment(80, 160)],
-      summaryLabel: "Web design",
+      summaryLabel: "Custom design",
     },
     {
       text: "Web development",
