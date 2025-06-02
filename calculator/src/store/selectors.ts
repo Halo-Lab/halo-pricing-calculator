@@ -7,9 +7,19 @@ import {
 
 export function calculateEstimates(
   store: Pick<Store, "answers" | "options" | "questions" | "estimates">,
-): [EstimateRange, Array<{ summaryLabel: string; estimateRange: EstimateRange; showOnlyLabel?: boolean }>] {
+): [
+  EstimateRange,
+  Array<{
+    summaryLabel: string;
+    estimateRange: EstimateRange;
+    showOnlyLabel?: boolean;
+  }>,
+] {
   let totalEstimates: EstimateRange = [0, 0];
-  const groupedEstimates: Record<string, { estimateRange: EstimateRange; showOnlyLabel?: boolean }> = {};
+  const groupedEstimates: Record<
+    string,
+    { estimateRange: EstimateRange; showOnlyLabel?: boolean }
+  > = {};
 
   store.answers.forEach((reference) => {
     const option = store.options.get(reference)!;
@@ -42,7 +52,10 @@ export function calculateEstimates(
     );
 
     if (showOnlyLabel) {
-      groupedEstimates[estimateTitle] = { estimateRange: optionEstimate, showOnlyLabel: true };
+      groupedEstimates[estimateTitle] = {
+        estimateRange: optionEstimate,
+        showOnlyLabel: true,
+      };
     } else if (optionEstimate[0] || optionEstimate[1]) {
       groupedEstimates[estimateTitle] = { estimateRange: optionEstimate };
     }
@@ -56,10 +69,12 @@ export function calculateEstimates(
 
   return [
     totalEstimates,
-    Object.entries(groupedEstimates).map(([summaryLabel, { estimateRange, showOnlyLabel }]) => ({
-      summaryLabel,
-      estimateRange,
-      showOnlyLabel,
-    })),
+    Object.entries(groupedEstimates).map(
+      ([summaryLabel, { estimateRange, showOnlyLabel }]) => ({
+        summaryLabel,
+        estimateRange,
+        showOnlyLabel,
+      }),
+    ),
   ];
 }
