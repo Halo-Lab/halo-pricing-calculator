@@ -1464,17 +1464,38 @@ enum QuestionGroup {
   options: [
     {
       text: "1-10 screens",
-      estimates: [new EstimateRangeAssessment(40, 80)],
+      estimates: [
+        new EstimateRangeAssessment(40, 80),
+        new EstimateRangeAssessment(100, 290, {
+          condition: new Selected(
+            (questions[40] as RegularQuestion).options[1],
+          ),
+        }),
+      ],
       summaryLabel: "Pages/screens count",
     },
     {
       text: "10-25 screens",
-      estimates: [new EstimateRangeAssessment(80, 160)],
+      estimates: [
+        new EstimateRangeAssessment(80, 160),
+        new EstimateRangeAssessment(200, 350, {
+          condition: new Selected(
+            (questions[40] as RegularQuestion).options[1],
+          ),
+        }),
+      ],
       summaryLabel: "Pages/screens count",
     },
     {
       text: "25+ screens",
-      estimates: [new EstimateRangeAssessment(160, 240)],
+      estimates: [
+        new EstimateRangeAssessment(160, 240),
+        new EstimateRangeAssessment(370, 520, {
+          condition: new Selected(
+            (questions[40] as RegularQuestion).options[1],
+          ),
+        }),
+      ],
       summaryLabel: "Pages/screens count",
     },
     {
@@ -1809,6 +1830,59 @@ questions[23].previous.push(
     condition: new Selected((questions[50] as RegularQuestion).options[0]),
   }),
 );
+{
+  {
+    const option1Id = (questions[23] as RegularQuestion).options[1];
+
+    const estimate = new Estimate({
+      id: createId(),
+      option: option1Id,
+      assessment: new EstimateRangeAssessment(40, 100, {
+        condition: new Selected((questions[50] as RegularQuestion).options[1]),
+      }),
+    });
+
+    options
+      .find((option) => option.id === option1Id)
+      ?.estimates.push(estimate.id);
+
+    estimates.push(estimate);
+  }
+  {
+    const option2Id = (questions[23] as RegularQuestion).options[2];
+
+    const estimate = new Estimate({
+      id: createId(),
+      option: option2Id,
+      assessment: new EstimateRangeAssessment(90, 230, {
+        condition: new Selected((questions[50] as RegularQuestion).options[1]),
+      }),
+    });
+
+    options
+      .find((option) => option.id === option2Id)
+      ?.estimates.push(estimate.id);
+
+    estimates.push(estimate);
+  }
+  {
+    const option3Id = (questions[23] as RegularQuestion).options[3];
+
+    const estimate = new Estimate({
+      id: createId(),
+      option: option3Id,
+      assessment: new EstimateRangeAssessment(270, 600, {
+        condition: new Selected((questions[50] as RegularQuestion).options[1]),
+      }),
+    });
+
+    options
+      .find((option) => option.id === option3Id)
+      ?.estimates.push(estimate.id);
+
+    estimates.push(estimate);
+  }
+}
 questions[50].next.push(questions[29].id);
 questions[29].previous.push(
   new PreviousQuestionConditionalLink({
