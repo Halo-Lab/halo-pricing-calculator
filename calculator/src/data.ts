@@ -426,7 +426,7 @@ enum QuestionGroup {
       summaryLabel: "Project stack",
     },
     {
-      text: "Custom development (no CMS)",
+      text: "JS/React development (no CMS)",
       estimates: [
         new EstimateExactAssessment(1.2, {
           operationKind: EstimationOperationKind.Multiplication,
