@@ -29,23 +29,30 @@ export function calculateEstimates(
     const optionEstimate = option.estimates.reduce<EstimateRange>(
       (range, reference) => {
         const assessment = store.estimates.get(reference)!.assessment;
-        if (
-          assessment.operationKind === EstimationOperationKind.Multiplication
-        ) {
-          const currentRange =
-            !range[0] || !range[1]
-              ? new EstimateRangeAssessment(
-                  totalEstimates[0],
-                  totalEstimates[1],
-                ).applyTo(range)
-              : range;
-          const nextRange = assessment.applyTo(currentRange);
-          return [
-            nextRange[0] - currentRange[0],
-            nextRange[1] - currentRange[1],
-          ];
+
+        if (assessment.matches(store.answers)) {
+          if (
+            assessment.operationKind === EstimationOperationKind.Multiplication
+          ) {
+            const currentRange =
+              !range[0] || !range[1]
+                ? new EstimateRangeAssessment(
+                    totalEstimates[0],
+                    totalEstimates[1],
+                  ).applyTo(range)
+                : range;
+
+            const nextRange = assessment.applyTo(currentRange);
+
+            return [
+              nextRange[0] - currentRange[0],
+              nextRange[1] - currentRange[1],
+            ];
+          } else {
+            return assessment.applyTo(range);
+          }
         } else {
-          return assessment.applyTo(range);
+          return range;
         }
       },
       groupedEstimates[estimateTitle]?.estimateRange ?? [0, 0],
@@ -61,8 +68,15 @@ export function calculateEstimates(
     }
 
     totalEstimates = option.estimates.reduce<EstimateRange>(
-      (range, reference) =>
-        store.estimates.get(reference)!.assessment.applyTo(range),
+      (range, reference) => {
+        const assessment = store.estimates.get(reference)!.assessment;
+
+        if (assessment.matches(store.answers)) {
+          return assessment.applyTo(range);
+        } else {
+          return range;
+        }
+      },
       totalEstimates,
     );
   });

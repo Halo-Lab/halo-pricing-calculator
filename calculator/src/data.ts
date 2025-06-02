@@ -212,17 +212,32 @@ enum QuestionGroup {
     },
     {
       text: "6-10 pages",
-      estimates: [new EstimateRangeAssessment(24, 48)],
+      estimates: [
+        new EstimateRangeAssessment(24, 48),
+        new EstimateRangeAssessment(40, 100, {
+          condition: new Selected((questions[2] as RegularQuestion).options[1]),
+        }),
+      ],
       summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
-      estimates: [new EstimateRangeAssessment(64, 112)],
+      estimates: [
+        new EstimateRangeAssessment(64, 112),
+        new EstimateRangeAssessment(72, 180, {
+          condition: new Selected((questions[2] as RegularQuestion).options[1]),
+        }),
+      ],
       summaryLabel: "Pages/screens count",
     },
     {
       text: ">20 pages",
-      estimates: [new EstimateRangeAssessment(144, 280)],
+      estimates: [
+        new EstimateRangeAssessment(144, 280),
+        new EstimateRangeAssessment(200, 300, {
+          condition: new Selected((questions[2] as RegularQuestion).options[1]),
+        }),
+      ],
       summaryLabel: "Pages/screens count",
     },
   ],
