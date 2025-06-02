@@ -208,22 +208,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "Web design",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(24, 48)],
-      summaryLabel: "Web design",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(64, 112)],
-      summaryLabel: "Web design",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: ">20 pages",
       estimates: [new EstimateRangeAssessment(144, 280)],
-      summaryLabel: "Web design",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -383,22 +383,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(40, 100)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(72, 180)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: ">20 pages",
       estimates: [new EstimateRangeAssessment(200, 300)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -697,17 +697,17 @@ enum QuestionGroup {
     {
       text: "Up to 100 pages",
       estimates: [new EstimateExactAssessment(32)],
-      summaryLabel: "SEO pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "Up to 1,000 pages",
       estimates: [new EstimateExactAssessment(48)],
-      summaryLabel: "SEO pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "Over 10,000 pages",
       estimates: [new EstimateExactAssessment(72)],
-      summaryLabel: "SEO pages",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -856,22 +856,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(24, 64)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(32, 80)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "20-30+ pages",
       estimates: [new EstimateRangeAssessment(160, 280)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [],
@@ -1450,22 +1450,22 @@ enum QuestionGroup {
     {
       text: "1-10 screens",
       estimates: [new EstimateRangeAssessment(40, 80)],
-      summaryLabel: "Screens",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "10-25 screens",
       estimates: [new EstimateRangeAssessment(80, 160)],
-      summaryLabel: "Screens",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "25+ screens",
       estimates: [new EstimateRangeAssessment(160, 240)],
-      summaryLabel: "Screens",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "Screens",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -1863,7 +1863,14 @@ function createRegularQuestion({
   insertQuestionToModuleVariable(question);
 
   minimalOptionsData.forEach(
-    ({ text, icon, selection, estimates: minimalEstimates, summaryLabel, showOnlyLabel }) => {
+    ({
+      text,
+      icon,
+      selection,
+      estimates: minimalEstimates,
+      summaryLabel,
+      showOnlyLabel,
+    }) => {
       const option = new Option({
         id: createId(),
         text,
