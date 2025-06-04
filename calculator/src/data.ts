@@ -1216,9 +1216,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[29].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[29].id,
+    // }),
   ],
 });
 /* 31 */ createRegularQuestion({
@@ -1710,9 +1710,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[44].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[44].id,
+    // }),
   ],
   optional: true,
   multiple: true,
@@ -1823,6 +1823,106 @@ questions[36].previous.push(
   ],
   multiple: true,
 });
+/* 51 */ createRegularQuestion({
+  text: "How many pages or screens will be in your app?",
+  title: QuestionGroup.WebDevelopment,
+  options: [
+    {
+      text: "1-5 pages",
+      estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "6-10 pages",
+      estimates: [new EstimateRangeAssessment(40, 100)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "11-20 pages",
+      estimates: [new EstimateRangeAssessment(90, 230)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "20-30+ pages",
+      estimates: [new EstimateRangeAssessment(270, 600)],
+      summaryLabel: "Pages/screens count",
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[29].id,
+      condition: new All(
+        new Not(new Selected((questions[50] as RegularQuestion).options[0])),
+        new Selected((questions[50] as RegularQuestion).options[1]),
+      ),
+    }),
+  ],
+});
+/* 52 */ createRegularQuestion({
+  text: "How many pages or screens will be in your app?",
+  title: QuestionGroup.AppDevelopment,
+  options: [
+    {
+      text: "1-10 screens",
+      estimates: [new EstimateRangeAssessment(100, 290)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "10-25 screens",
+      estimates: [new EstimateRangeAssessment(200, 350)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "25+ screens",
+      estimates: [new EstimateRangeAssessment(370, 520)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "I'd like to discuss it",
+      estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Pages/screens count",
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[44].id,
+      condition: new All(
+        new Not(new Selected((questions[40] as RegularQuestion).options[0])),
+        new Selected((questions[40] as RegularQuestion).options[1]),
+      ),
+    }),
+  ],
+});
+questions[44].next.push(questions[45].id);
+questions[52].next.push(questions[45].id);
+questions[45].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[44].id,
+    condition: new Selected((questions[40] as RegularQuestion).options[0]),
+  }),
+  new PreviousQuestionConditionalLink({
+    question: questions[52].id,
+    condition: new All(
+      new Not(new Selected((questions[40] as RegularQuestion).options[0])),
+      new Selected((questions[40] as RegularQuestion).options[1]),
+    ),
+  }),
+);
+questions[29].next.push(questions[30].id);
+questions[51].next.push(questions[30].id);
+questions[30].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[29].id,
+    condition: new Selected((questions[50] as RegularQuestion).options[0]),
+  }),
+  new PreviousQuestionConditionalLink({
+    question: questions[51].id,
+    condition: new All(
+      new Not(new Selected((questions[50] as RegularQuestion).options[0])),
+      new Selected((questions[50] as RegularQuestion).options[1]),
+    ),
+  }),
+);
 questions[50].next.push(questions[23].id);
 questions[23].previous.push(
   new PreviousQuestionConditionalLink({
