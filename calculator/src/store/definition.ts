@@ -41,6 +41,10 @@ export function createStore(): Store {
 
     answers,
     currentStep: 0,
+    // Wee have to explicitly set undefined here to overwrite previous value in
+    // the reactive container.
+    projectFiles: undefined,
+    projectDescription: undefined,
     questionsSequence: createQuestionsSequence(questionsDictionary, answers),
   };
 }
