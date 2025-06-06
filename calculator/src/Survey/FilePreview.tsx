@@ -25,7 +25,10 @@ export function FilePreview({
   const objectUrl = useMemo(
     () =>
       projectFile.acceptance === ProjectFileAcceptance.Accepted
-        ? (projectFile.original.type === "application/pdf" || projectFile.original.type === "application/msword" || projectFile.original.type ==="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+        ? projectFile.original.type === "application/pdf" ||
+          projectFile.original.type === "application/msword" ||
+          projectFile.original.type ===
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           ? null
           : URL.createObjectURL(projectFile.original)
         : null,

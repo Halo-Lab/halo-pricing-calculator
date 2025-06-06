@@ -208,22 +208,37 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "Web design",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "6-10 pages",
-      estimates: [new EstimateRangeAssessment(24, 48)],
-      summaryLabel: "Web design",
+      estimates: [
+        new EstimateRangeAssessment(24, 48),
+        new EstimateRangeAssessment(40, 100, {
+          condition: new Selected((questions[2] as RegularQuestion).options[1]),
+        }),
+      ],
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
-      estimates: [new EstimateRangeAssessment(64, 112)],
-      summaryLabel: "Web design",
+      estimates: [
+        new EstimateRangeAssessment(64, 112),
+        new EstimateRangeAssessment(72, 180, {
+          condition: new Selected((questions[2] as RegularQuestion).options[1]),
+        }),
+      ],
+      summaryLabel: "Pages/screens count",
     },
     {
       text: ">20 pages",
-      estimates: [new EstimateRangeAssessment(144, 280)],
-      summaryLabel: "Web design",
+      estimates: [
+        new EstimateRangeAssessment(144, 280),
+        new EstimateRangeAssessment(200, 300, {
+          condition: new Selected((questions[2] as RegularQuestion).options[1]),
+        }),
+      ],
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -383,22 +398,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(40, 100)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(72, 180)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: ">20 pages",
       estimates: [new EstimateRangeAssessment(200, 300)],
-      summaryLabel: "Pages",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -426,7 +441,7 @@ enum QuestionGroup {
       summaryLabel: "Project stack",
     },
     {
-      text: "Custom development (no CMS)",
+      text: "JS/React development (no CMS)",
       estimates: [
         new EstimateExactAssessment(1.2, {
           operationKind: EstimationOperationKind.Multiplication,
@@ -697,17 +712,17 @@ enum QuestionGroup {
     {
       text: "Up to 100 pages",
       estimates: [new EstimateExactAssessment(32)],
-      summaryLabel: "SEO pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "Up to 1,000 pages",
       estimates: [new EstimateExactAssessment(48)],
-      summaryLabel: "SEO pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "Over 10,000 pages",
       estimates: [new EstimateExactAssessment(72)],
-      summaryLabel: "SEO pages",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -856,22 +871,22 @@ enum QuestionGroup {
     {
       text: "1-5 pages",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "6-10 pages",
       estimates: [new EstimateRangeAssessment(24, 64)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "11-20 pages",
       estimates: [new EstimateRangeAssessment(32, 80)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "20-30+ pages",
       estimates: [new EstimateRangeAssessment(160, 280)],
-      summaryLabel: "UI pages",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [],
@@ -1201,9 +1216,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[29].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[29].id,
+    // }),
   ],
 });
 /* 31 */ createRegularQuestion({
@@ -1449,23 +1464,44 @@ enum QuestionGroup {
   options: [
     {
       text: "1-10 screens",
-      estimates: [new EstimateRangeAssessment(40, 80)],
-      summaryLabel: "Screens",
+      estimates: [
+        new EstimateRangeAssessment(40, 80),
+        new EstimateRangeAssessment(100, 290, {
+          condition: new Selected(
+            (questions[40] as RegularQuestion).options[1],
+          ),
+        }),
+      ],
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "10-25 screens",
-      estimates: [new EstimateRangeAssessment(80, 160)],
-      summaryLabel: "Screens",
+      estimates: [
+        new EstimateRangeAssessment(80, 160),
+        new EstimateRangeAssessment(200, 350, {
+          condition: new Selected(
+            (questions[40] as RegularQuestion).options[1],
+          ),
+        }),
+      ],
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "25+ screens",
-      estimates: [new EstimateRangeAssessment(160, 240)],
-      summaryLabel: "Screens",
+      estimates: [
+        new EstimateRangeAssessment(160, 240),
+        new EstimateRangeAssessment(370, 520, {
+          condition: new Selected(
+            (questions[40] as RegularQuestion).options[1],
+          ),
+        }),
+      ],
+      summaryLabel: "Pages/screens count",
     },
     {
       text: "I'd like to discuss it",
       estimates: [new EstimateExactAssessment(0)],
-      summaryLabel: "Screens",
+      summaryLabel: "Pages/screens count",
     },
   ],
   previous: [
@@ -1674,9 +1710,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    new PreviousQuestionConditionalLink({
-      question: questions[44].id,
-    }),
+    // new PreviousQuestionConditionalLink({
+    //   question: questions[44].id,
+    // }),
   ],
   optional: true,
   multiple: true,
@@ -1787,6 +1823,106 @@ questions[36].previous.push(
   ],
   multiple: true,
 });
+/* 51 */ createRegularQuestion({
+  text: "How many pages or screens will be in your app?",
+  title: QuestionGroup.WebDevelopment,
+  options: [
+    {
+      text: "1-5 pages",
+      estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "6-10 pages",
+      estimates: [new EstimateRangeAssessment(40, 100)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "11-20 pages",
+      estimates: [new EstimateRangeAssessment(90, 230)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "20-30+ pages",
+      estimates: [new EstimateRangeAssessment(270, 600)],
+      summaryLabel: "Pages/screens count",
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[29].id,
+      condition: new All(
+        new Not(new Selected((questions[50] as RegularQuestion).options[0])),
+        new Selected((questions[50] as RegularQuestion).options[1]),
+      ),
+    }),
+  ],
+});
+/* 52 */ createRegularQuestion({
+  text: "How many pages or screens will be in your app?",
+  title: QuestionGroup.AppDevelopment,
+  options: [
+    {
+      text: "1-10 screens",
+      estimates: [new EstimateRangeAssessment(100, 290)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "10-25 screens",
+      estimates: [new EstimateRangeAssessment(200, 350)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "25+ screens",
+      estimates: [new EstimateRangeAssessment(370, 520)],
+      summaryLabel: "Pages/screens count",
+    },
+    {
+      text: "I'd like to discuss it",
+      estimates: [new EstimateExactAssessment(0)],
+      summaryLabel: "Pages/screens count",
+    },
+  ],
+  previous: [
+    new PreviousQuestionConditionalLink({
+      question: questions[44].id,
+      condition: new All(
+        new Not(new Selected((questions[40] as RegularQuestion).options[0])),
+        new Selected((questions[40] as RegularQuestion).options[1]),
+      ),
+    }),
+  ],
+});
+questions[44].next.push(questions[45].id);
+questions[52].next.push(questions[45].id);
+questions[45].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[44].id,
+    condition: new Selected((questions[40] as RegularQuestion).options[0]),
+  }),
+  new PreviousQuestionConditionalLink({
+    question: questions[52].id,
+    condition: new All(
+      new Not(new Selected((questions[40] as RegularQuestion).options[0])),
+      new Selected((questions[40] as RegularQuestion).options[1]),
+    ),
+  }),
+);
+questions[29].next.push(questions[30].id);
+questions[51].next.push(questions[30].id);
+questions[30].previous.push(
+  new PreviousQuestionConditionalLink({
+    question: questions[29].id,
+    condition: new Selected((questions[50] as RegularQuestion).options[0]),
+  }),
+  new PreviousQuestionConditionalLink({
+    question: questions[51].id,
+    condition: new All(
+      new Not(new Selected((questions[50] as RegularQuestion).options[0])),
+      new Selected((questions[50] as RegularQuestion).options[1]),
+    ),
+  }),
+);
 questions[50].next.push(questions[23].id);
 questions[23].previous.push(
   new PreviousQuestionConditionalLink({
@@ -1794,6 +1930,59 @@ questions[23].previous.push(
     condition: new Selected((questions[50] as RegularQuestion).options[0]),
   }),
 );
+{
+  {
+    const option1Id = (questions[23] as RegularQuestion).options[1];
+
+    const estimate = new Estimate({
+      id: createId(),
+      option: option1Id,
+      assessment: new EstimateRangeAssessment(40, 100, {
+        condition: new Selected((questions[50] as RegularQuestion).options[1]),
+      }),
+    });
+
+    options
+      .find((option) => option.id === option1Id)
+      ?.estimates.push(estimate.id);
+
+    estimates.push(estimate);
+  }
+  {
+    const option2Id = (questions[23] as RegularQuestion).options[2];
+
+    const estimate = new Estimate({
+      id: createId(),
+      option: option2Id,
+      assessment: new EstimateRangeAssessment(90, 230, {
+        condition: new Selected((questions[50] as RegularQuestion).options[1]),
+      }),
+    });
+
+    options
+      .find((option) => option.id === option2Id)
+      ?.estimates.push(estimate.id);
+
+    estimates.push(estimate);
+  }
+  {
+    const option3Id = (questions[23] as RegularQuestion).options[3];
+
+    const estimate = new Estimate({
+      id: createId(),
+      option: option3Id,
+      assessment: new EstimateRangeAssessment(270, 600, {
+        condition: new Selected((questions[50] as RegularQuestion).options[1]),
+      }),
+    });
+
+    options
+      .find((option) => option.id === option3Id)
+      ?.estimates.push(estimate.id);
+
+    estimates.push(estimate);
+  }
+}
 questions[50].next.push(questions[29].id);
 questions[29].previous.push(
   new PreviousQuestionConditionalLink({
@@ -1863,7 +2052,14 @@ function createRegularQuestion({
   insertQuestionToModuleVariable(question);
 
   minimalOptionsData.forEach(
-    ({ text, icon, selection, estimates: minimalEstimates, summaryLabel, showOnlyLabel }) => {
+    ({
+      text,
+      icon,
+      selection,
+      estimates: minimalEstimates,
+      summaryLabel,
+      showOnlyLabel,
+    }) => {
       const option = new Option({
         id: createId(),
         text,

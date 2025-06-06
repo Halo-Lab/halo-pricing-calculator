@@ -123,7 +123,7 @@ function prepareQuestionnaireResults(store: Store): string {
 
   for (const groupTitle in groups) {
     const maybeGroupedEstimate = groupedEstimates.find(
-      ([title]) => title === groupTitle,
+      (group) => group.summaryLabel === groupTitle,
     );
 
     const answeredQuestions = Object.entries(groups[groupTitle]).map(
@@ -147,7 +147,7 @@ function prepareQuestionnaireResults(store: Store): string {
     results.questionGroups.push({
       title: groupTitle,
       questions: answeredQuestions,
-      totalEstimate: maybeGroupedEstimate?.[1],
+      totalEstimate: maybeGroupedEstimate?.estimateRange,
     });
   }
 

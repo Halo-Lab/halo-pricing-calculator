@@ -6,7 +6,7 @@ import { Summary } from "./Summary";
 import { ResetStore } from "../store/actions";
 import { Questionnaire } from "./Questionnaire";
 import { useBreakpoints } from "../ui/Responsiveness";
-import { useDispatch, useStore, useSelector } from "../store/Provider";
+import { useDispatch, useStore } from "../store/Provider";
 import { sendProjectEstimatesAndAccompanyingData } from "./sendProjectEstimatesAndAccompanyingData";
 
 declare namespace globalThis {
@@ -35,8 +35,7 @@ export function Survey({ returnToEntry }: SurveyProps): JSX.Element {
   const store = useStore();
   const dispatch = useDispatch();
   const { lt } = useBreakpoints();
-  const currentStep = useSelector((store) => store.currentStep + 1);
-  const { gte, range } = useBreakpoints();
+
   useEffect(() => {
     if (isDataSendFormVisible) {
       const onEstimateSent = async (
@@ -79,7 +78,7 @@ export function Survey({ returnToEntry }: SurveyProps): JSX.Element {
         />
         // )
       }
-        <Summary />
+      <Summary />
     </Box>
   );
 }

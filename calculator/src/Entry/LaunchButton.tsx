@@ -6,6 +6,7 @@ import { Button } from "../ui/Button";
 import { useBreakpoints } from "../ui/Responsiveness";
 import { Box, BoxDecoration } from "../ui/Box";
 import { Text, TextDecoration } from "../ui/Text";
+import { useDebouncedCallback } from "use-debounce";
 
 interface LaunchButtonProps {
   startSurvey: VoidFunction;
@@ -14,6 +15,8 @@ interface LaunchButtonProps {
 export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
   const { gte } = useBreakpoints();
   const [buttonHovered, setButtonHovered] = useState(false);
+
+  const dispatchButtonHovered = useDebouncedCallback(setButtonHovered, 50);
 
   return (
     <Button
@@ -28,7 +31,7 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
           decorations={BoxDecoration()
             .backgroundColor(Color.white)
             .borderRadius(50)
-            .transitionDuration(".4s")
+            .transitionDuration(".5s")
             .transitionTimingFunction("cubic-bezier(.215,.61,.355,1)")}
         >
           <Svg
@@ -51,10 +54,10 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
       }
       _extend={{
         onMouseEnter() {
-          setButtonHovered(true);
+          dispatchButtonHovered(true);
         },
         onMouseLeave() {
-          setButtonHovered(false);
+          dispatchButtonHovered(false);
         },
         // Attach this attribute at the end so Webflow can react on it.
         // @ts-expect-error data attributes are added to the extend interface
@@ -68,7 +71,7 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
         decorations={BoxDecoration()
           .backgroundColor(Color.white)
           .borderRadius(50)
-          .transitionDuration(".4s")
+          .transitionDuration(".5s")
           .transitionTimingFunction("cubic-bezier(.215,.61,.355,1)")}
       >
         <Svg
@@ -95,7 +98,7 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
         decorations={BoxDecoration()
           .backgroundColor(Color.yellow)
           .borderRadius(2)
-          .transitionDuration(".4s")
+          .transitionDuration(".5s")
           .transitionTimingFunction("cubic-bezier(.215,.61,.355,1)")}
       >
         <Box _extend={{ className: "button__overflow" }}>
@@ -107,7 +110,7 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
               // @ts-expect-error data attributes are added to the extend interface
               "data-hover-elem": "",
             }}
-            decorations={BoxDecoration().transitionDuration(".4s")}
+            decorations={BoxDecoration().transitionDuration(".5s")}
           >
             <Text
               size={gte(640) ? 1 : 0.75}
