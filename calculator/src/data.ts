@@ -926,23 +926,23 @@ enum QuestionGroup {
   title: QuestionGroup.UXUIDesign,
   options: [
     {
-      text: "Desktop only",
+      text: "Desktop and mobile",
       estimates: [new EstimateExactAssessment(0)],
       summaryLabel: "Optimization",
     },
     {
-      text: "All screen sizes",
+      text: "Big screens (1920px, 2k, 4k)",
       estimates: [
-        new EstimateExactAssessment(2, {
+        new EstimateExactAssessment(1.05, {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
       summaryLabel: "Optimization",
     },
     {
-      text: "Desktop and mobile",
+      text: "Tablet (landscape & portrait)",
       estimates: [
-        new EstimateExactAssessment(1.6, {
+        new EstimateExactAssessment(1.2, {
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
