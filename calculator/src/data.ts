@@ -966,11 +966,7 @@ enum QuestionGroup {
     },
     {
       text: "Multiple user types",
-      estimates: [
-        new EstimateRangeAssessment(1.2, 2, {
-          operationKind: EstimationOperationKind.Multiplication,
-        }),
-      ],
+      estimates: [new EstimateExactAssessment(120)],
       summaryLabel: "Account types",
     },
     {
@@ -1175,6 +1171,7 @@ enum QuestionGroup {
       text: "Content management",
       estimates: [
         new EstimateExactAssessment(1.5, {
+          target: (questions[23] as RegularQuestion).options.slice(),
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
@@ -1216,9 +1213,9 @@ enum QuestionGroup {
     },
   ],
   previous: [
-    // new PreviousQuestionConditionalLink({
-    //   question: questions[29].id,
-    // }),
+    new PreviousQuestionConditionalLink({
+      question: questions[29].id,
+    }),
   ],
 });
 /* 31 */ createRegularQuestion({
@@ -1242,7 +1239,8 @@ enum QuestionGroup {
     {
       text: "Yes, I need a fully custom back-end",
       estimates: [
-        new EstimateRangeAssessment(2, 2.5, {
+        new EstimateRangeAssessment(1.8, 2, {
+          target: (questions[29] as RegularQuestion).options.slice(),
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
@@ -1850,7 +1848,7 @@ questions[36].previous.push(
   ],
   previous: [
     new PreviousQuestionConditionalLink({
-      question: questions[29].id,
+      question: questions[50].id,
       condition: new All(
         new Not(new Selected((questions[50] as RegularQuestion).options[0])),
         new Selected((questions[50] as RegularQuestion).options[1]),
@@ -1908,21 +1906,20 @@ questions[45].previous.push(
     ),
   }),
 );
-questions[29].next.push(questions[30].id);
-questions[51].next.push(questions[30].id);
-questions[30].previous.push(
-  new PreviousQuestionConditionalLink({
-    question: questions[29].id,
-    condition: new Selected((questions[50] as RegularQuestion).options[0]),
-  }),
-  new PreviousQuestionConditionalLink({
-    question: questions[51].id,
-    condition: new All(
-      new Not(new Selected((questions[50] as RegularQuestion).options[0])),
-      new Selected((questions[50] as RegularQuestion).options[1]),
-    ),
-  }),
-);
+{
+  const optionId = (questions[29] as RegularQuestion).options[11];
+  const option = options.find((option) => {
+    return option.id === optionId;
+  })!;
+  const estimateId = option.estimates[0];
+  const estimate = estimates.find((estimate) => {
+    return estimate.id === estimateId;
+  })!;
+
+  estimate.assessment.target!.push(
+    ...(questions[51] as RegularQuestion).options,
+  );
+}
 questions[50].next.push(questions[23].id);
 questions[23].previous.push(
   new PreviousQuestionConditionalLink({
@@ -1983,10 +1980,10 @@ questions[23].previous.push(
     estimates.push(estimate);
   }
 }
-questions[50].next.push(questions[29].id);
+questions[51].next.push(questions[29].id);
 questions[29].previous.push(
   new PreviousQuestionConditionalLink({
-    question: questions[50].id,
+    question: questions[51].id,
     condition: new All(
       new Not(new Selected((questions[50] as RegularQuestion).options[0])),
       new Selected((questions[50] as RegularQuestion).options[1]),

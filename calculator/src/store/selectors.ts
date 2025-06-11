@@ -1,7 +1,9 @@
 import { Store } from "./definition";
+import { Option } from "../entities/option";
+import { Reference } from "../entities/entity";
 import {
+  Estimate,
   EstimateRange,
-  EstimateRangeAssessment,
   EstimationOperationKind,
 } from "../entities/estimate";
 
@@ -15,80 +17,80 @@ export function calculateEstimates(
     showOnlyLabel?: boolean;
   }>,
 ] {
-  let totalEstimates: EstimateRange = [0, 0];
-  const groupedEstimates: Record<
-    string,
-    { estimateRange: EstimateRange; showOnlyLabel?: boolean }
+  const totalEstimates: EstimateRange = [0, 0];
+
+  const answerEstimates: Record<
+    Reference<Option>,
+    {
+      summaryLabel: string;
+      estimateRange: EstimateRange;
+      showOnlyLabel?: boolean;
+    }
   > = {};
 
-  store.answers.forEach((reference) => {
-    const option = store.options.get(reference)!;
-    const estimateTitle = option.summaryLabel;
-    const showOnlyLabel = option.showOnlyLabel;
+  for (const optionReference of store.answers) {
+    const option = store.options.get(optionReference)!;
 
-    const optionEstimate = option.estimates.reduce<EstimateRange>(
-      (range, reference) => {
-        const assessment = store.estimates.get(reference)!.assessment;
-
-        if (assessment.matches(store.answers)) {
+    const estimateRange: EstimateRange = option.estimates
+      .map((estimateReference) => {
+        return store.estimates.get(estimateReference);
+      })
+      .filter((estimate): estimate is Estimate => {
+        return estimate?.assessment.matches(store.answers) ?? false;
+      })
+      .reduce(
+        (accumulator, estimate) => {
           if (
-            assessment.operationKind === EstimationOperationKind.Multiplication
+            estimate.assessment.operationKind ===
+            EstimationOperationKind.Multiplication
           ) {
-            const currentRange =
-              !range[0] || !range[1]
-                ? new EstimateRangeAssessment(
-                    totalEstimates[0],
-                    totalEstimates[1],
-                  ).applyTo(range)
-                : range;
+            const startingRange =
+              estimate.assessment.target
+                ?.map((optionReference) => {
+                  return store.options.get(optionReference);
+                })
+                .filter((option): option is Option => {
+                  return option ? option.id in answerEstimates : false;
+                })
+                .reduce(
+                  (accumulator: EstimateRange, option) => {
+                    const { estimateRange } = answerEstimates[option.id];
 
-            const nextRange = assessment.applyTo(currentRange);
+                    return [
+                      accumulator[0] + estimateRange[0],
+                      accumulator[1] + estimateRange[1],
+                    ] satisfies EstimateRange;
+                  },
+                  [0, 0],
+                ) ?? totalEstimates;
+
+            const nextRange = estimate.assessment.applyTo(startingRange);
 
             return [
-              nextRange[0] - currentRange[0],
-              nextRange[1] - currentRange[1],
+              nextRange[0] - startingRange[0],
+              nextRange[1] - startingRange[1],
             ];
           } else {
-            return assessment.applyTo(range);
+            return estimate.assessment.applyTo(accumulator);
           }
-        } else {
-          return range;
-        }
-      },
-      groupedEstimates[estimateTitle]?.estimateRange ?? [0, 0],
-    );
+        },
+        [0, 0],
+      );
 
-    if (showOnlyLabel) {
-      groupedEstimates[estimateTitle] = {
-        estimateRange: optionEstimate,
-        showOnlyLabel: true,
-      };
-    } else if (optionEstimate[0] || optionEstimate[1]) {
-      groupedEstimates[estimateTitle] = { estimateRange: optionEstimate };
-    }
+    answerEstimates[option.id] = {
+      estimateRange,
+      summaryLabel: option.summaryLabel,
+      showOnlyLabel: option.showOnlyLabel,
+    };
 
-    totalEstimates = option.estimates.reduce<EstimateRange>(
-      (range, reference) => {
-        const assessment = store.estimates.get(reference)!.assessment;
-
-        if (assessment.matches(store.answers)) {
-          return assessment.applyTo(range);
-        } else {
-          return range;
-        }
-      },
-      totalEstimates,
-    );
-  });
+    totalEstimates[0] += estimateRange[0];
+    totalEstimates[1] += estimateRange[1];
+  }
 
   return [
     totalEstimates,
-    Object.entries(groupedEstimates).map(
-      ([summaryLabel, { estimateRange, showOnlyLabel }]) => ({
-        summaryLabel,
-        estimateRange,
-        showOnlyLabel,
-      }),
-    ),
+    Object.values(answerEstimates).filter(({ estimateRange }) => {
+      return estimateRange[0] || estimateRange[1];
+    }),
   ];
 }

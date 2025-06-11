@@ -10,6 +10,7 @@ export enum EstimationOperationKind {
 }
 
 export interface EstimateAssessmentOptions {
+  target?: Array<Reference<Option>>;
   condition?: Condition;
   minimalDelta?: number;
   maximalDelta?: number;
@@ -17,6 +18,11 @@ export interface EstimateAssessmentOptions {
 }
 
 abstract class EstimateAssessmentBase extends Condition {
+  /**
+   * Determines which estimates should be this estimate applied to if the
+   * {@link operationKind} is multiplication.
+   */
+  target?: Array<Reference<Option>>;
   /**
    * Indicates the operation which must be conducted while
    * including current {@link Estimate} to the global {@link EstimateRange}.
@@ -45,6 +51,7 @@ abstract class EstimateAssessmentBase extends Condition {
   maximalDelta?: number;
 
   constructor({
+    target,
     condition,
     minimalDelta,
     maximalDelta,
@@ -52,6 +59,7 @@ abstract class EstimateAssessmentBase extends Condition {
   }: EstimateAssessmentOptions = {}) {
     super();
 
+    this.target = target;
     this.condition = condition;
     this.minimalDelta = minimalDelta;
     this.maximalDelta = maximalDelta;
