@@ -57,7 +57,9 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
     >
       <Box
         width="fill"
-        spacing={gte(1250) ? 8 : gte(975) ? 4 : gte(850) ? 3 : 1}
+        spacing={
+          gte(1780) ? 5 : gte(1250) ? 6 : gte(975) ? 4 : gte(850) ? 3 : 1
+        }
         padding={[0, 0, gte(1280) ? 2.625 : gte(640) ? 2.2 : 1.7, 0]}
       >
         <Text
@@ -142,7 +144,7 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
           >
             estimate
           </Text>{" "}
-          with a detailed roadmap and product creation plan*
+          with a detailed roadmap and product creation plan in a few clicks
         </Text>
         {gte(650) && (
           <Box
@@ -187,9 +189,11 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
         spacing={gte(740) ? 1.6 : 1}
       >
         <Box spacing={gte(1440) ? 3 : gte(640) ? 1.5 : 1} vertical={lt(640)}>
-          <Feature>no calls, no delays - just data-driven estimates</Feature>
           <Feature variant="smaller">
-            based on our 12 years of b2b expertise
+            No calls, no delays - just data-driven estimates
+          </Feature>
+          <Feature>
+            Based on 500+ finished projects &amp; 12 years of b2b expertise
           </Feature>
         </Box>
 
