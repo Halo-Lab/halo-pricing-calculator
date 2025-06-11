@@ -158,6 +158,17 @@ export function Questionnaire({
           }
           spacing={gte(1100) ? 2 : range(640, 1100) ? 4 : 2.75}
           width={gte(1290) ? ".78fr" : range(1100, 1290) ? ".75fr" : "fill"}
+          _extend={{
+            // @ts-expect-error
+            "data-current-question":
+              question instanceof RegularQuestion
+                ? question.text
+                : question instanceof DescriptionQuestion
+                  ? "$project-description$"
+                  : question instanceof FilesQuestion
+                    ? "$reference-files-upload$"
+                    : false,
+          }}
         >
           {question instanceof RegularQuestion ? (
             <RegularQuestionBlock

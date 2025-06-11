@@ -109,6 +109,10 @@ export function QuestionnaireActions({
             dispatch(new MoveToPreviousStep());
           }
         }}
+        _extend={{
+          // @ts-expect-error
+          "data-questionnaire-action": "$back-to-previous-question$",
+        }}
       >
         back
       </AnimatedButton>
@@ -144,6 +148,9 @@ export function QuestionnaireActions({
             "data-remodal-target": isUserAtTheEndOfQuestionsSequence
               ? "calculator"
               : undefined,
+            "data-questionnaire-action": isUserAtTheEndOfQuestionsSequence
+              ? "$open-form-to-fill-contact-information$"
+              : "$move-to-next-question$",
           }}
         >
           {isUserAtTheEndOfQuestionsSequence ? "get an estimate" : "next"}

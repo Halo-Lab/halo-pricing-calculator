@@ -56,6 +56,10 @@ export function RegularQuestionBlock({
           );
         }}
         decorations={buttonDecoration}
+        _extend={{
+          // @ts-expect-error
+          "data-option-text": option.text,
+        }}
       >
         {option.icon && (
           <Icon

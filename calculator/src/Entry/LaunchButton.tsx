@@ -53,15 +53,15 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
         </Box>
       }
       _extend={{
-        id: "launch-smart-calculator",
         onMouseEnter() {
           dispatchButtonHovered(true);
         },
         onMouseLeave() {
           dispatchButtonHovered(false);
         },
+        // @ts-expect-error
+        "data-launch-calculator-id": "launch-smart-calculator",
         // Attach this attribute at the end so Webflow can react on it.
-        // @ts-expect-error data attributes are added to the extend interface
         "data-hover": "",
       }}
     >
