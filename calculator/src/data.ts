@@ -1723,6 +1723,7 @@ enum QuestionGroup {
       text: "Yes",
       estimates: [
         new EstimateRangeAssessment(1.3, 1.5, {
+          target: (questions[41] as RegularQuestion).options.slice(),
           operationKind: EstimationOperationKind.Multiplication,
         }),
       ],
@@ -1918,6 +1919,20 @@ questions[45].previous.push(
 
   estimate.assessment.target!.push(
     ...(questions[51] as RegularQuestion).options,
+  );
+}
+{
+  const optionId = (questions[46] as RegularQuestion).options[0];
+  const option = options.find((option) => {
+    return option.id === optionId;
+  })!;
+  const estimateId = option.estimates[0];
+  const estimate = estimates.find((estimate) => {
+    return estimate.id === estimateId;
+  })!;
+
+  estimate.assessment.target!.push(
+    ...(questions[52] as RegularQuestion).options,
   );
 }
 questions[50].next.push(questions[23].id);

@@ -53,6 +53,7 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
         </Box>
       }
       _extend={{
+        id: "launch-smart-calculator",
         onMouseEnter() {
           dispatchButtonHovered(true);
         },
