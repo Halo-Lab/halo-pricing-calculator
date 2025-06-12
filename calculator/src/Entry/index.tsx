@@ -19,6 +19,24 @@ interface EntryProperties {
 export function Entry({ startSurvey }: EntryProperties): JSX.Element {
   const { lt, gte, range } = useBreakpoints();
 
+  const titleFontSize = gte(1610)
+    ? 5.625
+    : gte(1440)
+      ? 5.1
+      : gte(1350)
+        ? 4.875
+        : gte(1250)
+          ? 4.2
+          : gte(975)
+            ? 3.7
+            : gte(850)
+              ? 3.3
+              : gte(600)
+                ? 2.5
+                : gte(450)
+                  ? 2
+                  : 1.5;
+
   return (
     <Box
       vertical
@@ -66,82 +84,18 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
           alignY="center"
           color={Color.white}
           weight={500}
-          size={
-            gte(1610)
-              ? 5.625
-              : gte(1440)
-                ? 5.1
-                : gte(1350)
-                  ? 4.875
-                  : gte(1250)
-                    ? 4.2
-                    : gte(975)
-                      ? 3.7
-                      : gte(850)
-                        ? 3.3
-                        : gte(450)
-                          ? 2.7
-                          : 2
-          }
+          size={titleFontSize}
           spacing={gte(975) ? 0.25 : 0.35}
-          width={"0.755fr"}
+          width={gte(650) ? "0.755fr" : undefined}
         >
           Get an{" "}
-          <Text
-            weight={500}
-            size={
-              gte(1350)
-                ? 4.875
-                : gte(1250)
-                  ? 4.2
-                  : gte(975)
-                    ? 3.7
-                    : gte(850)
-                      ? 3.3
-                      : gte(450)
-                        ? 2.7
-                        : 2
-            }
-            color={Color.yellow}
-          >
+          <Text weight={500} size={titleFontSize} color={Color.yellow}>
             instant
           </Text>{" "}
-          <Text
-            weight={500}
-            size={
-              gte(1350)
-                ? 4.875
-                : gte(1250)
-                  ? 4.2
-                  : gte(975)
-                    ? 3.7
-                    : gte(850)
-                      ? 3.3
-                      : gte(450)
-                        ? 2.7
-                        : 2
-            }
-            color={Color.yellow}
-          >
+          <Text weight={500} size={titleFontSize} color={Color.yellow}>
             project
           </Text>{" "}
-          <Text
-            weight={500}
-            size={
-              gte(1350)
-                ? 4.875
-                : gte(1250)
-                  ? 4.2
-                  : gte(975)
-                    ? 3.7
-                    : gte(850)
-                      ? 3.3
-                      : gte(450)
-                        ? 2.7
-                        : 2
-            }
-            color={Color.yellow}
-          >
+          <Text weight={500} size={titleFontSize} color={Color.yellow}>
             estimate
           </Text>{" "}
           with a detailed roadmap and product creation plan in a few clicks

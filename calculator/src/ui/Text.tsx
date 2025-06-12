@@ -52,7 +52,7 @@ export const Text = forwardRef(
       density,
       breaking,
       realHeightRatio = 0.74,
-      sideOffsetCorrection = 0.05,
+      sideOffsetCorrection = 0.0625,
       _extend,
       ...props
     }: TextProps<T>,

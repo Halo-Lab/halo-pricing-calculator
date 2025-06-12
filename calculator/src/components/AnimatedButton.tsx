@@ -28,7 +28,7 @@ export function AnimatedButton({
 
   return (
     <Button
-      padding={padding ?? [0.875, 1.25]}
+      padding={padding ?? [gte(640) ? 1.2 : 0.875, gte(480) ? 2.2 : 1.5]}
       decorations={ButtonDecoration()
         .borderWidth(0.0625)
         .borderColor(
