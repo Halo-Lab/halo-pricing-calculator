@@ -44,7 +44,7 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
       <Box
         width={gte(690) ? undefined : "fill"}
         padding={[
-          gte(850) ? 1.2 : gte(690) ? 1 : gte(640) ? 1.2 : 0.9,
+          gte(850) ? 1.2 : gte(690) ? 1 : gte(360) ? 1.2 : 0.9,
           gte(850) ? 2.1 : gte(690) ? 1.8 : gte(480) ? 2.1 : 1.5,
         ]}
         moveLeft={buttonHovered ? (gte(640) ? 3.125 : 2.4) : 0}
