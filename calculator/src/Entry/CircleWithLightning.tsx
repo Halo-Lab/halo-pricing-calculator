@@ -19,7 +19,7 @@ export function CircleWithLightning({
   return (
     <Box
       alignX={position}
-      width={gte(640) ? 3.125 : 2.15}
+      minWidth={gte(850) ? 3.125 : gte(690) ? 2.7 : gte(640) ? 3.125 : 2.4}
       scale={
         buttonHovered
           ? position === "end"

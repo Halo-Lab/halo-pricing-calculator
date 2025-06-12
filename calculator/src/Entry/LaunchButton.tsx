@@ -20,7 +20,8 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
 
   return (
     <Button
-      alignX={gte(1310) ? "end" : "start"}
+      width={gte(690) ? undefined : "fill"}
+      alignX={gte(690) ? "end" : "start"}
       onPress={startSurvey}
       behindContent={
         <CircleWithLightning position="end" buttonHovered={buttonHovered} />
@@ -41,8 +42,12 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
       <CircleWithLightning position="start" buttonHovered={buttonHovered} />
 
       <Box
-        padding={[gte(640) ? 1.2 : 0.85, gte(480) ? 2.1 : 1.5]}
-        moveLeft={buttonHovered ? (gte(640) ? 3.125 : 2.15) : 0}
+        width={gte(690) ? undefined : "fill"}
+        padding={[
+          gte(850) ? 1.2 : gte(690) ? 1 : gte(640) ? 1.2 : 0.9,
+          gte(850) ? 2.1 : gte(690) ? 1.8 : gte(480) ? 2.1 : 1.5,
+        ]}
+        moveLeft={buttonHovered ? (gte(640) ? 3.125 : 2.4) : 0}
         decorations={BoxDecoration()
           .backgroundColor(Color.yellow)
           .borderRadius(2)
@@ -61,7 +66,8 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
             decorations={BoxDecoration().transitionDuration(".5s")}
           >
             <Text
-              size={gte(640) ? 1 : 0.75}
+              alignX="center"
+              size={gte(850) ? 1 : gte(690) ? 0.75 : gte(640) ? 1 : 0.75}
               weight={500}
               decorations={TextDecoration()
                 .textTransform("uppercase")
@@ -70,7 +76,8 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
               launch smart calculator
             </Text>
             <Text
-              size={gte(640) ? 1 : 0.75}
+              alignX="center"
+              size={gte(850) ? 1 : gte(690) ? 0.75 : gte(640) ? 1 : 0.75}
               weight={500}
               decorations={TextDecoration()
                 .textTransform("uppercase")

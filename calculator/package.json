@@ -12,6 +12,7 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "swiper": "^11.2.8",
     "use-debounce": "^10.0.4"
   }
 }

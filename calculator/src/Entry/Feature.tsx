@@ -16,7 +16,7 @@ export function Feature({ children, variant }: FeatureProps): JSX.Element {
   return (
     <Box spacing={gte(740) ? 1.5 : gte(640) ? 1.1 : 0.7}>
       <Box
-        width={gte(1040) ? 3.5 : gte(640) ? 2.8 : 2}
+        minWidth={gte(1040) ? 3.5 : gte(640) ? 2.8 : gte(480) ? 2.4 : 2}
         aspectRatio={1}
         decorations={BoxDecoration()
           .backgroundColor(Color.blueDark30)
@@ -26,7 +26,7 @@ export function Feature({ children, variant }: FeatureProps): JSX.Element {
           <Svg
             alignX="center"
             alignY="center"
-            width={gte(1040) ? 1.7 : gte(710) ? 1.3 : gte(640) ? 1.1 : 0.8}
+            width={gte(1040) ? 1.7 : gte(710) ? 1.3 : gte(480) ? 1.1 : 0.8}
             viewBox="0 0 28 28"
           >
             <path
@@ -50,7 +50,7 @@ export function Feature({ children, variant }: FeatureProps): JSX.Element {
           <Svg
             alignX="center"
             alignY="center"
-            width={gte(1040) ? 1.7 : gte(710) ? 1.3 : gte(640) ? 1.1 : 0.8}
+            width={gte(1040) ? 1.7 : gte(710) ? 1.3 : gte(480) ? 1.1 : 0.8}
             viewBox="0 0 29 29"
           >
             <path
@@ -75,7 +75,7 @@ export function Feature({ children, variant }: FeatureProps): JSX.Element {
         size={gte(1040) ? 1.25 : gte(640) ? 1 : 0.85}
         spacing={0.5}
         color={Color.white}
-        maxWidth={variant === "smaller" ? 16 : 19.25}
+        maxWidth={gte(1040) ? (variant === "smaller" ? 16 : 19.25) : 16}
       >
         {children}
       </Text>

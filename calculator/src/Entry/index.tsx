@@ -1,4 +1,6 @@
 import { JSX } from "react";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 // import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 import { Svg } from "../ui/Svg";
@@ -139,17 +141,42 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
       <Box
         width="fill"
         padding={[gte(640) ? 2 : 1.7, 0, 0]}
-        vertical={lt(1310)}
+        vertical={lt(690)}
         spacing={gte(740) ? 1.6 : 1}
       >
-        <Box spacing={gte(1440) ? 3 : gte(640) ? 1.5 : 1} vertical={lt(640)}>
-          <Feature variant="smaller">
-            No calls, no delays - just data-driven estimates
-          </Feature>
-          <Feature>
-            Based on 500+ finished projects &amp; 12 years of b2b expertise
-          </Feature>
-        </Box>
+        {gte(1350) ? (
+          <Box spacing={gte(1440) ? 3 : 1.5}>
+            <Feature variant="smaller">
+              No calls, no delays - just data-driven estimates
+            </Feature>
+            <Feature>
+              Based on 500+ finished projects &amp; 12 years of b2b expertise
+            </Feature>
+          </Box>
+        ) : (
+          <Swiper
+            loop
+            autoplay
+            direction="vertical"
+            modules={[Autoplay]}
+            // spaceBetween={gte(1440) ? 48 : gte(640) ? 24 : 16}
+            style={{
+              height: gte(1040) ? 60 : 50,
+              overflow: "hidden",
+            }}
+          >
+            <SwiperSlide>
+              <Feature variant="smaller">
+                No calls, no delays - just data-driven estimates
+              </Feature>
+            </SwiperSlide>
+            <SwiperSlide>
+              <Feature>
+                Based on 500+ finished projects &amp; 12 years of b2b expertise
+              </Feature>
+            </SwiperSlide>
+          </Swiper>
+        )}
 
         <LaunchButton startSurvey={startSurvey} />
       </Box>

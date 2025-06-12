@@ -175,11 +175,11 @@ export const Element = forwardRef(
       ];
       if (rotate != null) {
         transforms.push(
-          "rotate3d(var(--c-rotate-x, 0), var(--c-rotate-y, 0), var(--c-rotate-z, 0), var(--c-rotate-a, 0deg))"
+          "rotate3d(var(--c-rotate-x, 0), var(--c-rotate-y, 0), var(--c-rotate-z, 0), var(--c-rotate-a, 0deg))",
         );
       }
       transforms.push(
-        "scale3d(var(--c-scale-x, 1), var(--c-scale-y, 1), var(--c-scale-z, 1))"
+        "scale3d(var(--c-scale-x, 1), var(--c-scale-y, 1), var(--c-scale-z, 1))",
       );
       style.transform = transforms.join(" ");
 
