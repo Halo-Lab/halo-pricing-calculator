@@ -1,5 +1,5 @@
 import { Autoplay } from "swiper/modules";
-import { JSX, useMemo } from "react";
+import { CSSProperties, JSX } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
@@ -13,6 +13,11 @@ import { Box, BoxDecoration } from "../ui/Box";
 
 // import calculatorLottieUrl from "./calculator.lottie";
 import calculatorVideoUrl from "./calculator.webm";
+
+const highlightedWordsStyles: CSSProperties = {
+  color: Color.yellow,
+  cursor: "pointer",
+};
 
 interface EntryProperties {
   startSurvey: VoidFunction;
@@ -38,16 +43,6 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
                 : gte(450)
                   ? 2
                   : 1.5;
-
-  const highlightedWordExtendedProp = useMemo(() => {
-    return {
-      "data-launch-calculator-id": "launch-smart-calculator",
-      onClick: startSurvey,
-      style: {
-        cursor: "pointer",
-      },
-    };
-  }, [startSurvey]);
 
   return (
     <Box
@@ -101,63 +96,23 @@ export function Entry({ startSurvey }: EntryProperties): JSX.Element {
           width={gte(650) ? "0.755fr" : undefined}
         >
           Get an{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
+          <span
+            id="launch-smart-calculator-1"
+            onClick={startSurvey}
+            style={highlightedWordsStyles}
+            data-link-underline
           >
-            instant
-          </Text>{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
+            instant project estimate
+          </span>{" "}
+          with a detailed roadmap{" "}
+          <span
+            id="launch-smart-calculator-2"
+            onClick={startSurvey}
+            style={highlightedWordsStyles}
+            data-link-underline
           >
-            project
-          </Text>{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
-          >
-            estimate
-          </Text>{" "}
-          with a detailed roadmap and product creation plan{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
-          >
-            in
-          </Text>{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
-          >
-            a
-          </Text>{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
-          >
-            few
-          </Text>{" "}
-          <Text
-            weight={500}
-            size={titleFontSize}
-            color={Color.yellow}
-            _extend={highlightedWordExtendedProp}
-          >
-            clicks
-          </Text>
+            in a few clicks
+          </span>
         </Text>
         {gte(650) && (
           <Box

@@ -33,8 +33,8 @@ export function LaunchButton({ startSurvey }: LaunchButtonProps): JSX.Element {
         onMouseLeave() {
           dispatchButtonHovered(false);
         },
+        id: "launch-smart-calculator-3",
         // @ts-expect-error
-        "data-launch-calculator-id": "launch-smart-calculator",
         // Attach this attribute at the end so Webflow can react on it.
         "data-hover": "",
       }}
